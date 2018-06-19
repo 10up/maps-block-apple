@@ -18,6 +18,8 @@ define( 'APPLE_MAPS_FOR_WORDPRESS_INC',     APPLE_MAPS_FOR_WORDPRESS_PATH . 'inc
 
 // Include files
 require_once APPLE_MAPS_FOR_WORDPRESS_INC . 'functions/core.php';
+require_once APPLE_MAPS_FOR_WORDPRESS_INC . 'functions/settings.php';
+
 
 
 // Activation/Deactivation
@@ -26,3 +28,4 @@ register_deactivation_hook( __FILE__, '\AppleMapsForWordpress\Core\deactivate' )
 
 // Bootstrap
 AppleMapsForWordpress\Core\setup();
+AppleMapsForWordpress\Settings\setup();
