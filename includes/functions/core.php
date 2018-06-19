@@ -55,7 +55,7 @@ function init() {
  * @return void
  */
 function activate() {
-	// First load the init scripts in case any rewrite functionality is being loaded
+	// First load the init scripts in case any rewrite functionality is being loaded.
 	init();
 	flush_rewrite_rules();
 }
@@ -74,42 +74,42 @@ function deactivate() {
 /**
  * Generate an URL to a script, taking into account whether SCRIPT_DEBUG is enabled.
  *
- * @param string $script Script file name (no .js extension)
- * @param string $context Context for the script ('admin', 'frontend', or 'shared')
+ * @param string $script Script file name (no .js extension).
+ * @param string $context Context for the script ('admin', 'frontend', or 'shared').
  *
- * @return string|WP_Error URL
+ * @return string|\WP_Error URL
  */
 function script_url( $script, $context ) {
 
-	if( !in_array( $context, ['admin', 'frontend', 'shared','gutenberg'], true) ) {
-		error_log('Invalid $context specfied in AppleMapsForWordpress script loader.');
+	if ( ! in_array( $context, [ 'admin', 'frontend', 'shared', 'gutenberg' ], true ) ) {
+		error_log('Invalid $context specfied in AppleMapsForWordpress script loader.' );
 		return '';
 	}
 
 	return ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ?
 		APPLE_MAPS_FOR_WORDPRESS_URL . "assets/js/${context}/{$script}.js" :
-		APPLE_MAPS_FOR_WORDPRESS_URL . "dist/js/${context}.min.js" ;
+		APPLE_MAPS_FOR_WORDPRESS_URL . "dist/js/${context}.min.js";
 
 }
 
 /**
  * Generate an URL to a stylesheet, taking into account whether SCRIPT_DEBUG is enabled.
  *
- * @param string $stylesheet Stylesheet file name (no .css extension)
- * @param string $context Context for the script ('admin', 'frontend', or 'shared')
+ * @param string $stylesheet Stylesheet file name (no .css extension).
+ * @param string $context    Context for the script ('admin', 'frontend', or 'shared').
  *
  * @return string URL
  */
 function style_url( $stylesheet, $context ) {
 
-	if( !in_array( $context, ['admin', 'frontend', 'shared'], true) ) {
-		error_log('Invalid $context specfied in AppleMapsForWordpress stylesheet loader.');
+	if ( ! in_array( $context, [ 'admin', 'frontend', 'shared' ], true ) ) {
+		error_log('Invalid $context specfied in AppleMapsForWordpress stylesheet loader.' );
 		return '';
 	}
 
 	return ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ?
 		APPLE_MAPS_FOR_WORDPRESS_URL . "assets/css/${context}/{$stylesheet}.css" :
-		APPLE_MAPS_FOR_WORDPRESS_URL . "dist/css/${stylesheet}.min.css" ;
+		APPLE_MAPS_FOR_WORDPRESS_URL . "dist/css/${stylesheet}.min.css";
 
 }
 
@@ -177,7 +177,7 @@ function styles() {
 		APPLE_MAPS_FOR_WORDPRESS_VERSION
 	);
 
-	if( is_admin() ) {
+	if ( is_admin() ) {
 		wp_enqueue_script(
 			'apple_maps_for_wordpress_admin',
 			style_url( 'admin-style', 'admin' ),
@@ -185,8 +185,7 @@ function styles() {
 			APPLE_MAPS_FOR_WORDPRESS_VERSION,
 			true
 		);
-	}
-	else {
+	} else {
 		wp_enqueue_script(
 			'apple_maps_for_wordpress_frontend',
 			style_url( 'style', 'frontend' ),
@@ -219,9 +218,7 @@ function admin_styles() {
 		APPLE_MAPS_FOR_WORDPRESS_VERSION,
 		true
 	);
-
 }
-
 /**
  * Enqueue the block's assets for the editor.
  *
@@ -233,7 +230,7 @@ function admin_styles() {
  */
 function enqueue_ad_block_editor_assets() {
 	wp_enqueue_script(
-		'map-block', // Handle.
+		'apple-maps-wordpress-blocks', // Handle.
 		script_url( 'gutenberg', 'gutenberg' ), // Block.build.js: We register the block here. Built with Webpack.
 		array( 'wp-blocks', 'wp-i18n', 'wp-element' ) // Dependencies, defined above.
 	);
