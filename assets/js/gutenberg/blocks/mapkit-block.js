@@ -1,6 +1,9 @@
 /*global wp*/
+/*eslint-disable no-unused-vars*/
+import classnames from 'classnames';
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
+const { BlockControls, BlockAlignmentToolbar } = wp.editor; // Import registerBlockType() from wp.blocks
 
 /**
  * Register Basic Block.
@@ -14,19 +17,46 @@ const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.b
  * @return {?WPBlock}          The block, if it has been successfully
  *                             registered; otherwise `undefined`.
  */
-registerBlockType( 'tenup/mapkit',{
-	title:  __( 'Apple Map' ),
+registerBlockType( 'tenup/apple-map-for-wordpress',{
+	title:  __( 'Apple Map for WordPress' ),
 	icon: 'location',  // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
 	category: 'embed', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
-	attributes: {},
-	edit: () => {
+	attributes: {
+		divControl: {
+			type: 'string',
+			source: 'children',
+			selector: 'div',
+			default: 'map'
+		},
+		blockAlignment: {
+			type: 'string',
+			default: 'wide',
+		}
+	},
+	getEditWrapperProps( { blockAlignment } ) {
+		if ( blockAlignment === 'left' || blockAlignment === 'right' || blockAlignment === 'full' ) {
+			return { 'data-align': blockAlignment };
+		}
+	},
+	edit: props => {
+		const { blockAlignment, className, setAttributes } = props;
 		return (
-			<p>Map Edit</p>
+			<div className={ className }>
+				<BlockControls>
+					<BlockAlignmentToolbar
+						value={ blockAlignment }
+						onChange={ blockAlignment => setAttributes( {blockAlignment} ) }
+					/>
+				</BlockControls>
+				<div id="map">Map Placeholder</div>
+			</div>
 		);
 	},
-	save: () => {
+	save: props => {
+		const { blockAlignment } = props.attributes;
+		const classes = classnames( `align${blockAlignment}` );
 		return (
-			<p>Map Save</p>
+			<div className={ classes } id="map">Map Save</div>
 		);
 	},
 } );

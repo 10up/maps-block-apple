@@ -17,12 +17,7 @@ function setup() {
 	add_action( 'wp_enqueue_scripts', $n( 'styles' ) );
 	add_action( 'admin_enqueue_scripts', $n( 'admin_scripts' ) );
 	add_action( 'admin_enqueue_scripts', $n( 'admin_styles' ) );
-
-	// Gutenberg Editor assets.
-	add_action( 'enqueue_block_editor_assets', $n('enqueue_ad_block_editor_assets' ) );
-	// Gutenberg Front End Assets.
-	add_action( 'enqueue_block_assets', $n('enqueue_ad_block_assets' ) );
-
+	
 	// Editor styles. add_editor_style() doesn't work outside of a theme.
 	add_filter( 'mce_css', $n( 'mce_css' ) );
 
@@ -219,36 +214,7 @@ function admin_styles() {
 		true
 	);
 }
-/**
- * Enqueue the block's assets for the editor.
- *
- * `wp-blocks`: includes block type registration and related functions.
- * `wp-element`: includes the WordPress Element abstraction for describing the structure of your blocks.
- * `wp-i18n`: To internationalize the block's text.
- *
- * @since 1.0.0
- */
-function enqueue_ad_block_editor_assets() {
-	wp_enqueue_script(
-		'apple-maps-wordpress-blocks', // Handle.
-		script_url( 'gutenberg', 'gutenberg' ), // Block.build.js: We register the block here. Built with Webpack.
-		array( 'wp-blocks', 'wp-i18n', 'wp-element' ) // Dependencies, defined above.
-	);
-	
-	//wp_localize_script( 'map-block', 'adBlock', get_ad_data() );
-	
-	// Styles.
-//	wp_enqueue_style(
-//		'map-block-editor', // Handle.
-//		plugins_url( 'assets/css/blocks.editor.css', dirname( __FILE__ ) ), // Block editor CSS.
-//		array( 'wp-edit-blocks' ), // Dependency to include the CSS after it.
-//		filemtime( plugin_dir_path( dirname( __FILE__ ) ) . '/assets/css/blocks.editor.css' ) // filemtime — Gets file modification time.
-//	);
-}
 
-function enqueue_ad_block_assets() {
-
-}
 
 /**
  * Enqueue editor styles. Filters the comma-delimited list of stylesheets to load in TinyMCE.
