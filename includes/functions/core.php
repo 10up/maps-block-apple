@@ -114,14 +114,20 @@ function style_url( $stylesheet, $context ) {
  * @return void
  */
 function scripts() {
+	
+	wp_enqueue_script( 'mapkitjs', 'https://cdn.apple-mapkit.com/mk/5.x.x/mapkit.js', [], false );
 
 	wp_enqueue_script(
 		'apple_maps_for_wordpress_shared',
 		script_url( 'shared', 'shared' ),
-		[],
+		['mapkitjs'],
 		APPLE_MAPS_FOR_WORDPRESS_VERSION,
 		true
 	);
+	
+	// Localize the script so we can have access to the settings.
+	$settings = get_option( 'amfwp_settings', [] );
+	wp_localize_script( 'mapkitjs', 'AMFWP', [ 'longLifeToken' => $settings['long_life_token'], 'instances'=> [] ] );
 
 	wp_enqueue_script(
 		'apple_maps_for_wordpress_frontend',
@@ -148,10 +154,12 @@ function admin_scripts() {
 		true
 	);
 
+	wp_enqueue_script( 'mapkitjs', 'https://cdn.apple-mapkit.com/mk/5.x.x/mapkit.js', [], false );
+	
 	wp_enqueue_script(
 		'apple_maps_for_wordpress_admin',
 		script_url( 'admin', 'admin' ),
-		[],
+		[ 'mapkitjs' ],
 		APPLE_MAPS_FOR_WORDPRESS_VERSION,
 		true
 	);

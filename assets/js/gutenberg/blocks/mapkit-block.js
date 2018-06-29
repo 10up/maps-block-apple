@@ -1,9 +1,13 @@
 /*global wp*/
 /*eslint-disable no-unused-vars*/
 import classnames from 'classnames';
+import AppleMapEdit from './edit';
+import attributes from './attributes';
+
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
-const { BlockControls, BlockAlignmentToolbar } = wp.editor; // Import registerBlockType() from wp.blocks
+
+
 
 /**
  * Register Basic Block.
@@ -18,45 +22,32 @@ const { BlockControls, BlockAlignmentToolbar } = wp.editor; // Import registerBl
  *                             registered; otherwise `undefined`.
  */
 registerBlockType( 'tenup/apple-map-for-wordpress',{
-	title:  __( 'Apple Map for WordPress' ),
+	title:  __( 'Apple Maps for WordPress' ),
 	icon: 'location',  // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
 	category: 'embed', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
-	attributes: {
-		divControl: {
-			type: 'string',
-			source: 'children',
-			selector: 'div',
-			default: 'map'
-		},
-		blockAlignment: {
-			type: 'string',
-			default: 'wide',
-		}
-	},
+	attributes: attributes,
 	getEditWrapperProps( { blockAlignment } ) {
 		if ( blockAlignment === 'left' || blockAlignment === 'right' || blockAlignment === 'full' ) {
 			return { 'data-align': blockAlignment };
 		}
 	},
-	edit: props => {
-		const { blockAlignment, className, setAttributes } = props;
-		return (
-			<div className={ className }>
-				<BlockControls>
-					<BlockAlignmentToolbar
-						value={ blockAlignment }
-						onChange={ blockAlignment => setAttributes( {blockAlignment} ) }
-					/>
-				</BlockControls>
-				<div id="map">Map Placeholder</div>
-			</div>
-		);
-	},
+	edit: AppleMapEdit,
 	save: props => {
-		const { blockAlignment } = props.attributes;
-		const classes = classnames( `align${blockAlignment}` );
+		const { blockAlignment, width, height, id, latitude, longitude, latitudeDelta, longitudeDelta, mapID } = props.attributes;
+		console.log( props );
+		const classes = classnames( `align${blockAlignment}`, 'apple-maps-for-wordpress' );
+		const style = { width, height };
 		return (
-			<div className={ classes } id="map">Map Save</div>
+			<div
+				className={ classes }
+				id={mapID}
+				style={style}
+				data-lat={latitude}
+				data-long={longitude}
+				data-latd={latitudeDelta}
+				data-longd={longitudeDelta}
+			>
+			</div>
 		);
 	},
 } );

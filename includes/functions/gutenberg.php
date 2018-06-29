@@ -19,6 +19,8 @@ function setup() {
 }
 
 
+
+
 /**
  * Enqueue the block's assets for the editor.
  *
@@ -29,7 +31,6 @@ function setup() {
  * @since 1.0.0
  */
 function enqueue_ad_block_editor_assets() {
-	wp_enqueue_script( 'mapkitjs', 'https://cdn.apple-mapkit.com/mk/5.x.x/mapkit.js', [], false );
 	wp_enqueue_script(
 		'apple-maps-wordpress-blocks', // Handle.
 		Core\script_url( 'gutenberg', 'gutenberg' ), // Block.build.js: We register the block here. Built with Webpack.
@@ -38,7 +39,7 @@ function enqueue_ad_block_editor_assets() {
 
 	// Localize the script so we can have access to the settings.
 	$settings = get_option( 'amfwp_settings', [] );
-	wp_localize_script( 'apple-maps-wordpress-blocks', 'AMFWP', [ 'settings' => $settings ] );
+	wp_localize_script( 'apple-maps-wordpress-blocks', 'AMFWP', [ 'longLifeToken' => $settings['long_life_token'], 'instances'=> [] ] );
 
 	// Styles.
 //	wp_enqueue_style(
