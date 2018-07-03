@@ -1,4 +1,8 @@
 const attributes = {
+	blockAlignment: {
+		type: 'string',
+		default : 'full'
+	},
 	width: {
 		type: 'string',
 		default: '100%',
@@ -24,6 +28,9 @@ const attributes = {
 		type: 'number'
 	},
 	mapID : {
+		type: 'string',
+	},
+	address: {
 		type: 'string',
 	}
 };
