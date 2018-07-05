@@ -30,7 +30,7 @@ registerBlockType( 'tenup/apple-map-for-wordpress',{
 	save: props => {
 		const { blockAlignment, width, height , latitude, longitude, latitudeDelta, longitudeDelta, mapID } = props.attributes;
 		const classes = classnames( `align${blockAlignment}`, 'apple-maps-for-wordpress' );
-		const style = { width, height };
+		const style = { width: width + '%', height: height + 'px' };
 		return (
 			<div
 				className={ classes }

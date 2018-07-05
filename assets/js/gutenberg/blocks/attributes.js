@@ -1,12 +1,12 @@
 const attributes = {
 	width: {
 		type: 'string',
-		default: '100%',
+		default: '100',
 	},
 
 	height: {
 		type: 'string',
-		default: '600px',
+		default: '600',
 	},
 
 	latitude: {

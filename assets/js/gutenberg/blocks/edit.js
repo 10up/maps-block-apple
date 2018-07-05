@@ -82,7 +82,7 @@ class AppleMapEdit extends Component {
 
 	render () {
 		const { attributes:{ width, height, address }, className, setAttributes, id } = this.props;
-		const style = { width, height };
+		const style = { width: width + '%', height: height + 'px' };
 		return [
 			<InspectorControls>
 				<PanelBody
@@ -100,13 +100,14 @@ class AppleMapEdit extends Component {
 					</PanelRow>
 					<PanelRow>
 						<TextControl
-							label={'Width'}
+							label={'Width ( % )'}
 							value={width}
+							onChange={ width => setAttributes( { width } ) }
 						/>
 					</PanelRow>
 					<PanelRow>
 						<TextControl
-							label={'Height'}
+							label={'Height ( pixels )'}
 							value={ height }
 							onChange={ height => setAttributes( { height } ) }
 						/>

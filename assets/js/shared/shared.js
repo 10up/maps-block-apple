@@ -17,7 +17,6 @@ mapkit.addEventListener( 'configuration-change', function( event ) {
 					const map = new mapkit.Map( document.getElementById( maps[i].id ) );
 					map.showsMapTypeControl = false;
 					map.showsCompass = mapkit.FeatureVisibility.Hidden;
-					console.log(  parseInt( maps[i].getAttribute( 'data-latd' ) ), parseInt( maps[i].getAttribute( 'data-longd' ) )  );
 					map.region = new mapkit.CoordinateRegion(
 						new mapkit.Coordinate( parseFloat( maps[i].getAttribute( 'data-lat' ) ), parseFloat( maps[i].getAttribute( 'data-long' ) ) ),
 						new mapkit.CoordinateSpan( parseFloat( maps[i].getAttribute( 'data-latd' ) ), parseFloat( maps[i].getAttribute( 'data-longd' ) ) )
