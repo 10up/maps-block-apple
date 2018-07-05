@@ -26,15 +26,9 @@ registerBlockType( 'tenup/apple-map-for-wordpress',{
 	icon: 'location',  // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
 	category: 'embed', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
 	attributes: attributes,
-	getEditWrapperProps( { blockAlignment } ) {
-		if ( blockAlignment === 'left' || blockAlignment === 'right' || blockAlignment === 'full' ) {
-			return { 'data-align': blockAlignment };
-		}
-	},
 	edit: AppleMapEdit,
 	save: props => {
 		const { blockAlignment, width, height , latitude, longitude, latitudeDelta, longitudeDelta, mapID } = props.attributes;
-		console.log( props );
 		const classes = classnames( `align${blockAlignment}`, 'apple-maps-for-wordpress' );
 		const style = { width, height };
 		return (

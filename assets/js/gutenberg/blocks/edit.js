@@ -1,18 +1,32 @@
 /*global wp,mapkit*/
 /*eslint-disable no-unused-vars*/
-const { Component } = wp.element;
-const { BlockControls, BlockAlignmentToolbar, InspectorControls } = wp.editor; // Import registerBlockType() from wp.blocks
-const { PanelBody, PanelRow, TextControl } = wp.components;
+const { Component, createRef } = wp.element;
+const { InspectorControls } = wp.editor; // Import registerBlockType() from wp.blocks
+const { PanelBody, PanelRow, TextControl, Button } = wp.components;
 
 class AppleMapEdit extends Component {
 
+	constructor( props ) {
+		super( props );
+		this.handleGeoCode = this.handleGeoCode.bind( this );
+		this.geolocate = this.geolocate.bind( this );
+	}
+
 	componentDidMount() {
 		// Init the map instance
-		this.map = new mapkit.Map( document.getElementById( this.props.id ) );
-		this.props.setAttributes( { mapID: this.props.id } );
-		// Setup the display.
-		this.setMapDisplay();
-		this.mapHandlers();
+		if ( mapkit && typeof mapkit !== 'undefined' ) {
+			this.map = new mapkit.Map( document.getElementById( this.props.id ) );
+			// These items do not have corresponding controls
+			this.map.showsMapTypeControl = false;
+			this.map.showsCompass = mapkit.FeatureVisibility.Hidden;
+
+			this.geocoder = new mapkit.Geocoder();
+			this.props.setAttributes( {mapID: this.props.id} );
+			this.addressFieldRef = createRef();
+			// Setup the display.
+			this.setMapDisplay();
+			this.mapHandlers();
+		}
 	}
 
 	setMapDisplay() {
@@ -22,6 +36,26 @@ class AppleMapEdit extends Component {
 				new mapkit.Coordinate( latitude, longitude ),
 				new mapkit.CoordinateSpan( latitudeDelta, longitudeDelta )
 			);
+		}
+	}
+
+	handleGeoCode() {
+		const field = this.addressFieldRef.current;
+		if ( field.value ) {
+			this.geocoder.lookup( field.value, this.geolocate );
+		}
+	}
+
+	geolocate( error, data ) {
+		console.log( error, data );
+		if ( data.results ) {
+			const location = data.results[0].region;
+			this.map.region = new mapkit.CoordinateRegion(
+				new mapkit.Coordinate( location.center.latitude, location.center.longitude ),
+				new mapkit.CoordinateSpan( location.span.latitudeDelta, location.span.longitudeDelta )
+			);
+			// Update the block.
+			this.updateLocationZoomData( location );
 		}
 	}
 
@@ -48,13 +82,23 @@ class AppleMapEdit extends Component {
 	}
 
 	render () {
-		const { attributes:{ width, height, latitude, longitude, latitudeDelta, longitudeDelta },blockAlignment, className, setAttributes, id } = this.props;
+		const { attributes:{ width, height, address }, className, setAttributes, id } = this.props;
 		const style = { width, height };
 		return [
 			<InspectorControls>
 				<PanelBody
 					title={'Settings'}
 				>
+					<PanelRow>
+						<label>Address
+							<input type="text" ref={this.addressFieldRef} value={address} />
+							<Button
+								onClick={this.handleGeoCode}
+								className="button"
+							>Lookup
+							</Button>
+						</label>
+					</PanelRow>
 					<PanelRow>
 						<TextControl
 							label={'Width'}
@@ -68,38 +112,8 @@ class AppleMapEdit extends Component {
 							onChange={ height => setAttributes( { height } ) }
 						/>
 					</PanelRow>
-					<PanelRow>
-						<TextControl
-							label={'Lat'}
-							value={ latitude }
-						/>
-					</PanelRow>
-					<PanelRow>
-						<TextControl
-							label={'Long'}
-							value={ longitude }
-						/>
-					</PanelRow>
-					<PanelRow>
-						<TextControl
-							label={'LongDelta'}
-							value={ latitudeDelta }
-						/>
-					</PanelRow>
-					<PanelRow>
-						<TextControl
-							label={'LatDelta'}
-							value={ longitudeDelta }
-						/>
-					</PanelRow>
 				</PanelBody>
 			</InspectorControls>,
-			<BlockControls>
-				<BlockAlignmentToolbar
-					value={ blockAlignment }
-					onChange={ blockAlignment => setAttributes( {blockAlignment} ) }
-				/>
-			</BlockControls>,
 			<div className={ className }>
 				<div id={id} style={style}></div>
 			</div>

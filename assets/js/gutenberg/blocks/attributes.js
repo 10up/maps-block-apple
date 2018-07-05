@@ -1,12 +1,9 @@
 const attributes = {
-	blockAlignment: {
-		type: 'string',
-		default : 'full'
-	},
 	width: {
 		type: 'string',
 		default: '100%',
 	},
+
 	height: {
 		type: 'string',
 		default: '600px',
@@ -27,9 +24,11 @@ const attributes = {
 	longitudeDelta: {
 		type: 'number'
 	},
+
 	mapID : {
 		type: 'string',
 	},
+
 	address: {
 		type: 'string',
 	}
