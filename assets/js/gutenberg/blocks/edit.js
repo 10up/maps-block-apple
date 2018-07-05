@@ -47,7 +47,6 @@ class AppleMapEdit extends Component {
 	}
 
 	geolocate( error, data ) {
-		console.log( error, data );
 		if ( data.results ) {
 			const location = data.results[0].region;
 			this.map.region = new mapkit.CoordinateRegion(
