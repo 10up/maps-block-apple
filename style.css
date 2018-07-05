@@ -1,0 +1,3 @@
+/**
+ * Apple Maps For Wordpress
+ */
