@@ -17,7 +17,7 @@ function setup() {
 	add_action( 'wp_enqueue_scripts', $n( 'styles' ) );
 	add_action( 'admin_enqueue_scripts', $n( 'admin_scripts' ) );
 	add_action( 'admin_enqueue_scripts', $n( 'admin_styles' ) );
-	
+
 	// Editor styles. add_editor_style() doesn't work outside of a theme.
 	add_filter( 'mce_css', $n( 'mce_css' ) );
 
@@ -120,14 +120,14 @@ function scripts() {
 	wp_enqueue_script(
 		'apple_maps_for_wordpress_shared',
 		script_url( 'shared', 'shared' ),
-		['mapkitjs'],
+		[ 'mapkitjs' ],
 		APPLE_MAPS_FOR_WORDPRESS_VERSION,
 		true
 	);
-	
+
 	// Localize the script so we can have access to the settings.
 	$settings = get_option( 'amfwp_settings', [] );
-	wp_localize_script( 'mapkitjs', 'AMFWP', [ 'longLifeToken' => $settings['long_life_token'], 'instances'=> [] ] );
+	wp_localize_script( 'mapkitjs', 'AMFWP', [ 'longLifeToken' => $settings['long_life_token'] ] );
 
 	wp_enqueue_script(
 		'apple_maps_for_wordpress_frontend',
@@ -155,7 +155,16 @@ function admin_scripts() {
 	);
 
 	wp_enqueue_script( 'mapkitjs', 'https://cdn.apple-mapkit.com/mk/5.x.x/mapkit.js', [], false );
-	
+	// Localize the script so we can have access to the settings.
+	$settings = get_option( 'amfwp_settings', [] );
+	wp_localize_script( 'mapkitjs', 'AMFWP', [
+		'longLifeToken' => $settings['long_life_token'],
+		'authKey'       => $settings['token_gen_authkey'],
+		'iss'           => $settings['token_gen_iss'],
+		'kid'           => $settings['token_gen_kid'],
+		'origin'        => get_home_url(),
+	] );
+
 	wp_enqueue_script(
 		'apple_maps_for_wordpress_admin',
 		script_url( 'admin', 'admin' ),

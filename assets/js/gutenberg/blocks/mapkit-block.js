@@ -28,8 +28,8 @@ registerBlockType( 'tenup/apple-map-for-wordpress',{
 	attributes: attributes,
 	edit: AppleMapEdit,
 	save: props => {
-		const { blockAlignment, width, height , latitude, longitude, latitudeDelta, longitudeDelta, mapID } = props.attributes;
-		const classes = classnames( `align${blockAlignment}`, 'apple-maps-for-wordpress' );
+		const { width, height , latitude, longitude, latitudeDelta, longitudeDelta, mapID } = props.attributes;
+		const classes = classnames( 'apple-maps-for-wordpress' );
 		const style = { width: width + '%', height: height + 'px' };
 		return (
 			<div
