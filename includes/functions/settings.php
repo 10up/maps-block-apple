@@ -12,9 +12,23 @@ function setup() {
 			add_action( 'admin_menu', __NAMESPACE__ . '\admin_menu', 20 );
 			add_action( 'admin_init', __NAMESPACE__ . '\setup_fields_sections' );
 			add_action( 'admin_init', __NAMESPACE__ . '\register_settings' );
+			add_filter( 'plugin_action_links_' . APPLE_MAPS_FOR_WORDPRESS_BASENAME, __NAMESPACE__ . '\plugin_filter_action_links' );
 		}
 	);
 }
+
+
+/**
+ * Add the settings panel to the plugin page
+ *
+ * @param array $links the links for the plugin.
+ * @return array
+ */
+function plugin_filter_action_links( $links ) {
+	$links['settings'] = sprintf( '<a href="%s"> %s </a>', esc_url( admin_url( 'options-general.php?page=apple-maps-wordpress' ) ), __( 'Settings', 'apple-maps-for-wordpress' ) );
+	return $links;
+}
+
 
 /**
  * Output setting menu option
