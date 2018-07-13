@@ -1,29 +1,50 @@
-/*global wp,mapkit*/
-/*eslint-disable no-unused-vars*/
-const { dispatch, select, subscribe, registerStore } = wp.data;
+/*global wp*/
+const { registerStore } = wp.data;
+const defaultState = {
+	auth: true,
+	ready: false
+};
 
-const reducer = ( state = [], action ) => {
-	if ( action.type === 'APPLE_MAP_INIT' ) {
-		const map = new mapkit.Map( document.getElementById( action.map.mapID ) );
-		console.log( map );
+const reducer = ( state = defaultState, action ) => {
+
+	switch( action.type ) {
+			case 'APPLE_MAP_AUTH_FAILED':
+				state =  {
+					auth: false,
+					ready: false
+				};
+				break;
+			case 'APPLE_MAP_KIT_READY':
+				state =  {
+					ready: true,
+					auth: true
+				};
+				break;
 	}
 	return state;
 };
 
-const getAppleMaps = state => {
+const getAppleMapsState = state => {
 	return state;
 };
 
-const initMap = mapID => {
+const authFailed = () => {
 	return {
-		type: 'APPLE_MAP_INIT',
-		map: { mapID }
+		type: 'APPLE_MAP_AUTH_FAILED'
+	};
+};
+
+const mapKitReady = () => {
+	return {
+		type: 'APPLE_MAP_KIT_READY'
 	};
 };
 
 
-registerStore( 'apple-maps-for-wordpress', {
+const appleStore = registerStore( 'apple-maps-for-wordpress', {
 	reducer,
-	selectors: { getAppleMaps },
-	actions: { initMap }
+	selectors: { getAppleMapsState },
+	actions: { mapKitReady, authFailed }
 } );
+
+export default appleStore;

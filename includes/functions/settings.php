@@ -1,5 +1,6 @@
 <?php
 namespace AppleMapsForWordpress\Settings;
+use AppleMapsForWordpress\Core;
 
 /**
  * Setup settings
@@ -7,14 +8,14 @@ namespace AppleMapsForWordpress\Settings;
  * @since 1.0
  */
 function setup() {
-	add_action(
-		'plugins_loaded', function() {
-			add_action( 'admin_menu', __NAMESPACE__ . '\admin_menu', 20 );
-			add_action( 'admin_init', __NAMESPACE__ . '\setup_fields_sections' );
-			add_action( 'admin_init', __NAMESPACE__ . '\register_settings' );
-			add_filter( 'plugin_action_links_' . APPLE_MAPS_FOR_WORDPRESS_BASENAME, __NAMESPACE__ . '\plugin_filter_action_links' );
-		}
-	);
+
+	$n = function ( $function ) {
+		return __NAMESPACE__ . "\\$function";
+	};
+	add_action( 'admin_menu', $n('admin_menu' ), 20 );
+	add_action( 'admin_init', $n( 'setup_fields_sections' ) );
+	add_action( 'admin_init', $n ('register_settings') );
+	add_filter( 'plugin_action_links_' . APPLE_MAPS_FOR_WORDPRESS_BASENAME, $n('plugin_filter_action_links' ) );
 }
 
 
@@ -203,4 +204,3 @@ function sanitize_settings( $settings ) {
 	}
 	return $new_settings;
 }
-

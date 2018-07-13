@@ -142,37 +142,46 @@ function scripts() {
 /**
  * Enqueue scripts for admin.
  *
+ * @param string $hook The suffix for the current admin page.
+ *
  * @return void
  */
-function admin_scripts() {
-
-	wp_enqueue_script(
-		'apple_maps_for_wordpress_shared',
-		script_url( 'shared', 'shared' ),
-		[],
-		APPLE_MAPS_FOR_WORDPRESS_VERSION,
-		true
-	);
-
-	wp_enqueue_script( 'mapkitjs', 'https://cdn.apple-mapkit.com/mk/5.x.x/mapkit.js', [], false );
-	// Localize the script so we can have access to the settings.
+function admin_scripts( $hook ) {
+	
 	$settings = get_option( 'amfwp_settings', [] );
-	wp_localize_script( 'mapkitjs', 'AMFWP', [
-		'longLifeToken' => $settings['long_life_token'],
-		'authKey'       => $settings['token_gen_authkey'],
-		'iss'           => $settings['token_gen_iss'],
-		'kid'           => $settings['token_gen_kid'],
-		'origin'        => get_home_url(),
-	] );
+	if ( ! empty( $settings ) && in_array( $hook, [ 'post.php', 'post-new.php' ], true ) ) {
+		wp_enqueue_script(
+			'apple_maps_for_wordpress_shared',
+			script_url( 'shared', 'shared' ),
+			[],
+			APPLE_MAPS_FOR_WORDPRESS_VERSION,
+			true
+		);
 
-	wp_enqueue_script(
-		'apple_maps_for_wordpress_admin',
-		script_url( 'admin', 'admin' ),
-		[ 'mapkitjs' ],
-		APPLE_MAPS_FOR_WORDPRESS_VERSION,
-		true
-	);
+		wp_enqueue_script( 'mapkitjs', 'https://cdn.apple-mapkit.com/mk/5.x.x/mapkit.js', [], false );
+		// Localize the script so we can have access to the settings.
+		$settings = get_option( 'amfwp_settings', [] );
+		wp_localize_script( 'mapkitjs', 'AMFWP', [
+			'longLifeToken' => $settings['long_life_token'],
+			'authKey'       => $settings['token_gen_authkey'],
+			'iss'           => $settings['token_gen_iss'],
+			'kid'           => $settings['token_gen_kid'],
+			'origin'        => get_home_url(),
+		] );
+	}
 
+	if ( 'settings_page_apple-maps-wordpress' === $hook ) {
+		wp_enqueue_script(
+			'apple_maps_for_wordpress_admin',
+			script_url( 'admin', 'admin' ),
+			[],
+			APPLE_MAPS_FOR_WORDPRESS_VERSION,
+			true
+		);
+		wp_localize_script( 'apple_maps_for_wordpress_admin', 'AMFWP_ADMIN', [
+			'origin' => get_home_url(),
+		] );
+	}
 }
 
 /**

@@ -1,8 +1,10 @@
 /*global wp,mapkit*/
-/*eslint-disable no-unused-vars*/
+import appleStore from './data';
+
 const { Component, createRef } = wp.element;
 const { InspectorControls } = wp.editor; // Import registerBlockType() from wp.blocks
 const { PanelBody, PanelRow, TextControl, Button } = wp.components;
+const { select } = wp.data;
 
 class AppleMapEdit extends Component {
 
@@ -10,22 +12,33 @@ class AppleMapEdit extends Component {
 		super( props );
 		this.handleGeoCode = this.handleGeoCode.bind( this );
 		this.geolocate = this.geolocate.bind( this );
+		this.stateChanges = this.stateChanges.bind( this );
+		this.auth = true;
 	}
 
 	componentDidMount() {
 		// Init the map instance
-		if ( mapkit && typeof mapkit !== 'undefined' ) {
-			this.map = new mapkit.Map( document.getElementById( this.props.id ) );
-			// These items do not have corresponding controls
-			this.map.showsMapTypeControl = false;
-			this.map.showsCompass = mapkit.FeatureVisibility.Hidden;
+		appleStore.subscribe( this.stateChanges );
+	}
 
-			this.geocoder = new mapkit.Geocoder();
-			this.props.setAttributes( {mapID: this.props.id} );
-			this.addressFieldRef = createRef();
-			// Setup the display.
-			this.setMapDisplay();
-			this.mapHandlers();
+	stateChanges() {
+		const mapState = select( 'apple-maps-for-wordpress' ).getAppleMapsState();
+		this.auth = mapState.auth;
+		if ( mapState.ready === true ) {
+			this.ready = true;
+			if ( mapkit && typeof mapkit !== 'undefined' ) {
+				this.map = new mapkit.Map( document.getElementById( this.props.id ) );
+				// These items do not have corresponding controls
+				this.map.showsMapTypeControl = false;
+				this.map.showsCompass = mapkit.FeatureVisibility.Hidden;
+
+				this.geocoder = new mapkit.Geocoder();
+				this.props.setAttributes( { mapID: this.props.id } );
+				this.addressFieldRef = createRef();
+				// Setup the display.
+				this.setMapDisplay();
+				this.mapHandlers();
+			}
 		}
 	}
 
@@ -80,6 +93,7 @@ class AppleMapEdit extends Component {
 		} );
 	}
 
+
 	render () {
 		const { attributes:{ width, height, address }, className, setAttributes, id } = this.props;
 		const style = { width: width + '%', height: height + 'px' };
@@ -114,7 +128,8 @@ class AppleMapEdit extends Component {
 					</PanelRow>
 				</PanelBody>
 			</InspectorControls>,
-			<div className={ className }>
+			<div className={className}>
+				{ ! this.auth && ( <div className="editor-warning">MapKit JS did not authenticate. Please refresh your token in the settings.</div> ) }
 				<div id={id} style={style}></div>
 			</div>
 		];

@@ -21,11 +21,12 @@
     "url": "https://github.com/10up/apple-maps-wordpress"
   },
   "devDependencies": {
+    "@10up/eslint-config": "^1.0.5",
     "babel-core": "^6.26.3",
     "babel-eslint": "^7.2.3",
     "babel-loader": "^7.1.3",
     "babel-preset-env": "^1.7.0",
-    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-es2016": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "browserslist": "^3.2.8",
     "caniuse-db": "^1.0.30000855",
@@ -34,6 +35,7 @@
     "dotenv": "^6.0.0",
     "eslint": "^4.19.1",
     "eslint-loader": "^2.0.0",
+    "eslint-plugin-react": "^7.10.0",
     "gulp": "^3.9.1",
     "gulp-cssnano": "^2.1.3",
     "gulp-filter": "^5.1.0",
