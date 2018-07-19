@@ -36,18 +36,14 @@ function enqueue_ad_block_editor_assets() {
 		Core\script_url( 'gutenberg', 'gutenberg' ), // Block.build.js: We register the block here. Built with Webpack.
 		array( 'wp-blocks', 'wp-i18n', 'wp-element' ) // Dependencies, defined above.
 	);
-
-	// Localize the script so we can have access to the settings.
-	$settings = get_option( 'amfwp_settings', [] );
-	wp_localize_script( 'apple-maps-wordpress-blocks', 'AMFWP', [ 'longLifeToken' => $settings['long_life_token'], 'instances'=> [] ] );
-
+	
 	// Styles.
-//	wp_enqueue_style(
-//		'map-block-editor', // Handle.
-//		plugins_url( 'assets/css/blocks.editor.css', dirname( __FILE__ ) ), // Block editor CSS.
-//		array( 'wp-edit-blocks' ), // Dependency to include the CSS after it.
-//		filemtime( plugin_dir_path( dirname( __FILE__ ) ) . '/assets/css/blocks.editor.css' ) // filemtime — Gets file modification time.
-//	);
+	wp_enqueue_style(
+		'map-block-editor', // Handle.
+		Core\style_url( 'gutenberg-style', 'gutenberg' ), // Block editor CSS.
+		array( 'wp-edit-blocks' ), // Dependency to include the CSS after it.
+		filemtime( plugin_dir_path( dirname( __FILE__ ) ) . '/assets/css/blocks.editor.css' ) // filemtime — Gets file modification time.
+	);
 }
 
 function enqueue_ad_block_assets() { }

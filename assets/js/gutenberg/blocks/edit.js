@@ -18,28 +18,29 @@ class AppleMapEdit extends Component {
 
 	componentDidMount() {
 		// Init the map instance
+		const mapState = select( 'apple-maps-for-wordpress' ).getAppleMapsState();
+		this.auth = mapState.auth;
+		this.ready = mapState.ready;
 		appleStore.subscribe( this.stateChanges );
+		if ( mapkit && typeof mapkit !== 'undefined' ) {
+			this.map = new mapkit.Map( document.getElementById( this.props.id ) );
+			// These items do not have corresponding controls
+			this.map.showsMapTypeControl = false;
+			this.map.showsCompass = mapkit.FeatureVisibility.Hidden;
+
+			this.geocoder = new mapkit.Geocoder();
+			this.props.setAttributes( { mapID: this.props.id } );
+			this.addressFieldRef = createRef();
+			// Setup the display.
+			this.setMapDisplay();
+			this.mapHandlers();
+		}
 	}
 
 	stateChanges() {
 		const mapState = select( 'apple-maps-for-wordpress' ).getAppleMapsState();
 		this.auth = mapState.auth;
-		if ( mapState.ready === true ) {
-			this.ready = true;
-			if ( mapkit && typeof mapkit !== 'undefined' ) {
-				this.map = new mapkit.Map( document.getElementById( this.props.id ) );
-				// These items do not have corresponding controls
-				this.map.showsMapTypeControl = false;
-				this.map.showsCompass = mapkit.FeatureVisibility.Hidden;
-
-				this.geocoder = new mapkit.Geocoder();
-				this.props.setAttributes( { mapID: this.props.id } );
-				this.addressFieldRef = createRef();
-				// Setup the display.
-				this.setMapDisplay();
-				this.mapHandlers();
-			}
-		}
+		this.ready = mapState.ready;
 	}
 
 	setMapDisplay() {
@@ -49,6 +50,9 @@ class AppleMapEdit extends Component {
 				new mapkit.Coordinate( latitude, longitude ),
 				new mapkit.CoordinateSpan( latitudeDelta, longitudeDelta )
 			);
+		} else {
+			// Set the map display to the initial state.
+			this.updateLocationZoomData( this.map.region );
 		}
 	}
 
@@ -73,11 +77,11 @@ class AppleMapEdit extends Component {
 
 
 	mapHandlers() {
-		this.map.addEventListener( 'scroll-end', ( event ) => {
+		this.map.addEventListener( 'scroll-end', event  => {
 			this.updateLocationZoomData( event.target.region );
 		} );
 
-		this.map.addEventListener( 'zoom-end', ( event ) => {
+		this.map.addEventListener( 'zoom-end', event => {
 			this.updateLocationZoomData( event.target.region );
 		} );
 	}
@@ -129,7 +133,7 @@ class AppleMapEdit extends Component {
 				</PanelBody>
 			</InspectorControls>,
 			<div className={className}>
-				{ ! this.auth && ( <div className="editor-warning">MapKit JS did not authenticate. Please refresh your token in the settings.</div> ) }
+				{ ! this.auth && ( <div className="editor-warning no-auth">MapKit JS did not authenticate. Please refresh your token in the settings.</div> ) }
 				<div id={id} style={style}></div>
 			</div>
 		];

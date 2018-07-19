@@ -97,7 +97,7 @@ function script_url( $script, $context ) {
  */
 function style_url( $stylesheet, $context ) {
 
-	if ( ! in_array( $context, [ 'admin', 'frontend', 'shared' ], true ) ) {
+	if ( ! in_array( $context, [ 'admin', 'frontend', 'shared', 'gutenberg' ], true ) ) {
 		error_log('Invalid $context specfied in AppleMapsForWordpress stylesheet loader.' );
 		return '';
 	}
@@ -114,7 +114,7 @@ function style_url( $stylesheet, $context ) {
  * @return void
  */
 function scripts() {
-	
+
 	wp_enqueue_script( 'mapkitjs', 'https://cdn.apple-mapkit.com/mk/5.x.x/mapkit.js', [], false );
 
 	wp_enqueue_script(
@@ -147,7 +147,8 @@ function scripts() {
  * @return void
  */
 function admin_scripts( $hook ) {
-	
+
+	// MapKit scripts for the Post admin screen.
 	$settings = get_option( 'amfwp_settings', [] );
 	if ( ! empty( $settings ) && in_array( $hook, [ 'post.php', 'post-new.php' ], true ) ) {
 		wp_enqueue_script(
@@ -159,17 +160,14 @@ function admin_scripts( $hook ) {
 		);
 
 		wp_enqueue_script( 'mapkitjs', 'https://cdn.apple-mapkit.com/mk/5.x.x/mapkit.js', [], false );
+
 		// Localize the script so we can have access to the settings.
-		$settings = get_option( 'amfwp_settings', [] );
 		wp_localize_script( 'mapkitjs', 'AMFWP', [
 			'longLifeToken' => $settings['long_life_token'],
-			'authKey'       => $settings['token_gen_authkey'],
-			'iss'           => $settings['token_gen_iss'],
-			'kid'           => $settings['token_gen_kid'],
-			'origin'        => get_home_url(),
 		] );
 	}
 
+	// Add the admin script for the settings page only.
 	if ( 'settings_page_apple-maps-wordpress' === $hook ) {
 		wp_enqueue_script(
 			'apple_maps_for_wordpress_admin',
