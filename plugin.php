@@ -12,9 +12,10 @@
 
 // Useful global constants.
 define( 'APPLE_MAPS_FOR_WORDPRESS_VERSION', '0.1.0' );
-define( 'APPLE_MAPS_FOR_WORDPRESS_URL',     plugin_dir_url( __FILE__ ) );
-define( 'APPLE_MAPS_FOR_WORDPRESS_PATH',    dirname( __FILE__ ) . '/' );
-define( 'APPLE_MAPS_FOR_WORDPRESS_INC',     APPLE_MAPS_FOR_WORDPRESS_PATH . 'includes/' );
+define( 'APPLE_MAPS_FOR_WORDPRESS_URL', plugin_dir_url( __FILE__ ) );
+define( 'APPLE_MAPS_FOR_WORDPRESS_PATH', dirname( __FILE__ ) . '/' );
+define( 'APPLE_MAPS_FOR_WORDPRESS_INC', APPLE_MAPS_FOR_WORDPRESS_PATH . 'includes/' );
+define( 'APPLE_MAPS_FOR_WORDPRESS_BASENAME', plugin_basename( __FILE__ ) );
 
 // Include files.
 require_once APPLE_MAPS_FOR_WORDPRESS_INC . 'functions/core.php';
