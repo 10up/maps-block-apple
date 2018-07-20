@@ -59,7 +59,6 @@ class AppleMapEdit extends Component {
 
 		if ( address ) {
 			this.geocoder.lookup( address, this.geolocate );
-			this.props.setAttributes( { address } );
 		}
 	}
 
