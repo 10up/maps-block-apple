@@ -14,8 +14,6 @@ function setup() {
 
 	// Gutenberg Editor assets.
 	add_action( 'enqueue_block_editor_assets', $n('enqueue_ad_block_editor_assets' ) );
-	// Gutenberg Front End Assets.
-	add_action( 'enqueue_block_assets', $n('enqueue_ad_block_assets' ) );
 }
 
 
@@ -36,7 +34,7 @@ function enqueue_ad_block_editor_assets() {
 		Core\script_url( 'gutenberg', 'gutenberg' ), // Block.build.js: We register the block here. Built with Webpack.
 		array( 'wp-blocks', 'wp-i18n', 'wp-element' ) // Dependencies, defined above.
 	);
-	
+
 	// Styles.
 	wp_enqueue_style(
 		'map-block-editor', // Handle.
@@ -45,5 +43,3 @@ function enqueue_ad_block_editor_assets() {
 		filemtime( plugin_dir_path( dirname( __FILE__ ) ) . '/assets/css/blocks.editor.css' ) // filemtime — Gets file modification time.
 	);
 }
-
-function enqueue_ad_block_assets() { }
