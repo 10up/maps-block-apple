@@ -5,10 +5,6 @@ import pump from 'pump';
 
 gulp.task( 'css', ( cb ) => {
 	const fileSrc = [
-		'./assets/css/admin/admin-style.css',
-		'./assets/css/frontend/editor-style.css',
-		'./assets/css/frontend/style.css',
-		'./assets/css/shared/shared-style.css',
 		'./assets/css/gutenberg/gutenberg-style.css'
 	];
 	const fileDest = './dist';

@@ -9,12 +9,10 @@
     "role": "developer"
   },
   "scripts": {
-    "test": "phpunit",
     "start": "npm install && composer install && gulp",
     "watch": "gulp watch",
     "build": "gulp",
-    "deploy": "npm install && composer install --no-dev -o && gulp",
-    "generate": "node ./sign.js"
+    "deploy": "npm install && composer install --no-dev -o && gulp"
   },
   "repository": {
     "type": "git",

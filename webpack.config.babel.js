@@ -7,7 +7,6 @@ const config = {
 	cache: true,
 	entry: {
 		admin: './assets/js/admin/admin.js',
-		frontend: './assets/js/frontend/frontend.js',
 		shared: './assets/js/shared/shared.js',
 		gutenberg: './assets/js/gutenberg/gutenberg.js'
 	},
