@@ -66,6 +66,10 @@ function deactivate() {
 
 }
 
+function get_enqueue_contexts() {
+	return [ 'admin', 'frontend', 'shared', 'gutenberg' ];
+}
+
 /**
  * Generate an URL to a script, taking into account whether SCRIPT_DEBUG is enabled.
  *
@@ -76,8 +80,7 @@ function deactivate() {
  */
 function script_url( $script, $context ) {
 
-	if ( ! in_array( $context, [ 'admin', 'frontend', 'shared', 'gutenberg' ], true ) ) {
-		error_log('Invalid $context specfied in AppleMapsForWordpress script loader.' );
+	if ( ! in_array( $context, get_enqueue_contexts(), true ) ) {
 		return '';
 	}
 
@@ -97,8 +100,7 @@ function script_url( $script, $context ) {
  */
 function style_url( $stylesheet, $context ) {
 
-	if ( ! in_array( $context, [ 'admin', 'frontend', 'shared', 'gutenberg' ], true ) ) {
-		error_log('Invalid $context specfied in AppleMapsForWordpress stylesheet loader.' );
+	if ( ! in_array( $context, get_enqueue_contexts(), true ) ) {
 		return '';
 	}
 

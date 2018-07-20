@@ -1,9 +1,9 @@
 /*global wp,mapkit*/
 import appleStore from './data';
 
-const { Component, createRef } = wp.element;
+const { Component } = wp.element;
 const { InspectorControls } = wp.editor; // Import registerBlockType() from wp.blocks
-const { PanelBody, PanelRow, TextControl, Button } = wp.components;
+const { PanelBody, PanelRow, TextControl } = wp.components;
 const { select } = wp.data;
 
 class AppleMapEdit extends Component {
@@ -30,7 +30,6 @@ class AppleMapEdit extends Component {
 
 			this.geocoder = new mapkit.Geocoder();
 			this.props.setAttributes( { mapID: this.props.id } );
-			this.addressFieldRef = createRef();
 			// Setup the display.
 			this.setMapDisplay();
 			this.mapHandlers();
@@ -56,10 +55,10 @@ class AppleMapEdit extends Component {
 		}
 	}
 
-	handleGeoCode() {
-		const field = this.addressFieldRef.current;
-		if ( field.value ) {
-			this.geocoder.lookup( field.value, this.geolocate );
+	handleGeoCode( address ) {
+
+		if ( address ) {
+			this.geocoder.lookup( address, this.geolocate );
 		}
 	}
 
@@ -99,22 +98,23 @@ class AppleMapEdit extends Component {
 
 
 	render () {
-		const { attributes:{ width, height, address }, className, setAttributes, id } = this.props;
+		const { attributes:{ width, height, address, latitude, longitude }, className, setAttributes, id } = this.props;
 		const style = { width: width + '%', height: height + 'px' };
+		const updateAddress = ( address ) => {
+			this.handleGeoCode( address );
+			setAttributes( {address} );
+		};
 		return [
 			<InspectorControls>
 				<PanelBody
 					title={'Settings'}
 				>
 					<PanelRow>
-						<label>Address
-							<input type="text" ref={this.addressFieldRef} value={address} />
-							<Button
-								onClick={this.handleGeoCode}
-								className="button"
-							>Lookup
-							</Button>
-						</label>
+						<TextControl
+							label={'Address'}
+							value={ address }
+							onChange={ address => updateAddress( address ) }
+						/>
 					</PanelRow>
 					<PanelRow>
 						<TextControl
@@ -128,6 +128,18 @@ class AppleMapEdit extends Component {
 							label={'Height ( pixels )'}
 							value={ height }
 							onChange={ height => setAttributes( { height } ) }
+						/>
+					</PanelRow>
+					<PanelRow>
+						<TextControl readonly="readonly"
+							label={'Latitude'}
+							value={ latitude }
+						/>
+					</PanelRow>
+					<PanelRow>
+						<TextControl readonly="readonly"
+							label={'Longitude'}
+							value={ longitude }
 						/>
 					</PanelRow>
 				</PanelBody>
