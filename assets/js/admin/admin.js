@@ -26,12 +26,10 @@ generateTokenButton.addEventListener( 'click', e => {
 			typ: 'JWT'
 
 		};
+
 		const token = jwt.sign( payload, tokenGenAuthKey, {header: headers} );
 		if ( token ) {
 			tokenStorage.value = token;
 		}
 	}
 } );
-
-
-
