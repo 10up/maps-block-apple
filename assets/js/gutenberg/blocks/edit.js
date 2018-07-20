@@ -13,15 +13,11 @@ class AppleMapEdit extends Component {
 		this.handleGeoCode = this.handleGeoCode.bind( this );
 		this.geolocate = this.geolocate.bind( this );
 		this.stateChanges = this.stateChanges.bind( this );
-		this.auth = true;
+		this.state = { auth: true };
 	}
 
 	componentDidMount() {
 		// Init the map instance
-		const mapState = select( 'apple-maps-for-wordpress' ).getAppleMapsState();
-		this.auth = mapState.auth;
-		this.ready = mapState.ready;
-		appleStore.subscribe( this.stateChanges );
 		if ( mapkit && typeof mapkit !== 'undefined' ) {
 			this.map = new mapkit.Map( document.getElementById( this.props.id ) );
 			// These items do not have corresponding controls
@@ -34,12 +30,13 @@ class AppleMapEdit extends Component {
 			this.setMapDisplay();
 			this.mapHandlers();
 		}
+		// Subscribe to the store
+		appleStore.subscribe( this.stateChanges );
 	}
 
 	stateChanges() {
 		const mapState = select( 'apple-maps-for-wordpress' ).getAppleMapsState();
-		this.auth = mapState.auth;
-		this.ready = mapState.ready;
+		this.setState( { auth: mapState.auth } );
 	}
 
 	setMapDisplay() {
@@ -85,6 +82,10 @@ class AppleMapEdit extends Component {
 		} );
 	}
 
+	/**
+	 *
+	 * @param regionData
+	 */
 	updateLocationZoomData( regionData ) {
 		const centerData = regionData.center;
 		const spanData = regionData.span;
@@ -98,7 +99,7 @@ class AppleMapEdit extends Component {
 
 
 	render () {
-		const { attributes:{ width, height, address, latitude, longitude }, className, setAttributes, id } = this.props;
+		const { attributes:{ width, height, address, latitude, longitude }, className, setAttributes, clientId } = this.props;
 		const style = { width: width + '%', height: height + 'px' };
 		const updateAddress = ( address ) => {
 			this.handleGeoCode( address );
@@ -145,8 +146,8 @@ class AppleMapEdit extends Component {
 				</PanelBody>
 			</InspectorControls>,
 			<div className={className}>
-				{ ! this.auth && ( <div className="editor-warning no-auth">MapKit JS did not authenticate. Please refresh your token in the settings.</div> ) }
-				<div id={id} style={style}></div>
+				{ ! this.state.auth && ( <div className="editor-warning no-auth">MapKit JS did not authenticate. Please refresh your token in the settings.</div> ) }
+				<div id={clientId} style={style}></div>
 			</div>
 		];
 	}
