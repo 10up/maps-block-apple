@@ -14,12 +14,7 @@ function setup() {
 	add_action( 'init', $n( 'i18n' ) );
 	add_action( 'init', $n( 'init' ) );
 	add_action( 'wp_enqueue_scripts', $n( 'scripts' ) );
-	add_action( 'wp_enqueue_scripts', $n( 'styles' ) );
 	add_action( 'admin_enqueue_scripts', $n( 'admin_scripts' ) );
-	add_action( 'admin_enqueue_scripts', $n( 'admin_styles' ) );
-
-	// Editor styles. add_editor_style() doesn't work outside of a theme.
-	add_filter( 'mce_css', $n( 'mce_css' ) );
 
 	do_action( 'apple_maps_for_wordpress_loaded' );
 }
@@ -66,6 +61,11 @@ function deactivate() {
 
 }
 
+/**
+ * Keep the contexts in a single source.
+ *
+ * @return array
+ */
 function get_enqueue_contexts() {
 	return [ 'admin', 'frontend', 'shared', 'gutenberg' ];
 }
@@ -152,6 +152,8 @@ function admin_scripts( $hook ) {
 
 	// MapKit scripts for the Post admin screen.
 	$settings = get_option( 'amfwp_settings', [] );
+
+	// Post edit screen only.
 	if ( ! empty( $settings ) && in_array( $hook, [ 'post.php', 'post-new.php' ], true ) ) {
 		wp_enqueue_script(
 			'apple_maps_for_wordpress_shared',
@@ -182,78 +184,4 @@ function admin_scripts( $hook ) {
 			'origin' => get_home_url(),
 		] );
 	}
-}
-
-/**
- * Enqueue styles for front-end.
- *
- * @return void
- */
-function styles() {
-
-	wp_enqueue_style(
-		'apple_maps_for_wordpress_shared',
-		style_url( 'shared-style', 'shared' ),
-		[],
-		APPLE_MAPS_FOR_WORDPRESS_VERSION
-	);
-
-	if ( is_admin() ) {
-		wp_enqueue_script(
-			'apple_maps_for_wordpress_admin',
-			style_url( 'admin-style', 'admin' ),
-			[],
-			APPLE_MAPS_FOR_WORDPRESS_VERSION,
-			true
-		);
-	} else {
-		wp_enqueue_script(
-			'apple_maps_for_wordpress_frontend',
-			style_url( 'style', 'frontend' ),
-			[],
-			APPLE_MAPS_FOR_WORDPRESS_VERSION,
-			true
-		);
-	}
-
-}
-
-/**
- * Enqueue styles for admin.
- *
- * @return void
- */
-function admin_styles() {
-
-	wp_enqueue_style(
-		'apple_maps_for_wordpress_shared',
-		style_url( 'shared-style', 'shared' ),
-		[],
-		APPLE_MAPS_FOR_WORDPRESS_VERSION
-	);
-
-	wp_enqueue_script(
-		'apple_maps_for_wordpress_admin',
-		style_url( 'admin-style', 'admin' ),
-		[],
-		APPLE_MAPS_FOR_WORDPRESS_VERSION,
-		true
-	);
-}
-
-
-/**
- * Enqueue editor styles. Filters the comma-delimited list of stylesheets to load in TinyMCE.
- *
- * @param string $stylesheets Comma-delimited list of stylesheets.
- * @return string
- */
-function mce_css( $stylesheets ) {
-	if ( ! empty( $stylesheets ) ) {
-		$stylesheets .= ',';
-	}
-
-	return $stylesheets . APPLE_MAPS_FOR_WORDPRESS_URL . ( ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ?
-			'assets/css/frontend/editor-style.css' :
-			'dist/css/editor-style.min.css' );
 }
