@@ -1,5 +1,7 @@
 <?php
+
 namespace AppleMapsForWordpress\Settings;
+
 use AppleMapsForWordpress\Core;
 
 /**
@@ -8,14 +10,13 @@ use AppleMapsForWordpress\Core;
  * @since 1.0
  */
 function setup() {
-
 	$n = function ( $function ) {
 		return __NAMESPACE__ . "\\$function";
 	};
-	add_action( 'admin_menu', $n('admin_menu' ), 20 );
+	add_action( 'admin_menu', $n( 'admin_menu' ), 20 );
 	add_action( 'admin_init', $n( 'setup_fields_sections' ) );
-	add_action( 'admin_init', $n ('register_settings') );
-	add_filter( 'plugin_action_links_' . APPLE_MAPS_FOR_WORDPRESS_BASENAME, $n('plugin_filter_action_links' ) );
+	add_action( 'admin_init', $n ( 'register_settings' ) );
+	add_filter( 'plugin_action_links_' . APPLE_MAPS_FOR_WORDPRESS_BASENAME, $n( 'plugin_filter_action_links' ) );
 }
 
 
@@ -23,6 +24,7 @@ function setup() {
  * Add the settings panel to the plugin page
  *
  * @param array $links the links for the plugin.
+ *
  * @return array
  */
 function plugin_filter_action_links( $links ) {
@@ -58,25 +60,26 @@ function settings_screen() {
 		<form action="options.php" method="post">
 			<?php settings_fields( 'amfwp_settings' ); ?>
 			<?php do_settings_sections( 'applemapswordpress' ); ?>
-			<button aria-label="Generate Long Life Token"
-					class="button"
-					id="generate-token"
-			><?php esc_html_e( 'Generate Token', 'apple-maps-for-wordpress' ); ?></button>
 			<?php submit_button(); ?>
-
 		</form>
 	</div>
 	<?php
 }
 
+
+function test () {
+	?>
+	<button aria-label="Generate Long Life Token" class="button" id="generate-token"><?php esc_html_e( 'Generate Token', 'apple-maps-for-wordpress' ); ?></button>
+	<?php
+}
 /**
  * Register setting fields and sections
  *
  * @since  1.0
  */
 function setup_fields_sections() {
-	add_settings_section( 'amfwp-section-1', 'Active Authorization Token', '', 'applemapswordpress' );
-	add_settings_section( 'amfwp-section-2', 'Generate an Authorization Token', '', 'applemapswordpress' );
+	add_settings_section( 'amfwp-section-2', 'Authorization Token Credentials', '', 'applemapswordpress' );
+	add_settings_section( 'amfwp-section-1', 'Active Authorization Token', __NAMESPACE__ . '\test', 'applemapswordpress' );
 	add_settings_field(
 		'long_life_auth_token',
 		esc_html__( 'Long Life Authorization Token', 'apple-maps-for-wordpress' ),
@@ -114,13 +117,21 @@ function setup_fields_sections() {
  * Render the long life token settings box
  */
 function long_life_auth_token() {
-	$settings = get_option( 'amfwp_settings' );
-	$ll_token = isset( $settings['long_life_token'] ) ? $settings['long_life_token'] : '';
+	$settings          = get_option( 'amfwp_settings' );
+	$ll_token          = isset( $settings['long_life_token'] ) ? $settings['long_life_token'] : '';
+	$container_classes = ( ! empty( $ll_token ) ) ? 'hidden' : '';
+	$button_classes    = ( empty( $ll_token ) ) ? 'button hidden' : 'button';
 	?>
-	<textarea name="amfwp_settings[long_life_token]" cols="40" rows="10" id="long-life-token"><?php echo esc_textarea( $ll_token ); ?></textarea>
-	<p class="description">
-		<?php echo wp_kses_post( _e( 'This Long Life Authorization Token is used by the Apple Maps for WordPress plugin to authenticate with MapKit JS. <br>For more information please see <a href="https://developer.apple.com/videos/play/wwdc2018/508" target="_blank" rel="noopener noreferrer">Getting and Using a MapKit JS Key on the Apple Developer site.', 'apple-maps-for-wordpress' ) ); ?>
-	</p>
+	<button id="toggle-long-life-token" data-text-index="LongLifeToken" class="<?php echo esc_attr( $button_classes ); ?>">
+		<?php esc_html_e( 'Show Long Life Token', 'apple-maps-for-wordpress' ); ?>
+	</button>
+	<div id="long-life-token-container" class="<?php echo esc_attr( $container_classes ); ?>">
+		<br/>
+		<textarea readonly name="amfwp_settings[long_life_token]" cols="40" rows="10" id="long-life-token"><?php echo esc_textarea( $ll_token ); ?></textarea>
+		<p class="description">
+			<?php echo wp_kses_post( _e( 'This Long Life Authorization Token is used by the Apple Maps for WordPress plugin to authenticate with MapKit JS. <br>For more information please see <a href="https://developer.apple.com/videos/play/wwdc2018/508" target="_blank" rel="noopener noreferrer">Getting and Using a MapKit JS Key on the Apple Developer site.</a>', 'apple-maps-for-wordpress' ) ); ?>
+		</p>
+	</div>
 	<?php
 }
 
@@ -128,13 +139,22 @@ function long_life_auth_token() {
  *
  */
 function token_gen_authkey() {
-	$settings = get_option( 'amfwp_settings' );
-	$authkey  = isset( $settings['token_gen_authkey'] ) ? $settings['token_gen_authkey'] : '';
+	$settings          = get_option( 'amfwp_settings' );
+	$authkey           = isset( $settings['token_gen_authkey'] ) ? $settings['token_gen_authkey'] : '';
+	$container_classes = ( ! empty( $authkey ) ) ? 'hidden' : '';
+	$button_classes    = ( empty( $authkey ) ) ? 'button hidden' : 'button';
 	?>
-	<textarea name="amfwp_settings[token_gen_authkey]" cols="40" rows="10" id="token-gen-authkey"><?php echo esc_textarea( $authkey ); ?></textarea>
-	<p class="description">
-		<?php echo wp_kses_post( _e( 'Copy and paste the contents of the MapKit JS Key that was generated and downloaded from the Apple Developer website.<br>For instructions on generating a MapKit KS key, see <a href="https://developer.apple.com/videos/play/wwdc2018/508" target="_blank" rel="noopener noreferrer">Getting and Using a MapKit JS Key on the Apple Developer site.', 'apple-maps-for-wordpress' ) ); ?>
-	</p>
+	
+	<button id="toggle-auth-key" data-text-index="AuthKey" class="<?php echo esc_attr( $button_classes ); ?>">
+		<?php esc_html_e( 'Show MapKit JS Key', 'apple-maps-for-wordpress' ); ?>
+	</button>
+	<div id="authkey-container" class="<?php echo esc_attr( $container_classes ); ?>">
+		<br/>
+		<textarea name="amfwp_settings[token_gen_authkey]" cols="40" rows="10" id="token-gen-authkey"><?php echo esc_textarea( $authkey ); ?></textarea>
+		<p class="description">
+			<?php echo wp_kses_post( _e( 'Copy and paste the contents of the MapKit JS Key that was generated and downloaded from the Apple Developer website.<br>For instructions on generating a MapKit KS key, see <a href="https://developer.apple.com/videos/play/wwdc2018/508" target="_blank" rel="noopener noreferrer">Getting and Using a MapKit JS Key on the Apple Developer site.</a>', 'apple-maps-for-wordpress' ) ); ?>
+		</p>
+	</div>
 	<?php
 }
 
@@ -167,8 +187,6 @@ function token_gen_kid() {
 }
 
 
-
-
 /**
  * Register settings for options table
  *
@@ -182,6 +200,7 @@ function register_settings() {
  * Sanitize settings for DB
  *
  * @param array $settings The array of setting to sanitize.
+ *
  * @return array
  * @since  1.0
  */
@@ -202,5 +221,6 @@ function sanitize_settings( $settings ) {
 	if ( isset( $settings['token_gen_kid'] ) ) {
 		$new_settings['token_gen_kid'] = sanitize_text_field( $settings['token_gen_kid'] );
 	}
+
 	return $new_settings;
 }
