@@ -181,7 +181,13 @@ function admin_scripts( $hook ) {
 			true
 		);
 		wp_localize_script( 'apple_maps_for_wordpress_admin', 'AMFWP_ADMIN', [
-			'origin' => get_home_url(),
+			'origin'      => get_home_url(),
+			'buttonTexts' => [
+				'hideLongLifeToken' => __( 'Hide Long Life Token', 'apple-maps-for-wordpress' ),
+				'showLongLifeToken' => __( 'Show Long Life Token', 'apple-maps-for-wordpress' ),
+				'showAuthKey'       => __( 'Show MapKit JS Key', 'apple-maps-for-wordpress' ),
+				'hideAuthKey'       => __( 'Hide MapKit JS Key', 'apple-maps-for-wordpress' ),
+			],
 		] );
 	}
 }
