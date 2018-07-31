@@ -89,14 +89,6 @@ function setup_fields_sections() {
 	);
 
 	add_settings_field(
-		'token_gen_authkey',
-		esc_html__( 'MapKit JS Key', 'apple-maps-for-wordpress' ),
-		__NAMESPACE__ . '\token_gen_authkey',
-		'applemapswordpress',
-		'amfwp-section-2'
-	);
-
-	add_settings_field(
 		'token_gen_iss',
 		esc_html__( 'Apple Developer Team ID', 'apple-maps-for-wordpress' ),
 		__NAMESPACE__ . '\token_gen_iss',
@@ -108,6 +100,14 @@ function setup_fields_sections() {
 		'token_gen_kid',
 		esc_html__( 'MapKit JS Key Name', 'apple-maps-for-wordpress' ),
 		__NAMESPACE__ . '\token_gen_kid',
+		'applemapswordpress',
+		'amfwp-section-2'
+	);
+
+	add_settings_field(
+		'token_gen_authkey',
+		esc_html__( 'MapKit JS Key', 'apple-maps-for-wordpress' ),
+		__NAMESPACE__ . '\token_gen_authkey',
 		'applemapswordpress',
 		'amfwp-section-2'
 	);
