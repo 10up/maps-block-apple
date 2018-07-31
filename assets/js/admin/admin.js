@@ -35,6 +35,10 @@ generateTokenButton.addEventListener( 'click', e => {
 
 		const token = jwt.sign( payload, tokenGenAuthKey.value, {header: headers} );
 		if ( token ) {
+			if ( tokenContainer.classList.contains( 'hidden' ) ) {
+				showTokenButton.click();
+			}
+
 			tokenStorage.value = token;
 		}
 	}
