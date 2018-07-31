@@ -67,9 +67,9 @@ function settings_screen() {
 }
 
 
-function test () {
+function generate_button() {
 	?>
-	<button aria-label="Generate Long Life Token" class="button" id="generate-token"><?php esc_html_e( 'Generate Token', 'apple-maps-for-wordpress' ); ?></button>
+	<button aria-label="Generate Long Life Token" class="button" id="generate-token"><?php esc_html_e( 'Generate New Token', 'apple-maps-for-wordpress' ); ?></button>
 	<?php
 }
 /**
@@ -79,7 +79,7 @@ function test () {
  */
 function setup_fields_sections() {
 	add_settings_section( 'amfwp-section-2', 'Authorization Token Credentials', '', 'applemapswordpress' );
-	add_settings_section( 'amfwp-section-1', 'Active Authorization Token', __NAMESPACE__ . '\test', 'applemapswordpress' );
+	add_settings_section( 'amfwp-section-1', 'Active Authorization Token', __NAMESPACE__ . '\generate_button', 'applemapswordpress' );
 	add_settings_field(
 		'long_life_auth_token',
 		esc_html__( 'Long Life Authorization Token', 'apple-maps-for-wordpress' ),
