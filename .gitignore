@@ -6,9 +6,6 @@ composer.lock
 phpunit.xml
 .idea
 
-# Project Files
-dist
-
 # Editors
 *.esproj
 *.tmproj
