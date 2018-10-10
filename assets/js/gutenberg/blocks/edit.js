@@ -17,8 +17,11 @@ class AppleMapEdit extends Component {
 	}
 
 	componentDidMount() {
+		// Subscribe to the store
+		appleStore.subscribe( this.stateChanges );
+
 		// Init the map instance
-		if ( mapkit && typeof mapkit !== 'undefined' ) {
+		if ( typeof mapkit !== 'undefined' ) {
 			this.map = new mapkit.Map( document.getElementById( this.props.clientId ) );
 			// These items do not have corresponding controls
 			this.map.showsMapTypeControl = false;
@@ -29,9 +32,10 @@ class AppleMapEdit extends Component {
 			// Setup the display.
 			this.setMapDisplay();
 			this.mapHandlers();
+		} else {
+			wp.data.dispatch( 'apple-maps-for-wordpress' ).authFailed( { reason: 'Plugin not set up.'} );
 		}
-		// Subscribe to the store
-		appleStore.subscribe( this.stateChanges );
+
 	}
 
 	stateChanges() {

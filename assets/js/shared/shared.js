@@ -37,7 +37,7 @@ mapkit.addEventListener( 'error', e => {
 	switch ( e.status ) {
 			case 'Unauthorized' :
 				if ( wp.data )  {
-					wp.data.dispatch( 'apple-maps-for-wordpress' ).authFailed();
+					wp.data.dispatch( 'apple-maps-for-wordpress' ).authFailed( { reason: e.status } );
 				}
 				break;
 			case 'Too Many Requests':

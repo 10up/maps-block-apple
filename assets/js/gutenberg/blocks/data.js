@@ -11,7 +11,8 @@ const reducer = ( state = defaultState, action ) => {
 			case 'APPLE_MAP_AUTH_FAILED':
 				state =  {
 					auth: false,
-					ready: false
+					ready: false,
+					error: action.reason
 				};
 				break;
 			case 'APPLE_MAP_KIT_READY':
@@ -28,9 +29,14 @@ const getAppleMapsState = state => {
 	return state;
 };
 
-const authFailed = () => {
+const getAuthErrorMessage = state => {
+	return state.reason;
+};
+
+const authFailed = ( data ) => {
 	return {
-		type: 'APPLE_MAP_AUTH_FAILED'
+		type: 'APPLE_MAP_AUTH_FAILED',
+		reason: data.reason
 	};
 };
 
@@ -43,7 +49,7 @@ const mapKitReady = () => {
 
 const appleStore = registerStore( 'apple-maps-for-wordpress', {
 	reducer,
-	selectors: { getAppleMapsState },
+	selectors: { getAppleMapsState, getAuthErrorMessage },
 	actions: { mapKitReady, authFailed }
 } );
 
