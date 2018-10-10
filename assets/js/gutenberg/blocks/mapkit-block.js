@@ -23,6 +23,7 @@ registerBlockType( 'tenup/apple-map-for-wordpress',{
 	attributes: attributes,
 	edit: AppleMapEdit,
 	save: props => {
+		console.log( props.attributes );
 		const { width, height , latitude, longitude, latitudeDelta, longitudeDelta, mapID } = props.attributes;
 		const style = { width: width + '%', height: height + 'px' };
 		return (
