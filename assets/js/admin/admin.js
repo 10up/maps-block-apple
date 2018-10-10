@@ -51,7 +51,6 @@ generateTokenButton.addEventListener( 'click', e => {
 const toggleTextArea = ( button, textArea ) => {
 	const dataAttr = button.getAttribute( 'data-text-index' );
 	const state = ( ! textArea.classList.contains( 'hidden' ) ) ? 'show' + dataAttr : 'hide' + dataAttr;
-	console.log( state );
 	textArea.classList.toggle( 'hidden' );
 	button.innerText = AMFWP_ADMIN.buttonTexts[ state ];
 };
