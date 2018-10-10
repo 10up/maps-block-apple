@@ -130,15 +130,6 @@ function scripts() {
 	// Localize the script so we can have access to the settings.
 	$settings = get_option( 'amfwp_settings', [] );
 	wp_localize_script( 'mapkitjs', 'AMFWP', [ 'longLifeToken' => $settings['long_life_token'] ] );
-
-	wp_enqueue_script(
-		'apple_maps_for_wordpress_frontend',
-		script_url( 'frontend', 'frontend' ),
-		[],
-		APPLE_MAPS_FOR_WORDPRESS_VERSION,
-		true
-	);
-
 }
 
 /**
