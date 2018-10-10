@@ -19,13 +19,13 @@ class AppleMapEdit extends Component {
 	componentDidMount() {
 		// Init the map instance
 		if ( mapkit && typeof mapkit !== 'undefined' ) {
-			this.map = new mapkit.Map( document.getElementById( this.props.id ) );
+			this.map = new mapkit.Map( document.getElementById( this.props.clientId ) );
 			// These items do not have corresponding controls
 			this.map.showsMapTypeControl = false;
 			this.map.showsCompass = mapkit.FeatureVisibility.Hidden;
 
 			this.geocoder = new mapkit.Geocoder();
-			this.props.setAttributes( { mapID: this.props.id } );
+			this.props.setAttributes( { mapID: this.props.clientId} );
 			// Setup the display.
 			this.setMapDisplay();
 			this.mapHandlers();
