@@ -13,10 +13,8 @@ mapkit.addEventListener( 'configuration-change', function( event ) {
 			case 'Initialized':
 				//MapKit JS was initialized and configured.
 				if ( wp.data ) {
-					console.log( 'mapKitReady' );
 					wp.data.dispatch( 'apple-maps-for-wordpress' ).mapKitReady();
 				} else {
-					console.log( 'load the maps' );
 					maps = document.getElementsByClassName( 'apple-maps-for-wordpress' );
 					for ( let i = 0; i < maps.length; i++ ) {
 						const map = new mapkit.Map( document.getElementById( maps[i].id ) );
