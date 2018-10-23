@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name: Apple Maps For Wordpress
+ * Plugin Name: Apple Maps for WordPress
  * Plugin URI: https://10up.com
- * Description:
+ * Description: Registers an Apple Maps WordPress Block to bring the power of Apple Maps to your WordPress website.
  * Version:     0.1.0
  * Author:      10up
  * Author URI:  https://10up.com
