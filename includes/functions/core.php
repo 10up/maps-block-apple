@@ -128,7 +128,9 @@ function scripts() {
 	);
 
 	// Localize the script so we can have access to the settings.
-	$settings = get_option( 'amfwp_settings', [] );
+	$settings = get_option( 'amfwp_settings', [
+		'long_life_token' => '',
+	] );
 	wp_localize_script( 'mapkitjs', 'AMFWP', [ 'longLifeToken' => $settings['long_life_token'] ] );
 }
 
