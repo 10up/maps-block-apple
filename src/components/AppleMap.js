@@ -3,14 +3,7 @@
 import apiFetch from '@wordpress/api-fetch';
 import { dispatch } from '@wordpress/data';
 
-const {
-	MarkerAnnotation,
-	Coordinate,
-	Map,
-	FeatureVisibility,
-	CoordinateRegion,
-	CoordinateSpan,
-} = mapkit;
+const { MarkerAnnotation, Coordinate, Map, FeatureVisibility } = mapkit;
 
 class AppleMap {
 	constructor( element ) {

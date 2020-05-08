@@ -3,8 +3,8 @@
 import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
 
-import edit from './edit';
-import save from './save';
+import AppleMapsWordPressEdit from './edit';
+import AppleMapsWordPressSave from './save';
 
 const { Map } = mapkit;
 
@@ -42,6 +42,6 @@ registerBlockType( 'tenup/apple-maps-wordpress', {
 	supports: {
 		align: [ 'wide', 'full' ],
 	},
-	edit,
-	save,
+	edit: AppleMapsWordPressEdit,
+	save: AppleMapsWordPressSave,
 } );

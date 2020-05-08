@@ -11,7 +11,7 @@ import { useEffect, useRef } from '@wordpress/element';
 
 import { AppleMapEdit, MAP_TYPE_OPTIONS } from './components/AppleMap';
 
-export default function edit( props ) {
+export default function AppleMapsWordPressEdit( props ) {
 	const {
 		className,
 		attributes: {

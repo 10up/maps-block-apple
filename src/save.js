@@ -1,4 +1,4 @@
-export default function save( props ) {
+export default function AppleMapsWordPressSave( props ) {
 	const {
 		className,
 		attributes: { mapType, height, latitude, longitude, rotation, zoom },
