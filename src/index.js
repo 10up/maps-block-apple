@@ -10,7 +10,9 @@ const { Map } = mapkit;
 
 registerBlockType( 'tenup/apple-maps-wordpress', {
 	title: __( 'Apple Maps', 'apple-maps-wordpress' ),
-	category: 'common',
+	description: __( 'Add a Apple Map to your Page', 'apple-maps-wordpress' ),
+	category: 'embed',
+	icon: 'location-alt',
 	attributes: {
 		address: {
 			type: 'string',
