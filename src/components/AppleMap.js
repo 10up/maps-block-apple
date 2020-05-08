@@ -28,8 +28,6 @@ class AppleMap {
 			Number( this.element.dataset.longitude ) || -122.38372029405731
 		);
 
-		console.log( this.element.dataset );
-
 		this.mapOptions = {
 			center,
 			rotation: Number( this.element.dataset.rotation ) || 0,
