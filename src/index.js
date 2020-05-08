@@ -1,8 +1,12 @@
+/*global mapkit*/
+
 import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
 
 import edit from './edit';
 import save from './save';
+
+const { Map } = mapkit;
 
 registerBlockType( 'tenup/apple-maps-wordpress', {
 	title: __( 'Apple Maps', 'apple-maps-wordpress' ),
@@ -17,12 +21,22 @@ registerBlockType( 'tenup/apple-maps-wordpress', {
 			default: '450',
 		},
 		latitude: {
-			type: 'string',
-			default: '',
+			type: 'number',
 		},
 		longitude: {
+			type: 'number',
+		},
+		rotation: {
+			type: 'number',
+			default: 0,
+		},
+		zoom: {
+			type: 'number',
+			default: 15,
+		},
+		mapType: {
 			type: 'string',
-			default: '',
+			default: Map.MapTypes.Standard,
 		},
 	},
 	supports: {

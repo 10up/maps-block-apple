@@ -1,6 +1,6 @@
 import domReady from '@wordpress/dom-ready';
 
-import AppleMap from './components/AppleMap';
+import { AppleMap } from './components/AppleMap';
 
 domReady( () => {
 	const appleMapsBlocks = document.querySelectorAll(
