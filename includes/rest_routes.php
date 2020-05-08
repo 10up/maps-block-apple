@@ -131,9 +131,10 @@ function get_jwt() {
 	];
 
 	$body = [
-		'iss' => $team_id,
-		'iat' => time(),
-		'exp' => time() + 30,
+		'iss'    => $team_id,
+		'iat'    => time(),
+		'exp'    => time() + 30,
+		'origin' => get_site_url(),
 	];
 
 	$payload = encode( wp_json_encode( $header ) ) . '.' . encode( wp_json_encode( $body ) );
