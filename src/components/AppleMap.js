@@ -43,7 +43,7 @@ class AppleMap {
 
 		this.createMap();
 		this.map._impl.zoomLevel = Number( this.element.dataset.zoom ) || 15;
-		// this.addMarker();
+		this.addMarker();
 	}
 
 	createMap() {
@@ -60,8 +60,7 @@ class AppleMap {
 			glyphText: '✈️',
 		} );
 
-		// Add and show both annotations on the map
-		this.map.showItems( [ sfoAnnotation ] );
+		this.map.addAnnotation( sfoAnnotation );
 	}
 
 	static authenticateMap() {
