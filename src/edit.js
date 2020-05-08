@@ -115,7 +115,16 @@ export default function AppleMapsWordPressEdit( props ) {
 					</PanelRow>
 				</PanelBody>
 			</InspectorControls>
-			<div ref={ mapElement } className={ className }></div>
+			<div
+				ref={ mapElement }
+				className={ className }
+				data-map-type={ mapType }
+				data-latitude={ latitude }
+				data-longitude={ longitude }
+				data-rotation={ rotation }
+				data-zoom={ zoom }
+				style={ { height: `${ height }px` } }
+			/>
 		</>
 	);
 }

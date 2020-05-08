@@ -12,7 +12,7 @@ export default function AppleMapsWordPressSave( props ) {
 			data-longitude={ longitude }
 			data-rotation={ rotation }
 			data-zoom={ zoom }
-			height={ `${ height }px` }
+			style={ { height: `${ height }px` } }
 		/>
 	);
 }
