@@ -1,7 +1,6 @@
 import { InspectorControls } from '@wordpress/block-editor';
 import {
 	PanelBody,
-	PanelRow,
 	TextControl,
 	SelectControl,
 	RangeControl,
@@ -56,63 +55,51 @@ export default function AppleMapsWordPressEdit( props ) {
 				<PanelBody
 					title={ __( 'Map Settings', 'apple-maps-wordpress' ) }
 				>
-					<PanelRow>
-						<SelectControl
-							label={ __( 'MapType', 'apple-maps-wordpress' ) }
-							options={ MAP_TYPE_OPTIONS }
-							value={ mapType }
-							onChange={ ( newMapType ) =>
-								setAttributes( { mapType: newMapType } )
-							}
-						/>
-					</PanelRow>
-					<PanelRow>
-						<RangeControl
-							label={ __( 'Zoom', 'apple-maps-wordpress' ) }
-							value={ zoom }
-							onChange={ ( newZoom ) =>
-								setAttributes( { zoom: newZoom } )
-							}
-							min={ 0 }
-							max={ 20 }
-							step={ 0.5 }
-						/>
-					</PanelRow>
-					<PanelRow>
-						<TextControl
-							label={ __( 'Address', 'apple-maps-wordpress' ) }
-							value={ address }
-							onChange={ ( newAddress ) =>
-								setAttributes( { address: newAddress } )
-							}
-						/>
-					</PanelRow>
-					<PanelRow>
-						<TextControl
-							label={ __(
-								'Height ( pixels )',
-								'apple-maps-wordpress'
-							) }
-							value={ height }
-							onChange={ ( newHeight ) =>
-								setAttributes( { height: newHeight } )
-							}
-						/>
-					</PanelRow>
-					<PanelRow>
-						<TextControl
-							readonly="readonly"
-							label={ __( 'Latitude', 'apple-maps-wordpress' ) }
-							value={ latitude }
-						/>
-					</PanelRow>
-					<PanelRow>
-						<TextControl
-							readonly="readonly"
-							label={ __( 'Longitude', 'apple-maps-wordpress' ) }
-							value={ longitude }
-						/>
-					</PanelRow>
+					<SelectControl
+						label={ __( 'MapType', 'apple-maps-wordpress' ) }
+						options={ MAP_TYPE_OPTIONS }
+						value={ mapType }
+						onChange={ ( newMapType ) =>
+							setAttributes( { mapType: newMapType } )
+						}
+					/>
+					<RangeControl
+						label={ __( 'Zoom', 'apple-maps-wordpress' ) }
+						value={ zoom }
+						onChange={ ( newZoom ) =>
+							setAttributes( { zoom: newZoom } )
+						}
+						min={ 0 }
+						max={ 20 }
+						step={ 0.5 }
+					/>
+					<TextControl
+						label={ __( 'Address', 'apple-maps-wordpress' ) }
+						value={ address }
+						onChange={ ( newAddress ) =>
+							setAttributes( { address: newAddress } )
+						}
+					/>
+					<TextControl
+						label={ __(
+							'Height ( pixels )',
+							'apple-maps-wordpress'
+						) }
+						value={ height }
+						onChange={ ( newHeight ) =>
+							setAttributes( { height: newHeight } )
+						}
+					/>
+					<TextControl
+						readonly="readonly"
+						label={ __( 'Latitude', 'apple-maps-wordpress' ) }
+						value={ latitude }
+					/>
+					<TextControl
+						readonly="readonly"
+						label={ __( 'Longitude', 'apple-maps-wordpress' ) }
+						value={ longitude }
+					/>
 				</PanelBody>
 			</InspectorControls>
 			<div
