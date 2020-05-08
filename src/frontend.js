@@ -4,7 +4,7 @@ import AppleMap from './components/AppleMap';
 
 domReady( () => {
 	const appleMapsBlocks = document.querySelectorAll(
-		'.wp-block-10up-apple-maps-wordpress'
+		'.wp-block-tenup-apple-maps-wordpress'
 	);
 
 	appleMapsBlocks.forEach( ( block ) => {
