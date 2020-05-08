@@ -1,15 +1,15 @@
-console.log("Hello Frontend");
+console.log( 'Hello Frontend' );
 
-import domReady from "@wordpress/dom-ready";
+import domReady from '@wordpress/dom-ready';
 
-import AppleMap from "./components/AppleMap";
+import AppleMap from './components/AppleMap';
 
-domReady(() => {
+domReady( () => {
 	const appleMapsBlocks = document.querySelectorAll(
-		".wp-block-10up-apple-maps-wordpress"
+		'.wp-block-10up-apple-maps-wordpress'
 	);
 
-	appleMapsBlocks.forEach((block) => {
-		new AppleMap(block);
-	});
-});
+	appleMapsBlocks.forEach( ( block ) => {
+		new AppleMap( block );
+	} );
+} );

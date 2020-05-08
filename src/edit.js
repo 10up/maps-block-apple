@@ -1,8 +1,8 @@
-export default function edit(props) {
+export default function edit( props ) {
 	const {
 		className,
 		attributes: {},
 	} = props;
 
-	return <div className={className}></div>;
+	return <div className={ className }></div>;
 }
