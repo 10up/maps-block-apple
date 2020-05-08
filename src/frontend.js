@@ -1,5 +1,3 @@
-console.log( 'Hello Frontend' );
-
 import domReady from '@wordpress/dom-ready';
 
 import AppleMap from './components/AppleMap';

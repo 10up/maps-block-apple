@@ -5,7 +5,5 @@ export default class AppleMap {
 		this.init();
 	}
 
-	init() {
-		console.log( this.element );
-	}
+	init() {}
 }
