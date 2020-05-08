@@ -9,22 +9,86 @@ namespace tenup\Apple_Maps_WordPress;
 
 use \WP_Error as WP_Error;
 
-/*
- * Setup REST Endpoint to get a valid JWT
+define( 'APPLE_MAPS_WORDPRESS_VERSION_REST_NAMESPACE', 'AppleMapsWordPress/v1' );
+
+
+add_action( 'rest_api_init', __NAMESPACE__ . '\add_endpoints' );
+/**
+ * Add custom rest endpoints
  */
-add_action(
-	'rest_api_init',
-	function () {
-		register_rest_route(
-			'AppleMapsWordPress/v1',
-			'/GetJWT',
-			[
-				'methods'  => 'GET',
-				'callback' => __NAMESPACE__ . '\get_jwt',
-			]
-		);
-	}
-);
+function add_endpoints() {
+
+	register_rest_route(
+		APPLE_MAPS_WORDPRESS_VERSION_REST_NAMESPACE,
+		'/GetJWT',
+		[
+			'methods'  => 'GET',
+			'callback' => __NAMESPACE__ . '\get_jwt',
+		]
+	);
+
+	register_rest_route(
+		APPLE_MAPS_WORDPRESS_VERSION_REST_NAMESPACE,
+		'/private_key',
+		[
+			'methods'             => \WP_REST_Server::EDITABLE,
+			'callback'            => __NAMESPACE__ . '\update_apple_maps_private_key',
+			'permission_callback' => __NAMESPACE__ . '\check_permissions',
+		]
+	);
+
+	register_rest_route(
+		APPLE_MAPS_WORDPRESS_VERSION_REST_NAMESPACE,
+		'/private_key/get',
+		[
+			'methods'             => 'GET',
+			'callback'            => __NAMESPACE__ . '\get_apple_maps_private_key',
+			'permission_callback' => __NAMESPACE__ . '\check_permissions',
+		]
+	);
+
+	register_rest_route(
+		APPLE_MAPS_WORDPRESS_VERSION_REST_NAMESPACE,
+		'/team_id',
+		[
+			'methods'             => \WP_REST_Server::EDITABLE,
+			'callback'            => __NAMESPACE__ . '\update_apple_maps_team_id',
+			'permission_callback' => __NAMESPACE__ . '\check_permissions',
+		]
+	);
+
+	register_rest_route(
+		APPLE_MAPS_WORDPRESS_VERSION_REST_NAMESPACE,
+		'/team_id/get',
+		[
+			'methods'             => 'GET',
+			'callback'            => __NAMESPACE__ . '\get_apple_maps_team_id',
+			'permission_callback' => __NAMESPACE__ . '\check_permissions',
+		]
+	);
+
+	register_rest_route(
+		APPLE_MAPS_WORDPRESS_VERSION_REST_NAMESPACE,
+		'/key_id',
+		[
+			'methods'             => \WP_REST_Server::EDITABLE,
+			'callback'            => __NAMESPACE__ . '\update_apple_maps_key_id',
+			'permission_callback' => __NAMESPACE__ . '\check_permissions',
+		]
+	);
+
+	register_rest_route(
+		APPLE_MAPS_WORDPRESS_VERSION_REST_NAMESPACE,
+		'/key_id/get',
+		[
+			'methods'             => 'GET',
+			'callback'            => __NAMESPACE__ . '\get_apple_maps_key_id',
+			'permission_callback' => __NAMESPACE__ . '\check_permissions',
+		]
+	);
+}
+
+
 
 /**
  * Encode String
@@ -85,3 +149,99 @@ function get_jwt() {
 	return new \WP_REST_Response( $response, 200 );
 }
 
+/**
+ * Get private_key Setting
+ *
+ * @param [\WP_REST_Request] $request request
+ */
+function get_apple_maps_private_key( $request ) {
+	$private_key = get_option( 'apple_maps_private_key' );
+	$response    = new \WP_REST_Response( $private_key );
+	$response->set_status( 201 );
+
+	return $response;
+}
+
+/**
+ * Get team_id Setting
+ *
+ * @param [\WP_REST_Request] $request request
+ */
+function get_apple_maps_team_id( $request ) {
+	$team_id  = get_option( 'apple_maps_team_id' );
+	$response = new \WP_REST_Response( $team_id );
+	$response->set_status( 201 );
+
+	return $response;
+}
+
+/**
+ * Get key_id Setting
+ *
+ * @param [\WP_REST_Request] $request request
+ */
+function get_apple_maps_key_id( $request ) {
+	$key_id   = get_option( 'apple_maps_key_id' );
+	$response = new \WP_REST_Response( $key_id );
+	$response->set_status( 201 );
+
+	return $response;
+}
+
+/**
+ * Update private_key Setting
+ *
+ * @param [\WP_REST_Request] $request request
+ */
+function update_apple_maps_private_key( $request ) {
+
+	$new_private_key = $request->get_body();
+	update_option( 'apple_maps_private_key', $new_private_key );
+
+	$private_key = get_option( 'apple_maps_private_key' );
+	$response    = new \WP_REST_Response( $private_key );
+	$response->set_status( 201 );
+
+	return $response;
+}
+
+/**
+ * Update team_id Setting
+ *
+ * @param [\WP_REST_Request] $request request
+ */
+function update_apple_maps_team_id( $request ) {
+
+	$new_team_id = $request->get_body();
+	update_option( 'apple_maps_team_id', $new_team_id );
+
+	$team_id  = get_option( 'apple_maps_team_id' );
+	$response = new \WP_REST_Response( $team_id );
+	$response->set_status( 201 );
+
+	return $response;
+}
+
+/**
+ * Update key_id Setting
+ *
+ * @param [\WP_REST_Request] $request request
+ */
+function update_apple_maps_key_id( $request ) {
+
+	$new_key_id = $request->get_body();
+	update_option( 'apple_maps_key_id', $new_key_id );
+
+	$key_id   = get_option( 'apple_maps_key_id' );
+	$response = new \WP_REST_Response( $key_id );
+	$response->set_status( 201 );
+
+	return $response;
+}
+
+/**
+ * Check wether user can Edit Posts
+ */
+function check_permissions() {
+	return current_user_can( 'edit_posts' );
+}
