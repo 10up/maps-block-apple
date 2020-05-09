@@ -26,7 +26,6 @@ export default function AuthPanel() {
 		} )
 			.then( ( response ) => {
 				setPrivateKey( response );
-				console.log( response );
 			} )
 			.catch();
 
@@ -35,7 +34,6 @@ export default function AuthPanel() {
 		} )
 			.then( ( response ) => {
 				setTeamId( response );
-				console.log( response );
 			} )
 			.catch();
 
@@ -44,7 +42,6 @@ export default function AuthPanel() {
 		} )
 			.then( ( response ) => {
 				setKeyId( response );
-				console.log( response );
 			} )
 			.catch();
 	}, [] );
@@ -187,7 +184,8 @@ export default function AuthPanel() {
 					<p>
 						<Button
 							id="apple-maps-wordpress-edit-api-key-button"
-							className="is-button"
+							isButton
+							isPrimary
 							onClick={ toggleIsEditing }
 						>
 							{ __( 'Edit API Key', 'apple-maps-wordpress' ) }

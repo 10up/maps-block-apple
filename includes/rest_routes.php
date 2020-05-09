@@ -199,7 +199,7 @@ function get_apple_maps_key_id( $request ) {
 function update_apple_maps_wordpress_private_key( $request ) {
 
 	$new_private_key = $request->get_body();
-	update_option( 'apple_maps_wordpress_private_key', $new_private_key );
+	update_option( 'apple_maps_wordpress_private_key', json_decode( $new_private_key ) );
 
 	$private_key = get_option( 'apple_maps_wordpress_private_key' );
 	$response    = new WP_REST_Response( $private_key );
@@ -216,7 +216,7 @@ function update_apple_maps_wordpress_private_key( $request ) {
 function update_apple_maps_wordpress_team_id( $request ) {
 
 	$new_team_id = $request->get_body();
-	update_option( 'apple_maps_wordpress_team_id', $new_team_id );
+	update_option( 'apple_maps_wordpress_team_id', json_decode( $new_team_id ) );
 
 	$team_id  = get_option( 'apple_maps_wordpress_team_id' );
 	$response = new WP_REST_Response( $team_id );
@@ -233,7 +233,7 @@ function update_apple_maps_wordpress_team_id( $request ) {
 function update_apple_maps_wordpress_key_id( $request ) {
 
 	$new_key_id = $request->get_body();
-	update_option( 'apple_maps_wordpress_key_id', $new_key_id );
+	update_option( 'apple_maps_wordpress_key_id', json_decode( $new_key_id ) );
 
 	$key_id   = get_option( 'apple_maps_wordpress_key_id' );
 	$response = new WP_REST_Response( $key_id );
