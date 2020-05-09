@@ -50,16 +50,8 @@ export default function AppleMapsWordPressEdit( props ) {
 	}, [] );
 
 	useEffect( () => {
-		map.current.update( {
-			mapType,
-			address,
-			height,
-			latitude,
-			longitude,
-			rotation,
-			zoom,
-		} );
-	}, [ mapType, address, height, latitude, longitude, rotation, zoom ] );
+		map.current.update( props.attributes );
+	}, [ props.attributes ] );
 
 	return (
 		<>
@@ -67,16 +59,6 @@ export default function AppleMapsWordPressEdit( props ) {
 				<PanelBody
 					title={ __( 'Map Settings', 'apple-maps-wordpress' ) }
 				>
-					<ToggleControl
-						label={ __(
-							'Show MapType Controll',
-							'apple-maps-wordpress'
-						) }
-						checked={ showsMapTypeControl }
-						onChange={ ( value ) =>
-							setAttributes( { showsMapTypeControl: value } )
-						}
-					/>
 					<SelectControl
 						label={ __( 'MapType', 'apple-maps-wordpress' ) }
 						options={ MAP_TYPE_OPTIONS }
@@ -87,27 +69,12 @@ export default function AppleMapsWordPressEdit( props ) {
 					/>
 					<ToggleControl
 						label={ __(
-							'Show Zoom Controll',
+							'Show MapType Controll',
 							'apple-maps-wordpress'
 						) }
-						checked={ showsZoomControl }
+						checked={ showsMapTypeControl }
 						onChange={ ( value ) =>
-							setAttributes( { showsZoomControl: value } )
-						}
-					/>
-					<SelectControl
-						label={ __( 'Show Compas', 'apple-maps-wordpress' ) }
-						options={ FEATURE_VISIBILITY_OPTIONS }
-						value={ showsCompass }
-						onChange={ ( value ) =>
-							setAttributes( { showsCompass: value } )
-						}
-					/>
-					<ToggleControl
-						label={ __( 'Zoom Enabled', 'apple-maps-wordpress' ) }
-						checked={ isZoomEnabled }
-						onChange={ ( value ) =>
-							setAttributes( { isZoomEnabled: value } )
+							setAttributes( { showsMapTypeControl: value } )
 						}
 					/>
 					<RangeControl
@@ -121,6 +88,25 @@ export default function AppleMapsWordPressEdit( props ) {
 						step={ 0.5 }
 					/>
 					<ToggleControl
+						label={ __( 'Zoom Enabled', 'apple-maps-wordpress' ) }
+						checked={ isZoomEnabled }
+						onChange={ ( value ) =>
+							setAttributes( { isZoomEnabled: value } )
+						}
+					/>
+					{ isZoomEnabled && (
+						<ToggleControl
+							label={ __(
+								'Show Zoom Controll',
+								'apple-maps-wordpress'
+							) }
+							checked={ showsZoomControl }
+							onChange={ ( value ) =>
+								setAttributes( { showsZoomControl: value } )
+							}
+						/>
+					) }
+					<ToggleControl
 						label={ __(
 							'Rotation Enabled',
 							'apple-maps-wordpress'
@@ -128,6 +114,34 @@ export default function AppleMapsWordPressEdit( props ) {
 						checked={ isRotationEnabled }
 						onChange={ ( value ) =>
 							setAttributes( { isRotationEnabled: value } )
+						}
+					/>
+					{ isRotationEnabled && (
+						<SelectControl
+							label={ __(
+								'Show Compas',
+								'apple-maps-wordpress'
+							) }
+							options={ FEATURE_VISIBILITY_OPTIONS }
+							value={ showsCompass }
+							onChange={ ( value ) =>
+								setAttributes( { showsCompass: value } )
+							}
+						/>
+					) }
+					<ToggleControl
+						label={ __( 'Scroll Enabled', 'apple-maps-wordpress' ) }
+						checked={ isScrollEnabled }
+						onChange={ ( value ) =>
+							setAttributes( { isScrollEnabled: value } )
+						}
+					/>
+					<SelectControl
+						label={ __( 'Show Scale', 'apple-maps-wordpress' ) }
+						options={ FEATURE_VISIBILITY_OPTIONS }
+						value={ showsScale }
+						onChange={ ( value ) =>
+							setAttributes( { showsScale: value } )
 						}
 					/>
 					<TextControl
@@ -145,21 +159,6 @@ export default function AppleMapsWordPressEdit( props ) {
 						value={ height }
 						onChange={ ( value ) =>
 							setAttributes( { height: value } )
-						}
-					/>
-					<ToggleControl
-						label={ __( 'Scroll Enabled', 'apple-maps-wordpress' ) }
-						checked={ isScrollEnabled }
-						onChange={ ( value ) =>
-							setAttributes( { isScrollEnabled: value } )
-						}
-					/>
-					<SelectControl
-						label={ __( 'Show Scale', 'apple-maps-wordpress' ) }
-						options={ FEATURE_VISIBILITY_OPTIONS }
-						value={ showsScale }
-						onChange={ ( value ) =>
-							setAttributes( { showsScale: value } )
 						}
 					/>
 					<TextControl
@@ -182,6 +181,13 @@ export default function AppleMapsWordPressEdit( props ) {
 				data-longitude={ longitude }
 				data-rotation={ rotation }
 				data-zoom={ zoom }
+				data-shows-map-type-control={ showsMapTypeControl }
+				data-is-rotation-enabled={ isRotationEnabled }
+				data-shows-compass={ showsCompass }
+				data-is-zoom-enabled={ isZoomEnabled }
+				data-shows-zoom-control={ showsZoomControl }
+				data-is-scroll-enabled={ isScrollEnabled }
+				data-shows-scale={ showsScale }
 				style={ { height: `${ height }px` } }
 			/>
 		</>

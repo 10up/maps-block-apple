@@ -16,26 +16,41 @@ class AppleMap {
 	init() {
 		this.constructor.authenticateMap();
 
+		const {
+			mapType,
+			latitude,
+			longitude,
+			rotation,
+			zoom,
+			showsMapTypeControl,
+			isRotationEnabled,
+			showsCompass,
+			isZoomEnabled,
+			showsZoomControl,
+			isScrollEnabled,
+			showsScale,
+		} = this.element.dataset;
+
 		const center = new Coordinate(
-			Number( this.element.dataset.latitude ) || 30.616946271618716,
-			Number( this.element.dataset.longitude ) || -122.38372029405731
+			Number( latitude ) || 30.616946271618716,
+			Number( longitude ) || -122.38372029405731
 		);
 
 		this.mapOptions = {
 			center,
-			rotation: Number( this.element.dataset.rotation ) || 0,
-			mapType: this.element.dataset.mapType || Map.MapTypes.Satellite,
-			showsMapTypeControl: true,
-			isRotationEnabled: true,
-			showsCompass: FeatureVisibility.Adaptive,
-			isZoomEnabled: true,
-			showsZoomControl: true,
-			isScrollEnabled: true,
-			showsScale: FeatureVisibility.Adaptive,
+			rotation: Number( rotation ) || 0,
+			mapType: mapType || Map.MapTypes.Satellite,
+			showsMapTypeControl: showsMapTypeControl === 'true',
+			isRotationEnabled: isRotationEnabled === 'true',
+			showsCompass: showsCompass || FeatureVisibility.Adaptive,
+			isZoomEnabled: isZoomEnabled === 'true',
+			showsZoomControl: showsZoomControl === 'true',
+			isScrollEnabled: isScrollEnabled === 'true',
+			showsScale: showsScale || FeatureVisibility.Adaptive,
 		};
 
 		this.createMap();
-		this.map._impl.zoomLevel = Number( this.element.dataset.zoom ) || 15;
+		this.map._impl.zoomLevel = Number( zoom ) || 15;
 		this.addMarker();
 	}
 
@@ -100,7 +115,20 @@ class AppleMapEdit extends AppleMap {
 	}
 
 	update( options ) {
-		const { mapType, latitude, longitude, rotation, zoom } = options;
+		const {
+			mapType,
+			latitude,
+			longitude,
+			rotation,
+			zoom,
+			showsMapTypeControl,
+			isRotationEnabled,
+			showsCompass,
+			isZoomEnabled,
+			showsZoomControl,
+			isScrollEnabled,
+			showsScale,
+		} = options;
 
 		if ( mapType ) {
 			this.map.mapType = options.mapType;
@@ -116,6 +144,38 @@ class AppleMapEdit extends AppleMap {
 
 		if ( latitude && longitude ) {
 			this.map.center = new Coordinate( latitude, longitude );
+		}
+
+		if ( showsMapTypeControl !== undefined ) {
+			this.map.showsMapTypeControl = showsMapTypeControl;
+		}
+
+		if ( isRotationEnabled !== undefined ) {
+			this.map.isRotationEnabled = isRotationEnabled;
+		}
+
+		if ( showsCompass !== undefined ) {
+			this.map.showsCompass = showsCompass;
+		}
+
+		if ( isZoomEnabled !== undefined ) {
+			this.map.isZoomEnabled = isZoomEnabled;
+		}
+
+		if ( showsZoomControl !== undefined ) {
+			this.map.showsZoomControl = showsZoomControl;
+		}
+
+		if ( showsCompass !== undefined ) {
+			this.map.showsCompass = showsCompass;
+		}
+
+		if ( isScrollEnabled !== undefined ) {
+			this.map.isScrollEnabled = isScrollEnabled;
+		}
+
+		if ( showsScale !== undefined ) {
+			this.map.showsScale = showsScale;
 		}
 	}
 }
