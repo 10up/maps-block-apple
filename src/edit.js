@@ -5,6 +5,7 @@ import {
 	SelectControl,
 	RangeControl,
 	ToggleControl,
+	TextareaControl,
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { useEffect, useRef } from '@wordpress/element';
@@ -14,6 +15,7 @@ import {
 	MAP_TYPE_OPTIONS,
 	FEATURE_VISIBILITY_OPTIONS,
 } from './components/AppleMap';
+import AuthPanel from './components/AuthPanel';
 
 export default function AppleMapsWordPressEdit( props ) {
 	const {
@@ -172,6 +174,7 @@ export default function AppleMapsWordPressEdit( props ) {
 						value={ longitude }
 					/>
 				</PanelBody>
+				<AuthPanel { ...props } />
 			</InspectorControls>
 			<div
 				ref={ mapElement }

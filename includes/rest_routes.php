@@ -34,7 +34,7 @@ function add_endpoints() {
 		'/private_key',
 		[
 			'methods'             => WP_REST_Server::EDITABLE,
-			'callback'            => __NAMESPACE__ . '\update_apple_maps_private_key',
+			'callback'            => __NAMESPACE__ . '\update_apple_maps_wordpress_private_key',
 			'permission_callback' => __NAMESPACE__ . '\check_permissions',
 		]
 	);
@@ -54,7 +54,7 @@ function add_endpoints() {
 		'/team_id',
 		[
 			'methods'             => WP_REST_Server::EDITABLE,
-			'callback'            => __NAMESPACE__ . '\update_apple_maps_team_id',
+			'callback'            => __NAMESPACE__ . '\update_apple_maps_wordpress_team_id',
 			'permission_callback' => __NAMESPACE__ . '\check_permissions',
 		]
 	);
@@ -74,7 +74,7 @@ function add_endpoints() {
 		'/key_id',
 		[
 			'methods'             => WP_REST_Server::EDITABLE,
-			'callback'            => __NAMESPACE__ . '\update_apple_maps_key_id',
+			'callback'            => __NAMESPACE__ . '\update_apple_maps_wordpress_key_id',
 			'permission_callback' => __NAMESPACE__ . '\check_permissions',
 		]
 	);
@@ -158,7 +158,7 @@ function get_jwt() {
  * @param [WP_REST_Request] $request request
  */
 function get_apple_maps_private_key( $request ) {
-	$private_key = get_option( 'apple_maps_private_key' );
+	$private_key = get_option( 'apple_maps_wordpress_private_key' );
 	$response    = new WP_REST_Response( $private_key );
 	$response->set_status( 201 );
 
@@ -171,7 +171,7 @@ function get_apple_maps_private_key( $request ) {
  * @param [WP_REST_Request] $request request
  */
 function get_apple_maps_team_id( $request ) {
-	$team_id  = get_option( 'apple_maps_team_id' );
+	$team_id  = get_option( 'apple_maps_wordpress_team_id' );
 	$response = new WP_REST_Response( $team_id );
 	$response->set_status( 201 );
 
@@ -184,7 +184,7 @@ function get_apple_maps_team_id( $request ) {
  * @param [WP_REST_Request] $request request
  */
 function get_apple_maps_key_id( $request ) {
-	$key_id   = get_option( 'apple_maps_key_id' );
+	$key_id   = get_option( 'apple_maps_wordpress_key_id' );
 	$response = new WP_REST_Response( $key_id );
 	$response->set_status( 201 );
 
@@ -196,12 +196,12 @@ function get_apple_maps_key_id( $request ) {
  *
  * @param [WP_REST_Request] $request request
  */
-function update_apple_maps_private_key( $request ) {
+function update_apple_maps_wordpress_private_key( $request ) {
 
 	$new_private_key = $request->get_body();
-	update_option( 'apple_maps_private_key', $new_private_key );
+	update_option( 'apple_maps_wordpress_private_key', $new_private_key );
 
-	$private_key = get_option( 'apple_maps_private_key' );
+	$private_key = get_option( 'apple_maps_wordpress_private_key' );
 	$response    = new WP_REST_Response( $private_key );
 	$response->set_status( 201 );
 
@@ -213,12 +213,12 @@ function update_apple_maps_private_key( $request ) {
  *
  * @param [WP_REST_Request] $request request
  */
-function update_apple_maps_team_id( $request ) {
+function update_apple_maps_wordpress_team_id( $request ) {
 
 	$new_team_id = $request->get_body();
-	update_option( 'apple_maps_team_id', $new_team_id );
+	update_option( 'apple_maps_wordpress_team_id', $new_team_id );
 
-	$team_id  = get_option( 'apple_maps_team_id' );
+	$team_id  = get_option( 'apple_maps_wordpress_team_id' );
 	$response = new WP_REST_Response( $team_id );
 	$response->set_status( 201 );
 
@@ -230,12 +230,12 @@ function update_apple_maps_team_id( $request ) {
  *
  * @param [WP_REST_Request] $request request
  */
-function update_apple_maps_key_id( $request ) {
+function update_apple_maps_wordpress_key_id( $request ) {
 
 	$new_key_id = $request->get_body();
-	update_option( 'apple_maps_key_id', $new_key_id );
+	update_option( 'apple_maps_wordpress_key_id', $new_key_id );
 
-	$key_id   = get_option( 'apple_maps_key_id' );
+	$key_id   = get_option( 'apple_maps_wordpress_key_id' );
 	$response = new WP_REST_Response( $key_id );
 	$response->set_status( 201 );
 
