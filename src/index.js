@@ -6,7 +6,7 @@ import { registerBlockType } from '@wordpress/blocks';
 import AppleMapsWordPressEdit from './edit';
 import AppleMapsWordPressSave from './save';
 
-const { Map } = mapkit;
+const { Map, FeatureVisibility } = mapkit;
 
 registerBlockType( 'tenup/apple-maps-wordpress', {
 	title: __( 'Apple Maps', 'apple-maps-wordpress' ),
@@ -39,6 +39,34 @@ registerBlockType( 'tenup/apple-maps-wordpress', {
 		mapType: {
 			type: 'string',
 			default: Map.MapTypes.Standard,
+		},
+		showsMapTypeControl: {
+			type: 'boolean',
+			default: true,
+		},
+		isRotationEnabled: {
+			type: 'boolean',
+			default: true,
+		},
+		showsCompass: {
+			type: 'string',
+			default: FeatureVisibility.Adaptive,
+		},
+		isZoomEnabled: {
+			type: 'boolean',
+			default: true,
+		},
+		showsZoomControl: {
+			type: 'boolean',
+			default: true,
+		},
+		isScrollEnabled: {
+			type: 'boolean',
+			default: true,
+		},
+		showsScale: {
+			type: 'string',
+			default: FeatureVisibility.Adaptive,
 		},
 	},
 	supports: {
