@@ -1,8 +1,12 @@
+/*global mapkit*/
+/*global CustomEvent*/
+
 import { __ } from '@wordpress/i18n';
 import { TextControl, TextareaControl, Button } from '@wordpress/components';
 import { useEffect, useState } from '@wordpress/element';
 import { dispatch } from '@wordpress/data';
 import apiFetch from '@wordpress/api-fetch';
+// import { AppleMapEdit } from './AppleMap';
 
 export default function EditAuthForm() {
 	const [ privateKey, setPrivateKey ] = useState( null );
@@ -11,7 +15,6 @@ export default function EditAuthForm() {
 	const [ isBusy, setIsBusy ] = useState( false );
 
 	useEffect( () => {
-		setIsBusy( true );
 		Promise.all( [
 			apiFetch( {
 				path: '/AppleMapsWordPress/v1/private_key/get/',
@@ -27,13 +30,11 @@ export default function EditAuthForm() {
 				setPrivateKey( newPrivateKey );
 				setTeamId( newTeamId );
 				setKeyId( newKeyId );
-				setIsBusy( false );
 			} )
 			.catch( ( error ) => {
 				dispatch( 'core/notices' ).createWarningNotice( error.message, {
 					isDismissible: true,
 				} );
-				setIsBusy( false );
 			} );
 	}, [] );
 
@@ -62,10 +63,12 @@ export default function EditAuthForm() {
 				setTeamId( newTeamId );
 				setKeyId( newKeyId );
 				setIsBusy( false );
+				mapkit.dispatchEvent( new CustomEvent( 'reinitialize' ) );
 			} )
 			.catch( ( error ) => {
 				dispatch( 'core/notices' ).createErrorNotice( error.message, {
 					isDismissible: true,
+					type: 'snackbar',
 				} );
 				setIsBusy( false );
 			} );

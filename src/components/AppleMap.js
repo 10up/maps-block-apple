@@ -1,4 +1,5 @@
 /*global mapkit*/
+/*global Event*/
 
 import apiFetch from '@wordpress/api-fetch';
 import { dispatch } from '@wordpress/data';
@@ -70,13 +71,21 @@ class AppleMap {
 	}
 
 	static authenticateMap() {
-		mapkit.init( {
-			authorizationCallback( done ) {
-				apiFetch( { path: 'AppleMapsWordPress/v1/GetJWT/' } )
-					.then( done )
-					.catch( done );
-			},
-		} );
+		apiFetch( { path: 'AppleMapsWordPress/v1/GetJWT/' } )
+			.then( ( token ) => {
+				mapkit.init( {
+					authorizationCallback( done ) {
+						done( token );
+					},
+				} );
+			} )
+			.catch( ( error ) => {
+				dispatch( 'core/notices' ).createErrorNotice( error.message, {
+					isDismissible: true,
+					type: 'snackbar',
+				} );
+				mapkit.dispatchEvent( new Event( 'error' ) );
+			} );
 	}
 }
 

@@ -65,8 +65,8 @@ export default function AppleMapsWordPressEdit( props ) {
 					break;
 				case 'Refreshed':
 					setIsLoading( false );
-					setAuthenticated( true );
-					mapkit.authenticated = true;
+					setAuthenticated( false );
+					mapkit.authenticated = false;
 					break;
 				default:
 					setIsLoading( false );
@@ -86,6 +86,10 @@ export default function AppleMapsWordPressEdit( props ) {
 		};
 
 		mapkit.addEventListener( 'error', handleAppleMapError );
+
+		mapkit.addEventListener( 'reinitialize', () => {
+			AppleMapEdit.authenticateMap();
+		} );
 
 		AppleMapEdit.authenticateMap();
 
