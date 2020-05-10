@@ -24,9 +24,11 @@ registerBlockType( 'tenup/apple-maps-wordpress', {
 		},
 		latitude: {
 			type: 'number',
+			default: 51.48762585296625,
 		},
 		longitude: {
 			type: 'number',
+			default: -0.1326724377053381,
 		},
 		rotation: {
 			type: 'number',
