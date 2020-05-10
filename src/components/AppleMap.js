@@ -35,8 +35,8 @@ class AppleMap {
 		} = this.element.dataset;
 
 		const center = new Coordinate(
-			Number( latitude ) || 30.616946271618716,
-			Number( longitude ) || -122.38372029405731
+			Number( latitude ) || 51.48762585296625,
+			Number( longitude ) || -0.1326724377053381
 		);
 
 		this.mapOptions = {
