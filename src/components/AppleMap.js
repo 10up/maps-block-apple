@@ -14,8 +14,11 @@ class AppleMap {
 	}
 
 	init() {
-		this.constructor.authenticateMap();
+		this.createMap();
+		this.addMarker();
+	}
 
+	createMap() {
 		const {
 			mapType,
 			latitude,
@@ -49,13 +52,8 @@ class AppleMap {
 			showsScale: showsScale || FeatureVisibility.Adaptive,
 		};
 
-		this.createMap();
-		this.map._impl.zoomLevel = Number( zoom ) || 15;
-		this.addMarker();
-	}
-
-	createMap() {
 		this.map = new Map( this.element, this.mapOptions );
+		this.map._impl.zoomLevel = Number( zoom ) || 15;
 	}
 
 	addMarker() {
@@ -76,34 +74,50 @@ class AppleMap {
 			authorizationCallback( done ) {
 				apiFetch( { path: 'AppleMapsWordPress/v1/GetJWT/' } )
 					.then( done )
-					.catch( console.error );
+					.catch( done );
 			},
 		} );
 	}
 }
 
 class AppleMapEdit extends AppleMap {
+	/**
+	 * Constructor of the AppleMapEdit Class
+	 *
+	 * @param {HTMLElement} element Element to initialize the map on
+	 * @param {string} clientId ClientId of the Block
+	 * @param {Function} setAttributes to update attributes of the block
+	 */
 	constructor( element, clientId, setAttributes ) {
 		super( element );
 		this.clientId = clientId;
 		this.setAttributes = setAttributes;
 	}
 
+	/**
+	 * Initialize Edit version of AppleMap
+	 */
 	init() {
 		super.init();
-
 		this.addListeners();
 	}
 
+	/**
+	 * Attach different listeners to handle interactions
+	 * with the map and modify block settings accordingly
+	 */
 	addListeners() {
+		// select the block when the user interacts with the map
 		this.map.element.addEventListener( 'click', () => {
 			dispatch( 'core/block-editor' ).selectBlock( this.clientId );
 		} );
 
+		// change the mapType attribute when it gets changed inside the map
 		this.map.addEventListener( 'map-type-change', () => {
 			this.setAttributes( { mapType: this.map.mapType } );
 		} );
 
+		// update the region settings when the map gets moved arround
 		this.map.addEventListener( 'region-change-end', () => {
 			this.setAttributes( {
 				rotation: this.map.rotation,
@@ -114,6 +128,11 @@ class AppleMapEdit extends AppleMap {
 		} );
 	}
 
+	/**
+	 * Update options of the map
+	 *
+	 * @param {Object} options Settings to update
+	 */
 	update( options ) {
 		const {
 			mapType,
@@ -130,56 +149,60 @@ class AppleMapEdit extends AppleMap {
 			showsScale,
 		} = options;
 
-		if ( mapType ) {
+		if ( mapType !== this.mapOptions.mapType ) {
 			this.map.mapType = options.mapType;
 		}
 
-		if ( zoom ) {
+		if ( zoom !== this.map._impl.zoomLevel ) {
 			this.map._impl.zoomLevel = zoom;
 		}
 
-		if ( rotation ) {
+		if ( rotation !== this.mapOptions.rotation ) {
 			this.map.rotation = Number( rotation );
 		}
 
-		if ( latitude && longitude ) {
+		if (
+			latitude !== this.mapOptions.latitude ||
+			longitude !== this.mapOptions.longitude
+		) {
 			this.map.center = new Coordinate( latitude, longitude );
 		}
 
-		if ( showsMapTypeControl !== undefined ) {
+		if ( showsMapTypeControl !== this.mapOptions.showsMapTypeControl ) {
 			this.map.showsMapTypeControl = showsMapTypeControl;
 		}
 
-		if ( isRotationEnabled !== undefined ) {
+		if ( isRotationEnabled !== this.mapOptions.isRotationEnabled ) {
 			this.map.isRotationEnabled = isRotationEnabled;
 		}
 
-		if ( showsCompass !== undefined ) {
+		if ( showsCompass !== this.mapOptions.showsCompass ) {
 			this.map.showsCompass = showsCompass;
 		}
 
-		if ( isZoomEnabled !== undefined ) {
+		if ( isZoomEnabled !== this.mapOptions.isZoomEnabled ) {
 			this.map.isZoomEnabled = isZoomEnabled;
 		}
 
-		if ( showsZoomControl !== undefined ) {
+		if ( showsZoomControl !== this.mapOptions.showsZoomControl ) {
 			this.map.showsZoomControl = showsZoomControl;
 		}
 
-		if ( showsCompass !== undefined ) {
+		if ( showsCompass !== this.mapOptions.showsCompass ) {
 			this.map.showsCompass = showsCompass;
 		}
 
-		if ( isScrollEnabled !== undefined ) {
+		if ( isScrollEnabled !== this.mapOptions.isScrollEnabled ) {
 			this.map.isScrollEnabled = isScrollEnabled;
 		}
 
-		if ( showsScale !== undefined ) {
+		if ( showsScale !== this.mapOptions.showsScale ) {
 			this.map.showsScale = showsScale;
 		}
 	}
 }
 
+// MapTypes formated to be used as options in SelectControl dropdowns
 const MAP_TYPE_OPTIONS = Object.keys( Map.MapTypes ).map( ( mapType ) => {
 	return {
 		label: mapType,
@@ -187,6 +210,7 @@ const MAP_TYPE_OPTIONS = Object.keys( Map.MapTypes ).map( ( mapType ) => {
 	};
 } );
 
+// FeatureVisibility options formated to be used as options in SelectControl dropdowns
 const FEATURE_VISIBILITY_OPTIONS = Object.keys( FeatureVisibility ).map(
 	( featureVisibility ) => {
 		return {

@@ -216,6 +216,7 @@ function update_apple_maps_wordpress_private_key( $request ) {
  */
 function update_apple_maps_wordpress_team_id( $request ) {
 
+	return new WP_Error( 'example', 'This is to test' );
 	$new_team_id = json_decode( $request->get_body() );
 	$sanitized   = sanitize_option( 'apple_maps_wordpress_team_id', $new_team_id );
 	update_option( 'apple_maps_wordpress_team_id', $sanitized );

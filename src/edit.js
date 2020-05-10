@@ -1,21 +1,24 @@
+/*global mapkit*/
+
 import { InspectorControls } from '@wordpress/block-editor';
 import {
+	Spinner,
+	Placeholder,
 	PanelBody,
 	TextControl,
 	SelectControl,
 	RangeControl,
 	ToggleControl,
-	TextareaControl,
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import { useEffect, useRef } from '@wordpress/element';
+import { useEffect, useRef, useState } from '@wordpress/element';
 
 import {
 	AppleMapEdit,
 	MAP_TYPE_OPTIONS,
 	FEATURE_VISIBILITY_OPTIONS,
 } from './components/AppleMap';
-import AuthPanel from './components/AuthPanel';
+import EditAuthForm from './components/EditAuthForm';
 
 export default function AppleMapsWordPressEdit( props ) {
 	const {
@@ -40,20 +43,135 @@ export default function AppleMapsWordPressEdit( props ) {
 		clientId,
 	} = props;
 
+	const [ authenticated, setAuthenticated ] = useState( false );
+	const [ isLoading, setIsLoading ] = useState( true );
+
 	const mapElement = useRef();
 	const map = useRef();
 
 	useEffect( () => {
-		map.current = new AppleMapEdit(
-			mapElement.current,
-			clientId,
-			setAttributes
+		if ( mapkit.authenticated ) {
+			setIsLoading( false );
+			setAuthenticated( true );
+			return;
+		}
+
+		const handleConfigurationChange = ( { status } ) => {
+			switch ( status ) {
+				case 'Initialized':
+					setIsLoading( false );
+					setAuthenticated( true );
+					mapkit.authenticated = true;
+					break;
+				case 'Refreshed':
+					setIsLoading( false );
+					setAuthenticated( true );
+					mapkit.authenticated = true;
+					break;
+				default:
+					setIsLoading( false );
+					setAuthenticated( false );
+					break;
+			}
+		};
+
+		mapkit.addEventListener(
+			'configuration-change',
+			handleConfigurationChange
 		);
+
+		const handleAppleMapError = () => {
+			setIsLoading( false );
+			setAuthenticated( false );
+		};
+
+		mapkit.addEventListener( 'error', handleAppleMapError );
+
+		AppleMapEdit.authenticateMap();
+
+		return () => {
+			mapkit.removeEventListener(
+				'configuration-change',
+				handleConfigurationChange
+			);
+
+			mapkit.removeEventListener( 'error', handleAppleMapError );
+		};
 	}, [] );
 
 	useEffect( () => {
-		map.current.update( props.attributes );
-	}, [ props.attributes ] );
+		if ( authenticated ) {
+			map.current = new AppleMapEdit(
+				mapElement.current,
+				clientId,
+				setAttributes
+			);
+		}
+	}, [ authenticated ] );
+
+	useEffect( () => {
+		if ( authenticated ) {
+			map.current.update( props.attributes );
+		}
+	}, [ props.attributes, authenticated ] );
+
+	if ( isLoading ) {
+		return (
+			<Placeholder
+				style={ { height: `${ height }px` } }
+				label={ __( 'Apple Maps WordPress', 'apple-maps-wordpress' ) }
+				icon={ 'location-alt' }
+			>
+				<Spinner />
+			</Placeholder>
+		);
+	}
+
+	if ( ! authenticated ) {
+		return (
+			<>
+				<InspectorControls>
+					<PanelBody>
+						<p>
+							{ __(
+								'You need to authenticate first',
+								'apple-maps-wordpress'
+							) }
+						</p>
+					</PanelBody>
+				</InspectorControls>
+				<Placeholder
+					style={ { minHeight: `${ height }px` } }
+					label={ __(
+						'Authenticate - Apple Maps',
+						'apple-maps-wordpress'
+					) }
+					icon={ 'location-alt' }
+					instructions={
+						<>
+							{ __(
+								'In order to use an Apple Map on your website you need to get some credentials from Apple. Here you can find a detailed documentation on how to get these keys: ',
+								'apple-maps-wordpress'
+							) }
+							<a
+								href="https://developer.apple.com/documentation/mapkitjs/setting_up_mapkit_js"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								{ __(
+									'Instructions for getting a your Apple Maps Credentials.',
+									'apple-maps-wordpress'
+								) }
+							</a>{ ' ' }
+						</>
+					}
+					isColumnLayout={ true }
+				>
+					<EditAuthForm />
+				</Placeholder>
+			</>
+		);
+	}
 
 	return (
 		<>
@@ -174,7 +292,11 @@ export default function AppleMapsWordPressEdit( props ) {
 						value={ longitude }
 					/>
 				</PanelBody>
-				<AuthPanel { ...props } />
+				<PanelBody
+					title={ __( 'Authentication', 'apple-maps-wordpress' ) }
+				>
+					<EditAuthForm />
+				</PanelBody>
 			</InspectorControls>
 			<div
 				ref={ mapElement }
