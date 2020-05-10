@@ -114,13 +114,13 @@ function get_jwt() {
 	$key_id      = get_option( 'apple_maps_wordpress_key_id' );
 	$team_id     = get_option( 'apple_maps_wordpress_team_id' );
 
-	if ( ! isset( $private_key ) ) {
+	if ( ! isset( $private_key ) || '' === $private_key ) {
 		return new WP_Error( 'NoKey', 'Missing Private Key', [ 'status' => 401 ] );
 	}
-	if ( ! isset( $key_id ) ) {
+	if ( ! isset( $key_id ) || '' === $key_id ) {
 		return new WP_Error( 'NoKey', 'Missing Key ID', [ 'status' => 401 ] );
 	}
-	if ( ! isset( $team_id ) ) {
+	if ( ! isset( $team_id ) || '' === $team_id ) {
 		return new WP_Error( 'NoKey', 'Missing Team ID', [ 'status' => 401 ] );
 	}
 
