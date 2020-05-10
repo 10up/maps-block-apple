@@ -44,7 +44,7 @@ function add_endpoints() {
 		'/private_key/get',
 		[
 			'methods'             => 'GET',
-			'callback'            => __NAMESPACE__ . '\get_apple_maps_private_key',
+			'callback'            => __NAMESPACE__ . '\get_apple_maps_wordpress_private_key',
 			'permission_callback' => __NAMESPACE__ . '\check_permissions',
 		]
 	);
@@ -64,7 +64,7 @@ function add_endpoints() {
 		'/team_id/get',
 		[
 			'methods'             => 'GET',
-			'callback'            => __NAMESPACE__ . '\get_apple_maps_team_id',
+			'callback'            => __NAMESPACE__ . '\get_apple_maps_wordpress_team_id',
 			'permission_callback' => __NAMESPACE__ . '\check_permissions',
 		]
 	);
@@ -84,7 +84,7 @@ function add_endpoints() {
 		'/key_id/get',
 		[
 			'methods'             => 'GET',
-			'callback'            => __NAMESPACE__ . '\get_apple_maps_key_id',
+			'callback'            => __NAMESPACE__ . '\get_apple_maps_wordpress_key_id',
 			'permission_callback' => __NAMESPACE__ . '\check_permissions',
 		]
 	);
@@ -115,13 +115,13 @@ function get_jwt() {
 	$team_id     = get_option( 'apple_maps_wordpress_team_id' );
 
 	if ( ! isset( $private_key ) ) {
-		return new WP_Error( 'NoKey', 'Missing Private Key' );
+		return new WP_Error( 'NoKey', 'Missing Private Key', [ 'status' => 401 ] );
 	}
 	if ( ! isset( $key_id ) ) {
-		return new WP_Error( 'NoKey', 'Missing Key ID' );
+		return new WP_Error( 'NoKey', 'Missing Key ID', [ 'status' => 401 ] );
 	}
 	if ( ! isset( $team_id ) ) {
-		return new WP_Error( 'NoKey', 'Missing Team ID' );
+		return new WP_Error( 'NoKey', 'Missing Team ID', [ 'status' => 401 ] );
 	}
 
 	$header = [
@@ -141,11 +141,11 @@ function get_jwt() {
 
 	$key = openssl_pkey_get_private( $private_key );
 	if ( ! $key ) {
-		return new WP_Error( 'InvalidKey', 'Invalid Private Key' );
+		return new WP_Error( 'InvalidKey', 'Invalid Private Key', [ 'status' => 401 ] );
 	}
 
 	if ( ! openssl_sign( $payload, $signature, $key, OPENSSL_ALGO_SHA256 ) ) {
-		return new WP_Error( 'SignError', 'Signing Failed' );
+		return new WP_Error( 'SignError', 'Signing Failed', [ 'status' => 500 ] );
 	}
 
 	$response = $payload . '.' . encode( $signature );
@@ -157,7 +157,7 @@ function get_jwt() {
  *
  * @param [WP_REST_Request] $request request
  */
-function get_apple_maps_private_key( $request ) {
+function get_apple_maps_wordpress_private_key( $request ) {
 	$private_key = get_option( 'apple_maps_wordpress_private_key' );
 	$response    = new WP_REST_Response( $private_key );
 	$response->set_status( 201 );
@@ -170,7 +170,7 @@ function get_apple_maps_private_key( $request ) {
  *
  * @param [WP_REST_Request] $request request
  */
-function get_apple_maps_team_id( $request ) {
+function get_apple_maps_wordpress_team_id( $request ) {
 	$team_id  = get_option( 'apple_maps_wordpress_team_id' );
 	$response = new WP_REST_Response( $team_id );
 	$response->set_status( 201 );
@@ -183,7 +183,7 @@ function get_apple_maps_team_id( $request ) {
  *
  * @param [WP_REST_Request] $request request
  */
-function get_apple_maps_key_id( $request ) {
+function get_apple_maps_wordpress_key_id( $request ) {
 	$key_id   = get_option( 'apple_maps_wordpress_key_id' );
 	$response = new WP_REST_Response( $key_id );
 	$response->set_status( 201 );
@@ -198,8 +198,9 @@ function get_apple_maps_key_id( $request ) {
  */
 function update_apple_maps_wordpress_private_key( $request ) {
 
-	$new_private_key = $request->get_body();
-	update_option( 'apple_maps_wordpress_private_key', json_decode( $new_private_key ) );
+	$new_private_key = json_decode( $request->get_body() );
+	$sanitized       = sanitize_option( 'apple_maps_wordpress_private_key', $new_private_key );
+	update_option( 'apple_maps_wordpress_private_key', $sanitized );
 
 	$private_key = get_option( 'apple_maps_wordpress_private_key' );
 	$response    = new WP_REST_Response( $private_key );
@@ -215,8 +216,9 @@ function update_apple_maps_wordpress_private_key( $request ) {
  */
 function update_apple_maps_wordpress_team_id( $request ) {
 
-	$new_team_id = $request->get_body();
-	update_option( 'apple_maps_wordpress_team_id', json_decode( $new_team_id ) );
+	$new_team_id = json_decode( $request->get_body() );
+	$sanitized   = sanitize_option( 'apple_maps_wordpress_team_id', $new_team_id );
+	update_option( 'apple_maps_wordpress_team_id', $sanitized );
 
 	$team_id  = get_option( 'apple_maps_wordpress_team_id' );
 	$response = new WP_REST_Response( $team_id );
@@ -232,8 +234,9 @@ function update_apple_maps_wordpress_team_id( $request ) {
  */
 function update_apple_maps_wordpress_key_id( $request ) {
 
-	$new_key_id = $request->get_body();
-	update_option( 'apple_maps_wordpress_key_id', json_decode( $new_key_id ) );
+	$new_key_id = json_decode( $request->get_body() );
+	$sanitized  = sanitize_option( 'apple_maps_wordpress_key_id', $new_key_id );
+	update_option( 'apple_maps_wordpress_key_id', $sanitized );
 
 	$key_id   = get_option( 'apple_maps_wordpress_key_id' );
 	$response = new WP_REST_Response( $key_id );
