@@ -25,12 +25,12 @@ class AppleMap {
 			longitude,
 			rotation,
 			zoom,
-			showsMapTypeControl,
-			isRotationEnabled,
+			showsMapTypeControl = true,
+			isRotationEnabled = true,
 			showsCompass,
-			isZoomEnabled,
-			showsZoomControl,
-			isScrollEnabled,
+			isZoomEnabled = true,
+			showsZoomControl = true,
+			isScrollEnabled = true,
 			showsScale,
 		} = this.element.dataset;
 
