@@ -16,7 +16,7 @@ class AppleMap {
 
 	init() {
 		this.createMap();
-		this.addMarker();
+		// this.addMarker();
 	}
 
 	createMap() {
@@ -156,56 +156,78 @@ class AppleMapEdit extends AppleMap {
 			showsZoomControl,
 			isScrollEnabled,
 			showsScale,
+			region,
 		} = options;
 
-		if ( mapType !== this.mapOptions.mapType ) {
+		if ( region && region !== '' ) {
+			this.map.setRegionAnimated( region, true );
+		}
+
+		if ( mapType && mapType !== this.mapOptions.mapType ) {
 			this.map.mapType = options.mapType;
 		}
 
-		if ( zoom !== this.map._impl.zoomLevel ) {
+		if ( zoom && zoom !== this.map._impl.zoomLevel ) {
 			this.map._impl.zoomLevel = zoom;
 		}
 
-		if ( rotation !== this.mapOptions.rotation ) {
+		if ( rotation && rotation !== this.mapOptions.rotation ) {
 			this.map.rotation = Number( rotation );
 		}
 
 		if (
-			latitude !== this.mapOptions.latitude ||
-			longitude !== this.mapOptions.longitude
+			latitude &&
+			longitude &&
+			( latitude !== this.mapOptions.latitude ||
+				longitude !== this.mapOptions.longitude )
 		) {
 			this.map.center = new Coordinate( latitude, longitude );
 		}
 
-		if ( showsMapTypeControl !== this.mapOptions.showsMapTypeControl ) {
+		if (
+			showsMapTypeControl &&
+			showsMapTypeControl !== this.mapOptions.showsMapTypeControl
+		) {
 			this.map.showsMapTypeControl = showsMapTypeControl;
 		}
 
-		if ( isRotationEnabled !== this.mapOptions.isRotationEnabled ) {
+		if (
+			isRotationEnabled &&
+			isRotationEnabled !== this.mapOptions.isRotationEnabled
+		) {
 			this.map.isRotationEnabled = isRotationEnabled;
 		}
 
-		if ( showsCompass !== this.mapOptions.showsCompass ) {
+		if ( showsCompass && showsCompass !== this.mapOptions.showsCompass ) {
 			this.map.showsCompass = showsCompass;
 		}
 
-		if ( isZoomEnabled !== this.mapOptions.isZoomEnabled ) {
+		if (
+			isZoomEnabled &&
+			isZoomEnabled !== this.mapOptions.isZoomEnabled
+		) {
 			this.map.isZoomEnabled = isZoomEnabled;
 		}
 
-		if ( showsZoomControl !== this.mapOptions.showsZoomControl ) {
+		if (
+			showsZoomControl &&
+			showsZoomControl !== this.mapOptions.showsZoomControl
+		) {
 			this.map.showsZoomControl = showsZoomControl;
 		}
 
-		if ( showsCompass !== this.mapOptions.showsCompass ) {
+		if ( showsCompass && showsCompass !== this.mapOptions.showsCompass ) {
 			this.map.showsCompass = showsCompass;
 		}
 
-		if ( isScrollEnabled !== this.mapOptions.isScrollEnabled ) {
+		if (
+			isScrollEnabled &&
+			isScrollEnabled !== this.mapOptions.isScrollEnabled
+		) {
 			this.map.isScrollEnabled = isScrollEnabled;
 		}
 
-		if ( showsScale !== this.mapOptions.showsScale ) {
+		if ( showsScale && showsScale !== this.mapOptions.showsScale ) {
 			this.map.showsScale = showsScale;
 		}
 	}

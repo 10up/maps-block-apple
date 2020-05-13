@@ -19,6 +19,7 @@ import {
 	FEATURE_VISIBILITY_OPTIONS,
 } from './components/AppleMap';
 import EditAuthForm from './components/EditAuthForm';
+import SearchResults from './components/SearchResults';
 
 export default function AppleMapsWordPressEdit( props ) {
 	const {
@@ -45,9 +46,12 @@ export default function AppleMapsWordPressEdit( props ) {
 
 	const [ authenticated, setAuthenticated ] = useState( false );
 	const [ isLoading, setIsLoading ] = useState( true );
+	const [ searchString, setSearchString ] = useState( [] );
+	const [ searchResults, setSearchResults ] = useState( [] );
 
 	const mapElement = useRef();
 	const map = useRef();
+	const geocoder = new mapkit.Geocoder();
 
 	useEffect( () => {
 		if ( mapkit.authenticated ) {
@@ -119,6 +123,10 @@ export default function AppleMapsWordPressEdit( props ) {
 		}
 	}, [ props.attributes, authenticated ] );
 
+	useEffect( () => {
+		setSearchString( address );
+	}, [ address ] );
+
 	if ( isLoading ) {
 		return (
 			<Placeholder
@@ -177,11 +185,52 @@ export default function AppleMapsWordPressEdit( props ) {
 		);
 	}
 
+	const handleAddressChange = ( value ) => {
+		if ( value ) {
+			geocoder.lookup( value, geolocate );
+		}
+
+		setSearchString( value );
+	};
+
+	const geolocate = ( error, data ) => {
+		if ( data.results ) {
+			setSearchResults( data.results );
+		}
+	};
+
 	return (
 		<>
 			<InspectorControls>
 				<PanelBody
-					title={ __( 'Map Settings', 'apple-maps-wordpress' ) }
+					title={ __( 'Location Settings', 'apple-maps-wordpress' ) }
+				>
+					<div>
+						<TextControl
+							label={ __( 'Address', 'apple-maps-wordpress' ) }
+							value={ searchString }
+							onChange={ handleAddressChange }
+						/>
+						<SearchResults
+							map={ map }
+							setAttributes={ setAttributes }
+							searchResults={ searchResults }
+							setSearchResults={ setSearchResults }
+						/>
+					</div>
+					<TextControl
+						readonly="readonly"
+						label={ __( 'Latitude', 'apple-maps-wordpress' ) }
+						value={ latitude }
+					/>
+					<TextControl
+						readonly="readonly"
+						label={ __( 'Longitude', 'apple-maps-wordpress' ) }
+						value={ longitude }
+					/>
+				</PanelBody>
+				<PanelBody
+					title={ __( 'Display Settings', 'apple-maps-wordpress' ) }
 				>
 					<SelectControl
 						label={ __( 'MapType', 'apple-maps-wordpress' ) }
@@ -269,13 +318,6 @@ export default function AppleMapsWordPressEdit( props ) {
 						}
 					/>
 					<TextControl
-						label={ __( 'Address', 'apple-maps-wordpress' ) }
-						value={ address }
-						onChange={ ( value ) =>
-							setAttributes( { address: value } )
-						}
-					/>
-					<TextControl
 						label={ __(
 							'Height ( pixels )',
 							'apple-maps-wordpress'
@@ -285,19 +327,10 @@ export default function AppleMapsWordPressEdit( props ) {
 							setAttributes( { height: value } )
 						}
 					/>
-					<TextControl
-						readonly="readonly"
-						label={ __( 'Latitude', 'apple-maps-wordpress' ) }
-						value={ latitude }
-					/>
-					<TextControl
-						readonly="readonly"
-						label={ __( 'Longitude', 'apple-maps-wordpress' ) }
-						value={ longitude }
-					/>
 				</PanelBody>
 				<PanelBody
 					title={ __( 'Authentication', 'apple-maps-wordpress' ) }
+					initialOpen={ false }
 				>
 					<EditAuthForm />
 				</PanelBody>
