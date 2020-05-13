@@ -4,7 +4,7 @@
 import apiFetch from '@wordpress/api-fetch';
 import { dispatch } from '@wordpress/data';
 
-const { MarkerAnnotation, Coordinate, Map, FeatureVisibility } = mapkit;
+const { Coordinate, Map, FeatureVisibility } = mapkit;
 
 class AppleMap {
 	constructor( element ) {
@@ -16,7 +16,6 @@ class AppleMap {
 
 	init() {
 		this.createMap();
-		// this.addMarker();
 	}
 
 	createMap() {
@@ -55,19 +54,6 @@ class AppleMap {
 
 		this.map = new Map( this.element, this.mapOptions );
 		this.map._impl.zoomLevel = Number( zoom ) || 15;
-	}
-
-	addMarker() {
-		const sfo = new Coordinate( 37.616934, -122.38379 );
-
-		// Setting properties on creation:
-		const sfoAnnotation = new MarkerAnnotation( sfo, {
-			color: '#f4a56d',
-			title: 'SFO',
-			glyphText: '✈️',
-		} );
-
-		this.map.addAnnotation( sfoAnnotation );
 	}
 
 	static authenticateMap() {
