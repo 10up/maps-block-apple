@@ -1,30 +1,16 @@
-import { InspectorControls } from '@wordpress/block-editor';
-import {
-	Spinner,
-	Placeholder,
-	PanelBody,
-	TextControl,
-	SelectControl,
-	RangeControl,
-	ToggleControl,
-} from '@wordpress/components';
+import { Spinner, Placeholder } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { useEffect, useRef, useState } from '@wordpress/element';
 
-import {
-	AppleMapEdit,
-	MAP_TYPE_OPTIONS,
-	FEATURE_VISIBILITY_OPTIONS,
-} from './components/AppleMap';
+import { AppleMapEdit } from './components/AppleMap';
 import EditAuthForm from './components/EditAuthForm';
-import SearchResults from './components/SearchResults';
+import InspectorSettings from './inspector-settings';
 
 export default function AppleMapsWordPressEdit( props ) {
 	const {
 		className,
 		attributes: {
 			mapType,
-			address,
 			height,
 			latitude,
 			longitude,
@@ -44,12 +30,9 @@ export default function AppleMapsWordPressEdit( props ) {
 
 	const [ authenticated, setAuthenticated ] = useState( false );
 	const [ isLoading, setIsLoading ] = useState( true );
-	const [ searchString, setSearchString ] = useState( [] );
-	const [ searchResults, setSearchResults ] = useState( [] );
 
 	const mapElement = useRef();
 	const map = useRef();
-	const geocoder = new mapkit.Geocoder();
 
 	useEffect( () => {
 		if ( mapkit.authenticated ) {
@@ -121,10 +104,6 @@ export default function AppleMapsWordPressEdit( props ) {
 		}
 	}, [ props.attributes, authenticated ] );
 
-	useEffect( () => {
-		setSearchString( address );
-	}, [ address ] );
-
 	if ( isLoading ) {
 		return (
 			<Placeholder
@@ -140,16 +119,11 @@ export default function AppleMapsWordPressEdit( props ) {
 	if ( ! authenticated ) {
 		return (
 			<>
-				<InspectorControls>
-					<PanelBody>
-						<p>
-							{ __(
-								'You need to authenticate first',
-								'apple-maps-wordpress'
-							) }
-						</p>
-					</PanelBody>
-				</InspectorControls>
+				<InspectorSettings
+					{ ...props }
+					authenticated={ authenticated }
+					map={ map }
+				/>
 				<Placeholder
 					style={ { minHeight: `${ height }px` } }
 					label={ __(
@@ -183,156 +157,13 @@ export default function AppleMapsWordPressEdit( props ) {
 		);
 	}
 
-	const handleAddressChange = ( value ) => {
-		if ( value ) {
-			geocoder.lookup( value, geolocate );
-		}
-
-		setSearchString( value );
-	};
-
-	const geolocate = ( error, data ) => {
-		if ( data.results ) {
-			setSearchResults( data.results );
-		}
-	};
-
 	return (
 		<>
-			<InspectorControls>
-				<PanelBody
-					title={ __( 'Location Settings', 'apple-maps-wordpress' ) }
-				>
-					<div>
-						<TextControl
-							label={ __( 'Address', 'apple-maps-wordpress' ) }
-							value={ searchString }
-							onChange={ handleAddressChange }
-						/>
-						<SearchResults
-							map={ map }
-							setAttributes={ setAttributes }
-							searchResults={ searchResults }
-							setSearchResults={ setSearchResults }
-						/>
-					</div>
-					<TextControl
-						readonly="readonly"
-						label={ __( 'Latitude', 'apple-maps-wordpress' ) }
-						value={ latitude }
-					/>
-					<TextControl
-						readonly="readonly"
-						label={ __( 'Longitude', 'apple-maps-wordpress' ) }
-						value={ longitude }
-					/>
-				</PanelBody>
-				<PanelBody
-					title={ __( 'Display Settings', 'apple-maps-wordpress' ) }
-				>
-					<SelectControl
-						label={ __( 'MapType', 'apple-maps-wordpress' ) }
-						options={ MAP_TYPE_OPTIONS }
-						value={ mapType }
-						onChange={ ( value ) =>
-							setAttributes( { mapType: value } )
-						}
-					/>
-					<ToggleControl
-						label={ __(
-							'Show MapType Controll',
-							'apple-maps-wordpress'
-						) }
-						checked={ showsMapTypeControl }
-						onChange={ ( value ) =>
-							setAttributes( { showsMapTypeControl: value } )
-						}
-					/>
-					<RangeControl
-						label={ __( 'Zoom', 'apple-maps-wordpress' ) }
-						value={ zoom }
-						onChange={ ( value ) =>
-							setAttributes( { zoom: value } )
-						}
-						min={ 0 }
-						max={ 20 }
-						step={ 0.5 }
-					/>
-					<ToggleControl
-						label={ __( 'Zoom Enabled', 'apple-maps-wordpress' ) }
-						checked={ isZoomEnabled }
-						onChange={ ( value ) =>
-							setAttributes( { isZoomEnabled: value } )
-						}
-					/>
-					{ isZoomEnabled && (
-						<ToggleControl
-							label={ __(
-								'Show Zoom Controll',
-								'apple-maps-wordpress'
-							) }
-							checked={ showsZoomControl }
-							onChange={ ( value ) =>
-								setAttributes( { showsZoomControl: value } )
-							}
-						/>
-					) }
-					<ToggleControl
-						label={ __(
-							'Rotation Enabled',
-							'apple-maps-wordpress'
-						) }
-						checked={ isRotationEnabled }
-						onChange={ ( value ) =>
-							setAttributes( { isRotationEnabled: value } )
-						}
-					/>
-					{ isRotationEnabled && (
-						<SelectControl
-							label={ __(
-								'Show Compas',
-								'apple-maps-wordpress'
-							) }
-							options={ FEATURE_VISIBILITY_OPTIONS }
-							value={ showsCompass }
-							onChange={ ( value ) =>
-								setAttributes( { showsCompass: value } )
-							}
-						/>
-					) }
-					<ToggleControl
-						label={ __( 'Scroll Enabled', 'apple-maps-wordpress' ) }
-						checked={ isScrollEnabled }
-						onChange={ ( value ) =>
-							setAttributes( { isScrollEnabled: value } )
-						}
-					/>
-					<SelectControl
-						label={ __( 'Show Scale', 'apple-maps-wordpress' ) }
-						options={ FEATURE_VISIBILITY_OPTIONS }
-						value={ showsScale }
-						onChange={ ( value ) =>
-							setAttributes( { showsScale: value } )
-						}
-					/>
-					<TextControl
-						label={ __(
-							'Height ( pixels )',
-							'apple-maps-wordpress'
-						) }
-						value={ height }
-						onChange={ ( value ) =>
-							setAttributes( { height: value } )
-						}
-					/>
-				</PanelBody>
-				<PanelBody
-					title={ __( 'Authentication', 'apple-maps-wordpress' ) }
-					initialOpen={ false }
-				>
-					<EditAuthForm />
-				</PanelBody>
-			</InspectorControls>
+			<InspectorSettings
+				{ ...props }
+				authenticated={ authenticated }
+				map={ map }
+			/>
 			<div
 				ref={ mapElement }
 				className={ className }
