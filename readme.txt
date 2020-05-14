@@ -1,8 +1,8 @@
 === Apple Maps For Wordpress ===
 Contributors:      10up
-Tags: 
-Requires at least: 4.9
-Tested up to:      4.9
+Tags:
+Requires at least: 5.0
+Tested up to:      5.4.1
 Stable tag:        0.1.0
 
 A brief description of the plugin.
