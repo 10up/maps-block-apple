@@ -1,6 +1,3 @@
-/*global mapkit*/
-/*global Event*/
-
 import apiFetch from '@wordpress/api-fetch';
 import { dispatch } from '@wordpress/data';
 

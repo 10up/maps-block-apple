@@ -1,5 +1,3 @@
-/*global mapkit*/
-
 import { InspectorControls } from '@wordpress/block-editor';
 import {
 	Spinner,
