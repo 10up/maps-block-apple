@@ -6,7 +6,7 @@
  * Version:     0.1.0
  * Author:      10up
  * Author URI:  https://10up.com
- * License:			GPL v2 or later
+ * License:	GPL v2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: apple-maps-wordpress
  * Domain Path: /languages
