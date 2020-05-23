@@ -4,6 +4,8 @@ Tags:
 Requires at least: 5.0
 Tested up to:      5.4.1
 Stable tag:        0.1.0
+License: GPLv2 or later
+License UR: http://www.gnu.org/licenses/gpl-2.0.html
 
 A brief description of the plugin.
 
