@@ -249,5 +249,5 @@ function update_apple_maps_wordpress_key_id( $request ) {
  * Check wether user can Edit Posts
  */
 function check_permissions() {
-	return current_user_can( 'edit_posts' );
+	return current_user_can( 'manage_options' );
 }
