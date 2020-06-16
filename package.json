@@ -8,9 +8,7 @@
     "url": "https://10up.com",
     "role": "developer"
   },
-{
-  "license": "GPL-2.0-only"
-  },
+  "license": "GPL-2.0-only",
   "scripts": {
     "build": "wp-scripts build src/index.js src/frontend.js",
     "check-engines": "wp-scripts check-engines",
