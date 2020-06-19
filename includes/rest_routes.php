@@ -11,7 +11,7 @@ use \WP_Error as WP_Error;
 use \WP_REST_Response as WP_REST_Response;
 use \WP_REST_Server as WP_REST_Server;
 
-define( 'MAPS_BLOCK_APPLE_VERSION_REST_NAMESPACE', 'AppleMapsWordPress/v1' );
+define( 'MAPS_BLOCK_APPLE_VERSION_REST_NAMESPACE', 'MapsBlockApple/v1' );
 
 
 add_action( 'rest_api_init', __NAMESPACE__ . '\add_endpoints' );
@@ -246,7 +246,7 @@ function update_maps_block_apple_key_id( $request ) {
 }
 
 /**
- * Check wether user can Edit Posts
+ * Check whether user can Edit Posts
  */
 function check_permissions() {
 	return current_user_can( 'manage_options' );
