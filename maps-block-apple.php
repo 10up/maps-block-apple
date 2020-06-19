@@ -30,9 +30,9 @@ add_action( 'init', __NAMESPACE__ . '\add_options' );
  * Add options
  */
 function add_options() {
-	add_option( 'apple_maps_wordpress_team_id' );
-	add_option( 'apple_maps_wordpress_key_id' );
-	add_option( 'apple_maps_wordpress_private_key' );
+	add_option( 'maps_block_apple_team_id' );
+	add_option( 'maps_block_apple_key_id' );
+	add_option( 'maps_block_apple_private_key' );
 }
 
 require_once MAPS_BLOCK_APPLE_INC . 'block_assets.php';
