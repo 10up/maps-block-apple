@@ -128,7 +128,7 @@ export default function AppleMapsWordPressEdit( props ) {
 				<Placeholder
 					style={ { minHeight: `${ height }px` } }
 					label={ __(
-						'Authenticate - Apple Maps',
+						'Confirm access to Apple Maps',
 						'apple-maps-wordpress'
 					) }
 					icon={ 'location-alt' }
