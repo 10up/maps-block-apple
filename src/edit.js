@@ -148,7 +148,7 @@ export default function AppleMapsWordPressEdit( props ) {
 								rel="noopener noreferrer"
 							>
 								{ __(
-									'Instructions for creating your Apple Maps credentials.',
+									'Instructions for creating your MapKit credentials.',
 									'apple-maps-wordpress'
 								) }
 							</a>{ ' ' }
