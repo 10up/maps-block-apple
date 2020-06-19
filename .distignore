@@ -1,0 +1,18 @@
+# Directories
+/.wordpress-org
+/.git
+/.github
+/src
+
+# Files
+.distignore
+.eslintrc
+.gitignore
+CHANGELOG.md
+CODE_OF_CONDUCT.md
+CONTRIBUTING.md
+CREDITS.md
+LICENSE.md
+package-lock.json
+package.json
+README.md
