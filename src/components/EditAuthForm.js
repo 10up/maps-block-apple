@@ -76,7 +76,7 @@ export default function EditAuthForm() {
 			<TextareaControl
 				label={ __(
 					'Please enter your Private Key',
-					'apple-maps-wordpress'
+					'maps-block-apple'
 				) }
 				readonly={ isBusy }
 				name="private_key"
@@ -86,7 +86,7 @@ export default function EditAuthForm() {
 			<TextControl
 				label={ __(
 					'Please enter your Key ID',
-					'apple-maps-wordpress'
+					'maps-block-apple'
 				) }
 				readonly={ isBusy }
 				name="key_id"
@@ -96,7 +96,7 @@ export default function EditAuthForm() {
 			<TextControl
 				label={ __(
 					'Please enter your Team ID',
-					'apple-maps-wordpress'
+					'maps-block-apple'
 				) }
 				readonly={ isBusy }
 				name="team_id"
@@ -110,7 +110,7 @@ export default function EditAuthForm() {
 				isBusy={ isBusy }
 				onClick={ handleSave }
 			>
-				{ __( 'Confirm MapKit Credentials', 'apple-maps-wordpress' ) }
+				{ __( 'Confirm MapKit Credentials', 'maps-block-apple' ) }
 			</Button>
 		</>
 	);
