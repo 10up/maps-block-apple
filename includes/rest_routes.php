@@ -11,7 +11,7 @@ use \WP_Error as WP_Error;
 use \WP_REST_Response as WP_REST_Response;
 use \WP_REST_Server as WP_REST_Server;
 
-define( 'APPLE_MAPS_WORDPRESS_VERSION_REST_NAMESPACE', 'AppleMapsWordPress/v1' );
+define( 'MAPS_BLOCK_APPLE_VERSION_REST_NAMESPACE', 'AppleMapsWordPress/v1' );
 
 
 add_action( 'rest_api_init', __NAMESPACE__ . '\add_endpoints' );
@@ -21,7 +21,7 @@ add_action( 'rest_api_init', __NAMESPACE__ . '\add_endpoints' );
 function add_endpoints() {
 
 	register_rest_route(
-		APPLE_MAPS_WORDPRESS_VERSION_REST_NAMESPACE,
+		MAPS_BLOCK_APPLE_VERSION_REST_NAMESPACE,
 		'/GetJWT',
 		[
 			'methods'  => 'GET',
@@ -30,7 +30,7 @@ function add_endpoints() {
 	);
 
 	register_rest_route(
-		APPLE_MAPS_WORDPRESS_VERSION_REST_NAMESPACE,
+		MAPS_BLOCK_APPLE_VERSION_REST_NAMESPACE,
 		'/private_key',
 		[
 			'methods'             => WP_REST_Server::EDITABLE,
@@ -40,7 +40,7 @@ function add_endpoints() {
 	);
 
 	register_rest_route(
-		APPLE_MAPS_WORDPRESS_VERSION_REST_NAMESPACE,
+		MAPS_BLOCK_APPLE_VERSION_REST_NAMESPACE,
 		'/private_key/get',
 		[
 			'methods'             => 'GET',
@@ -50,7 +50,7 @@ function add_endpoints() {
 	);
 
 	register_rest_route(
-		APPLE_MAPS_WORDPRESS_VERSION_REST_NAMESPACE,
+		MAPS_BLOCK_APPLE_VERSION_REST_NAMESPACE,
 		'/team_id',
 		[
 			'methods'             => WP_REST_Server::EDITABLE,
@@ -60,7 +60,7 @@ function add_endpoints() {
 	);
 
 	register_rest_route(
-		APPLE_MAPS_WORDPRESS_VERSION_REST_NAMESPACE,
+		MAPS_BLOCK_APPLE_VERSION_REST_NAMESPACE,
 		'/team_id/get',
 		[
 			'methods'             => 'GET',
@@ -70,7 +70,7 @@ function add_endpoints() {
 	);
 
 	register_rest_route(
-		APPLE_MAPS_WORDPRESS_VERSION_REST_NAMESPACE,
+		MAPS_BLOCK_APPLE_VERSION_REST_NAMESPACE,
 		'/key_id',
 		[
 			'methods'             => WP_REST_Server::EDITABLE,
@@ -80,7 +80,7 @@ function add_endpoints() {
 	);
 
 	register_rest_route(
-		APPLE_MAPS_WORDPRESS_VERSION_REST_NAMESPACE,
+		MAPS_BLOCK_APPLE_VERSION_REST_NAMESPACE,
 		'/key_id/get',
 		[
 			'methods'             => 'GET',
