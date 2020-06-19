@@ -109,7 +109,7 @@ export default function MapsBlockAppleEdit( props ) {
 		return (
 			<Placeholder
 				style={ { height: `${ height }px` } }
-				label={ __( 'Apple Maps WordPress', 'maps-block-apple' ) }
+				label={ __( 'Block for Apple Maps', 'maps-block-apple' ) }
 				icon={ 'location-alt' }
 			>
 				<Spinner />
@@ -135,7 +135,7 @@ export default function MapsBlockAppleEdit( props ) {
 					instructions={
 						<IsAdmin
 							fallback={ __(
-								'Sorry you are not allowed to do that. Please talk to your Administrator.'
+								'Sorry, you are not allowed to do that. Please talk to your Administrator.'
 							) }
 						>
 							{ __(
