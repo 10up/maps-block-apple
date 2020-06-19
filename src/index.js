@@ -16,9 +16,9 @@ import AppleMapsWordPressEdit from './edit';
 import AppleMapsWordPressSave from './save';
 import BlockIcon from './block-icon';
 
-registerBlockType( 'tenup/apple-maps-wordpress', {
-	title: __( 'Apple Maps', 'apple-maps-wordpress' ),
-	description: __( 'Add an Apple Map to your site.', 'apple-maps-wordpress' ),
+registerBlockType( 'tenup/maps-block-apple', {
+	title: __( 'Apple Maps', 'maps-block-apple' ),
+	description: __( 'Add an Apple Map to your site.', 'maps-block-apple' ),
 	category: 'embed',
 	icon: BlockIcon,
 	attributes: {
