@@ -32,13 +32,13 @@ export default function DisplaySettings( props ) {
 	return (
 		<PanelBody title={ __( 'Display Settings', 'apple-maps-wordpress' ) }>
 			<SelectControl
-				label={ __( 'MapType', 'apple-maps-wordpress' ) }
+				label={ __( 'Map Type', 'apple-maps-wordpress' ) }
 				options={ MAP_TYPE_OPTIONS }
 				value={ mapType }
 				onChange={ ( value ) => setAttributes( { mapType: value } ) }
 			/>
 			<ToggleControl
-				label={ __( 'Show MapType Controll', 'apple-maps-wordpress' ) }
+				label={ __( 'Show Map Type Control', 'apple-maps-wordpress' ) }
 				checked={ showsMapTypeControl }
 				onChange={ ( value ) =>
 					setAttributes( { showsMapTypeControl: value } )
@@ -61,7 +61,7 @@ export default function DisplaySettings( props ) {
 			/>
 			{ isZoomEnabled && (
 				<ToggleControl
-					label={ __( 'Show Zoom Controll', 'apple-maps-wordpress' ) }
+					label={ __( 'Show Zoom Control', 'apple-maps-wordpress' ) }
 					checked={ showsZoomControl }
 					onChange={ ( value ) =>
 						setAttributes( { showsZoomControl: value } )
@@ -77,7 +77,7 @@ export default function DisplaySettings( props ) {
 			/>
 			{ isRotationEnabled && (
 				<SelectControl
-					label={ __( 'Show Compas', 'apple-maps-wordpress' ) }
+					label={ __( 'Show Compass', 'apple-maps-wordpress' ) }
 					options={ FEATURE_VISIBILITY_OPTIONS }
 					value={ showsCompass }
 					onChange={ ( value ) =>
