@@ -110,7 +110,7 @@ export default function EditAuthForm() {
 				isBusy={ isBusy }
 				onClick={ handleSave }
 			>
-				{ __( 'Save API Key', 'apple-maps-wordpress' ) }
+				{ __( 'Confirm MapKit Credentials', 'apple-maps-wordpress' ) }
 			</Button>
 		</>
 	);
