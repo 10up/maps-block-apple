@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name:       Apple Maps for WordPress
+ * Plugin Name:       Block for Apple Maps
  * Plugin URI:        https://github.com/10up/apple-maps-wordpress
- * Description:       
+ * Description:       An Apple Maps block for the WordPress block editor (Gutenberg).
  * Version:           0.1.0
  * Requires at least: 5.2
  * Requires PHP:      5.6
