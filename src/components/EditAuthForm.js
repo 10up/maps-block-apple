@@ -14,13 +14,13 @@ export default function EditAuthForm() {
 	useEffect( () => {
 		Promise.all( [
 			apiFetch( {
-				path: '/AppleMapsWordPress/v1/private_key/get/',
+				path: '/MapsBlockApple/v1/private_key/get/',
 			} ),
 			apiFetch( {
-				path: '/AppleMapsWordPress/v1/team_id/get/',
+				path: '/MapsBlockApple/v1/team_id/get/',
 			} ),
 			apiFetch( {
-				path: '/AppleMapsWordPress/v1/key_id/get/',
+				path: '/MapsBlockApple/v1/key_id/get/',
 			} ),
 		] )
 			.then( ( [ newPrivateKey, newTeamId, newKeyId ] ) => {
@@ -40,17 +40,17 @@ export default function EditAuthForm() {
 
 		Promise.all( [
 			apiFetch( {
-				path: '/AppleMapsWordPress/v1/private_key/',
+				path: '/MapsBlockApple/v1/private_key/',
 				method: 'POST',
 				data: privateKey,
 			} ),
 			apiFetch( {
-				path: '/AppleMapsWordPress/v1/team_id/',
+				path: '/MapsBlockApple/v1/team_id/',
 				method: 'POST',
 				data: teamId,
 			} ),
 			apiFetch( {
-				path: '/AppleMapsWordPress/v1/key_id/',
+				path: '/MapsBlockApple/v1/key_id/',
 				method: 'POST',
 				data: keyId,
 			} ),
