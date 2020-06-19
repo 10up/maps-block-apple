@@ -15,7 +15,7 @@ export default function InspectorSettings( props ) {
 				<PanelBody>
 					<p>
 						{ __(
-							'You need to confirm your access to Apple Maps first.',
+							'You need to confirm your access to Apple Maps before you can continue.',
 							'maps-block-apple'
 						) }
 					</p>
