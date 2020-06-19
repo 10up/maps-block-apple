@@ -135,11 +135,11 @@ export default function AppleMapsWordPressEdit( props ) {
 					instructions={
 						<IsAdmin
 							fallback={ __(
-								'Sorry you are not allowed to do that. Please talk to your Administrator'
+								'Sorry you are not allowed to do that. Please talk to your Administrator.'
 							) }
 						>
 							{ __(
-								'In order to use an Apple Map on your website you need to get some credentials from Apple. Here you can find a detailed documentation on how to get these keys: ',
+								'In order to include an Apple Map on your website you need to confirm your MapKit credentials below. Here is documentation on how to get those credentials: ',
 								'apple-maps-wordpress'
 							) }
 							<a
@@ -148,7 +148,7 @@ export default function AppleMapsWordPressEdit( props ) {
 								rel="noopener noreferrer"
 							>
 								{ __(
-									'Instructions for getting a your Apple Maps Credentials.',
+									'Instructions for creating your Apple Maps credentials.',
 									'apple-maps-wordpress'
 								) }
 							</a>{ ' ' }
