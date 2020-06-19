@@ -16,7 +16,7 @@ export default function InspectorSettings( props ) {
 					<p>
 						{ __(
 							'You need to confirm your access to Apple Maps first.',
-							'apple-maps-wordpress'
+							'maps-block-apple'
 						) }
 					</p>
 				</PanelBody>
