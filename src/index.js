@@ -1,16 +1,26 @@
+/**
+ * External dependencies
+ */
+const { Map, FeatureVisibility } = mapkit;
+
+/**
+ * WordPress dependencies
+ */
 import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
 
+/**
+ * Internal dependencies
+ */
 import AppleMapsWordPressEdit from './edit';
 import AppleMapsWordPressSave from './save';
+import BlockIcon from './block-icon';
 
-const { Map, FeatureVisibility } = mapkit;
-
-registerBlockType( 'tenup/apple-maps-wordpress', {
-	title: __( 'Apple Maps', 'apple-maps-wordpress' ),
-	description: __( 'Add a Apple Map to your Page', 'apple-maps-wordpress' ),
+registerBlockType('tenup/apple-maps-wordpress', {
+	title: __('Apple Maps', 'apple-maps-wordpress'),
+	description: __('Add a Apple Map to your Page', 'apple-maps-wordpress'),
 	category: 'embed',
-	icon: 'location-alt',
+	icon: BlockIcon,
 	attributes: {
 		address: {
 			type: 'string',
@@ -70,8 +80,8 @@ registerBlockType( 'tenup/apple-maps-wordpress', {
 		},
 	},
 	supports: {
-		align: [ 'wide', 'full' ],
+		align: ['wide', 'full'],
 	},
 	edit: AppleMapsWordPressEdit,
 	save: AppleMapsWordPressSave,
-} );
+});
