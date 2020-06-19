@@ -7,7 +7,7 @@ import EditAuthForm from './components/EditAuthForm';
 import InspectorSettings from './inspector-settings';
 import IsAdmin from './helper';
 
-export default function AppleMapsWordPressEdit( props ) {
+export default function MapsBlockAppleEdit( props ) {
 	const {
 		className,
 		attributes: {
