@@ -109,7 +109,7 @@ export default function AppleMapsWordPressEdit( props ) {
 		return (
 			<Placeholder
 				style={ { height: `${ height }px` } }
-				label={ __( 'Apple Maps WordPress', 'apple-maps-wordpress' ) }
+				label={ __( 'Apple Maps WordPress', 'maps-block-apple' ) }
 				icon={ 'location-alt' }
 			>
 				<Spinner />
@@ -129,7 +129,7 @@ export default function AppleMapsWordPressEdit( props ) {
 					style={ { minHeight: `${ height }px` } }
 					label={ __(
 						'Confirm access to Apple Maps',
-						'apple-maps-wordpress'
+						'maps-block-apple'
 					) }
 					icon={ 'location-alt' }
 					instructions={
@@ -140,7 +140,7 @@ export default function AppleMapsWordPressEdit( props ) {
 						>
 							{ __(
 								'In order to include an Apple Map on your website you need to confirm your MapKit credentials below. Here is documentation on how to get those credentials: ',
-								'apple-maps-wordpress'
+								'maps-block-apple'
 							) }
 							<a
 								href="https://developer.apple.com/documentation/mapkitjs/setting_up_mapkit_js"
@@ -149,7 +149,7 @@ export default function AppleMapsWordPressEdit( props ) {
 							>
 								{ __(
 									'Instructions for creating your MapKit credentials.',
-									'apple-maps-wordpress'
+									'maps-block-apple'
 								) }
 							</a>{ ' ' }
 						</IsAdmin>
