@@ -16,10 +16,10 @@ function register_block_assets() {
 	wp_enqueue_script( 'apple-mapkit-js', 'https://cdn.apple-mapkit.com/mk/5.x.x/mapkit.js', [], 5, false );
 
 	$file_name           = 'index';
-	$script_dependencies = ( include APPLE_MAPS_WORDPRESS_PATH . "build/$file_name.asset.php" );
+	$script_dependencies = ( include MAPS_BLOCK_APPLE_PATH . "build/$file_name.asset.php" );
 	wp_register_script(
 		'maps-block-apple-block',
-		APPLE_MAPS_WORDPRESS_URL . "build/$file_name.js",
+		MAPS_BLOCK_APPLE_URL . "build/$file_name.js",
 		array_merge( $script_dependencies['dependencies'], [ 'apple-mapkit-js' ] ),
 		$script_dependencies['version'],
 		false
@@ -27,14 +27,14 @@ function register_block_assets() {
 
 	wp_register_style(
 		'maps-block-apple-style',
-		APPLE_MAPS_WORDPRESS_URL . 'style.css',
+		MAPS_BLOCK_APPLE_URL . 'style.css',
 		[],
 		$script_dependencies['version']
 	);
 
 	wp_register_style(
 		'maps-block-apple-editor-style',
-		APPLE_MAPS_WORDPRESS_URL . 'editor.css',
+		MAPS_BLOCK_APPLE_URL . 'editor.css',
 		[],
 		$script_dependencies['version']
 	);
@@ -61,10 +61,10 @@ function register_frontend_assets() {
 	}
 
 	$file_name             = 'frontend';
-	$frontend_dependencies = ( include APPLE_MAPS_WORDPRESS_PATH . "build/$file_name.asset.php" );
+	$frontend_dependencies = ( include MAPS_BLOCK_APPLE_PATH . "build/$file_name.asset.php" );
 	wp_enqueue_script(
 		'maps-block-apple-frontend',
-		APPLE_MAPS_WORDPRESS_URL . "build/$file_name.js",
+		MAPS_BLOCK_APPLE_URL . "build/$file_name.js",
 		array_merge( $frontend_dependencies['dependencies'], [ 'apple-mapkit-js' ] ),
 		$frontend_dependencies['version'],
 		false
