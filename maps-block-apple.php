@@ -13,10 +13,10 @@
  * Text Domain:       maps-block-apple
  * Domain Path:       /languages
  *
- * @package           tenup\Apple_Maps_WordPress
+ * @package           tenup\Maps_Block_Apple
  */
 
-namespace tenup\Apple_Maps_WordPress;
+namespace tenup\Maps_Block_Apple;
 
 // Useful global constants.
 define( 'APPLE_MAPS_WORDPRESS_VERSION', '0.1.0' );
