@@ -75,7 +75,7 @@ export default function EditAuthForm() {
 		<>
 			<TextareaControl
 				label={ __(
-					'Please enter your private Key',
+					'Please enter your Private Key',
 					'apple-maps-wordpress'
 				) }
 				readonly={ isBusy }
