@@ -9,7 +9,7 @@ namespace tenup\Maps_Block_Apple;
 
 add_action( 'init', __NAMESPACE__ . '\register_block_assets' );
 /**
- * Regiister block assets
+ * Register block assets
  */
 function register_block_assets() {
 
@@ -40,7 +40,7 @@ function register_block_assets() {
 	);
 
 	register_block_type(
-		'tenup/maps-block-apples',
+		'tenup/maps-block-apple',
 		[
 			'editor_script' => 'maps-block-apple-block',
 			'editor_style'  => 'maps-block-apple-editor-style',
@@ -52,7 +52,7 @@ function register_block_assets() {
 
 add_action( 'init', __NAMESPACE__ . '\register_frontend_assets' );
 /**
- * Regiister block assets
+ * Register block assets
  */
 function register_frontend_assets() {
 	// If in the backend, bail out.
