@@ -17,3 +17,5 @@ Thank you to all the people who have already contributed to this repository via 
 The following software libraries are utilized in this repository.
 
 n/a.
+
+**Disclaimer:** _Apple Maps, MapKit JS, and the Apple logo are trademarks of Apple Inc.  Apple Maps may not be available in all countries or regions._
