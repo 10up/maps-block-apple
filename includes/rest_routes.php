@@ -2,10 +2,10 @@
 /**
  * Register Block Assets
  *
- * @package tenup\Apple_Maps_WordPress
+ * @package tenup\Maps_Block_Apple
  */
 
-namespace tenup\Apple_Maps_WordPress;
+namespace tenup\Maps_Block_Apple;
 
 use \WP_Error as WP_Error;
 use \WP_REST_Response as WP_REST_Response;
