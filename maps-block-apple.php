@@ -19,11 +19,11 @@
 namespace tenup\Maps_Block_Apple;
 
 // Useful global constants.
-define( 'APPLE_MAPS_WORDPRESS_VERSION', '0.1.0' );
-define( 'APPLE_MAPS_WORDPRESS_URL', plugin_dir_url( __FILE__ ) );
-define( 'APPLE_MAPS_WORDPRESS_PATH', dirname( __FILE__ ) . '/' );
-define( 'APPLE_MAPS_WORDPRESS_INC', APPLE_MAPS_WORDPRESS_PATH . 'includes/' );
-define( 'APPLE_MAPS_WORDPRESS_BASENAME', plugin_basename( __FILE__ ) );
+define( 'MAPS_BLOCK_APPLE_VERSION', '0.1.0' );
+define( 'MAPS_BLOCK_APPLE_URL', plugin_dir_url( __FILE__ ) );
+define( 'MAPS_BLOCK_APPLE_PATH', dirname( __FILE__ ) . '/' );
+define( 'MAPS_BLOCK_APPLE_INC', MAPS_BLOCK_APPLE_PATH . 'includes/' );
+define( 'MAPS_BLOCK_APPLE_BASENAME', plugin_basename( __FILE__ ) );
 
 add_action( 'init', __NAMESPACE__ . '\add_options' );
 /**
@@ -35,5 +35,5 @@ function add_options() {
 	add_option( 'apple_maps_wordpress_private_key' );
 }
 
-require_once APPLE_MAPS_WORDPRESS_INC . 'block_assets.php';
-require_once APPLE_MAPS_WORDPRESS_INC . 'rest_routes.php';
+require_once MAPS_BLOCK_APPLE_INC . 'block_assets.php';
+require_once MAPS_BLOCK_APPLE_INC . 'rest_routes.php';
