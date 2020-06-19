@@ -2,10 +2,10 @@
 /**
  * Register Block Assets
  *
- * @package tenup\Apple_Maps_WordPress
+ * @package tenup\Maps_Block_Apple
  */
 
-namespace tenup\Apple_Maps_WordPress;
+namespace tenup\Maps_Block_Apple;
 
 add_action( 'init', __NAMESPACE__ . '\register_block_assets' );
 /**
