@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from '@wordpress/element';
 import { AppleMapEdit } from './components/AppleMap';
 import EditAuthForm from './components/EditAuthForm';
 import InspectorSettings from './inspector-settings';
+import IsAdmin from './helper';
 
 export default function AppleMapsWordPressEdit( props ) {
 	const {
@@ -132,7 +133,11 @@ export default function AppleMapsWordPressEdit( props ) {
 					) }
 					icon={ 'location-alt' }
 					instructions={
-						<>
+						<IsAdmin
+							fallback={ __(
+								'Sorry you are not allowed to do that. Please talk to your Administrator'
+							) }
+						>
 							{ __(
 								'In order to use an Apple Map on your website you need to get some credentials from Apple. Here you can find a detailed documentation on how to get these keys: ',
 								'apple-maps-wordpress'
@@ -147,11 +152,13 @@ export default function AppleMapsWordPressEdit( props ) {
 									'apple-maps-wordpress'
 								) }
 							</a>{ ' ' }
-						</>
+						</IsAdmin>
 					}
 					isColumnLayout={ true }
 				>
-					<EditAuthForm />
+					<IsAdmin>
+						<EditAuthForm />
+					</IsAdmin>
 				</Placeholder>
 			</>
 		);
