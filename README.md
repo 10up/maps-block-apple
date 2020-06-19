@@ -40,6 +40,12 @@ In order to start using the Apple Maps block, you will need to sign up for the A
 1. Open the Identifier you created in Step 1, copy the `App ID Prefix` value (notice the value is appened with `(Team ID)`), and paste it into the respective plugin setup field.
 1. Click the `Save API Key` button in the plugin setup to gain access to the block options and begin customizing your Apple Maps block!
 
+## Frequently Asked Questions
+ 
+### Can I see how many map views and service requests are made to my MapKit JS Private Key?
+ 
+Yes, you can track your MapKit JS useage on the [MapKit JS Developer Dashboard](https://maps.developer.apple.com/).
+
 ## Support Level
 
 **Active:** 10up is actively working on this, and we expect to continue work for the foreseeable future including keeping tested up to the most recent version of WordPress.  Bug reports, feature requests, questions, and pull requests are welcome.
