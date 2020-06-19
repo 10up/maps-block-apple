@@ -39,7 +39,7 @@ The `develop` branch is the development branch which means it contains the next 
 9. Push: Push your `master` branch to GitHub (e.g. `git push origin master`).
 10. [Wait for build](https://xkcd.com/303/): Head to the [Actions](/actions) tab in the repo and wait for it to finish if it hasn't already. If it doesn't succeed, figure out why and start over.
 11. Check the build: Check out the `stable` branch and test for functionality locally.
-12. Release: Create a [new release](/releases/new), naming the tag and the release with the new version number, and targeting the `stable` branch. Paste the changelog from `CHANGELOG.md` into the body of the release and include a link to the closed issues on the milestone](/milestone/3?closed=1).
+12. Release: Create a [new release](/releases/new), naming the tag and the release with the new version number, and targeting the `stable` branch. Paste the changelog from `CHANGELOG.md` into the body of the release and include a link to the [closed issues on the milestone](/milestone/3?closed=1).
 13. SVN: Wait for the [GitHub Action](/actions) to finish deploying to the WordPress.org repository. If all goes well, users with SVN commit access for that plugin will receive an emailed diff of changes.
 14. Check WordPress.org: Ensure that the changes are live on https://wordpress.org/plugins/maps-block-apple/. This may take a few minutes.
 15. Close the milestone: Edit the [X.Y.Z milestone](/milestone/#) with release date (in the `Due date (optional)` field) and link to GitHub release (in the `Description` field), then close the milestone.
