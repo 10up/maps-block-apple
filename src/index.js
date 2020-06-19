@@ -12,8 +12,8 @@ import { registerBlockType } from '@wordpress/blocks';
 /**
  * Internal dependencies
  */
-import AppleMapsWordPressEdit from './edit';
-import AppleMapsWordPressSave from './save';
+import MapsBlockAppleEdit from './edit';
+import MapsBlockAppleSave from './save';
 import BlockIcon from './block-icon';
 
 registerBlockType( 'tenup/maps-block-apple', {
@@ -82,6 +82,6 @@ registerBlockType( 'tenup/maps-block-apple', {
 	supports: {
 		align: ['wide', 'full'],
 	},
-	edit: AppleMapsWordPressEdit,
-	save: AppleMapsWordPressSave,
+	edit: MapsBlockAppleEdit,
+	save: MapsBlockAppleSave,
 });
