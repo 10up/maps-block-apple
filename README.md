@@ -2,7 +2,7 @@
 
 > An Apple Maps block for the WordPress block editor (Gutenberg).
 
-[![Support Level](https://img.shields.io/badge/support-active-green.svg)](#support-level) [![Release Version](https://img.shields.io/github/release/10up/apple-maps-wordpress.svg)](https://github.com/10up/apple-maps-wordpress/releases/latest) ![WordPress tested up to version](https://img.shields.io/badge/WordPress-v5.4%20tested-success.svg) [![GPLv2 License](https://img.shields.io/github/license/10up/apple-maps-wordpress.svg)](https://github.com/10up/apple-maps-wordpress/blob/develop/LICENSE.md)
+[![Support Level](https://img.shields.io/badge/support-active-green.svg)](#support-level) [![Release Version](https://img.shields.io/github/release/10up/maps-block-apple.svg)](https://github.com/10up/maps-block-apple/releases/latest) ![WordPress tested up to version](https://img.shields.io/badge/WordPress-v5.4%20tested-success.svg) [![GPLv2 License](https://img.shields.io/github/license/10up/maps-block-apple.svg)](https://github.com/10up/maps-block-apple/blob/develop/LICENSE.md)
 
 ## Overview
 
@@ -41,9 +41,9 @@ In order to start using the Apple Maps block, you will need to sign up for the A
 1. Click the `Save API Key` button in the plugin setup to gain access to the block options and begin customizing your Apple Maps block!
 
 ## Frequently Asked Questions
- 
+
 ### Can I see how many map views and service requests are made to my MapKit JS Private Key?
- 
+
 Yes, you can track your MapKit JS useage on the [MapKit JS Developer Dashboard](https://maps.developer.apple.com/).
 
 ## Support Level
@@ -52,11 +52,11 @@ Yes, you can track your MapKit JS useage on the [MapKit JS Developer Dashboard](
 
 ## Changelog
 
-A complete listing of all notable changes to Apple Maps for WordPress are documented in [CHANGELOG.md](https://github.com/10up/apple-maps-wordpress/blob/develop/CHANGELOG.md).
+A complete listing of all notable changes to Apple Maps for WordPress are documented in [CHANGELOG.md](https://github.com/10up/maps-block-apple/blob/develop/CHANGELOG.md).
 
 ## Contributing
 
-Please read [CODE_OF_CONDUCT.md](https://github.com/10up/apple-maps-wordpress/blob/develop/CODE_OF_CONDUCT.md) for details on our code of conduct, [CONTRIBUTING.md](https://github.com/10up/apple-maps-wordpress/blob/develop/CONTRIBUTING.md) for details on the process for submitting pull requests to us, and [CREDITS.md](https://github.com/10up/apple-maps-wordpress/blob/develop/CREDITS.md) for a listing of maintainers of, contributors to, and libraries used by Apple Maps for WordPress.
+Please read [CODE_OF_CONDUCT.md](https://github.com/10up/maps-block-apple/blob/develop/CODE_OF_CONDUCT.md) for details on our code of conduct, [CONTRIBUTING.md](https://github.com/10up/maps-block-apple/blob/develop/CONTRIBUTING.md) for details on the process for submitting pull requests to us, and [CREDITS.md](https://github.com/10up/maps-block-apple/blob/develop/CREDITS.md) for a listing of maintainers of, contributors to, and libraries used by Apple Maps for WordPress.
 
 ## Like what you see?
 
