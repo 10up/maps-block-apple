@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:       Block for Apple Maps
- * Plugin URI:        https://github.com/10up/apple-maps-wordpress
+ * Plugin URI:        https://github.com/10up/maps-block-apple
  * Description:       An Apple Maps block for the WordPress block editor (Gutenberg).
  * Version:           0.1.0
  * Requires at least: 5.2
@@ -10,7 +10,7 @@
  * Author URI:        https://10up.com
  * License:           GPLv2 or later
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       apple-maps-wordpress
+ * Text Domain:       maps-block-apple
  * Domain Path:       /languages
  *
  * @package           tenup\Apple_Maps_WordPress
