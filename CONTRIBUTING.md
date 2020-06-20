@@ -29,7 +29,7 @@ The `develop` branch is the development branch which means it contains the next 
 ## Release instructions
 
 1. Branch: Starting from `develop`, cut a release branch named `release/X.Y.Z` for your changes.
-2. Version bump: Bump the version number in `maps-block-apple.php`, `readme.txt`, and `package.json` if it does not already reflect the version being released.
+2. Version bump: Bump the version number in `maps-block-apple.php`, `readme.txt`, and `package.json` if it does not already reflect the version being released.  Update both the plugin "Version:" property and the plugin `MAPS_BLOCK_APPLE_VERSION` constant in `maps-block-apple.php`.
 3. Changelog: Add/update the changelog in `CHANGELOG.md` and `readme.txt`.
 4. Props: update `CREDITS.md` with any new contributors, confirm maintainers are accurate.
 5. Translations: Update the `.pot` file by running `npm run makepot`.
