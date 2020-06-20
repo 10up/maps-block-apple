@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file, per [the Ke
 ## [Unreleased] - TBD
 
 ## [0.1.0] - 2020-04-13
-- Initial private release of Apple Maps for WordPress plugin.
+- Initial private release of Block for Apple Maps plugin.
 
 [Unreleased]: https://github.com/10up/maps-block-apple/compare/master...develop
 [1.0.0]: https://github.com/10up/maps-block-apple/compare/0.1.0...1.0.0
