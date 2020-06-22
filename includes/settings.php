@@ -93,7 +93,7 @@ function settings_screen() {
 				</a>
 				<p>
 					<strong>
-						<?php echo esc_html__( 'Autoshare for Twitter', 'maps-block-apple' ) . ' ' . esc_html__( 'by', 'maps-block-apple' ); ?> <a href="https://10up.com" class="logo" title="<?php esc_attr_e( '10up', 'maps-block-apple' ); ?>"><?php esc_html_e( '10up', 'maps-block-apple' ); ?></a>
+						<?php echo esc_html__( 'Block for Apple Maps', 'maps-block-apple' ) . ' ' . esc_html__( 'by', 'maps-block-apple' ); ?> <a href="https://10up.com" class="logo" title="<?php esc_attr_e( '10up', 'maps-block-apple' ); ?>"><?php esc_html_e( '10up', 'maps-block-apple' ); ?></a>
 					</strong>
 				</p>
 				<nav>
