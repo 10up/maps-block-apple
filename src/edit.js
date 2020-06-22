@@ -6,6 +6,7 @@ import { AppleMapEdit } from './components/AppleMap';
 import EditAuthForm from './components/EditAuthForm';
 import InspectorSettings from './inspector-settings';
 import IsAdmin from './helper';
+import BlockIcon from './block-icon';
 
 export default function MapsBlockAppleEdit( props ) {
 	const {
@@ -110,7 +111,7 @@ export default function MapsBlockAppleEdit( props ) {
 			<Placeholder
 				style={ { height: `${ height }px` } }
 				label={ __( 'Block for Apple Maps', 'maps-block-apple' ) }
-				icon={ 'location-alt' }
+				icon={ BlockIcon }
 			>
 				<Spinner />
 			</Placeholder>
@@ -131,7 +132,7 @@ export default function MapsBlockAppleEdit( props ) {
 						'Confirm access to Apple Maps',
 						'maps-block-apple'
 					) }
-					icon={ 'location-alt' }
+					icon={ BlockIcon }
 					instructions={
 						<IsAdmin
 							fallback={ __(
