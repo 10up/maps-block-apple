@@ -6,8 +6,10 @@ All notable changes to this project will be documented in this file, per [the Ke
 
 ## [1.0.0] - 2020-06-22
 ### Added
-- Documentation improvements (props [@jeffpaul](https://github.com/jeffpaul), [@kopepasah](https://github.com/kopepasah), [ryanwelcher](https://github.com/ryanwelcher), [@fabiankaegy](https://github.com/fabiankaegy), [@helen](https://github.com/helen) via [#22](https://github.com/10up/maps-block-apple/pull/22), [#25](https://github.com/10up/maps-block-apple/pull/25), [#26](https://github.com/10up/maps-block-apple/pull/26), [#30](https://github.com/10up/maps-block-apple/pull/30))
-- Plugin header, plugin icon, and block icon images (props [@JackieKjome](https://github.com/JackieKjome), [@jeffpaul](https://github.com/jeffpaul), [@ryanwelcher](https://github.com/ryanwelcher), [@helen](https://github.com/helen) via [#32](https://github.com/10up/maps-block-apple/pull/32), [#33](https://github.com/10up/maps-block-apple/pull/33))
+- Rich preview to block inserter view (props [@fabiankaegy](https://github.com/fabiankaegy) via [#40](https://github.com/10up/maps-block-apple/pull/40))
+- Documentation improvements (props [@jeffpaul](https://github.com/jeffpaul), [@kopepasah](https://github.com/kopepasah), [ryanwelcher](https://github.com/ryanwelcher), [@fabiankaegy](https://github.com/fabiankaegy), [@helen](https://github.com/helen) via [#22](https://github.com/10up/maps-block-apple/pull/22), [#25](https://github.com/10up/maps-block-apple/pull/25), [#26](https://github.com/10up/maps-block-apple/pull/26), [#30](https://github.com/10up/maps-block-apple/pull/30), [#35](https://github.com/10up/maps-block-apple/pull/35))
+- Plugin header, plugin icon, and block icon images (props [@JackieKjome](https://github.com/JackieKjome), [@jeffpaul](https://github.com/jeffpaul), [@ryanwelcher](https://github.com/ryanwelcher), [@fabiankaegy](https://github.com/fabiankaegy), [@helen](https://github.com/helen) via [#32](https://github.com/10up/maps-block-apple/pull/32), [#33](https://github.com/10up/maps-block-apple/pull/33), [#39](https://github.com/10up/maps-block-apple/pull/39))
+- GitHub Actions for WordPress.org plugin deploy and readme/asset update (props [@jeffpaul](https://github.com/jeffpaul) via [#36](https://github.com/10up/maps-block-apple/pull/36))
 
 ### Changed
 - Refactored codebase, build system to use `@wordpress/scripts` (props [@fabiankaegy](https://github.com/fabiankaegy), [@ryanwelcher](https://github.com/ryanwelcher) via [#20](https://github.com/10up/maps-block-apple/pull/20))
