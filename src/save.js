@@ -1,4 +1,4 @@
-export default function AppleMapsWordPressSave( props ) {
+export default function MapsBlockAppleSave( props ) {
 	const {
 		className,
 		attributes: {

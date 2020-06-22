@@ -12,13 +12,13 @@ import { registerBlockType } from '@wordpress/blocks';
 /**
  * Internal dependencies
  */
-import AppleMapsWordPressEdit from './edit';
-import AppleMapsWordPressSave from './save';
+import MapsBlockAppleEdit from './edit';
+import MapsBlockAppleSave from './save';
 import BlockIcon from './block-icon';
 
-registerBlockType('tenup/apple-maps-wordpress', {
-	title: __('Apple Maps', 'apple-maps-wordpress'),
-	description: __('Add a Apple Map to your Page', 'apple-maps-wordpress'),
+registerBlockType( 'tenup/maps-block-apple', {
+	title: __( 'Apple Maps', 'maps-block-apple' ),
+	description: __( 'Add an Apple Map to your site.', 'maps-block-apple' ),
 	category: 'embed',
 	icon: BlockIcon,
 	attributes: {
@@ -79,9 +79,15 @@ registerBlockType('tenup/apple-maps-wordpress', {
 			default: FeatureVisibility.Adaptive,
 		},
 	},
-	supports: {
-		align: ['wide', 'full'],
+	example: {
+		attributes: {
+			latitude: 51.48762585296625,
+			longitude: -0.1326724377053381,
+		},
 	},
-	edit: AppleMapsWordPressEdit,
-	save: AppleMapsWordPressSave,
+	supports: {
+		align: [ 'wide', 'full' ],
+	},
+	edit: MapsBlockAppleEdit,
+	save: MapsBlockAppleSave,
 });

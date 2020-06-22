@@ -54,7 +54,7 @@ class AppleMap {
 	}
 
 	static authenticateMap() {
-		apiFetch( { path: 'AppleMapsWordPress/v1/GetJWT/' } )
+		apiFetch( { path: 'MapsBlockApple/v1/GetJWT/' } )
 			.then( ( token ) => {
 				mapkit.init( {
 					authorizationCallback( done ) {
