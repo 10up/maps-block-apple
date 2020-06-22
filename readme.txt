@@ -41,6 +41,10 @@ In order to start using the Apple Maps block, you will need to sign up for the A
 1. Click the `Save API Key` button in the plugin setup to gain access to the block options and begin customizing your Apple Maps block!
 
 == Frequently Asked Questions ==
+
+= I'm seeing validation errors when trying to authenticate my MapKit JS credentials, what am I doing wrong? =
+
+If you have WordPress installed in a subdirectory, then there is a [known issue](https://github.com/10up/maps-block-apple/issues/34) specifically related to this setup where the WordPress Admin URL is different from the site URL.  We're working on a [minor release](https://github.com/10up/maps-block-apple/milestone/3) to resolve this issue.
  
 = Can I see how many map views and service requests are made to my MapKit JS Private Key? =
  
