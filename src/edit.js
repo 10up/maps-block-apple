@@ -3,7 +3,6 @@ import { __ } from '@wordpress/i18n';
 import { useEffect, useRef, useState } from '@wordpress/element';
 
 import { AppleMapEdit } from './components/AppleMap';
-import EditAuthForm from './components/EditAuthForm';
 import InspectorSettings from './inspector-settings';
 import IsAdmin from './helper';
 import BlockIcon from './block-icon';
@@ -156,11 +155,7 @@ export default function MapsBlockAppleEdit( props ) {
 						</IsAdmin>
 					}
 					isColumnLayout={ true }
-				>
-					<IsAdmin>
-						<EditAuthForm />
-					</IsAdmin>
-				</Placeholder>
+				/>
 			</>
 		);
 	}
