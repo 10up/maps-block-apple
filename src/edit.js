@@ -118,6 +118,7 @@ export default function MapsBlockAppleEdit( props ) {
 	}
 
 	if ( ! authenticated ) {
+		const { settingsURL } = global._mbaData;
 		return (
 			<>
 				<InspectorSettings
@@ -139,16 +140,12 @@ export default function MapsBlockAppleEdit( props ) {
 							) }
 						>
 							{ __(
-								'In order to include an Apple Map on your website you need to confirm your MapKit credentials below. Here is documentation on how to get those credentials: ',
+								'In order to start using the Apple Maps block, you will need to sign up for the Apple Developer Program and create your Maps identifiers, keys, and tokens. ',
 								'maps-block-apple'
 							) }
-							<a
-								href="https://developer.apple.com/documentation/mapkitjs/setting_up_mapkit_js"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
+							<a href={ settingsURL }>
 								{ __(
-									'Instructions for creating your MapKit credentials.',
+									'Click here to go to the settings screen for setup instructions.',
 									'maps-block-apple'
 								) }
 							</a>{ ' ' }
