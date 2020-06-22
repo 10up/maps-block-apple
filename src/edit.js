@@ -6,6 +6,7 @@ import { AppleMapEdit } from './components/AppleMap';
 import EditAuthForm from './components/EditAuthForm';
 import InspectorSettings from './inspector-settings';
 import IsAdmin from './helper';
+import BlockIcon from './block-icon';
 
 export default function AppleMapsWordPressEdit( props ) {
 	const {
@@ -110,7 +111,7 @@ export default function AppleMapsWordPressEdit( props ) {
 			<Placeholder
 				style={ { height: `${ height }px` } }
 				label={ __( 'Apple Maps WordPress', 'apple-maps-wordpress' ) }
-				icon={ 'location-alt' }
+				icon={ BlockIcon }
 			>
 				<Spinner />
 			</Placeholder>
@@ -131,7 +132,7 @@ export default function AppleMapsWordPressEdit( props ) {
 						'Authenticate - Apple Maps',
 						'apple-maps-wordpress'
 					) }
-					icon={ 'location-alt' }
+					icon={ BlockIcon }
 					instructions={
 						<IsAdmin
 							fallback={ __(
