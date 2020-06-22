@@ -8,7 +8,7 @@ export default function AuthenticationSettings() {
 	return (
 		<IsAdmin>
 			<PanelBody
-				title={ __( 'Authentication', 'apple-maps-wordpress' ) }
+				title={ __( 'Authentication', 'maps-block-apple' ) }
 				initialOpen={ false }
 			>
 				<EditAuthForm />
