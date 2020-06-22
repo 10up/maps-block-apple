@@ -35,10 +35,10 @@ export default function LocationSettings( props ) {
 	};
 
 	return (
-		<PanelBody title={ __( 'Location Settings', 'apple-maps-wordpress' ) }>
+		<PanelBody title={ __( 'Location Settings', 'maps-block-apple' ) }>
 			<div>
 				<TextControl
-					label={ __( 'Address', 'apple-maps-wordpress' ) }
+					label={ __( 'Address', 'maps-block-apple' ) }
 					value={ searchString }
 					onChange={ handleAddressChange }
 				/>
@@ -51,12 +51,12 @@ export default function LocationSettings( props ) {
 			</div>
 			<TextControl
 				readonly="readonly"
-				label={ __( 'Latitude', 'apple-maps-wordpress' ) }
+				label={ __( 'Latitude', 'maps-block-apple' ) }
 				value={ latitude }
 			/>
 			<TextControl
 				readonly="readonly"
-				label={ __( 'Longitude', 'apple-maps-wordpress' ) }
+				label={ __( 'Longitude', 'maps-block-apple' ) }
 				value={ longitude }
 			/>
 		</PanelBody>

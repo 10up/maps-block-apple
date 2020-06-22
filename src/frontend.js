@@ -4,7 +4,7 @@ import { AppleMap } from './components/AppleMap';
 
 domReady( async () => {
 	const appleMapsBlocks = document.querySelectorAll(
-		'.wp-block-tenup-apple-maps-wordpress'
+		'.wp-block-tenup-maps-block-apple'
 	);
 
 	if ( ! appleMapsBlocks.length ) {

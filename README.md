@@ -1,10 +1,14 @@
-# Apple Maps for WordPress
+# Block for Apple Maps
 
-> This plugin adds Apple Maps as a WordPress Block.
+> An Apple Maps block for the WordPress block editor (Gutenberg).
 
-[![Support Level](https://img.shields.io/badge/support-active-green.svg)](#support-level) [![Release Version](https://img.shields.io/github/release/10up/apple-maps-wordpress.svg)](https://github.com/10up/apple-maps-wordpress/releases/latest) ![WordPress tested up to version](https://img.shields.io/badge/WordPress-v5.4%20tested-success.svg) [![GPLv2 License](https://img.shields.io/github/license/10up/apple-maps-wordpress.svg)](https://github.com/10up/apple-maps-wordpress/blob/develop/LICENSE.md)
+[![Support Level](https://img.shields.io/badge/support-active-green.svg)](#support-level) [![Release Version](https://img.shields.io/github/release/10up/maps-block-apple.svg)](https://github.com/10up/maps-block-apple/releases/latest) ![WordPress tested up to version](https://img.shields.io/badge/WordPress-v5.4%20tested-success.svg) [![GPLv2 License](https://img.shields.io/github/license/10up/maps-block-apple.svg)](https://github.com/10up/maps-block-apple/blob/develop/LICENSE.md)
 
 ## Overview
+
+**Disclaimer:** _Apple Maps, MapKit JS, and the Apple logo are trademarks of Apple Inc.  Apple Maps may not be available in all countries or regions._
+
+This plugin integrates Apple's [MapKit JS](https://developer.apple.com/maps/mapkitjs/) into an "Apple Maps" block in the WordPress block editor (Gutenberg).  You will need an [Apple Developer Program](https://developer.apple.com/programs/) account, Maps Identifier, and Private Key to configure this plugin and connect to the MapKit JS API in order for the block to function.  Note that the Apple Developer Program has an annual fee of 99 USD, in local currency where available.  Prices may vary by region and are listed in local currency during the enrollment process.  [Fee waivers are available for the Apple Developer Program for eligible organizations](https://developer.apple.com/support/membership-fee-waiver/).
 
 ## Requirements
 
@@ -16,15 +20,35 @@
 
 1. Install the plugin via the plugin installer, either by searching for it or uploading a .ZIP file.
 1. Activate the plugin.
+1. Follow the instructions to configure your accesss to the MapKit JS API.
 1. Use Apple Maps for WordPress!
 
 ## Configuration
 
-In order to start using Apple Maps block, you will first need to set up your Maps identifiers, keys, and tokens.
+In order to start using the Apple Maps block, you will need to sign up for the Apple Developer Program and create your Maps identifiers, keys, and tokens.  Follow the steps below to generate the Private Key, Key ID, and Team ID that you will need to configure the plugin and gain access to the MapKit JS API for the Apple Maps block.
 
-### Setup Instructions
+### Create an Apple Developer account
 
-Sign into your [Apple Developer account](https://developer.apple.com/account/) and visit Certificates, Identifiers & Profiles.
+1. [Enroll in the Apple Developer Program as either an individual or organization](https://developer.apple.com/programs/enroll/).
+1. Sign the Apple Developer Program License Agreement in the [Agreements, Tax, and Banking section of App Store Connect](https://appstoreconnect.apple.com/WebObjects/iTunesConnect.woa/da/jumpTo?page=contracts).
+
+### Create a Maps Identifier and Private Key
+
+1. [Create a Maps ID and a MapKit JS Private Key](https://developer.apple.com/documentation/mapkitjs/creating_a_maps_identifier_and_a_private_key).
+1. Copy the Private Key, paste it into the respective plugin setup field, and ensure the key includes the `-----BEGIN PRIVATE KEY-----` and `-----END PRIVATE KEY-----` lines.
+1. Open the Key you created in Step 1, copy the `Key ID` value, and paste it into the respective plugin setup field.
+1. Open the Identifier you created in Step 1, copy the `App ID Prefix` value (notice the value is appened with `(Team ID)`), and paste it into the respective plugin setup field.
+1. Click the `Save API Key` button in the plugin setup to gain access to the block options and begin customizing your Apple Maps block!
+
+## Frequently Asked Questions
+
+### I'm seeing validation errors when trying to authenticate my MapKit JS credentials, what am I doing wrong?
+
+If you have WordPress installed in a subdirectory, then there is a [known issue](https://github.com/10up/maps-block-apple/issues/34) specifically related to this setup where the WordPress Admin URL is different from the site URL.  We're working on a [minor release](https://github.com/10up/maps-block-apple/milestone/3) to resolve this issue.
+
+### Can I see how many map views and service requests are made to my MapKit JS Private Key?
+
+Yes, you can track your MapKit JS useage on the [MapKit JS Developer Dashboard](https://maps.developer.apple.com/).
 
 ## Support Level
 
@@ -32,11 +56,11 @@ Sign into your [Apple Developer account](https://developer.apple.com/account/) a
 
 ## Changelog
 
-A complete listing of all notable changes to Apple Maps for WordPress are documented in [CHANGELOG.md](https://github.com/10up/apple-maps-wordpress/blob/develop/CHANGELOG.md).
+A complete listing of all notable changes to Apple Maps for WordPress are documented in [CHANGELOG.md](https://github.com/10up/maps-block-apple/blob/develop/CHANGELOG.md).
 
 ## Contributing
 
-Please read [CODE_OF_CONDUCT.md](https://github.com/10up/apple-maps-wordpress/blob/develop/CODE_OF_CONDUCT.md) for details on our code of conduct, [CONTRIBUTING.md](https://github.com/10up/apple-maps-wordpress/blob/develop/CONTRIBUTING.md) for details on the process for submitting pull requests to us, and [CREDITS.md](https://github.com/10up/apple-maps-wordpress/blob/develop/CREDITS.md) for a listing of maintainers of, contributors to, and libraries used by Apple Maps for WordPress.
+Please read [CODE_OF_CONDUCT.md](https://github.com/10up/maps-block-apple/blob/develop/CODE_OF_CONDUCT.md) for details on our code of conduct, [CONTRIBUTING.md](https://github.com/10up/maps-block-apple/blob/develop/CONTRIBUTING.md) for details on the process for submitting pull requests to us, and [CREDITS.md](https://github.com/10up/maps-block-apple/blob/develop/CREDITS.md) for a listing of maintainers of, contributors to, and libraries used by Apple Maps for WordPress.
 
 ## Like what you see?
 
