@@ -9,7 +9,6 @@ namespace tenup\Maps_Block_Apple;
 
 use \WP_Error as WP_Error;
 use \WP_REST_Response as WP_REST_Response;
-use \WP_REST_Server as WP_REST_Server;
 use function tenup\Maps_Block_Apple\Settings\get_setting;
 
 define( 'MAPS_BLOCK_APPLE_VERSION_REST_NAMESPACE', 'MapsBlockApple/v1' );
