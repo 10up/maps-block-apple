@@ -16,9 +16,9 @@ import AppleMapsWordPressEdit from './edit';
 import AppleMapsWordPressSave from './save';
 import BlockIcon from './block-icon';
 
-registerBlockType('tenup/apple-maps-wordpress', {
-	title: __('Apple Maps', 'apple-maps-wordpress'),
-	description: __('Add a Apple Map to your Page', 'apple-maps-wordpress'),
+registerBlockType( 'tenup/apple-maps-wordpress', {
+	title: __( 'Apple Maps', 'apple-maps-wordpress' ),
+	description: __( 'Add a Apple Map to your Page', 'apple-maps-wordpress' ),
 	category: 'embed',
 	icon: BlockIcon,
 	attributes: {
@@ -79,9 +79,15 @@ registerBlockType('tenup/apple-maps-wordpress', {
 			default: FeatureVisibility.Adaptive,
 		},
 	},
+	example: {
+		attributes: {
+			latitude: 51.48762585296625,
+			longitude: -0.1326724377053381,
+		},
+	},
 	supports: {
-		align: ['wide', 'full'],
+		align: [ 'wide', 'full' ],
 	},
 	edit: AppleMapsWordPressEdit,
 	save: AppleMapsWordPressSave,
-});
+} );
