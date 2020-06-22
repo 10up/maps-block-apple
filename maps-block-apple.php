@@ -37,3 +37,7 @@ function add_options() {
 
 require_once MAPS_BLOCK_APPLE_INC . 'block_assets.php';
 require_once MAPS_BLOCK_APPLE_INC . 'rest_routes.php';
+require_once MAPS_BLOCK_APPLE_INC . 'settings.php';
+
+// Initialize the settings page.
+Settings\setup();
