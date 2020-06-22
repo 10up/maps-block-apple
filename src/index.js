@@ -79,8 +79,14 @@ registerBlockType( 'tenup/maps-block-apple', {
 			default: FeatureVisibility.Adaptive,
 		},
 	},
+	example: {
+		attributes: {
+			latitude: 51.48762585296625,
+			longitude: -0.1326724377053381,
+		},
+	},
 	supports: {
-		align: ['wide', 'full'],
+		align: [ 'wide', 'full' ],
 	},
 	edit: MapsBlockAppleEdit,
 	save: MapsBlockAppleSave,
