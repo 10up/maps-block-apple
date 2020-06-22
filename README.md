@@ -30,7 +30,7 @@ Sign into your [Apple Developer account](https://developer.apple.com/account/) a
 
 ### I'm seeing validation errors when trying to authenticate my MapKit JS credentials, what am I doing wrong?
 
-If you have WordPress installed in a subdirectory, then there is a [known issue](https://github.com/10up/maps-block-apple/issues/34) specifically related to this setup where the WordPress Admin URL is different from site URL.  We're working on a [minor release](https://github.com/10up/maps-block-apple/milestone/3) to resolve this issue.
+If you have WordPress installed in a subdirectory, then there is a [known issue](https://github.com/10up/maps-block-apple/issues/34) specifically related to this setup where the WordPress Admin URL is different from the site URL.  We're working on a [minor release](https://github.com/10up/maps-block-apple/milestone/3) to resolve this issue.
  
 ## Support Level
 
