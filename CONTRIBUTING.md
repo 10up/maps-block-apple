@@ -24,7 +24,7 @@ For more on how 10up writes and manages code, check out our [10up Engineering Be
 
 ## Workflow
 
-The `develop` branch is the development branch which means it contains the next version to be released.  `stable` contains the current latest release and `master` contains the corresponding stable development version.  Always work on the `develop` branch and open up PRs against `develop`.
+The `develop` branch is the development branch which means it contains the next version to be released.  `stable` contains the current latest release and `trunk` contains the corresponding stable development version.  Always work on the `develop` branch and open up PRs against `develop`.
 
 ## Release instructions
 
@@ -35,8 +35,8 @@ The `develop` branch is the development branch which means it contains the next 
 5. Translations: Update the `.pot` file by running `npm run makepot`.
 6. New files: Check to be sure any new files/paths that are unnecessary in the production version are included in `.distignore`.
 7. Readme updates: Make any other readme changes as necessary. `CHANGELOG.md` and `README.md` are geared toward GitHub and `readme.txt` contains WordPress.org-specific content. The two are slightly different.
-8. Merge: Make a non-fast-forward merge from your release branch to `develop` (or merge the pull request), then do the same for `develop` into `master` (`git checkout master && git merge --no-ff develop`). `master` contains the stable development version.
-9. Push: Push your `master` branch to GitHub (e.g. `git push origin master`).
+8. Merge: Make a non-fast-forward merge from your release branch to `develop` (or merge the pull request), then do the same for `develop` into `trunk` (`git checkout trunk && git merge --no-ff develop`). `trunk` contains the stable development version.
+9. Push: Push your `trunk` branch to GitHub (e.g. `git push origin trunk`).
 10. [Wait for build](https://xkcd.com/303/): Head to the [Actions](/actions) tab in the repo and wait for it to finish if it hasn't already. If it doesn't succeed, figure out why and start over.
 11. Check the build: Check out the `stable` branch and test for functionality locally.
 12. Release: Create a [new release](/releases/new), naming the tag and the release with the new version number, and targeting the `stable` branch. Paste the changelog from `CHANGELOG.md` into the body of the release and include a link to the closed issues on the milestone](/milestone/3?closed=1).
