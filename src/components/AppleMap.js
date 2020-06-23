@@ -1,18 +1,35 @@
 import apiFetch from '@wordpress/api-fetch';
 import { dispatch } from '@wordpress/data';
 
-const { Coordinate, Map, FeatureVisibility } = mapkit;
+const { Coordinate, Map, FeatureVisibility, MarkerAnnotation } = mapkit;
 
 class AppleMap {
 	constructor( element ) {
 		this.element = element;
 		this.mapOptions = {};
+		this.markerElements = this.element.querySelectorAll(
+			'.marker-annotation'
+		);
+		this.markers = [ ...this.markerElements ].map( ( markerElement ) => {
+			return {
+				latitude: Number( markerElement.dataset.latitude ),
+				longitude: Number( markerElement.dataset.longitude ),
+				title: markerElement.dataset.title || '',
+				subtitle: markerElement.dataset.subtitle || '',
+			};
+		} );
+
+		this.isEditor = true;
 
 		this.init();
 	}
 
 	init() {
 		this.createMap();
+
+		this.clearMarkers();
+
+		this.addMarkers( this.markers );
 	}
 
 	createMap() {
@@ -53,6 +70,57 @@ class AppleMap {
 		this.map._impl.zoomLevel = Number( zoom ) || 15;
 	}
 
+	/**
+	 * Add a MarkerAnnotation at the provided coordinated
+	 *
+	 * @param {Array} markers markers
+	 */
+	addMarkers( markers ) {
+		this.clearMarkers();
+
+		const markerAnnotations = [];
+
+		markers.forEach( ( item ) => {
+			const {
+				latitude,
+				longitude,
+				title,
+				subtitle,
+				titleVisibility,
+				subtitleVisibility,
+				color,
+				glyphColor,
+				glyphText,
+			} = item;
+			const position = new Coordinate(
+				Number( latitude ),
+				Number( longitude )
+			);
+			const marker = new MarkerAnnotation( position, {
+				title,
+				subtitle: subtitle || null,
+				titleVisibility: titleVisibility || FeatureVisibility.Visible,
+				subtitleVisibility:
+					subtitleVisibility || FeatureVisibility.Visible,
+				color: color || 'green',
+				glyphColor: glyphColor || 'white',
+				glyphText: glyphText || '',
+				draggable: !! this.isEditor,
+			} );
+
+			markerAnnotations.push( marker );
+		} );
+
+		this.map.addAnnotations( markerAnnotations );
+	}
+
+	/**
+	 * clear markers from the map
+	 */
+	clearMarkers() {
+		this.map.removeAnnotations( this.map.annotations );
+	}
+
 	static authenticateMap() {
 		apiFetch( { path: 'MapsBlockApple/v1/GetJWT/' } )
 			.then( ( token ) => {
@@ -84,13 +152,14 @@ class AppleMapEdit extends AppleMap {
 		super( element );
 		this.clientId = clientId;
 		this.setAttributes = setAttributes;
+
+		this.initEdit();
 	}
 
 	/**
 	 * Initialize Edit version of AppleMap
 	 */
-	init() {
-		super.init();
+	initEdit() {
 		this.addListeners();
 	}
 

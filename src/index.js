@@ -78,6 +78,10 @@ registerBlockType( 'tenup/maps-block-apple', {
 			type: 'string',
 			default: FeatureVisibility.Adaptive,
 		},
+		markers: {
+			type: 'array',
+			default: [],
+		},
 	},
 	example: {
 		attributes: {
@@ -90,4 +94,4 @@ registerBlockType( 'tenup/maps-block-apple', {
 	},
 	edit: MapsBlockAppleEdit,
 	save: MapsBlockAppleSave,
-});
+} );
