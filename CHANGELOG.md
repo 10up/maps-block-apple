@@ -22,7 +22,7 @@ All notable changes to this project will be documented in this file, per [the Ke
 ## [0.1.0] - 2020-05-13
 - Initial private release of Block for Apple Maps plugin.
 
-[Unreleased]: https://github.com/10up/maps-block-apple/compare/master...develop
+[Unreleased]: https://github.com/10up/maps-block-apple/compare/trunk...develop
 [1.0.1]: https://github.com/10up/maps-block-apple/compare/1.0.0...1.0.1
 [1.0.0]: https://github.com/10up/maps-block-apple/releases/tag/1.0.0
 [0.1.0]: https://github.com/10up/maps-block-apple/tree/a2fe565d64e2c59070f2dc3611700718d7383d37
