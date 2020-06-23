@@ -2,7 +2,6 @@ import { __ } from '@wordpress/i18n';
 import { TextControl, TextareaControl, Button } from '@wordpress/components';
 import { useEffect, useState } from '@wordpress/element';
 import { dispatch, useSelect } from '@wordpress/data';
-import apiFetch from '@wordpress/api-fetch';
 // import { AppleMapEdit } from './AppleMap';
 
 export default function EditAuthForm() {
@@ -11,18 +10,18 @@ export default function EditAuthForm() {
 	const [ teamId, setTeamId ] = useState( '' );
 	const [ isBusy, setIsBusy ] = useState( false );
 
-	const settings = useSelect( ( select ) => {
+	const siteSettings = useSelect( ( select ) => {
 		return select( 'core' ).getEntityRecord( 'root', 'site' );
-	}, [ privateKey, keyId, teamId ] );
+	}, [] );
 
 	useEffect( () => {
-		if ( settings ) {
-			const { maps_block_apple: { private_key, team_id, key_id  } } = settings;
+		if ( siteSettings ) {
+			const { maps_block_apple: { private_key, team_id, key_id  } } = siteSettings;
 			setPrivateKey( private_key );
 			setKeyId( key_id  );
 			setTeamId( team_id );
 		}
-	}, [ settings ] );
+	}, [ siteSettings ] );
 
 	const handleSave = () => {
 		setIsBusy( true );
