@@ -3,6 +3,7 @@ import { __ } from '@wordpress/i18n';
 import { useEffect, useRef, useState } from '@wordpress/element';
 
 import { AppleMapEdit } from './components/AppleMap';
+import EditAuthForm from './components/EditAuthForm';
 import InspectorSettings from './inspector-settings';
 import IsAdmin from './helper';
 import BlockIcon from './block-icon';
@@ -118,7 +119,6 @@ export default function MapsBlockAppleEdit( props ) {
 	}
 
 	if ( ! authenticated ) {
-		const { settingsURL } = global._mbaData;
 		return (
 			<>
 				<InspectorSettings
@@ -140,19 +140,27 @@ export default function MapsBlockAppleEdit( props ) {
 							) }
 						>
 							{ __(
-								'In order to start using the Apple Maps block, you will need to sign up for the Apple Developer Program and create your Maps identifiers, keys, and tokens. ',
+								'In order to include an Apple Map on your website you need to confirm your MapKit credentials below. Here is documentation on how to get those credentials: ',
 								'maps-block-apple'
 							) }
-							<a href={ settingsURL }>
+							<a
+								href="https://developer.apple.com/documentation/mapkitjs/setting_up_mapkit_js"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
 								{ __(
-									'Click here to go to the settings screen for setup instructions.',
+									'Instructions for creating your MapKit credentials.',
 									'maps-block-apple'
 								) }
 							</a>{ ' ' }
 						</IsAdmin>
 					}
 					isColumnLayout={ true }
-				/>
+				>
+					<IsAdmin>
+						<EditAuthForm />
+					</IsAdmin>
+				</Placeholder>
 			</>
 		);
 	}

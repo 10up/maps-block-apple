@@ -18,6 +18,7 @@ function setup() {
 	add_action( 'admin_menu', $n( 'admin_menu' ), 20 );
 	add_action( 'admin_init', $n( 'setup_fields_sections' ) );
 	add_action( 'admin_init', $n ( 'register_settings' ) );
+	add_action( 'rest_api_init', $n( 'register_settings' ) );
 	add_filter( 'plugin_action_links_' . MAPS_BLOCK_APPLE_BASENAME, $n( 'plugin_filter_action_links' ) );
 	add_action( 'admin_enqueue_scripts', $n( 'enqueue_settings_assets' ) );
 }
@@ -39,7 +40,29 @@ function get_setting( $setting ) {
  * @since  1.0
  */
 function register_settings() {
-	register_setting( 'maps_block_apple', 'maps_block_apple', __NAMESPACE__ . '\sanitize_settings' );
+	register_setting(
+		'maps_block_apple',
+		'maps_block_apple',
+		array(
+			'show_in_rest' => array(
+				'schema' => array(
+					'type'       => 'object',
+					'properties' => array(
+						'private_key' => array(
+							'type' => 'string',
+						),
+						'team_id' => array(
+							'type' => 'string',
+						),
+						'key_id' => array(
+							'type' => 'string',
+						),
+					)
+				),
+			),
+			'sanitize_callback' => __NAMESPACE__ . '\sanitize_settings'
+		)
+	);
 }
 
 
