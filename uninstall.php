@@ -1,9 +1,14 @@
 <?php
+/**
+ * Uninstaller
+ *
+ * @package tenup\Maps_Block_Apple
+ */
+
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	die;
 }
 
-$option_name = 'maps_block_apple';
-
 // Remove MapKit credentials on uninstall.
-delete_option( $option_name );
+delete_option( 'maps_block_apple' );
+delete_site_option( 'maps_block_apple' );
