@@ -6,8 +6,9 @@ import { AppleMapEdit } from './components/AppleMap';
 import EditAuthForm from './components/EditAuthForm';
 import InspectorSettings from './inspector-settings';
 import IsAdmin from './helper';
+import BlockIcon from './block-icon';
 
-export default function AppleMapsWordPressEdit( props ) {
+export default function MapsBlockAppleEdit( props ) {
 	const {
 		className,
 		attributes: {
@@ -109,8 +110,8 @@ export default function AppleMapsWordPressEdit( props ) {
 		return (
 			<Placeholder
 				style={ { height: `${ height }px` } }
-				label={ __( 'Apple Maps WordPress', 'apple-maps-wordpress' ) }
-				icon={ 'location-alt' }
+				label={ __( 'Block for Apple Maps', 'maps-block-apple' ) }
+				icon={ BlockIcon }
 			>
 				<Spinner />
 			</Placeholder>
@@ -128,19 +129,19 @@ export default function AppleMapsWordPressEdit( props ) {
 				<Placeholder
 					style={ { minHeight: `${ height }px` } }
 					label={ __(
-						'Authenticate - Apple Maps',
-						'apple-maps-wordpress'
+						'Confirm access to Apple Maps',
+						'maps-block-apple'
 					) }
-					icon={ 'location-alt' }
+					icon={ BlockIcon }
 					instructions={
 						<IsAdmin
 							fallback={ __(
-								'Sorry you are not allowed to do that. Please talk to your Administrator'
+								'Sorry, you are not allowed to do that. Please talk to your Administrator.'
 							) }
 						>
 							{ __(
-								'In order to use an Apple Map on your website you need to get some credentials from Apple. Here you can find a detailed documentation on how to get these keys: ',
-								'apple-maps-wordpress'
+								'In order to include an Apple Map on your website you need to confirm your MapKit credentials below. Here is documentation on how to get those credentials: ',
+								'maps-block-apple'
 							) }
 							<a
 								href="https://developer.apple.com/documentation/mapkitjs/setting_up_mapkit_js"
@@ -148,8 +149,8 @@ export default function AppleMapsWordPressEdit( props ) {
 								rel="noopener noreferrer"
 							>
 								{ __(
-									'Instructions for getting a your Apple Maps Credentials.',
-									'apple-maps-wordpress'
+									'Instructions for creating your MapKit credentials.',
+									'maps-block-apple'
 								) }
 							</a>{ ' ' }
 						</IsAdmin>

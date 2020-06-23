@@ -1,10 +1,10 @@
 {
-  "name": "apple-map-wordpress",
+  "name": "maps-block-apple",
   "version": "1.0.0",
-  "description": "Apple Maps for WordPress",
+  "description": "An Apple Maps block for the WordPress block editor (Gutenberg).",
   "author": {
     "name": "10up",
-    "email": "info@10up.com",
+    "email": "opensource@10up.com",
     "url": "https://10up.com",
     "role": "developer"
   },
@@ -26,7 +26,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/10up/apple-maps-wordpress"
+    "url": "https://github.com/10up/maps-block-apple"
   },
   "devDependencies": {
     "@wordpress/eslint-plugin": "^5.1.0",

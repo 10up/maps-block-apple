@@ -14,13 +14,13 @@ export default function EditAuthForm() {
 	useEffect( () => {
 		Promise.all( [
 			apiFetch( {
-				path: '/AppleMapsWordPress/v1/private_key/get/',
+				path: '/MapsBlockApple/v1/private_key/get/',
 			} ),
 			apiFetch( {
-				path: '/AppleMapsWordPress/v1/team_id/get/',
+				path: '/MapsBlockApple/v1/team_id/get/',
 			} ),
 			apiFetch( {
-				path: '/AppleMapsWordPress/v1/key_id/get/',
+				path: '/MapsBlockApple/v1/key_id/get/',
 			} ),
 		] )
 			.then( ( [ newPrivateKey, newTeamId, newKeyId ] ) => {
@@ -40,17 +40,17 @@ export default function EditAuthForm() {
 
 		Promise.all( [
 			apiFetch( {
-				path: '/AppleMapsWordPress/v1/private_key/',
+				path: '/MapsBlockApple/v1/private_key/',
 				method: 'POST',
 				data: privateKey,
 			} ),
 			apiFetch( {
-				path: '/AppleMapsWordPress/v1/team_id/',
+				path: '/MapsBlockApple/v1/team_id/',
 				method: 'POST',
 				data: teamId,
 			} ),
 			apiFetch( {
-				path: '/AppleMapsWordPress/v1/key_id/',
+				path: '/MapsBlockApple/v1/key_id/',
 				method: 'POST',
 				data: keyId,
 			} ),
@@ -75,8 +75,8 @@ export default function EditAuthForm() {
 		<>
 			<TextareaControl
 				label={ __(
-					'Please enter your private Key',
-					'apple-maps-wordpress'
+					'Please enter your Private Key',
+					'maps-block-apple'
 				) }
 				readonly={ isBusy }
 				name="private_key"
@@ -86,7 +86,7 @@ export default function EditAuthForm() {
 			<TextControl
 				label={ __(
 					'Please enter your Key ID',
-					'apple-maps-wordpress'
+					'maps-block-apple'
 				) }
 				readonly={ isBusy }
 				name="key_id"
@@ -96,7 +96,7 @@ export default function EditAuthForm() {
 			<TextControl
 				label={ __(
 					'Please enter your Team ID',
-					'apple-maps-wordpress'
+					'maps-block-apple'
 				) }
 				readonly={ isBusy }
 				name="team_id"
@@ -110,7 +110,7 @@ export default function EditAuthForm() {
 				isBusy={ isBusy }
 				onClick={ handleSave }
 			>
-				{ __( 'Save API Key', 'apple-maps-wordpress' ) }
+				{ __( 'Confirm MapKit Credentials', 'maps-block-apple' ) }
 			</Button>
 		</>
 	);
