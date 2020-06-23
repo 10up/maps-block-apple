@@ -28,7 +28,6 @@ export default function InspectorSettings( props ) {
 		<InspectorControls>
 			<LocationSettings { ...props } map={ map } />
 			<DisplaySettings { ...props } />
-			<AuthenticationSettings />
 		</InspectorControls>
 	);
 }
