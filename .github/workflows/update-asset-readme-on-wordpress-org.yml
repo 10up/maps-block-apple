@@ -2,10 +2,10 @@ name: Update asset/readme on WordPress.org
 on:
   push:
     branches:
-    - master
+    - trunk
 jobs:
   master:
-    name: Push to master
+    name: Push to trunk
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
