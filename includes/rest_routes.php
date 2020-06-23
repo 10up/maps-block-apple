@@ -73,7 +73,7 @@ function get_jwt() {
 		'iss'    => $team_id,
 		'iat'    => time(),
 		'exp'    => time() + 30,
-		'origin' => get_site_url(),
+		'origin' => parse_url( get_site_url(), PHP_URL_HOST ),
 	];
 
 	$payload = encode( wp_json_encode( $header ) ) . '.' . encode( wp_json_encode( $body ) );
