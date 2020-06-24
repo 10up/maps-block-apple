@@ -37,6 +37,12 @@ export default function EditAuthForm() {
 			setTeamId( team_id );
 			setIsBusy( false );
 			mapkit.dispatchEvent( new CustomEvent( 'reinitialize' ) );
+		} ).catch( ( error ) => {
+			dispatch( 'core/notices' ).createErrorNotice( error.message, {
+				isDismissible: true,
+				type: 'snackbar',
+			} );
+			setIsBusy( false );
 		} );
 	};
 
