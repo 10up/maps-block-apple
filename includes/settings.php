@@ -60,6 +60,7 @@ function register_settings() {
 					)
 				),
 			),
+			'default'      => [],
 			'sanitize_callback' => __NAMESPACE__ . '\sanitize_settings'
 		)
 	);
