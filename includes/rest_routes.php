@@ -50,8 +50,8 @@ function encode( $string ) {
  */
 function get_jwt() {
 	$private_key = get_setting( 'private_key' );
-	$key_id      = get_setting( 'key_id' ); 
-	$team_id     = get_setting( 'team_id'); 
+	$key_id      = get_setting( 'key_id' );
+	$team_id     = get_setting( 'team_id');
 
 	if ( ! isset( $private_key ) || '' === $private_key ) {
 		return new WP_Error( 'NoKey', 'Missing Private Key', [ 'status' => 401 ] );
@@ -73,7 +73,7 @@ function get_jwt() {
 		'iss'    => $team_id,
 		'iat'    => time(),
 		'exp'    => time() + 30,
-		'origin' => parse_url( get_site_url(), PHP_URL_HOST ),
+		'origin' => get_fqdn_from_url( get_site_url() ),
 	];
 
 	$payload = encode( wp_json_encode( $header ) ) . '.' . encode( wp_json_encode( $body ) );
@@ -89,4 +89,19 @@ function get_jwt() {
 
 	$response = $payload . '.' . encode( $signature );
 	return new WP_REST_Response( $response, 200 );
+}
+
+/**
+ * Get the Fully Qualified Domain Name from the URL.
+ *
+ * @param string $url URL.
+ */
+function get_fqdn_from_url( $url ) {
+	$parsed_url = parse_url( $url );
+
+	return sprintf(
+		'%1$s://%2$s',
+		$parsed_url['scheme'] ? $parsed_url['scheme'] : 'http',
+		$parsed_url['host']
+	);
 }
