@@ -7,6 +7,7 @@
 		<exclude name="WordPress.Files.FileName.InvalidClassFileName" />
 		<exclude name="Generic.Arrays.DisallowShortArraySyntax.Found" />
 	</rule>
+	<exclude-pattern>build</exclude-pattern>
 	<exclude-pattern>node_modules</exclude-pattern>
 	<exclude-pattern>vendor</exclude-pattern>
 </ruleset>
