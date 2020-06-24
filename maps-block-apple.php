@@ -25,7 +25,8 @@ define( 'MAPS_BLOCK_APPLE_INC', MAPS_BLOCK_APPLE_PATH . 'includes/' );
 define( 'MAPS_BLOCK_APPLE_BASENAME', plugin_basename( __FILE__ ) );
 
 /**
- * Require PHP version 5.6 - throw an error if the plugin is activated on an older version.
+ * Require WP version 5.2+ beacuse of hooks.
+ * PHP 5.6 errors should be caught in the sandbox during activation.
  */
 register_activation_hook(
 	__FILE__,
