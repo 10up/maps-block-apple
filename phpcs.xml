@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 <ruleset name="10up-autoshare">
 	<description>Extension of the WordPress standard</description>
+	<arg name="extensions" value="php" />
+	<file>.</file>
 	<rule ref="WordPress">
 		<exclude name="WordPress.Files.FileName.InvalidClassFileName" />
 		<exclude name="Generic.Arrays.DisallowShortArraySyntax.Found" />
