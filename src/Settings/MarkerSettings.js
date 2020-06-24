@@ -1,5 +1,6 @@
-import { PanelBody, Button } from '@wordpress/components';
+import { PanelBody } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
+import EditMarker from '../components/EditMarker';
 
 export default function LocationSettings( props ) {
 	const {
@@ -7,21 +8,29 @@ export default function LocationSettings( props ) {
 		setAttributes,
 	} = props;
 
+	const updateMarker = ( index ) => ( marker ) => {
+		const newMarkers = [ ...markers ];
+		newMarkers[ index ] = marker;
+
+		setAttributes( { markers: newMarkers } );
+	};
+
+	const removeMarker = ( index ) => () => {
+		const newMarkers = [ ...markers ];
+		newMarkers.splice( index, 1 );
+		setAttributes( { markers: newMarkers } );
+	};
+
 	return markers.length ? (
 		<PanelBody title={ __( 'Marker Settings', 'apple-maps-wordpress' ) }>
 			{ markers.map( ( marker, index ) => {
 				return (
-					<Button
+					<EditMarker
 						key={ index }
-						onClick={ () => {
-							const newMarkers = [ ...markers ];
-							newMarkers.splice( index, 1 );
-
-							setAttributes( { markers: newMarkers } );
-						} }
-					>
-						{ marker.title }
-					</Button>
+						marker={ marker }
+						update={ updateMarker( index ) }
+						remove={ removeMarker( index ) }
+					/>
 				);
 			} ) }
 		</PanelBody>

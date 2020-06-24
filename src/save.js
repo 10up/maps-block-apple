@@ -43,6 +43,9 @@ export default function MapsBlockAppleSave( props ) {
 					data-latitude={ marker.latitude }
 					data-longitude={ marker.longitude }
 					data-title={ marker.title }
+					data-subtitle={ marker.subtitle }
+					data-color={ marker.color }
+					data-glyph-color={ marker.glyphColor }
 				/>
 			) ) }
 		</div>

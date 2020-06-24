@@ -11,15 +11,23 @@ class AppleMap {
 			'.marker-annotation'
 		);
 		this.markers = [ ...this.markerElements ].map( ( markerElement ) => {
+			const {
+				latitude,
+				longitude,
+				title,
+				subtitle,
+				color,
+				glyphColor,
+			} = markerElement.dataset;
 			return {
-				latitude: Number( markerElement.dataset.latitude ),
-				longitude: Number( markerElement.dataset.longitude ),
-				title: markerElement.dataset.title || '',
-				subtitle: markerElement.dataset.subtitle || '',
+				latitude: Number( latitude ),
+				longitude: Number( longitude ),
+				title: title || '',
+				subtitle: subtitle || '',
+				color: color || null,
+				glyphColor: glyphColor || null,
 			};
 		} );
-
-		this.isEditor = true;
 
 		this.init();
 	}
@@ -79,8 +87,9 @@ class AppleMap {
 		this.clearMarkers();
 
 		const markerAnnotations = [];
+		const isEditor = 'AppleMapEdit' === this.constructor.name;
 
-		markers.forEach( ( item ) => {
+		markers.forEach( ( item, index ) => {
 			const {
 				latitude,
 				longitude,
@@ -96,6 +105,7 @@ class AppleMap {
 				Number( latitude ),
 				Number( longitude )
 			);
+
 			const marker = new MarkerAnnotation( position, {
 				title,
 				subtitle: subtitle || null,
@@ -105,8 +115,25 @@ class AppleMap {
 				color: color || 'green',
 				glyphColor: glyphColor || 'white',
 				glyphText: glyphText || '',
-				draggable: !! this.isEditor,
+				draggable: !! isEditor,
 			} );
+
+			if ( this.setAttributes ) {
+				marker.addEventListener( 'drag-end', ( event ) => {
+					const {
+						target: { coordinate },
+					} = event;
+					const newMarkers = [ ...markers ];
+					newMarkers[ index ].latitude = coordinate.latitude;
+					newMarkers[ index ].longitude = coordinate.longitude;
+
+					this.setAttributes( { markers: newMarkers } );
+				} );
+
+				marker.addEventListener( 'select', ( event ) => {
+					const index = this.map.annotations.indexOf( event.target );
+				} );
+			}
 
 			markerAnnotations.push( marker );
 		} );
@@ -161,6 +188,7 @@ class AppleMapEdit extends AppleMap {
 	 */
 	initEdit() {
 		this.addListeners();
+		this.addMarkers( this.markers );
 	}
 
 	/**
