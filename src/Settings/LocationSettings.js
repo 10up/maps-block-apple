@@ -50,12 +50,12 @@ export default function LocationSettings( props ) {
 				/>
 			</div>
 			<TextControl
-				readonly="readonly"
+				readOnly={true}
 				label={ __( 'Latitude', 'maps-block-apple' ) }
 				value={ latitude }
 			/>
 			<TextControl
-				readonly="readonly"
+				readOnly={true}
 				label={ __( 'Longitude', 'maps-block-apple' ) }
 				value={ longitude }
 			/>
