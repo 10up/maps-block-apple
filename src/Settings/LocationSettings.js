@@ -3,7 +3,13 @@ import { __ } from '@wordpress/i18n';
 import { useState, useEffect } from '@wordpress/element';
 
 import SearchResults from '../components/SearchResults';
+import LocationInfo from '../components/LocationInfo';
 
+/**
+ * Location Settings Sidebar Panel
+ *
+ * @param {Object} props
+ */
 export default function LocationSettings( props ) {
 	const {
 		map,
@@ -17,18 +23,29 @@ export default function LocationSettings( props ) {
 	const geocoder = new mapkit.Geocoder();
 
 	useEffect( () => {
-		setSearchString( address );
+		// clear search string when the address changes
+		setSearchString( '' );
 	}, [ address ] );
 
-	const handleAddressChange = ( value ) => {
-		if ( value ) {
-			geocoder.lookup( value, geolocate );
+	/**
+	 *
+	 * @param {string} searchTerm current search term
+	 */
+	const handleSearchStringChange = ( searchTerm ) => {
+		if ( searchTerm ) {
+			geocoder.lookup( searchTerm, handleSearchResults );
 		}
 
-		setSearchString( value );
+		setSearchString( searchTerm );
 	};
 
-	const geolocate = ( error, data ) => {
+	/**
+	 * Handle apple geocoder lookup response
+	 *
+	 * @param {*} error error from apple geocoder
+	 * @param {Array} data data from apple geocoder
+	 */
+	const handleSearchResults = ( error, data ) => {
 		if ( data.results ) {
 			setSearchResults( data.results );
 		}
@@ -36,11 +53,12 @@ export default function LocationSettings( props ) {
 
 	return (
 		<PanelBody title={ __( 'Location Settings', 'maps-block-apple' ) }>
+			<LocationInfo latitude={ latitude } longitude={ longitude } />
 			<div>
 				<TextControl
-					label={ __( 'Address', 'maps-block-apple' ) }
+					label={ __( 'Search for a Location', 'maps-block-apple' ) }
 					value={ searchString }
-					onChange={ handleAddressChange }
+					onChange={ handleSearchStringChange }
 				/>
 				<SearchResults
 					map={ map }
@@ -49,16 +67,6 @@ export default function LocationSettings( props ) {
 					setSearchResults={ setSearchResults }
 				/>
 			</div>
-			<TextControl
-				readonly="readonly"
-				label={ __( 'Latitude', 'maps-block-apple' ) }
-				value={ latitude }
-			/>
-			<TextControl
-				readonly="readonly"
-				label={ __( 'Longitude', 'maps-block-apple' ) }
-				value={ longitude }
-			/>
 		</PanelBody>
 	);
 }
