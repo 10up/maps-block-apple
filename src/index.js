@@ -90,4 +90,4 @@ registerBlockType( 'tenup/maps-block-apple', {
 	},
 	edit: MapsBlockAppleEdit,
 	save: MapsBlockAppleSave,
-});
+} );

@@ -93,10 +93,10 @@ function add_endpoints() {
 
 
 /**
- * Encode String
+ * Encode String.
  *
- * @param [String] $string String to be encoded
- * @return [String]
+ * @param [string] $string String to be encoded.
+ * @return [string]
  */
 function encode( $string ) {
 	$response = strtr( base64_encode( $string ), '+/', '-_' );
@@ -104,7 +104,7 @@ function encode( $string ) {
 }
 
 /**
- * MapKit get JWT
+ * MapKit get JWT.
  *
  * @return [WP_REST_Response]
  */
@@ -153,9 +153,9 @@ function get_jwt() {
 }
 
 /**
- * Get private_key Setting
+ * Get private_key Setting.
  *
- * @param [WP_REST_Request] $request request
+ * @param [WP_REST_Request] $request Request object.
  */
 function get_maps_block_apple_private_key( $request ) {
 	$private_key = get_option( 'maps_block_apple_private_key' );
@@ -168,7 +168,7 @@ function get_maps_block_apple_private_key( $request ) {
 /**
  * Get team_id Setting
  *
- * @param [WP_REST_Request] $request request
+ * @param [WP_REST_Request] $request Request object.
  */
 function get_maps_block_apple_team_id( $request ) {
 	$team_id  = get_option( 'maps_block_apple_team_id' );
@@ -181,7 +181,7 @@ function get_maps_block_apple_team_id( $request ) {
 /**
  * Get key_id Setting
  *
- * @param [WP_REST_Request] $request request
+ * @param [WP_REST_Request] $request Request object.
  */
 function get_maps_block_apple_key_id( $request ) {
 	$key_id   = get_option( 'maps_block_apple_key_id' );
@@ -194,7 +194,7 @@ function get_maps_block_apple_key_id( $request ) {
 /**
  * Update private_key Setting
  *
- * @param [WP_REST_Request] $request request
+ * @param [WP_REST_Request] $request Request object.
  */
 function update_maps_block_apple_private_key( $request ) {
 
@@ -212,7 +212,7 @@ function update_maps_block_apple_private_key( $request ) {
 /**
  * Update team_id Setting
  *
- * @param [WP_REST_Request] $request request
+ * @param [WP_REST_Request] $request Request object.
  */
 function update_maps_block_apple_team_id( $request ) {
 
@@ -230,7 +230,7 @@ function update_maps_block_apple_team_id( $request ) {
 /**
  * Update key_id Setting
  *
- * @param [WP_REST_Request] $request request
+ * @param [WP_REST_Request] $request Request object.
  */
 function update_maps_block_apple_key_id( $request ) {
 
@@ -246,7 +246,7 @@ function update_maps_block_apple_key_id( $request ) {
 }
 
 /**
- * Check whether user can Edit Posts
+ * Check whether user has the appropriate permissions.
  */
 function check_permissions() {
 	return current_user_can( 'manage_options' );
