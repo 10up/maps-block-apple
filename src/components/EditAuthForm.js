@@ -59,20 +59,14 @@ export default function EditAuthForm() {
 				onChange={ ( newPrivateKey ) => setPrivateKey( newPrivateKey ) }
 			/>
 			<TextControl
-				label={ __(
-					'Please enter your Key ID',
-					'maps-block-apple'
-				) }
+				label={ __( 'Please enter your Key ID', 'maps-block-apple' ) }
 				readOnly={ isBusy }
 				name="key_id"
 				value={ keyId }
 				onChange={ ( newKeyId ) => setKeyId( newKeyId ) }
 			/>
 			<TextControl
-				label={ __(
-					'Please enter your Team ID',
-					'maps-block-apple'
-				) }
+				label={ __( 'Please enter your Team ID', 'maps-block-apple' ) }
 				readOnly={ isBusy }
 				name="team_id"
 				value={ teamId }

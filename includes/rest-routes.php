@@ -33,10 +33,10 @@ function add_endpoints() {
 
 
 /**
- * Encode String
+ * Encode String.
  *
- * @param [String] $string String to be encoded
- * @return [String]
+ * @param [string] $string String to be encoded.
+ * @return [string]
  */
 function encode( $string ) {
 	$response = strtr( base64_encode( $string ), '+/', '-_' );
@@ -44,7 +44,7 @@ function encode( $string ) {
 }
 
 /**
- * MapKit get JWT
+ * MapKit get JWT.
  *
  * @return [WP_REST_Response]
  */

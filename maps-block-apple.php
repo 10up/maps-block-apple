@@ -35,8 +35,8 @@ function add_options() {
 	add_option( 'maps_block_apple_private_key' );
 }
 
-require_once MAPS_BLOCK_APPLE_INC . 'block_assets.php';
-require_once MAPS_BLOCK_APPLE_INC . 'rest_routes.php';
+require_once MAPS_BLOCK_APPLE_INC . 'block-assets.php';
+require_once MAPS_BLOCK_APPLE_INC . 'rest-routes.php';
 require_once MAPS_BLOCK_APPLE_INC . 'settings.php';
 
 // Initialize the settings page.
