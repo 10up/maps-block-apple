@@ -52,8 +52,8 @@ export default function MapsBlockAppleEdit( props ) {
 					break;
 				case 'Refreshed':
 					setIsLoading( false );
-					setAuthenticated( false );
-					mapkit.authenticated = false;
+					setAuthenticated( true );
+					mapkit.authenticated = true;
 					break;
 				default:
 					setIsLoading( false );
