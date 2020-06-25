@@ -52,7 +52,7 @@ There is a free daily limit of 250,000 map views and 25,000 service calls per th
 
 ### Can I see how many map views and service requests are made to my MapKit JS Private Key?
 
-Yes, you can track your MapKit JS useage on the [MapKit JS Developer Dashboard](https://maps.developer.apple.com/).  You can also Mmonitor map initializations and service requests in realtime, or see up to a year of activity by day, week, month, or year via the MapKit JS Dashboard.
+Yes, you can track your MapKit JS useage on the [MapKit JS Developer Dashboard](https://maps.developer.apple.com/).  You can also monitor map initializations and service requests in realtime, or see up to a year of activity by day, week, month, or year via the MapKit JS Dashboard.
 
 ## Support Level
 
