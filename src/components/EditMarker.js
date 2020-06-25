@@ -8,6 +8,7 @@ import {
 	PanelRow,
 } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
+import LocationInfo from './LocationInfo';
 
 export default function EditMarker( props ) {
 	const { marker, remove, update } = props;
@@ -44,14 +45,13 @@ export default function EditMarker( props ) {
 				/>
 			</PanelRow>
 			<ColorPalette
-				label={ __( 'Marker Color', 'maps-block-apple' ) }
 				value={ marker.color }
 				colors={ availableColors }
 				onChange={ ( value ) => update( { ...marker, color: value } ) }
 			/>
 			<PanelRow>
 				<label htmlFor="glyph-color-control">
-					{ __( 'Marker Color', 'maps-block-apple' ) }
+					{ __( 'Glyph Color', 'maps-block-apple' ) }
 				</label>
 				<ColorIndicator
 					id="glyph-color-control"
@@ -59,12 +59,15 @@ export default function EditMarker( props ) {
 				/>
 			</PanelRow>
 			<ColorPalette
-				label={ __( 'Glyph Color', 'maps-block-apple' ) }
 				value={ marker.glyphColor }
 				colors={ availableColors }
 				onChange={ ( value ) =>
 					update( { ...marker, glyphColor: value } )
 				}
+			/>
+			<LocationInfo
+				latitude={ marker.latitude }
+				longitude={ marker.longitude }
 			/>
 			<PanelRow>
 				<Button isLink icon="no" isDestructive onClick={ remove }>

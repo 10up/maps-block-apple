@@ -3,6 +3,7 @@ import { __ } from '@wordpress/i18n';
 import { useState, useEffect } from '@wordpress/element';
 
 import SearchResults from '../components/SearchResults';
+import LocationInfo from '../components/LocationInfo';
 
 export default function LocationSettings( props ) {
 	const {
@@ -38,7 +39,7 @@ export default function LocationSettings( props ) {
 		<PanelBody title={ __( 'Location Settings', 'maps-block-apple' ) }>
 			<div>
 				<TextControl
-					label={ __( 'Address', 'maps-block-apple' ) }
+					label={ __( 'Search Place', 'maps-block-apple' ) }
 					value={ searchString }
 					onChange={ handleAddressChange }
 				/>
@@ -49,16 +50,7 @@ export default function LocationSettings( props ) {
 					setSearchResults={ setSearchResults }
 				/>
 			</div>
-			<TextControl
-				readonly="readonly"
-				label={ __( 'Latitude', 'maps-block-apple' ) }
-				value={ latitude }
-			/>
-			<TextControl
-				readonly="readonly"
-				label={ __( 'Longitude', 'maps-block-apple' ) }
-				value={ longitude }
-			/>
+			<LocationInfo latitude={ latitude } longitude={ longitude } />
 		</PanelBody>
 	);
 }
