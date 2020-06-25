@@ -130,10 +130,14 @@ class AppleMap {
 					this.setAttributes( { markers: newMarkers } );
 				} );
 
-				marker.addEventListener( 'select', ( event ) => {
-					const index = this.map.annotations.indexOf( event.target );
-					console.log( item.id );
-				} );
+				/*
+				 * Focus the Marker setting when the marker is selected
+				 *
+				 * marker.addEventListener( 'select', ( event ) => {
+				 * 		const identifier =
+				 * 			this.map.annotations.indexOf( event.target );
+				 * } );
+				 */
 			}
 
 			markerAnnotations.push( marker );
