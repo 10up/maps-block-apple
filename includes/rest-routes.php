@@ -97,7 +97,7 @@ function get_jwt() {
  * @param string $url URL.
  */
 function get_fqdn_from_url( $url ) {
-	$parsed_url = parse_url( $url );
+	$parsed_url = wp_parse_url( $url );
 
 	return sprintf(
 		'%1$s://%2$s',

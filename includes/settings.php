@@ -45,23 +45,23 @@ function register_settings() {
 		'maps_block_apple',
 		'maps_block_apple',
 		array(
-			'show_in_rest' => array(
+			'show_in_rest'      => array(
 				'schema' => array(
 					'type'       => 'object',
 					'properties' => array(
 						'private_key' => array(
 							'type' => 'string',
 						),
-						'team_id' => array(
+						'team_id'     => array(
 							'type' => 'string',
 						),
-						'key_id' => array(
+						'key_id'      => array(
 							'type' => 'string',
 						),
 					),
 				),
 			),
-			'default'      => [],
+			'default'           => [],
 			'sanitize_callback' => __NAMESPACE__ . '\sanitize_settings',
 		)
 	);
@@ -213,6 +213,7 @@ function render_instructions() {
 			<h4><?php esc_html_e( '1. Create an Apple Developer account', 'maps-block-apple' ); ?></a></h4>
 			<ul>
 				<li><a href="https://developer.apple.com/programs/enroll/" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Enroll in the Apple Developer Program as either an individual or organization.', 'maps-block-apple' ); ?></a></li>
+				<?php /* translators: %s is the URL of App Store Connect Contracts page. */ ?>
 				<li><?php echo wp_kses_post( sprintf( __( 'Sign the Apple Developer Program License Agreement in the <a href="%s" target="_blank" rel="noopener noreferrer">Agreements, Tax, and Banking section of App Store Connect.</a>', 'maps-block-apple' ), esc_url( 'https://appstoreconnect.apple.com/WebObjects/iTunesConnect.woa/da/jumpTo?page=contracts' ) ) ); ?></li>
 			</ul>
 			<h4><?php esc_html_e( '2. Create a Maps Identifier and Private Key', 'maps-block-apple' ); ?></a></h4>
@@ -232,11 +233,11 @@ function render_instructions() {
  * Render the Private Key field.
  */
 function render_private_key_field() {
-	$key = 'private_key';
+	$key  = 'private_key';
 	$name = "maps_block_apple[$key]";
 	?>
 	<div id="authkey-container">
-		<textarea name="<?php echo esc_attr( $name ); ?>" class="large-text" rows="10" id="token-gen-authkey" placeholder="<?php esc_html_e( 'paste your Private Key here' ); ?>"><?php echo get_setting( $key ); ?></textarea>
+		<textarea name="<?php echo esc_attr( $name ); ?>" class="large-text" rows="10" id="token-gen-authkey" placeholder="<?php esc_html_e( 'paste your Private Key here' ); ?>"><?php echo esc_attr( get_setting( $key ) ); ?></textarea>
 	</div>
 	<?php
 }
@@ -247,10 +248,10 @@ function render_private_key_field() {
 function render_team_id_field() {
 	$settings = get_option( 'amfwp_settings' );
 	$iss      = isset( $settings['token_gen_iss'] ) ? $settings['token_gen_iss'] : '';
-	$key = 'team_id';
-	$name = "maps_block_apple[$key]";
+	$key      = 'team_id';
+	$name     = "maps_block_apple[$key]";
 	?>
-	<input type="text" name="<?php echo esc_attr( $name ); ?>" class="large-text" id="token-gen-iss" placeholder="<?php esc_html_e( 'paste your Key ID here ', 'maps-block-apple' ); ?>" value="<?php echo get_setting( $key ); ?>"/>
+	<input type="text" name="<?php echo esc_attr( $name ); ?>" class="large-text" id="token-gen-iss" placeholder="<?php esc_html_e( 'paste your Key ID here ', 'maps-block-apple' ); ?>" value="<?php echo esc_attr( get_setting( $key ) ); ?>"/>
 	<?php
 }
 
@@ -260,10 +261,10 @@ function render_team_id_field() {
 function render_key_id_field() {
 	$settings = get_option( 'amfwp_settings' );
 	$kid      = isset( $settings['token_gen_kid'] ) ? $settings['token_gen_kid'] : '';
-	$key = 'key_id';
-	$name = "maps_block_apple[$key]";
+	$key      = 'key_id';
+	$name     = "maps_block_apple[$key]";
 	?>
-	<input type="text" name="<?php echo esc_attr( $name ); ?>"class="large-text" id="token-gen-kid" placeholder="<?php esc_html_e( 'paste your Team ID here', 'maps-block-apple' ); ?>" value="<?php echo get_setting( $key ); ?>"/>
+	<input type="text" name="<?php echo esc_attr( $name ); ?>"class="large-text" id="token-gen-kid" placeholder="<?php esc_html_e( 'paste your Team ID here', 'maps-block-apple' ); ?>" value="<?php echo esc_attr( get_setting( $key ) ); ?>"/>
 	<?php
 }
 /**

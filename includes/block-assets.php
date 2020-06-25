@@ -29,7 +29,7 @@ function register_block_assets() {
 		'maps-block-apple-block',
 		'_mbaData',
 		[
-			'settingsURL' => admin_url( 'options-general.php?page=block-for-apple-maps' )
+			'settingsURL' => admin_url( 'options-general.php?page=block-for-apple-maps' ),
 		]
 	);
 
