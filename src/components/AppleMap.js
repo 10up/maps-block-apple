@@ -55,7 +55,6 @@ class AppleMap {
 
 	static authenticateMap() {
 		function getJWTToken( resolveCallback ) {
-			console.info( 'authenticate' );
 			apiFetch( { path: 'MapsBlockApple/v1/GetJWT/' } )
 				.then( resolveCallback )
 				.catch( ( error ) => {
