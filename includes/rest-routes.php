@@ -51,7 +51,7 @@ function encode( $string ) {
 function get_jwt() {
 	$private_key = get_setting( 'private_key' );
 	$key_id      = get_setting( 'key_id' );
-	$team_id     = get_setting( 'team_id');
+	$team_id     = get_setting( 'team_id' );
 
 	if ( ! isset( $private_key ) || '' === $private_key ) {
 		return new WP_Error( 'NoKey', 'Missing Private Key', [ 'status' => 401 ] );

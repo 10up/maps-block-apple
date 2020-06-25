@@ -6,6 +6,7 @@
  */
 
 namespace tenup\Maps_Block_Apple\Settings;
+
 /**
  * Setup settings
  *
@@ -17,7 +18,7 @@ function setup() {
 	};
 	add_action( 'admin_menu', $n( 'admin_menu' ), 20 );
 	add_action( 'admin_init', $n( 'setup_fields_sections' ) );
-	add_action( 'admin_init', $n ( 'register_settings' ) );
+	add_action( 'admin_init', $n( 'register_settings' ) );
 	add_action( 'rest_api_init', $n( 'register_settings' ) );
 	add_filter( 'plugin_action_links_' . MAPS_BLOCK_APPLE_BASENAME, $n( 'plugin_filter_action_links' ) );
 	add_action( 'admin_enqueue_scripts', $n( 'enqueue_settings_assets' ) );
@@ -57,11 +58,11 @@ function register_settings() {
 						'key_id' => array(
 							'type' => 'string',
 						),
-					)
+					),
 				),
 			),
 			'default'      => [],
-			'sanitize_callback' => __NAMESPACE__ . '\sanitize_settings'
+			'sanitize_callback' => __NAMESPACE__ . '\sanitize_settings',
 		)
 	);
 }
@@ -166,7 +167,7 @@ function setup_fields_sections() {
 		__NAMESPACE__ . '\render_instructions',
 		'mapsblockapple'
 	);
-	
+
 	add_settings_section(
 		'maps-block-apple-crendentials',
 		'',
@@ -197,11 +198,13 @@ function setup_fields_sections() {
 		'mapsblockapple',
 		'maps-block-apple-crendentials'
 	);
-
-	
-
 }
 
+/**
+ * Display instructions for setting fields and sections
+ *
+ * @since  1.0.0
+ */
 function render_instructions() {
 	?>
 	<section class="credentials-instructions">
@@ -209,12 +212,12 @@ function render_instructions() {
 			<p><?php echo esc_html_e( 'Follow the steps below to generate the Private Key, Key ID, and Team ID that you will need to configure the plugin and gain access to the MapKit JS API for the Apple Maps block.', 'maps-block-apple' ); ?></p>
 			<h4><?php esc_html_e( '1. Create an Apple Developer account', 'maps-block-apple' ); ?></a></h4>
 			<ul>
-				<li><a href="https://developer.apple.com/programs/enroll/" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Enroll in the Apple Developer Program as either an individual or organization.', 'maps-block-apple' );?></a></li>
-				<li><?php echo wp_kses_post( sprintf( __( 'Sign the Apple Developer Program License Agreement in the <a href="%s" target="_blank" rel="noopener noreferrer">Agreements, Tax, and Banking section of App Store Connect.</a>', 'maps-block-apple' ), esc_url( 'https://appstoreconnect.apple.com/WebObjects/iTunesConnect.woa/da/jumpTo?page=contracts' ) ) );?></li>
+				<li><a href="https://developer.apple.com/programs/enroll/" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Enroll in the Apple Developer Program as either an individual or organization.', 'maps-block-apple' ); ?></a></li>
+				<li><?php echo wp_kses_post( sprintf( __( 'Sign the Apple Developer Program License Agreement in the <a href="%s" target="_blank" rel="noopener noreferrer">Agreements, Tax, and Banking section of App Store Connect.</a>', 'maps-block-apple' ), esc_url( 'https://appstoreconnect.apple.com/WebObjects/iTunesConnect.woa/da/jumpTo?page=contracts' ) ) ); ?></li>
 			</ul>
 			<h4><?php esc_html_e( '2. Create a Maps Identifier and Private Key', 'maps-block-apple' ); ?></a></h4>
 			<ul>
-				<li><a href="https://developer.apple.com/documentation/mapkitjs/creating_a_maps_identifier_and_a_private_key" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Create a Maps ID and a MapKit JS Private Key.', 'maps-block-apple' );?></a></li>
+				<li><a href="https://developer.apple.com/documentation/mapkitjs/creating_a_maps_identifier_and_a_private_key" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Create a Maps ID and a MapKit JS Private Key.', 'maps-block-apple' ); ?></a></li>
 				<li><?php echo wp_kses_data( __( 'Copy the Private Key, paste it into the respective field below, and ensure the key includes the <code>-----BEGIN PRIVATE KEY-----</code> and <code>-----END PRIVATE KEY-----</code> lines.', 'maps-block-apple' ) ); ?></li>
 				<li><?php echo wp_kses_data( __( 'Open the Key you created above, copy the <code>Key ID</code> value, and paste it into the respective field below.', 'maps-block-apple' ) ); ?></li>
 				<li><?php echo wp_kses_data( __( 'Open the Identifier you created above, copy the <code>App ID Prefix</code> value (notice the value is appended with <code>(Team ID)</code>), and paste it into the respective field below.', 'maps-block-apple' ) ); ?></li>

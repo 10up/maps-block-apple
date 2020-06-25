@@ -16,9 +16,9 @@ export default function EditAuthForm() {
 
 	useEffect( () => {
 		if ( siteSettings ) {
-			const { maps_block_apple: { private_key, team_id, key_id  } } = siteSettings;
+			const {maps_block_apple: { private_key, team_id, key_id }, } = siteSettings;
 			setPrivateKey( private_key );
-			setKeyId( key_id  );
+			setKeyId( key_id );
 			setTeamId( team_id );
 		}
 	}, [ siteSettings ] );
