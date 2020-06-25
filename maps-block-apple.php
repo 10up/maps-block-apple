@@ -52,3 +52,7 @@ add_action( 'init', __NAMESPACE__ . '\add_options' );
 
 require_once MAPS_BLOCK_APPLE_INC . 'block-assets.php';
 require_once MAPS_BLOCK_APPLE_INC . 'rest-routes.php';
+require_once MAPS_BLOCK_APPLE_INC . 'settings.php';
+
+// Initialize the settings page.
+Settings\setup();
