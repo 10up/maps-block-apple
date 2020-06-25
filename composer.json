@@ -1,0 +1,25 @@
+{
+	"name": "10up/maps-block-apple",
+	"description": "WordPress editor block for Apple Maps",
+	"version": "1.0.0",
+	"type": "wordpress-plugin",
+	"homepage": "https://10up.com",
+	"license": "GPLv2 or later",
+	"authors": [
+		{
+			"name": "10up",
+			"email": "opensource@10up.com",
+			"homepage": "https://10up.com",
+			"role": "Developer"
+		}
+	],
+	"require-dev": {
+		"wp-coding-standards/wpcs": "^2.2",
+		"dealerdirect/phpcodesniffer-composer-installer": "^0.5.0"
+	},
+	"scripts": {
+		"lint": "./vendor/bin/phpcs",
+		"lint-fix": "./vendor/bin/phpcbf --extensions=php ."
+	},
+	"minimum-stability": "dev"
+}

@@ -4,5 +4,6 @@
         "mapkit": "writable",
         "CustomEvent": "readonly",
         "Event": "readonly"
-    }
+    },
+    "ignorePatterns": ["**/vendor/**"]
 }
