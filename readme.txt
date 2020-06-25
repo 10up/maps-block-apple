@@ -38,8 +38,8 @@ In order to start using the Apple Maps block, you will need to sign up for the A
 1. [Create a Maps ID and a MapKit JS Private Key](https://developer.apple.com/documentation/mapkitjs/creating_a_maps_identifier_and_a_private_key).
 1. Copy the Private Key, paste it into the respective plugin setup field, and ensure the key includes the `-----BEGIN PRIVATE KEY-----` and `-----END PRIVATE KEY-----` lines.
 1. Open the Key you created in Step 1, copy the `Key ID` value, and paste it into the respective plugin setup field.
-1. Open the Identifier you created in Step 1, copy the `App ID Prefix` value (notice the value is appened with `(Team ID)`), and paste it into the respective plugin setup field.
-1. Click the `Save API Key` button in the plugin setup to gain access to the block options and begin customizing your Apple Maps block!
+1. Open the Identifier you created in Step 1, copy the `App ID Prefix` value (notice the value is appended with `(Team ID)`), and paste it into the respective plugin setup field.
+1. Click the `Confirm MapKit Credentials` button in the plugin setup to gain access to the block options and begin customizing your Apple Maps block!
 
 == Frequently Asked Questions ==
 
