@@ -153,21 +153,24 @@ class AppleMap {
 	}
 
 	static authenticateMap() {
-		apiFetch( { path: 'MapsBlockApple/v1/GetJWT/' } )
-			.then( ( token ) => {
-				mapkit.init( {
-					authorizationCallback( done ) {
-						done( token );
-					},
+		function getJWTToken( resolveCallback ) {
+			apiFetch( { path: 'MapsBlockApple/v1/GetJWT/' } )
+				.then( resolveCallback )
+				.catch( ( error ) => {
+					dispatch( 'core/notices' ).createErrorNotice(
+						error.message,
+						{
+							isDismissible: true,
+							type: 'snackbar',
+						}
+					);
+					mapkit.dispatchEvent( new Event( 'error' ) );
 				} );
-			} )
-			.catch( ( error ) => {
-				dispatch( 'core/notices' ).createErrorNotice( error.message, {
-					isDismissible: true,
-					type: 'snackbar',
-				} );
-				mapkit.dispatchEvent( new Event( 'error' ) );
-			} );
+		}
+
+		mapkit.init( {
+			authorizationCallback: getJWTToken,
+		} );
 	}
 }
 
@@ -211,7 +214,7 @@ class AppleMapEdit extends AppleMap {
 			this.setAttributes( { mapType: this.map.mapType } );
 		} );
 
-		// update the region settings when the map gets moved arround
+		// update the region settings when the map gets moved around
 		this.map.addEventListener( 'region-change-end', () => {
 			this.setAttributes( {
 				rotation: this.map.rotation,
@@ -269,36 +272,47 @@ class AppleMapEdit extends AppleMap {
 			this.map.center = new Coordinate( latitude, longitude );
 		}
 
-		if ( showsMapTypeControl !== this.map.showsMapTypeControl ) {
-			this.map.showsMapTypeControl = showsMapTypeControl;
+		if (
+			typeof showsMapTypeControl !== 'undefined' &&
+			showsMapTypeControl !== this.map.showsMapTypeControl
+		) {
+			this.map.showsMapTypeControl = !! showsMapTypeControl;
 		}
 
-		if ( isRotationEnabled !== this.map.isRotationEnabled ) {
-			this.map.isRotationEnabled = isRotationEnabled;
-		}
-
-		if ( showsCompass !== this.map.showsCompass ) {
-			this.map.showsCompass = showsCompass;
-		}
-
-		if ( isZoomEnabled !== this.map.isZoomEnabled ) {
-			this.map.isZoomEnabled = isZoomEnabled;
-		}
-
-		if ( showsZoomControl !== this.map.showsZoomControl ) {
-			this.map.showsZoomControl = showsZoomControl;
+		if (
+			typeof isRotationEnabled !== 'undefined' &&
+			isRotationEnabled !== this.map.isRotationEnabled
+		) {
+			this.map.isRotationEnabled = !! isRotationEnabled;
 		}
 
 		if ( showsCompass !== this.map.showsCompass ) {
-			this.map.showsCompass = showsCompass;
+			this.map.showsCompass = showsCompass || FeatureVisibility.Adaptive;
 		}
 
-		if ( isScrollEnabled !== this.map.isScrollEnabled ) {
-			this.map.isScrollEnabled = isScrollEnabled;
+		if (
+			typeof isZoomEnabled !== 'undefined' &&
+			isZoomEnabled !== this.map.isZoomEnabled
+		) {
+			this.map.isZoomEnabled = !! isZoomEnabled;
+		}
+
+		if (
+			typeof showsZoomControl !== 'undefined' &&
+			showsZoomControl !== this.map.showsZoomControl
+		) {
+			this.map.showsZoomControl = !! showsZoomControl;
+		}
+
+		if (
+			typeof isScrollEnabled !== 'undefined' &&
+			isScrollEnabled !== this.map.isScrollEnabled
+		) {
+			this.map.isScrollEnabled = !! isScrollEnabled;
 		}
 
 		if ( showsScale !== this.map.showsScale ) {
-			this.map.showsScale = showsScale;
+			this.map.showsScale = showsScale || FeatureVisibility.Adaptive;
 		}
 	}
 }

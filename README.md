@@ -29,7 +29,8 @@ In order to start using the Apple Maps block, you will need to sign up for the A
 
 ### Create an Apple Developer account
 
-1. [Enroll in the Apple Developer Program as either an individual or organization](https://developer.apple.com/programs/enroll/).
+1. If you don't already have an Apple ID, then please [create an Apple ID](https://appleid.apple.com/account#!&page=create) as it is required in order to enroll in the Apple Developer Program in the next step.
+1. [Enroll in the Apple Developer Program as either an individual or organization](https://developer.apple.com/programs/enroll/).  Note that its possible to have an existing Apple Developer account but not be enrolled in the Apple Developer Program, so please be sure to complete the enrollment process in this step.
 1. Sign the Apple Developer Program License Agreement in the [Agreements, Tax, and Banking section of App Store Connect](https://appstoreconnect.apple.com/WebObjects/iTunesConnect.woa/da/jumpTo?page=contracts).
 
 ### Create a Maps Identifier and Private Key
@@ -37,8 +38,8 @@ In order to start using the Apple Maps block, you will need to sign up for the A
 1. [Create a Maps ID and a MapKit JS Private Key](https://developer.apple.com/documentation/mapkitjs/creating_a_maps_identifier_and_a_private_key).
 1. Copy the Private Key, paste it into the respective plugin setup field, and ensure the key includes the `-----BEGIN PRIVATE KEY-----` and `-----END PRIVATE KEY-----` lines.
 1. Open the Key you created in Step 1, copy the `Key ID` value, and paste it into the respective plugin setup field.
-1. Open the Identifier you created in Step 1, copy the `App ID Prefix` value (notice the value is appened with `(Team ID)`), and paste it into the respective plugin setup field.
-1. Click the `Save API Key` button in the plugin setup to gain access to the block options and begin customizing your Apple Maps block!
+1. Open the Identifier you created in Step 1, copy the `App ID Prefix` value (notice the value is appended with `(Team ID)`), and paste it into the respective plugin setup field.
+1. Click the `Confirm MapKit Credentials` button in the plugin setup to gain access to the block options and begin customizing your Apple Maps block!
 
 ## Frequently Asked Questions
 
@@ -46,9 +47,13 @@ In order to start using the Apple Maps block, you will need to sign up for the A
 
 If you have WordPress installed in a subdirectory, then there is a [known issue](https://github.com/10up/maps-block-apple/issues/34) specifically related to this setup where the WordPress Admin URL is different from the site URL.  We're working on a [minor release](https://github.com/10up/maps-block-apple/milestone/3) to resolve this issue.
 
+### Are there any MapKit JS rate limits?
+
+There is a free daily limit of 250,000 map views and 25,000 service calls per the Apple Developer Program membership.  For additional MapKit JS capacity needs you will need to [contact Apple directly](https://developer.apple.com/contact/request/mapkitjs/).
+
 ### Can I see how many map views and service requests are made to my MapKit JS Private Key?
 
-Yes, you can track your MapKit JS useage on the [MapKit JS Developer Dashboard](https://maps.developer.apple.com/).
+Yes, you can track your MapKit JS useage on the [MapKit JS Developer Dashboard](https://maps.developer.apple.com/).  You can also monitor map initializations and service requests in realtime, or see up to a year of activity by day, week, month, or year via the MapKit JS Dashboard.
 
 ## Support Level
 

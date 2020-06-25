@@ -1,0 +1,22 @@
+# Directories
+/.wordpress-org
+/.git
+/.github
+/src
+/vendor
+
+# Files
+.distignore
+.eslintrc
+.gitignore
+.phpcs.xml
+CHANGELOG.md
+CODE_OF_CONDUCT.md
+composer.json
+composer.lock
+CONTRIBUTING.md
+CREDITS.md
+LICENSE.md
+package.json
+package-lock.json
+README.md
