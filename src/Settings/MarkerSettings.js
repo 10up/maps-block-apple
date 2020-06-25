@@ -36,7 +36,7 @@ export default function LocationSettings( props ) {
 
 			<Tip>
 				{ __(
-					'You can move a marker by long pressing on it',
+					'You can move a marker by long pressing on it.',
 					'maps-block-apple'
 				) }
 			</Tip>

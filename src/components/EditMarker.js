@@ -52,7 +52,7 @@ export default function EditMarker( props ) {
 			/>
 			<PanelRow>
 				<label htmlFor="glyph-color-control">
-					{ __( 'Glyph Color', 'maps-block-apple' ) }
+					{ __( 'Icon Color', 'maps-block-apple' ) }
 				</label>
 				<ColorIndicator
 					id="glyph-color-control"
@@ -66,10 +66,12 @@ export default function EditMarker( props ) {
 					update( { ...marker, glyphColor: value } )
 				}
 			/>
-			<LocationInfo
-				latitude={ marker.latitude }
-				longitude={ marker.longitude }
-			/>
+			<PanelRow>
+				<LocationInfo
+					latitude={ marker.latitude }
+					longitude={ marker.longitude }
+				/>
+			</PanelRow>
 			<PanelRow>
 				<Button isLink icon="no" isDestructive onClick={ remove }>
 					{ __( 'Remove Marker', 'maps-block-apple' ) }

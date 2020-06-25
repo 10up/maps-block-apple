@@ -53,9 +53,10 @@ export default function LocationSettings( props ) {
 
 	return (
 		<PanelBody title={ __( 'Location Settings', 'maps-block-apple' ) }>
+			<LocationInfo latitude={ latitude } longitude={ longitude } />
 			<div>
 				<TextControl
-					label={ __( 'Search Place', 'maps-block-apple' ) }
+					label={ __( 'Search for a Location', 'maps-block-apple' ) }
 					value={ searchString }
 					onChange={ handleSearchStringChange }
 				/>
@@ -66,7 +67,6 @@ export default function LocationSettings( props ) {
 					setSearchResults={ setSearchResults }
 				/>
 			</div>
-			<LocationInfo latitude={ latitude } longitude={ longitude } />
 		</PanelBody>
 	);
 }
