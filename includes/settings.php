@@ -236,7 +236,7 @@ function render_private_key_field() {
 	$name = "maps_block_apple[$key]";
 	?>
 	<div id="authkey-container">
-		<textarea name="<?php echo esc_attr( $name );?>" class="large-text" rows="10" id="token-gen-authkey" placeholder="<?php esc_html_e( 'paste your Private Key here' );?>"><?php echo get_setting( $key ) ?></textarea>
+		<textarea name="<?php echo esc_attr( $name ); ?>" class="large-text" rows="10" id="token-gen-authkey" placeholder="<?php esc_html_e( 'paste your Private Key here' ); ?>"><?php echo get_setting( $key ); ?></textarea>
 	</div>
 	<?php
 }
@@ -250,7 +250,7 @@ function render_team_id_field() {
 	$key = 'team_id';
 	$name = "maps_block_apple[$key]";
 	?>
-	<input type="text" name="<?php echo esc_attr( $name );?>" class="large-text" id="token-gen-iss" placeholder="<?php esc_html_e( 'paste your Key ID here ', 'maps-block-apple' ); ?>" value="<?php echo get_setting( $key ) ?>"/>
+	<input type="text" name="<?php echo esc_attr( $name ); ?>" class="large-text" id="token-gen-iss" placeholder="<?php esc_html_e( 'paste your Key ID here ', 'maps-block-apple' ); ?>" value="<?php echo get_setting( $key ); ?>"/>
 	<?php
 }
 
@@ -263,7 +263,7 @@ function render_key_id_field() {
 	$key = 'key_id';
 	$name = "maps_block_apple[$key]";
 	?>
-	<input type="text" name="<?php echo esc_attr( $name );?>"class="large-text" id="token-gen-kid" placeholder="<?php esc_html_e( 'paste your Team ID here', 'maps-block-apple' ); ?>" value="<?php echo get_setting( $key ) ?>"/>
+	<input type="text" name="<?php echo esc_attr( $name ); ?>"class="large-text" id="token-gen-kid" placeholder="<?php esc_html_e( 'paste your Team ID here', 'maps-block-apple' ); ?>" value="<?php echo get_setting( $key ); ?>"/>
 	<?php
 }
 /**
