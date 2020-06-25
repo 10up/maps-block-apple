@@ -152,6 +152,16 @@ function enqueue_settings_assets( $screen_id ) {
 		[],
 		MAPS_BLOCK_APPLE_VERSION
 	);
+
+	$file_name    = 'admin-settings';
+	$dependencies = ( include MAPS_BLOCK_APPLE_PATH . "build/$file_name.asset.php" );
+	wp_enqueue_script(
+		'maps-block-apple-frontend',
+		MAPS_BLOCK_APPLE_URL . "build/$file_name.js",
+		array_merge( $dependencies['dependencies'], [ 'apple-mapkit-js' ] ),
+		$dependencies['version'],
+		true
+	);
 }
 
 /**
@@ -163,7 +173,7 @@ function setup_fields_sections() {
 
 	add_settings_section(
 		'map-blocks-apple-instructions',
-		__( 'MapKit JS connection settings', 'maps-block-apple' ),
+		__( 'MapKit JS credential settings', 'maps-block-apple' ),
 		__NAMESPACE__ . '\render_instructions',
 		'mapsblockapple'
 	);
@@ -195,6 +205,14 @@ function setup_fields_sections() {
 		'maps_block_apple_team_id',
 		esc_html__( 'Team ID', 'maps-block-apple' ),
 		__NAMESPACE__ . '\render_team_id_field',
+		'mapsblockapple',
+		'maps-block-apple-crendentials'
+	);
+
+	add_settings_field(
+		'maps_block_apple_status',
+		esc_html__( 'MapKit status', 'maps-block-apple' ),
+		__NAMESPACE__ . '\render_credential_status',
 		'mapsblockapple',
 		'maps-block-apple-crendentials'
 	);
@@ -267,6 +285,19 @@ function render_key_id_field() {
 	<input type="text" name="<?php echo esc_attr( $name ); ?>"class="large-text" id="token-gen-kid" placeholder="<?php esc_html_e( 'paste your Team ID here', 'maps-block-apple' ); ?>" value="<?php echo esc_attr( get_setting( $key ) ); ?>"/>
 	<?php
 }
+
+/**
+ * Render the credential status.
+ */
+function render_credential_status() {
+	?>
+		<div id="mapkit-credentials-status">
+			<span class="spinner is-active"></span>
+			<span class="txt"><?php esc_html_e( 'Checking...', 'maps-block-apple' ); ?></span>
+		</div>
+	<?php
+}
+
 /**
  * Sanitize settings for DB
  *

@@ -32,6 +32,27 @@
 	vertical-align: unset;
 }
 
+#mapkit-credentials-status {
+	font-weight: 700;
+}
+
+#mapkit-credentials-status .spinner {
+	float: none;
+	margin-top: 0;
+}
+
+#mapkit-credentials-status .txt {
+	font-weight: 400;
+}
+
+.mapkit-error {
+	color: #c00;
+}
+
+.mapkit-valid {
+	color: #46b450;
+}
+
 @media (min-width: 1024px) {
 	.maps-block-apple-settings {
 		display: flex;
