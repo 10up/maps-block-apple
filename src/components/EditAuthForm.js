@@ -1,8 +1,8 @@
+/* eslint-disable camelcase */
 import { __ } from '@wordpress/i18n';
 import { TextControl, TextareaControl, Button } from '@wordpress/components';
 import { useEffect, useState } from '@wordpress/element';
 import { dispatch, useSelect } from '@wordpress/data';
-// import { AppleMapEdit } from './AppleMap';
 
 export default function EditAuthForm() {
 	const [ privateKey, setPrivateKey ] = useState( '' );
@@ -16,7 +16,9 @@ export default function EditAuthForm() {
 
 	useEffect( () => {
 		if ( siteSettings ) {
-			const {maps_block_apple: { private_key, team_id, key_id }, } = siteSettings;
+			const {
+				maps_block_apple: { private_key, team_id, key_id },
+			} = siteSettings;
 			setPrivateKey( private_key );
 			setKeyId( key_id );
 			setTeamId( team_id );
@@ -26,25 +28,30 @@ export default function EditAuthForm() {
 	const handleSave = () => {
 		setIsBusy( true );
 
-		dispatch( 'core' ).saveEntityRecord( 'root', 'site', {
-			 maps_block_apple: {
-				 private_key: privateKey,
-				 team_id: teamId,
-				 key_id: keyId,
-			 },
-		} ).then( ( { maps_block_apple: { private_key, team_id, key_id  } } ) => {
-			setPrivateKey( private_key );
-			setKeyId( key_id  );
-			setTeamId( team_id );
-			setIsBusy( false );
-			mapkit.dispatchEvent( new CustomEvent( 'reinitialize' ) );
-		} ).catch( ( error ) => {
-			dispatch( 'core/notices' ).createErrorNotice( error.message, {
-				isDismissible: true,
-				type: 'snackbar',
+		dispatch( 'core' )
+			.saveEntityRecord( 'root', 'site', {
+				maps_block_apple: {
+					private_key: privateKey,
+					team_id: teamId,
+					key_id: keyId,
+				},
+			} )
+			.then(
+				( { maps_block_apple: { private_key, team_id, key_id } } ) => {
+					setPrivateKey( private_key );
+					setKeyId( key_id );
+					setTeamId( team_id );
+					setIsBusy( false );
+					mapkit.dispatchEvent( new CustomEvent( 'reinitialize' ) );
+				}
+			)
+			.catch( ( error ) => {
+				dispatch( 'core/notices' ).createErrorNotice( error.message, {
+					isDismissible: true,
+					type: 'snackbar',
+				} );
+				setIsBusy( false );
 			} );
-			setIsBusy( false );
-		} );
 	};
 
 	return (
