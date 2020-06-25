@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file, per [the Ke
 
 ## [Unreleased] - TBD
 
-## [1.0.0] - 2020-06-22
+## [1.0.0] - 2020-06-25
 ### Added
 - Ability to add Markers to the map (props [@fabiankaegy](https://github.com/fabiankaegy) via [#51](https://github.com/10up/maps-block-apple/pull/51))
 - In-editor credential setup (props [@fabiankaegy](https://github.com/fabiankaegy) via [#20](https://github.com/10up/maps-block-apple/pull/20))
