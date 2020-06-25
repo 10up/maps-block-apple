@@ -25,12 +25,13 @@ export default function EditAuthForm() {
 
 	const handleSave = () => {
 		setIsBusy( true );
+
 		dispatch( 'core' ).saveEntityRecord( 'root', 'site', {
-			maps_block_apple: {
-				private_key: privateKey,
-				team_id: teamId,
-				key_id: keyId,
-			}
+			 maps_block_apple: {
+				 private_key: privateKey,
+				 team_id: teamId,
+				 key_id: keyId,
+			 },
 		} ).then( ( { maps_block_apple: { private_key, team_id, key_id  } } ) => {
 			setPrivateKey( private_key );
 			setKeyId( key_id  );
