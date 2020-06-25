@@ -4,7 +4,7 @@ Tags:              apple maps, map block
 Requires at least: 5.2
 Tested up to:      5.4.1
 Requires PHP:      5.6
-Stable tag:        0.1.0
+Stable tag:        1.0.0
 License:           GPLv2 or later
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -59,6 +59,11 @@ Yes, you can track your MapKit JS useage on the [MapKit JS Developer Dashboard](
 
 
 == Changelog ==
+
+= 1.0.0 =
+🎉 Initial public release!
+
+Block for Apple Maps gives you an easy way to add MapKit-powered maps with custom markers to your site. For all of the technical details, please see the [full changelog](https://github.com/10up/maps-block-apple/blob/develop/CHANGELOG.md).
 
 = 0.1.0 =
 * Initial private release of Block for Apple Maps plugin.
