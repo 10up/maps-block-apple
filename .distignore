@@ -1,12 +1,14 @@
 # Directories
-/.wordpress-org
 /.git
 /.github
+/.wordpress-org
+/node_modules
 /src
 /vendor
 
 # Files
 .distignore
+.editorconfig
 .eslintrc
 .gitignore
 .phpcs.xml
