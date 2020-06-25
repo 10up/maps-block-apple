@@ -60,5 +60,10 @@ Yes, you can track your MapKit JS useage on the [MapKit JS Developer Dashboard](
 
 == Changelog ==
 
+= 1.0.0 =
+🎉 Initial public release!
+
+Block for Apple Maps gives you an easy way to add MapKit-powered maps with custom markers to your site. For all of the technical details, please see the [full changelog](https://github.com/10up/maps-block-apple/blob/develop/CHANGELOG.md).
+
 = 0.1.0 =
 * Initial private release of Block for Apple Maps plugin.
