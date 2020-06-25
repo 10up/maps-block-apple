@@ -54,21 +54,24 @@ class AppleMap {
 	}
 
 	static authenticateMap() {
-		apiFetch( { path: 'MapsBlockApple/v1/GetJWT/' } )
-			.then( ( token ) => {
-				mapkit.init( {
-					authorizationCallback( done ) {
-						done( token );
-					},
+		function getJWTToken( resolveCallback ) {
+			apiFetch( { path: 'MapsBlockApple/v1/GetJWT/' } )
+				.then( resolveCallback )
+				.catch( ( error ) => {
+					dispatch( 'core/notices' ).createErrorNotice(
+						error.message,
+						{
+							isDismissible: true,
+							type: 'snackbar',
+						}
+					);
+					mapkit.dispatchEvent( new Event( 'error' ) );
 				} );
-			} )
-			.catch( ( error ) => {
-				dispatch( 'core/notices' ).createErrorNotice( error.message, {
-					isDismissible: true,
-					type: 'snackbar',
-				} );
-				mapkit.dispatchEvent( new Event( 'error' ) );
-			} );
+		}
+
+		mapkit.init( {
+			authorizationCallback: getJWTToken,
+		} );
 	}
 }
 
