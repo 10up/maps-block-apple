@@ -6,7 +6,9 @@ All notable changes to this project will be documented in this file, per [the Ke
 
 ## [1.0.0] - 2020-06-22
 ### Added
-- Rich preview to block inserter view (props [@fabiankaegy](https://github.com/fabiankaegy) via [#40](https://github.com/10up/maps-block-apple/pull/40))
+- Ability to add Markers to the map (props [@fabiankaegy](https://github.com/fabiankaegy) via [#51](https://github.com/10up/maps-block-apple/pull/51))
+- In-editor credential setup (props [@fabiankaegy](https://github.com/fabiankaegy) via [#20](https://github.com/10up/maps-block-apple/pull/20))
+- Rich preview in block inserter view (props [@fabiankaegy](https://github.com/fabiankaegy) via [#40](https://github.com/10up/maps-block-apple/pull/40))
 - Error messaging on plugin activation for WordPress versions below 5.2 (props [@helen](https://github.com/helen), [@kopepasah](https://github.com/kopepasah) via [#50](https://github.com/10up/maps-block-apple/pull/50))
 - Plugin deletion routine (props [@dinhtungdu](https://github.com/dinhtungdu) via [#47](https://github.com/10up/maps-block-apple/pull/47))
 - Documentation improvements (props [@jeffpaul](https://github.com/jeffpaul), [@kopepasah](https://github.com/kopepasah), [ryanwelcher](https://github.com/ryanwelcher), [@fabiankaegy](https://github.com/fabiankaegy), [@helen](https://github.com/helen) via [#22](https://github.com/10up/maps-block-apple/pull/22), [#25](https://github.com/10up/maps-block-apple/pull/25), [#26](https://github.com/10up/maps-block-apple/pull/26), [#30](https://github.com/10up/maps-block-apple/pull/30), [#35](https://github.com/10up/maps-block-apple/pull/35), [#41](https://github.com/10up/maps-block-apple/pull/41), [#42](https://github.com/10up/maps-block-apple/pull/42), [#45](https://github.com/10up/maps-block-apple/pull/45), [#46](https://github.com/10up/maps-block-apple/pull/46))
@@ -16,6 +18,7 @@ All notable changes to this project will be documented in this file, per [the Ke
 
 ### Changed
 - Refactored codebase, build system to use `@wordpress/scripts` (props [@fabiankaegy](https://github.com/fabiankaegy), [@ryanwelcher](https://github.com/ryanwelcher) via [#20](https://github.com/10up/maps-block-apple/pull/20))
+- Revamped settings screen to go with refactored codebase (props [@ryanwelcher] and(https://github.com/ryanwelcher) and [@dinhtungdu](https://github.com/dinhtungdu) via [#31](https://github.com/10up/maps-block-apple/pull/31))
 - Permissions to change the MapKit JS authentication keys to users with the capability to `manage_options` (props [@fabiankaegy](https://github.com/fabiankaegy), [@ryanwelcher](https://github.com/ryanwelcher) via [#29](https://github.com/10up/maps-block-apple/pull/29))
 - Authorizations by passing a callback function to `authorizationCallback` (props [@fabiankaegy](https://github.com/fabiankaegy) via [#52](https://github.com/10up/maps-block-apple/pull/52))
 - Re-licensed to GPLv2 (props [@jeffpaul](https://github.com/jeffpaul) via [#21](https://github.com/10up/maps-block-apple/pull/21))
