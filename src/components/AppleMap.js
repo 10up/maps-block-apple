@@ -87,7 +87,6 @@ class AppleMap {
 		this.clearMarkers();
 
 		const markerAnnotations = [];
-		const isEditor = 'AppleMapEdit' === this.constructor.name;
 
 		markers.forEach( ( item, index ) => {
 			const {
@@ -115,7 +114,7 @@ class AppleMap {
 				color: color || 'green',
 				glyphColor: glyphColor || 'white',
 				glyphText: glyphText || '',
-				draggable: !! isEditor,
+				draggable: !! this.isEditor,
 			} );
 
 			if ( this.setAttributes ) {
@@ -182,6 +181,7 @@ class AppleMapEdit extends AppleMap {
 	 */
 	constructor( element, clientId, setAttributes ) {
 		super( element );
+		this.isEditor = true;
 		this.clientId = clientId;
 		this.setAttributes = setAttributes;
 
