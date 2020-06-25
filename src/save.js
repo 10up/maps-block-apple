@@ -15,6 +15,7 @@ export default function MapsBlockAppleSave( props ) {
 			showsZoomControl,
 			isScrollEnabled,
 			showsScale,
+			markers,
 		},
 	} = props;
 
@@ -34,6 +35,19 @@ export default function MapsBlockAppleSave( props ) {
 			data-is-scroll-enabled={ isScrollEnabled }
 			data-shows-scale={ showsScale }
 			style={ { height: `${ height }px` } }
-		/>
+		>
+			{ markers.map( ( marker, index ) => (
+				<div
+					key={ index }
+					className={ 'marker-annotation' }
+					data-latitude={ marker.latitude }
+					data-longitude={ marker.longitude }
+					data-title={ marker.title }
+					data-subtitle={ marker.subtitle }
+					data-color={ marker.color }
+					data-glyph-color={ marker.glyphColor }
+				/>
+			) ) }
+		</div>
 	);
 }

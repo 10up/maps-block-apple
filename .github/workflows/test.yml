@@ -25,9 +25,6 @@ jobs:
       uses: icrawl/action-eslint@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      with:
-        job-name: eslint
   phpcs:
     name: phpcs
     runs-on: ubuntu-latest

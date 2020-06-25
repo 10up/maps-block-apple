@@ -1,18 +1,43 @@
 import apiFetch from '@wordpress/api-fetch';
 import { dispatch } from '@wordpress/data';
 
-const { Coordinate, Map, FeatureVisibility } = mapkit;
+const { Coordinate, Map, FeatureVisibility, MarkerAnnotation } = mapkit;
 
 class AppleMap {
 	constructor( element ) {
 		this.element = element;
 		this.mapOptions = {};
+		this.markerElements = this.element.querySelectorAll(
+			'.marker-annotation'
+		);
+		this.markers = [ ...this.markerElements ].map( ( markerElement ) => {
+			const {
+				latitude,
+				longitude,
+				title,
+				subtitle,
+				color,
+				glyphColor,
+			} = markerElement.dataset;
+			return {
+				latitude: Number( latitude ),
+				longitude: Number( longitude ),
+				title: title || '',
+				subtitle: subtitle || '',
+				color: color || null,
+				glyphColor: glyphColor || null,
+			};
+		} );
 
 		this.init();
 	}
 
 	init() {
 		this.createMap();
+
+		this.clearMarkers();
+
+		this.addMarkers( this.markers );
 	}
 
 	createMap() {
@@ -53,6 +78,80 @@ class AppleMap {
 		this.map._impl.zoomLevel = Number( zoom ) || 15;
 	}
 
+	/**
+	 * Add a MarkerAnnotation at the provided coordinated
+	 *
+	 * @param {Array} markers markers
+	 */
+	addMarkers( markers ) {
+		this.clearMarkers();
+
+		const markerAnnotations = [];
+
+		markers.forEach( ( item, index ) => {
+			const {
+				latitude,
+				longitude,
+				title,
+				subtitle,
+				titleVisibility,
+				subtitleVisibility,
+				color,
+				glyphColor,
+				glyphText,
+			} = item;
+			const position = new Coordinate(
+				Number( latitude ),
+				Number( longitude )
+			);
+
+			const marker = new MarkerAnnotation( position, {
+				title,
+				subtitle: subtitle || null,
+				titleVisibility: titleVisibility || FeatureVisibility.Visible,
+				subtitleVisibility:
+					subtitleVisibility || FeatureVisibility.Visible,
+				color: color || 'green',
+				glyphColor: glyphColor || 'white',
+				glyphText: glyphText || '',
+				draggable: !! this.isEditor,
+			} );
+
+			if ( this.setAttributes ) {
+				marker.addEventListener( 'drag-end', ( event ) => {
+					const {
+						target: { coordinate },
+					} = event;
+					const newMarkers = [ ...markers ];
+					newMarkers[ index ].latitude = coordinate.latitude;
+					newMarkers[ index ].longitude = coordinate.longitude;
+
+					this.setAttributes( { markers: newMarkers } );
+				} );
+
+				/*
+				 * Focus the Marker setting when the marker is selected
+				 *
+				 * marker.addEventListener( 'select', ( event ) => {
+				 * 		const identifier =
+				 * 			this.map.annotations.indexOf( event.target );
+				 * } );
+				 */
+			}
+
+			markerAnnotations.push( marker );
+		} );
+
+		this.map.addAnnotations( markerAnnotations );
+	}
+
+	/**
+	 * clear markers from the map
+	 */
+	clearMarkers() {
+		this.map.removeAnnotations( this.map.annotations );
+	}
+
 	static authenticateMap() {
 		function getJWTToken( resolveCallback ) {
 			apiFetch( { path: 'MapsBlockApple/v1/GetJWT/' } )
@@ -85,16 +184,19 @@ class AppleMapEdit extends AppleMap {
 	 */
 	constructor( element, clientId, setAttributes ) {
 		super( element );
+		this.isEditor = true;
 		this.clientId = clientId;
 		this.setAttributes = setAttributes;
+
+		this.initEdit();
 	}
 
 	/**
 	 * Initialize Edit version of AppleMap
 	 */
-	init() {
-		super.init();
+	initEdit() {
 		this.addListeners();
+		this.addMarkers( this.markers );
 	}
 
 	/**

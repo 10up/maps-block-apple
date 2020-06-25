@@ -1,6 +1,12 @@
-import { Spinner, Placeholder } from '@wordpress/components';
+import {
+	Spinner,
+	Placeholder,
+	Toolbar,
+	ToolbarButton,
+} from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { useEffect, useRef, useState } from '@wordpress/element';
+import { BlockControls } from '@wordpress/block-editor';
 
 import { AppleMapEdit } from './components/AppleMap';
 import EditAuthForm from './components/EditAuthForm';
@@ -25,6 +31,7 @@ export default function MapsBlockAppleEdit( props ) {
 			showsZoomControl,
 			isScrollEnabled,
 			showsScale,
+			markers,
 		},
 		setAttributes,
 		clientId,
@@ -106,6 +113,14 @@ export default function MapsBlockAppleEdit( props ) {
 		}
 	}, [ props.attributes, authenticated ] );
 
+	useEffect( () => {
+		if ( ! map.current ) {
+			return;
+		}
+
+		map.current.addMarkers( markers );
+	}, [ markers ] );
+
 	if ( isLoading ) {
 		return (
 			<Placeholder
@@ -167,6 +182,29 @@ export default function MapsBlockAppleEdit( props ) {
 
 	return (
 		<>
+			<BlockControls>
+				<Toolbar>
+					<ToolbarButton
+						icon="location"
+						title={ __( 'Add Marker', 'apple-maps-wordpress' ) }
+						onClick={ () => {
+							setAttributes( {
+								markers: [
+									...markers,
+									{
+										latitude,
+										longitude,
+										title: 'Title',
+										id: Symbol(
+											'identifier for the marker'
+										),
+									},
+								],
+							} );
+						} }
+					/>
+				</Toolbar>
+			</BlockControls>
 			<InspectorSettings
 				{ ...props }
 				authenticated={ authenticated }
@@ -188,7 +226,20 @@ export default function MapsBlockAppleEdit( props ) {
 				data-is-scroll-enabled={ isScrollEnabled }
 				data-shows-scale={ showsScale }
 				style={ { height: `${ height }px` } }
-			/>
+			>
+				{ markers.map( ( marker, index ) => (
+					<div
+						key={ index }
+						className={ 'marker-annotation' }
+						data-latitude={ marker.latitude }
+						data-longitude={ marker.longitude }
+						data-title={ marker.title }
+						data-subtitle={ marker.subtitle }
+						data-color={ marker.color }
+						data-glyph-color={ marker.glyphColor }
+					/>
+				) ) }
+			</div>
 		</>
 	);
 }
