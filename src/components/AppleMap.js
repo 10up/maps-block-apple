@@ -171,12 +171,15 @@ class AppleMapEdit extends AppleMap {
 			this.map.showsMapTypeControl = showsMapTypeControl;
 		}
 
-		if ( isRotationEnabled !== this.map.isRotationEnabled ) {
-			this.map.isRotationEnabled = isRotationEnabled;
+		if (
+			typeof isRotationEnabled !== 'undefined' &&
+			isRotationEnabled !== this.map.isRotationEnabled
+		) {
+			this.map.isRotationEnabled = !! isRotationEnabled;
 		}
 
 		if ( showsCompass !== this.map.showsCompass ) {
-			this.map.showsCompass = showsCompass;
+			this.map.showsCompass = showsCompass || FeatureVisibility.Adaptive;
 		}
 
 		if ( isZoomEnabled !== this.map.isZoomEnabled ) {
@@ -187,16 +190,12 @@ class AppleMapEdit extends AppleMap {
 			this.map.showsZoomControl = showsZoomControl;
 		}
 
-		if ( showsCompass !== this.map.showsCompass ) {
-			this.map.showsCompass = showsCompass;
-		}
-
 		if ( isScrollEnabled !== this.map.isScrollEnabled ) {
 			this.map.isScrollEnabled = isScrollEnabled;
 		}
 
 		if ( showsScale !== this.map.showsScale ) {
-			this.map.showsScale = showsScale;
+			this.map.showsScale = showsScale || FeatureVisibility.Adaptive;
 		}
 	}
 }
