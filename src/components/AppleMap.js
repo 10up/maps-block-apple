@@ -112,7 +112,7 @@ class AppleMapEdit extends AppleMap {
 			this.setAttributes( { mapType: this.map.mapType } );
 		} );
 
-		// update the region settings when the map gets moved arround
+		// update the region settings when the map gets moved around
 		this.map.addEventListener( 'region-change-end', () => {
 			this.setAttributes( {
 				rotation: this.map.rotation,
@@ -170,8 +170,11 @@ class AppleMapEdit extends AppleMap {
 			this.map.center = new Coordinate( latitude, longitude );
 		}
 
-		if ( showsMapTypeControl !== this.map.showsMapTypeControl ) {
-			this.map.showsMapTypeControl = showsMapTypeControl;
+		if (
+			typeof showsMapTypeControl !== 'undefined' &&
+			showsMapTypeControl !== this.map.showsMapTypeControl
+		) {
+			this.map.showsMapTypeControl = !! showsMapTypeControl;
 		}
 
 		if (
@@ -185,16 +188,25 @@ class AppleMapEdit extends AppleMap {
 			this.map.showsCompass = showsCompass || FeatureVisibility.Adaptive;
 		}
 
-		if ( isZoomEnabled !== this.map.isZoomEnabled ) {
-			this.map.isZoomEnabled = isZoomEnabled;
+		if (
+			typeof isZoomEnabled !== 'undefined' &&
+			isZoomEnabled !== this.map.isZoomEnabled
+		) {
+			this.map.isZoomEnabled = !! isZoomEnabled;
 		}
 
-		if ( showsZoomControl !== this.map.showsZoomControl ) {
-			this.map.showsZoomControl = showsZoomControl;
+		if (
+			typeof showsZoomControl !== 'undefined' &&
+			showsZoomControl !== this.map.showsZoomControl
+		) {
+			this.map.showsZoomControl = !! showsZoomControl;
 		}
 
-		if ( isScrollEnabled !== this.map.isScrollEnabled ) {
-			this.map.isScrollEnabled = isScrollEnabled;
+		if (
+			typeof isScrollEnabled !== 'undefined' &&
+			isScrollEnabled !== this.map.isScrollEnabled
+		) {
+			this.map.isScrollEnabled = !! isScrollEnabled;
 		}
 
 		if ( showsScale !== this.map.showsScale ) {
