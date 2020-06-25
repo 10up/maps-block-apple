@@ -195,6 +195,9 @@ export default function MapsBlockAppleEdit( props ) {
 										latitude,
 										longitude,
 										title: 'Title',
+										id: Symbol(
+											'identifier for the marker'
+										),
 									},
 								],
 							} );

@@ -22,6 +22,7 @@ export default function EditMarker( props ) {
 			title={ marker.title }
 			className="marker-edit"
 			icon={ 'location' }
+			initialOpen={ false }
 		>
 			<TextControl
 				label={ __( 'Title', 'maps-block-apple' ) }

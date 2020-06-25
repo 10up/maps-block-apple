@@ -132,6 +132,7 @@ class AppleMap {
 
 				marker.addEventListener( 'select', ( event ) => {
 					const index = this.map.annotations.indexOf( event.target );
+					console.log( item.id );
 				} );
 			}
 

@@ -1,4 +1,4 @@
-import { PanelBody } from '@wordpress/components';
+import { PanelBody, Tip } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import EditMarker from '../components/EditMarker';
 
@@ -33,6 +33,13 @@ export default function LocationSettings( props ) {
 					/>
 				);
 			} ) }
+
+			<Tip>
+				{ __(
+					'You can move a marker by long pressing on it',
+					'maps-block-apple'
+				) }
+			</Tip>
 		</PanelBody>
 	) : null;
 }
