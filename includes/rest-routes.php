@@ -69,7 +69,7 @@ function get_jwt() {
 		return new WP_Error( 'InvalidKey', 'Invalid Team ID', [ 'status' => 401 ] );
 	}
 	if (
-		0 !== strpos( $private_key, '-----BEGIN PRIVATE KEY-----')
+		0 !== strpos( $private_key, '-----BEGIN PRIVATE KEY-----' )
 		&& ! strpos( $private_key, '-----END PRIVATE KEY-----' )
 	) {
 		return new WP_Error( 'InvalidKey', 'Invalid Private Key', [ 'status' => 401 ] );

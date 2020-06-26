@@ -161,8 +161,8 @@ class AppleMap {
 						 * JWT only lives for 30 mins. Calling it again here to
 						 * allow mapkit to get new token when needed.
 						 *
-						 * @link https://github.com/10up/maps-block-apple/issues/48
-						 * @link https://github.com/10up/maps-block-apple/pull/52
+						 * @see https://github.com/10up/maps-block-apple/issues/48
+						 * @see https://github.com/10up/maps-block-apple/pull/52
 						 */
 						apiFetch( { path: 'MapsBlockApple/v1/GetJWT/' } ).then(
 							done
