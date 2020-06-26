@@ -10,6 +10,8 @@
 
 This plugin integrates Apple's [MapKit JS](https://developer.apple.com/maps/mapkitjs/) into an "Apple Maps" block in the WordPress block editor (Gutenberg).  You will need an [Apple Developer Program](https://developer.apple.com/programs/) account, Maps Identifier, and Private Key to configure this plugin and connect to the MapKit JS API in order for the block to function.  Note that the Apple Developer Program has an annual fee of 99 USD, in local currency where available.  Prices may vary by region and are listed in local currency during the enrollment process.  [Fee waivers are available for the Apple Developer Program for eligible organizations](https://developer.apple.com/support/membership-fee-waiver/).
 
+![Block settings](.wordpress-org/screenshot-1.png "Example of Apple Maps block in the new WordPress editor")
+
 ## Requirements
 
 * PHP 5.6+
@@ -26,6 +28,8 @@ This plugin integrates Apple's [MapKit JS](https://developer.apple.com/maps/mapk
 ## Configuration
 
 In order to start using the Apple Maps block, you will need to sign up for the Apple Developer Program and create your Maps identifiers, keys, and tokens.  Follow the steps below to generate the Private Key, Key ID, and Team ID that you will need to configure the plugin and gain access to the MapKit JS API for the Apple Maps block.
+
+![Block initial install view showing MapKit JS credential fields](.wordpress-org/screenshot-3.png "Example of Apple Maps block showing MapKit JS credential fields in the new WordPress editor")
 
 ### Create an Apple Developer account
 
@@ -54,6 +58,8 @@ There is a free daily limit of 250,000 map views and 25,000 service calls per th
 ### Can I see how many map views and service requests are made to my MapKit JS Private Key?
 
 Yes, you can track your MapKit JS useage on the [MapKit JS Developer Dashboard](https://maps.developer.apple.com/).  You can also monitor map initializations and service requests in realtime, or see up to a year of activity by day, week, month, or year via the MapKit JS Dashboard.
+
+![Block marker settings](.wordpress-org/screenshot-2.png "Example of Apple Maps block showing Marker settings in the new WordPress editor")
 
 ## Support Level
 
