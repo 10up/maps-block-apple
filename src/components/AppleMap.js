@@ -153,24 +153,23 @@ class AppleMap {
 	}
 
 	static authenticateMap() {
-		function getJWTToken( resolveCallback ) {
-			apiFetch( { path: 'MapsBlockApple/v1/GetJWT/' } )
-				.then( resolveCallback )
-				.catch( ( error ) => {
-					dispatch( 'core/notices' ).createErrorNotice(
-						error.message,
-						{
-							isDismissible: true,
-							type: 'snackbar',
-						}
-					);
-					mapkit.dispatchEvent( new Event( 'error' ) );
+		apiFetch( { path: 'MapsBlockApple/v1/GetJWT/' } )
+			.then( () => {
+				mapkit.init( {
+					authorizationCallback( done ) {
+						apiFetch( { path: 'MapsBlockApple/v1/GetJWT/' } ).then(
+							done
+						);
+					},
 				} );
-		}
-
-		mapkit.init( {
-			authorizationCallback: getJWTToken,
-		} );
+			} )
+			.catch( ( error ) => {
+				dispatch( 'core/notices' ).createErrorNotice( error.message, {
+					isDismissible: true,
+					type: 'snackbar',
+				} );
+				mapkit.dispatchEvent( new Event( 'error' ) );
+			} );
 	}
 }
 
