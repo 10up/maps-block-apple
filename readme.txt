@@ -60,6 +60,7 @@ Yes, you can track your MapKit JS useage on the [MapKit JS Developer Dashboard](
 1. Block settings
 2. Block marker settings
 3. Block initial install view showing MapKit JS credential fields
+4. Block settings page showing MapKit JS credential fields
 
 == Changelog ==
 
