@@ -153,24 +153,30 @@ class AppleMap {
 	}
 
 	static authenticateMap() {
-		function getJWTToken( resolveCallback ) {
-			apiFetch( { path: 'MapsBlockApple/v1/GetJWT/' } )
-				.then( resolveCallback )
-				.catch( ( error ) => {
-					dispatch( 'core/notices' ).createErrorNotice(
-						error.message,
-						{
-							isDismissible: true,
-							type: 'snackbar',
-						}
-					);
-					mapkit.dispatchEvent( new Event( 'error' ) );
+		apiFetch( { path: 'MapsBlockApple/v1/GetJWT/' } )
+			.then( () => {
+				mapkit.init( {
+					authorizationCallback( done ) {
+						/**
+						 * JWT only lives for 30 mins. Calling it again here to
+						 * allow mapkit to get new token when needed.
+						 *
+						 * @see https://github.com/10up/maps-block-apple/issues/48
+						 * @see https://github.com/10up/maps-block-apple/pull/52
+						 */
+						apiFetch( { path: 'MapsBlockApple/v1/GetJWT/' } ).then(
+							done
+						);
+					},
 				} );
-		}
-
-		mapkit.init( {
-			authorizationCallback: getJWTToken,
-		} );
+			} )
+			.catch( ( error ) => {
+				dispatch( 'core/notices' ).createErrorNotice( error.message, {
+					isDismissible: true,
+					type: 'snackbar',
+				} );
+				mapkit.dispatchEvent( new Event( 'error' ) );
+			} );
 	}
 }
 

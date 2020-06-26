@@ -62,6 +62,18 @@ function get_jwt() {
 	if ( ! isset( $team_id ) || '' === $team_id ) {
 		return new WP_Error( 'NoKey', 'Missing Team ID', [ 'status' => 401 ] );
 	}
+	if ( 10 !== strlen( $key_id ) ) {
+		return new WP_Error( 'InvalidKey', 'Invalid Key ID', [ 'status' => 401 ] );
+	}
+	if ( 10 !== strlen( $team_id ) ) {
+		return new WP_Error( 'InvalidKey', 'Invalid Team ID', [ 'status' => 401 ] );
+	}
+	if (
+		0 !== strpos( $private_key, '-----BEGIN PRIVATE KEY-----' )
+		&& ! strpos( $private_key, '-----END PRIVATE KEY-----' )
+	) {
+		return new WP_Error( 'InvalidKey', 'Invalid Private Key', [ 'status' => 401 ] );
+	}
 
 	$header = [
 		'alg' => 'ES256',
