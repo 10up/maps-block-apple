@@ -1,5 +1,5 @@
 === Block for Apple Maps ===
-Contributors:      10up, helen, welcher, fabiankaegy
+Contributors:      10up, helen, welcher, fabiankaegy, dinhtungdu
 Tags:              apple maps, map block
 Requires at least: 5.2
 Tested up to:      5.4.1
@@ -57,6 +57,10 @@ Yes, you can track your MapKit JS useage on the [MapKit JS Developer Dashboard](
 
 == Screenshots ==
 
+1. Block settings
+2. Block marker settings
+3. Block initial install view showing MapKit JS credential fields
+4. Block settings page showing MapKit JS credential fields
 
 == Changelog ==
 
