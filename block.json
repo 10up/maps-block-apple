@@ -8,7 +8,7 @@
   "attributes": {
  		"address": {
  			"type": "string",
- 			"default": '',
+ 			"default": "",
  		},
  		"height": {
  			"type": "string",
