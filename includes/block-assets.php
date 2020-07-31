@@ -25,14 +25,6 @@ function register_block_assets() {
 		false
 	);
 
-	wp_localize_script(
-		'maps-block-apple-block',
-		'_mbaData',
-		[
-			'settingsURL' => admin_url( 'options-general.php?page=block-for-apple-maps' ),
-		]
-	);
-
 	wp_register_style(
 		'maps-block-apple-style',
 		MAPS_BLOCK_APPLE_URL . 'style.css',
