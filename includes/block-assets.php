@@ -78,3 +78,11 @@ function register_frontend_assets() {
 		false
 	);
 }
+
+add_action( 'init', __NAMESPACE__ . '\set_script_translations' );
+/**
+ * Load translations.
+ */
+function set_script_translations() {
+	wp_set_script_translations( 'maps-block-apple-block', 'maps-block-apple' );
+}
