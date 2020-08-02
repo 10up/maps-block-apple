@@ -5,6 +5,7 @@ import { __ } from '@wordpress/i18n';
 import DisplaySettings from './Settings/DisplaySettings';
 import LocationSettings from './Settings/LocationSettings';
 import MarkerSettings from './Settings/MarkerSettings';
+import AuthenticationSettings from './Settings/AuthenticationSettings';
 
 export default function InspectorSettings( props ) {
 	const { authenticated, map } = props;
@@ -29,6 +30,7 @@ export default function InspectorSettings( props ) {
 			<LocationSettings { ...props } map={ map } />
 			<DisplaySettings { ...props } />
 			<MarkerSettings { ...props } />
+			{ authenticated && <AuthenticationSettings { ...props } /> }
 		</InspectorControls>
 	);
 }
