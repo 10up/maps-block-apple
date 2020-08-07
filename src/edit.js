@@ -98,10 +98,15 @@ export default function MapsBlockAppleEdit( props ) {
 		};
 	}, [] );
 
-	const debouncedUpdateMarkers =
-		map && map.current
-			? debounce( map.current.addMarkers.bind( map.current ), 300 )
-			: () => {};
+	const debouncedUpdateMarkers = useRef(
+		debounce( ( markers ) => {
+			if ( ! map.current ) {
+				return;
+			}
+
+			map.current.addMarkers( markers );
+		}, 300 )
+	).current;
 
 	useEffect( () => {
 		if ( authenticated ) {
