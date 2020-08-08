@@ -99,12 +99,12 @@ export default function MapsBlockAppleEdit( props ) {
 	}, [] );
 
 	const debouncedUpdateMarkers = useRef(
-		debounce( ( markers ) => {
+		debounce( ( newMarkers ) => {
 			if ( ! map.current ) {
 				return;
 			}
 
-			map.current.addMarkers( markers );
+			map.current.addMarkers( newMarkers );
 		}, 300 )
 	).current;
 
@@ -124,13 +124,7 @@ export default function MapsBlockAppleEdit( props ) {
 		}
 	}, [ props.attributes, authenticated ] );
 
-	useEffect( () => {
-		if ( ! map.current ) {
-			return;
-		}
-
-		debouncedUpdateMarkers( markers );
-	}, [ markers ] );
+	useEffect( () => debouncedUpdateMarkers( markers ), [ markers ] );
 
 	if ( isLoading ) {
 		return (
