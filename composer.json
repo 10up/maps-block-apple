@@ -1,7 +1,7 @@
 {
 	"name": "10up/maps-block-apple",
 	"description": "WordPress editor block for Apple Maps",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"type": "wordpress-plugin",
 	"homepage": "https://10up.com",
 	"license": "GPLv2 or later",
