@@ -1,6 +1,6 @@
 === Block for Apple Maps ===
 Contributors:      10up, helen, welcher, fabiankaegy, dinhtungdu
-Tags:              apple maps, map block
+Tags:              apple maps, map block, block
 Requires at least: 5.2
 Tested up to:      5.4.1
 Requires PHP:      5.6

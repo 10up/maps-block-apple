@@ -1,0 +1,74 @@
+{
+	"name": "tenup/maps-block-apple",
+	"title": "Apple Maps",
+	"category": "embed",
+	"icon": <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 40 52"><path fill="#333" fillRule="evenodd" d="M37.15 9.802c0 4.936-3.698 9.05-8.46 9.709v11.854l-1.304 3.92-1.303-3.92V19.521c-4.8-.626-8.536-4.757-8.536-9.72 0-5.39 4.41-9.801 9.802-9.801 5.39 0 9.801 4.41 9.801 9.802zm-15.224-2.38c.74.633 2.088.274 3.01-.802.922-1.077 1.068-2.464.327-3.098-.74-.634-2.088-.275-3.01.802-.921 1.076-1.068 2.463-.327 3.097z" clipRule="evenodd"></path><path fill="#333" d="M12.85 25l11.277 3.776v2.589l3.26 8.821 3.258-8.821v-2.483L40 25v21.736l-12.124 4.93-15.026-4.93L0 51.666V30.032L12.85 25z"></path></svg>,
+	"description": "An Apple Maps block.",
+	"keywords": [ "apple", __( 'map' ), "apple map" ],
+  "attributes": {
+ 		"address": {
+ 			"type": "string",
+ 			"default": "",
+ 		},
+ 		"height": {
+ 			"type": "string",
+ 			"default": "450",
+ 		},
+ 		"latitude": {
+ 			"type": "number",
+ 			"default": 51.48762585296625,
+ 		},
+ 		"longitude": {
+ 			"type": "number",
+ 			"default": -0.1326724377053381,
+ 		},
+ 		"rotation": {
+ 			"type": "number",
+ 			"default": 0,
+ 		},
+ 		"zoom": {
+ 			"type": "number",
+ 			"default": 15,
+ 		},
+ 		"mapType": {
+ 			"type": "string",
+ 			"default": "Map.MapTypes.Standard",
+ 		},
+ 		"showsMapTypeControl": {
+ 			"type": "boolean",
+ 			"default": true,
+ 		},
+ 		"isRotationEnabled": {
+ 			"type": "boolean",
+ 			"default": true,
+ 		},
+ 		"showsCompass": {
+ 			"type": "string",
+ 			"default": "FeatureVisibility.Adaptive",
+ 		},
+ 		"isZoomEnabled": {
+ 			"type": "boolean",
+ 			"default": true,
+ 		},
+ 		"showsZoomControl": {
+ 			"type": "boolean",
+ 			"default": true,
+ 		},
+ 		"isScrollEnabled": {
+ 			"type": "boolean",
+ 			"default": true,
+ 		},
+ 		"showsScale": {
+ 			"type": "string",
+ 			"default": "FeatureVisibility.Adaptive",
+ 		},
+ 		"markers": {
+ 			"type": "array",
+ 			"default": [],
+ 		},
+ 	},
+	"editorScript": "file:build/index.js",
+	"editorStyle": "file:editor.css",
+  "script": "file:build/frontend.js",
+	"style": "file:style.css"
+}
