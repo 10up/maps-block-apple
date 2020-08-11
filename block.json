@@ -67,8 +67,8 @@
  			"default": [],
  		},
  	},
-	"editorScript": "file:.js",
-	"editorStyle": "file:.css",
-  "script": "file:.js",
-	"style": "file:.css"
+	"editorScript": "file:build/index.js",
+	"editorStyle": "file:editor.css",
+  "script": "file:build/frontend.js",
+	"style": "file:style.css"
 }
