@@ -13,6 +13,7 @@ import EditAuthForm from './components/EditAuthForm';
 import InspectorSettings from './inspector-settings';
 import IsAdmin from './helper';
 import BlockIcon from './block-icon';
+import { debounce } from 'lodash';
 
 export default function MapsBlockAppleEdit( props ) {
 	const {
@@ -97,6 +98,16 @@ export default function MapsBlockAppleEdit( props ) {
 		};
 	}, [] );
 
+	const debouncedUpdateMarkers = useRef(
+		debounce( ( newMarkers ) => {
+			if ( ! map.current ) {
+				return;
+			}
+
+			map.current.addMarkers( newMarkers );
+		}, 300 )
+	).current;
+
 	useEffect( () => {
 		if ( authenticated ) {
 			map.current = new AppleMapEdit(
@@ -113,13 +124,7 @@ export default function MapsBlockAppleEdit( props ) {
 		}
 	}, [ props.attributes, authenticated ] );
 
-	useEffect( () => {
-		if ( ! map.current ) {
-			return;
-		}
-
-		map.current.addMarkers( markers );
-	}, [ markers ] );
+	useEffect( () => debouncedUpdateMarkers( markers ), [ markers ] );
 
 	if ( isLoading ) {
 		return (

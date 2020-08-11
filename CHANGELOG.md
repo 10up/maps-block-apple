@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file, per [the Ke
 
 ## [Unreleased] - TBD
 
+## [1.0.1] - 2020-08-11
+### Added
+- Internationalization support via loading translations for the block (props [@dinhtungdu](https://github.com/dinhtungdu), [@helen](https://github.com/helen) via [#69](https://github.com/10up/maps-block-apple/pull/69))
+- WordPress.org Block Directory integration (props [@jeffpaul](https://github.com/jeffpaul) via [#63](https://github.com/10up/maps-block-apple/pull/63))
+- Documentation and GitHub Action updates (props [@helen](https://github.com/helen), [@jeffpaul](https://github.com/jeffpaul) via [#59](https://github.com/10up/maps-block-apple/pull/59), [#60](https://github.com/10up/maps-block-apple/pull/60), [#68](https://github.com/10up/maps-block-apple/pull/68))
+
+### Fixed
+- Debounce `addMarker` call when marker settings are changed (props [@fabiankaegy](https://github.com/fabiankaegy), [@dinhtungdu](https://github.com/dinhtungdu) via [#70](https://github.com/10up/maps-block-apple/pull/70))
+- Key and Team ID settings placeholders (props [@dinhtungdu](https://github.com/dinhtungdu), [@helen](https://github.com/helen), [@jeffpaul](https://github.com/jeffpaul) via [#57](https://github.com/10up/maps-block-apple/pull/57))
+
+### Security
+- Bump `lodash` from 4.17.15 to 4.17.19 (props [@dependabot](https://github.com/apps/dependabot) via [#67](https://github.com/10up/maps-block-apple/pull/67))
+- Bump `elliptic` from 6.5.2 to 6.5.3 (props [@dependabot](https://github.com/apps/dependabot) via [#71](https://github.com/10up/maps-block-apple/pull/71))
+
 ## [1.0.0] - 2020-06-25
 ### Added
 - Ability to add Markers to the map (props [@fabiankaegy](https://github.com/fabiankaegy) via [#51](https://github.com/10up/maps-block-apple/pull/51))

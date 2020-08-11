@@ -2,7 +2,7 @@
 
 > An Apple Maps block for the WordPress block editor (Gutenberg).
 
-[![Support Level](https://img.shields.io/badge/support-active-green.svg)](#support-level) [![Release Version](https://img.shields.io/github/release/10up/maps-block-apple.svg)](https://github.com/10up/maps-block-apple/releases/latest) ![WordPress tested up to version](https://img.shields.io/badge/WordPress-v5.4%20tested-success.svg) [![GPLv2 License](https://img.shields.io/github/license/10up/maps-block-apple.svg)](https://github.com/10up/maps-block-apple/blob/develop/LICENSE.md)
+[![Support Level](https://img.shields.io/badge/support-active-green.svg)](#support-level) [![Release Version](https://img.shields.io/github/release/10up/maps-block-apple.svg)](https://github.com/10up/maps-block-apple/releases/latest) ![WordPress tested up to version](https://img.shields.io/badge/WordPress-v5.5%20tested-success.svg) [![GPLv2 License](https://img.shields.io/github/license/10up/maps-block-apple.svg)](https://github.com/10up/maps-block-apple/blob/develop/LICENSE.md)
 
 ## Overview
 
@@ -50,6 +50,14 @@ In order to start using the Apple Maps block, you will need to sign up for the A
 ### I'm seeing validation errors when trying to authenticate my MapKit JS credentials, what am I doing wrong?
 
 If you have WordPress installed in a subdirectory, then there is a [known issue](https://github.com/10up/maps-block-apple/issues/34) specifically related to this setup where the WordPress Admin URL is different from the site URL.  We're working on a [minor release](https://github.com/10up/maps-block-apple/milestone/3) to resolve this issue.
+
+### I want to update my MapKit JS credentials, what's the best way to do this?
+
+Our recommendation on updating the Apple Maps block settings focuses on ensuring the best experience for your site users.  Specifically we recommend the following approach to ensure that existing Apple Maps on your site continue to be displayed during your MapKit JS credential transition.
+
+1. Create a new MapKit JS Private Key, Key ID, and/or Team ID.
+2. Update the Apple Maps block settings with the newly created Private Key, Key ID, and/or Team ID.
+3. Delete your old MapKit JS Private Key, Key ID, and/or Team ID.
 
 ### Are there any MapKit JS rate limits?
 

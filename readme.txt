@@ -1,10 +1,10 @@
 === Block for Apple Maps ===
 Contributors:      10up, helen, welcher, fabiankaegy, dinhtungdu
-Tags:              apple maps, map block
+Tags:              apple maps, map block, block
 Requires at least: 5.2
-Tested up to:      5.4.1
+Tested up to:      5.5
 Requires PHP:      5.6
-Stable tag:        1.0.0
+Stable tag:        1.0.1
 License:           GPLv2 or later
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -47,6 +47,14 @@ In order to start using the Apple Maps block, you will need to sign up for the A
 
 If you have WordPress installed in a subdirectory, then there is a [known issue](https://github.com/10up/maps-block-apple/issues/34) specifically related to this setup where the WordPress Admin URL is different from the site URL.  We're working on a [minor release](https://github.com/10up/maps-block-apple/milestone/3) to resolve this issue.
 
+= I want to update my MapKit JS credentials, what's the best way to do this? =
+
+Our recommendation on updating the Apple Maps block settings focuses on ensuring the best experience for your site users.  Specifically we recommend the following approach to ensure that existing Apple Maps on your site continue to be displayed during your MapKit JS credential transition.
+
+1. Create a new MapKit JS Private Key, Key ID, and/or Team ID.
+2. Update the Apple Maps block settings with the newly created Private Key, Key ID, and/or Team ID.
+3. Delete your old MapKit JS Private Key, Key ID, and/or Team ID.
+
 = Are there any MapKit JS rate limits? =
 
 There is a free daily limit of 250,000 map views and 25,000 service calls per the Apple Developer Program membership.  For additional MapKit JS capacity needs you will need to [contact Apple directly](https://developer.apple.com/contact/request/mapkitjs/).
@@ -63,6 +71,15 @@ Yes, you can track your MapKit JS useage on the [MapKit JS Developer Dashboard](
 4. Block settings page showing MapKit JS credential fields
 
 == Changelog ==
+
+= 1.0.1 =
+* **Added:** Internationalization support via loading translations for the block (props [@dinhtungdu](https://profiles.wordpress.org/dinhtungdu/), [@helen](https://profiles.wordpress.org/helen/) via [#69](https://github.com/10up/maps-block-apple/pull/69))
+* **Added:** WordPress.org Block Directory integration (props [@jeffpaul](https://profiles.wordpress.org/jeffpaul/) via [#63](https://github.com/10up/maps-block-apple/pull/63))
+* **Added:** Documentation and GitHub Action updates (props [@helen](https://profiles.wordpress.org/helen/), [@jeffpaul](https://profiles.wordpress.org/jeffpaul/) via [#59](https://github.com/10up/maps-block-apple/pull/59), [#60](https://github.com/10up/maps-block-apple/pull/60), [#68](https://github.com/10up/maps-block-apple/pull/68))
+* **Fixed:** Debounce `addMarker` call when marker settings are changed (props [@fabiankaegy](https://profiles.wordpress.org/fabiankaegy/), [@dinhtungdu](https://profiles.wordpress.org/dinhtungdu/) via [#70](https://github.com/10up/maps-block-apple/pull/70))
+* **Fixed:** Key and Team ID settings placeholders (props [@dinhtungdu](https://profiles.wordpress.org/dinhtungdu/), [@helen](https://profiles.wordpress.org/helen/), [@jeffpaul](https://profiles.wordpress.org/jeffpaul/) via [#57](https://github.com/10up/maps-block-apple/pull/57))
+* **Security:** Bump `lodash` from 4.17.15 to 4.17.19 (props [@dependabot](https://github.com/apps/dependabot) via [#67](https://github.com/10up/maps-block-apple/pull/67))
+* **Security:** Bump `elliptic` from 6.5.2 to 6.5.3 (props [@dependabot](https://github.com/apps/dependabot) via [#71](https://github.com/10up/maps-block-apple/pull/71))
 
 = 1.0.0 =
 🎉 Initial public release!
