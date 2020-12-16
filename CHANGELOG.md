@@ -32,7 +32,7 @@ All notable changes to this project will be documented in this file, per [the Ke
 
 ### Changed
 - Refactored codebase, build system to use `@wordpress/scripts` (props [@fabiankaegy](https://github.com/fabiankaegy), [@ryanwelcher](https://github.com/ryanwelcher) via [#20](https://github.com/10up/maps-block-apple/pull/20))
-- Revamped settings screen to go with refactored codebase (props [@ryanwelcher] and(https://github.com/ryanwelcher) and [@dinhtungdu](https://github.com/dinhtungdu) via [#31](https://github.com/10up/maps-block-apple/pull/31))
+- Revamped settings screen to go with refactored codebase (props [@ryanwelcher](https://github.com/ryanwelcher) and [@dinhtungdu](https://github.com/dinhtungdu) via [#31](https://github.com/10up/maps-block-apple/pull/31))
 - Permissions to change the MapKit JS authentication keys to users with the capability to `manage_options` (props [@fabiankaegy](https://github.com/fabiankaegy), [@ryanwelcher](https://github.com/ryanwelcher) via [#29](https://github.com/10up/maps-block-apple/pull/29))
 - Authorizations by passing a callback function to `authorizationCallback` (props [@fabiankaegy](https://github.com/fabiankaegy) via [#52](https://github.com/10up/maps-block-apple/pull/52))
 - Re-licensed to GPLv2 (props [@jeffpaul](https://github.com/jeffpaul) via [#21](https://github.com/10up/maps-block-apple/pull/21))
