@@ -3,7 +3,6 @@ import {
 	Placeholder,
 	Toolbar,
 	ToolbarButton,
-	ResizableBox,
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { useEffect, useRef, useState } from '@wordpress/element';
@@ -16,6 +15,7 @@ import InspectorSettings from './inspector-settings';
 import IsAdmin from './helper';
 import BlockIcon from './block-icon';
 import { debounce } from 'lodash';
+import { ResizableMap } from './components/ResizableMap'
 
 export default function MapsBlockAppleEdit( props ) {
 	const {
@@ -264,57 +264,5 @@ export default function MapsBlockAppleEdit( props ) {
 				) ) }
 			</div>
 		</>
-	);
-}
-
-const RESIZABLE_BOX_ENABLE_OPTION = {
-	top: false,
-	right: false,
-	bottom: true,
-	left: false,
-	topRight: false,
-	bottomRight: false,
-	bottomLeft: false,
-	topLeft: false,
-};
-
-const MAP_MIN_HEIGHT = 100;
-
-function ResizableMap( {
-	onResizeStart,
-	onResize,
-	onResizeStop,
-	...props
-} ) {
-	const [ isResizing, setIsResizing ] = useState( false );
-
-	return (
-		<ResizableBox
-			style={{
-				position: 'absolute',
-				top: 0,
-				left: 0,
-				right: 0,
-				bottom: 0,
-			}}
-			className={ `apple-maps-block__resize-container ${isResizing ? 'is-resizing' : ''}` }
-			enable={ RESIZABLE_BOX_ENABLE_OPTION }
-			onResizeStart={ ( _event, _direction, elt ) => {
-				onResizeStart( elt.clientHeight );
-				onResize( elt.clientHeight );
-			} }
-			onResize={ ( _event, _direction, elt ) => {
-				onResize( elt.clientHeight );
-				if ( ! isResizing ) {
-					setIsResizing( true );
-				}
-			} }
-			onResizeStop={ ( _event, _direction, elt ) => {
-				onResizeStop( elt.clientHeight );
-				setIsResizing( false );
-			} }
-			minHeight={ MAP_MIN_HEIGHT }
-			{ ...props }
-		/>
 	);
 }
