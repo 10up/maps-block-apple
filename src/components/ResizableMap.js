@@ -1,6 +1,5 @@
-import {
-	ResizableBox,
-} from '@wordpress/components';
+import { ResizableBox } from '@wordpress/components';
+import { useState } from '@wordpress/element';
 
 const RESIZABLE_BOX_ENABLE_OPTION = {
 	top: false,
