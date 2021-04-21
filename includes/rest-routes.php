@@ -24,8 +24,9 @@ function add_endpoints() {
 		MAPS_BLOCK_APPLE_VERSION_REST_NAMESPACE,
 		'/GetJWT',
 		[
-			'methods'  => 'GET',
-			'callback' => __NAMESPACE__ . '\get_jwt',
+			'methods'             => 'GET',
+			'callback'            => __NAMESPACE__ . '\get_jwt',
+			'permission_callback' => '__return_true',
 		]
 	);
 }

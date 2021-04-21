@@ -3,7 +3,8 @@
 All notable changes to this project will be documented in this file, per [the Keep a Changelog standard](http://keepachangelog.com/), and will adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased] - TBD
-
+### Added
+- Resize Handle to modify the height of the Map inline
 ## [1.0.1] - 2020-08-11
 ### Added
 - Internationalization support via loading translations for the block (props [@dinhtungdu](https://github.com/dinhtungdu), [@helen](https://github.com/helen) via [#69](https://github.com/10up/maps-block-apple/pull/69))
