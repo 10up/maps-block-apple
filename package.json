@@ -22,13 +22,15 @@
     "packages-update": "wp-scripts packages-update",
     "start": "wp-scripts start src/index.js src/frontend.js src/admin-settings.js",
     "test:e2e": "wp-scripts test-e2e",
-    "test:unit": "wp-scripts test-unit-js"
+    "test:unit": "wp-scripts test-unit-js",
+    "wp-env": "wp-env"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/10up/maps-block-apple"
   },
   "devDependencies": {
+    "@wordpress/env": "^2.0.1",
     "@wordpress/eslint-plugin": "^5.1.0",
     "@wordpress/scripts": "^9.0.0"
   }
