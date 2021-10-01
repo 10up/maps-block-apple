@@ -13,7 +13,7 @@ add_action( 'init', __NAMESPACE__ . '\register_block_assets' );
  */
 function register_block_assets() {
 
-	wp_enqueue_script( 'apple-mapkit-js', 'https://cdn.apple-mapkit.com/mk/5.x.x/mapkit.js', [], 5, false );
+	wp_register_script( 'apple-mapkit-js', 'https://cdn.apple-mapkit.com/mk/5.x.x/mapkit.js', [], 5, false );
 
 	$file_name           = 'index';
 	$script_dependencies = ( include MAPS_BLOCK_APPLE_PATH . "build/$file_name.asset.php" );
@@ -33,38 +33,22 @@ function register_block_assets() {
 		]
 	);
 
-	wp_register_style(
-		'maps-block-apple-style',
-		MAPS_BLOCK_APPLE_URL . 'style.css',
-		[],
-		$script_dependencies['version']
-	);
-
-	wp_register_style(
-		'maps-block-apple-editor-style',
-		MAPS_BLOCK_APPLE_URL . 'editor.css',
-		[],
-		$script_dependencies['version']
-	);
-
 	register_block_type(
 		'tenup/maps-block-apple',
 		[
-			'editor_script' => 'maps-block-apple-block',
-			'editor_style'  => 'maps-block-apple-editor-style',
-			'style'         => 'maps-block-apple-style',
+			'editor_script' => 'maps-block-apple-block'
 		]
 	);
 
 }
 
-add_action( 'init', __NAMESPACE__ . '\register_frontend_assets' );
+add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\register_frontend_assets' );
 /**
  * Register block assets
  */
 function register_frontend_assets() {
-	// If in the backend, bail out.
-	if ( is_admin() ) {
+	// If not single post display and does not have the map block then bail.
+	if ( ! is_singular() || ! has_block( 'tenup/maps-block-apple' ) ) {
 		return;
 	}
 
