@@ -89,6 +89,9 @@ function get_jwt() {
 		'origin' => get_fqdn_from_url( get_site_url() ),
 	];
 
+	// exlude the origin restriction from the JWT for local environemts
+	// this is to allow tools like wp-env or browsersync to work since the url
+	// is not the same as the site url.
 	if ( wp_get_environment_type() === 'local' ) {
 		unset( $body['origin'] );
 	}
