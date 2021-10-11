@@ -64,13 +64,7 @@ function register_block_assets() {
 		false
 	);
 
-	register_block_type(
-		'tenup/maps-block-apple',
-		[
-			'editor_script' => 'maps-block-apple-block',
-			'script'        => 'maps-block-apple-frontend',
-		]
-	);
+	register_block_type( MAPS_BLOCK_APPLE_PATH );
 
 }
 
