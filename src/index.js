@@ -6,7 +6,6 @@ const { Map, FeatureVisibility } = mapkit;
 /**
  * WordPress dependencies
  */
-import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
 
 /**
@@ -19,7 +18,8 @@ import metadata from './../block.json';
 
 registerBlockType( metadata, {
 	icon: BlockIcon,
-	attributes: { ...metadata.attributes,
+	attributes: {
+		...metadata.attributes,
 		mapType: {
 			type: 'string',
 			default: Map.MapTypes.Standard,
@@ -31,7 +31,7 @@ registerBlockType( metadata, {
 		showsScale: {
 			type: 'string',
 			default: FeatureVisibility.Adaptive,
-		}
+		},
 	},
 	edit: MapsBlockAppleEdit,
 	save: MapsBlockAppleSave,

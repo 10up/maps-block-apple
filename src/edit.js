@@ -15,7 +15,7 @@ import InspectorSettings from './inspector-settings';
 import IsAdmin from './helper';
 import BlockIcon from './block-icon';
 import { debounce } from 'lodash';
-import { ResizableMap } from './components/ResizableMap'
+import { ResizableMap } from './components/ResizableMap';
 
 export default function MapsBlockAppleEdit( props ) {
 	const {
@@ -224,8 +224,8 @@ export default function MapsBlockAppleEdit( props ) {
 				onResizeStart={ () => {
 					toggleSelection( false );
 				} }
-				onResize={ (newHeight) => {
-					setAttributes( { height: newHeight } )
+				onResize={ ( newHeight ) => {
+					setAttributes( { height: newHeight } );
 				} }
 				onResizeStop={ ( newHeight ) => {
 					toggleSelection( true );
