@@ -89,6 +89,10 @@ function get_jwt() {
 		'origin' => get_fqdn_from_url( get_site_url() ),
 	];
 
+	if ( wp_get_environment_type() === 'local' ) {
+		unset( $body['origin'] );
+	}
+
 	$payload = encode( wp_json_encode( $header ) ) . '.' . encode( wp_json_encode( $body ) );
 
 	$key = openssl_pkey_get_private( $private_key );
