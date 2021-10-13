@@ -32,3 +32,5 @@ jobs:
       - uses: actions/checkout@v2
       - name: WPCS check
         uses: 10up/wpcs-action@stable
+        with:
+          use_local_config: true
