@@ -13,7 +13,9 @@ add_action( 'init', __NAMESPACE__ . '\register_block_assets' );
  */
 function register_block_assets() {
 
-	// Admin Settings Page Style
+	/**
+	 * Admin Settings Page Style
+	 */
 	wp_register_style(
 		'maps-block-apple-settings',
 		trailingslashit( MAPS_BLOCK_APPLE_URL ) . 'assets/css/admin-maps-block-apple-settings.css',
@@ -21,10 +23,14 @@ function register_block_assets() {
 		MAPS_BLOCK_APPLE_VERSION
 	);
 
-	// Mapkit Library
+	/**
+	 * Mapkit Library
+	 */
 	wp_register_script( 'apple-mapkit-js', 'https://cdn.apple-mapkit.com/mk/5.x.x/mapkit.js', [], 5, false );
 
-	// Admin Settings Script
+	/**
+	 * Admin Settings Script
+	 */
 	$settings_file_name    = 'admin-settings';
 	$settings_dependencies = ( include MAPS_BLOCK_APPLE_PATH . "build/$settings_file_name.asset.php" );
 	wp_register_script(
@@ -35,7 +41,9 @@ function register_block_assets() {
 		true
 	);
 
-	// Block Editorial Script
+	/**
+	 * Block Editorial Script
+	 */
 	$block_file_name    = 'index';
 	$block_dependencies = ( include MAPS_BLOCK_APPLE_PATH . "build/$block_file_name.asset.php" );
 	wp_register_script(
@@ -53,7 +61,9 @@ function register_block_assets() {
 		]
 	);
 
-	// FE Block Script
+	/**
+	 * FE Block Script
+	 */
 	$fe_file_name          = 'frontend';
 	$frontend_dependencies = ( include MAPS_BLOCK_APPLE_PATH . "build/$fe_file_name.asset.php" );
 	wp_register_script(
