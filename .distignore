@@ -22,3 +22,4 @@ LICENSE.md
 package.json
 package-lock.json
 README.md
+.wp-env.json
