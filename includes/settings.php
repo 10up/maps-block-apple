@@ -146,22 +146,9 @@ function enqueue_settings_assets( $screen_id ) {
 	if ( ! $screen_id || 'settings_page_block-for-apple-maps' !== $screen_id ) {
 		return;
 	}
-	wp_enqueue_style(
-		'admin_block_for_apple_maps',
-		trailingslashit( MAPS_BLOCK_APPLE_URL ) . 'assets/css/admin-maps-block-apple-settings.css',
-		[],
-		MAPS_BLOCK_APPLE_VERSION
-	);
 
-	$file_name    = 'admin-settings';
-	$dependencies = ( include MAPS_BLOCK_APPLE_PATH . "build/$file_name.asset.php" );
-	wp_enqueue_script(
-		'maps-block-apple-frontend',
-		MAPS_BLOCK_APPLE_URL . "build/$file_name.js",
-		array_merge( $dependencies['dependencies'], [ 'apple-mapkit-js' ] ),
-		$dependencies['version'],
-		true
-	);
+	wp_enqueue_style( 'maps-block-apple-settings' );
+	wp_enqueue_script( 'maps-block-apple-settings' );
 }
 
 /**

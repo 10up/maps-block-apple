@@ -24,8 +24,9 @@ function add_endpoints() {
 		MAPS_BLOCK_APPLE_VERSION_REST_NAMESPACE,
 		'/GetJWT',
 		[
-			'methods'  => 'GET',
-			'callback' => __NAMESPACE__ . '\get_jwt',
+			'methods'             => 'GET',
+			'callback'            => __NAMESPACE__ . '\get_jwt',
+			'permission_callback' => '__return_true',
 		]
 	);
 }
@@ -87,6 +88,13 @@ function get_jwt() {
 		'exp'    => time() + 30,
 		'origin' => get_fqdn_from_url( get_site_url() ),
 	];
+
+	// exlude the origin restriction from the JWT for local environemts
+	// this is to allow tools like wp-env or browsersync to work since the url
+	// is not the same as the site url.
+	if ( wp_get_environment_type() === 'local' ) {
+		unset( $body['origin'] );
+	}
 
 	$payload = encode( wp_json_encode( $header ) ) . '.' . encode( wp_json_encode( $body ) );
 

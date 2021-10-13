@@ -7,6 +7,7 @@ import {
 import { __ } from '@wordpress/i18n';
 import { useEffect, useRef, useState } from '@wordpress/element';
 import { BlockControls } from '@wordpress/block-editor';
+import { dispatch } from '@wordpress/data';
 
 import { AppleMapEdit } from './components/AppleMap';
 import EditAuthForm from './components/EditAuthForm';
@@ -14,6 +15,7 @@ import InspectorSettings from './inspector-settings';
 import IsAdmin from './helper';
 import BlockIcon from './block-icon';
 import { debounce } from 'lodash';
+import { ResizableMap } from './components/ResizableMap';
 
 export default function MapsBlockAppleEdit( props ) {
 	const {
@@ -36,6 +38,7 @@ export default function MapsBlockAppleEdit( props ) {
 		},
 		setAttributes,
 		clientId,
+		isSelected,
 	} = props;
 
 	const [ authenticated, setAuthenticated ] = useState( false );
@@ -43,6 +46,8 @@ export default function MapsBlockAppleEdit( props ) {
 
 	const mapElement = useRef();
 	const map = useRef();
+
+	const { toggleSelection } = dispatch( 'core/block-editor' );
 
 	useEffect( () => {
 		if ( mapkit.authenticated ) {
@@ -214,6 +219,19 @@ export default function MapsBlockAppleEdit( props ) {
 				{ ...props }
 				authenticated={ authenticated }
 				map={ map }
+			/>
+			<ResizableMap
+				onResizeStart={ () => {
+					toggleSelection( false );
+				} }
+				onResize={ ( newHeight ) => {
+					setAttributes( { height: newHeight } );
+				} }
+				onResizeStop={ ( newHeight ) => {
+					toggleSelection( true );
+					setAttributes( { height: newHeight } );
+				} }
+				showHandle={ isSelected }
 			/>
 			<div
 				ref={ mapElement }
