@@ -42,3 +42,9 @@ The `develop` branch is the development branch which means it contains the next 
 12. Check WordPress.org: Ensure that the changes are live on https://wordpress.org/plugins/maps-block-apple/. This may take a few minutes.
 13. Close the milestone: Edit the [X.Y.Z milestone](/milestone/#) with release date (in the `Due date (optional)` field) and link to GitHub release (in the `Description` field), then close the milestone.
 14. Punt incomplete items: If any open issues or PRs which were milestoned for `X.Y.Z` do not make it into the release, update their milestone to `X+1.0.0`, `X.Y+1.0`, `X.Y.Z+1`, or `Future Release`
+
+## Local Development
+This plugin can be installed with any local development instalation. To make it easier however it also comes with a bundled wp-env installation. So you can run `npm ci` to install the dependencies and then `npm run wp-env start` to start the local development server. For further documentation regarding the `@wordpress/env` package prese reffer to their docs here: [https://www.npmjs.com/package/@wordpress/env](https://www.npmjs.com/package/@wordpress/env)
+
+### Asset compilation
+Since this plugins uses JSX and ESNext there is a build step involved. To compile the assets you need to run `npm run build` locally. If you want to watch for changes and automatically rebuild during development you can run `npm start`
