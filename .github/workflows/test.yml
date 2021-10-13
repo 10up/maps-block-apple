@@ -26,14 +26,9 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   phpcs:
-    name: phpcs
+    name: WPCS
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-    - name: composer install
-      run: composer install
-    - name: PHPCS check
-      uses: chekalsky/phpcs-action@v1
-      with:
-        phpcs_bin_path: './vendor/bin/phpcs'
+      - uses: actions/checkout@v2
+      - name: WPCS check
+        uses: 10up/wpcs-action@stable
