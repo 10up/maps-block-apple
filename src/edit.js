@@ -8,16 +8,16 @@ import { __ } from '@wordpress/i18n';
 import { useEffect, useRef, useState } from '@wordpress/element';
 import { BlockControls } from '@wordpress/block-editor';
 import { dispatch } from '@wordpress/data';
+import { debounce } from 'lodash';
 
 import { AppleMapEdit } from './components/AppleMap';
 import EditAuthForm from './components/EditAuthForm';
 import InspectorSettings from './inspector-settings';
 import IsAdmin from './helper';
 import BlockIcon from './block-icon';
-import { debounce } from 'lodash';
 import { ResizableMap } from './components/ResizableMap';
 
-export default function MapsBlockAppleEdit( props ) {
+export default function MapsBlockAppleEdit(props) {
 	const {
 		className,
 		attributes: {
@@ -41,36 +41,36 @@ export default function MapsBlockAppleEdit( props ) {
 		isSelected,
 	} = props;
 
-	const [ authenticated, setAuthenticated ] = useState( false );
-	const [ isLoading, setIsLoading ] = useState( true );
+	const [authenticated, setAuthenticated] = useState(false);
+	const [isLoading, setIsLoading] = useState(true);
 
 	const mapElement = useRef();
 	const map = useRef();
 
-	const { toggleSelection } = dispatch( 'core/block-editor' );
+	const { toggleSelection } = dispatch('core/block-editor');
 
-	useEffect( () => {
-		if ( mapkit.authenticated ) {
-			setIsLoading( false );
-			setAuthenticated( true );
+	useEffect(() => {
+		if (mapkit.authenticated) {
+			setIsLoading(false);
+			setAuthenticated(true);
 			return;
 		}
 
-		const handleConfigurationChange = ( { status } ) => {
-			switch ( status ) {
+		const handleConfigurationChange = ({ status }) => {
+			switch (status) {
 				case 'Initialized':
-					setIsLoading( false );
-					setAuthenticated( true );
+					setIsLoading(false);
+					setAuthenticated(true);
 					mapkit.authenticated = true;
 					break;
 				case 'Refreshed':
-					setIsLoading( false );
-					setAuthenticated( true );
+					setIsLoading(false);
+					setAuthenticated(true);
 					mapkit.authenticated = true;
 					break;
 				default:
-					setIsLoading( false );
-					setAuthenticated( false );
+					setIsLoading(false);
+					setAuthenticated(false);
 					break;
 			}
 		};
@@ -81,15 +81,15 @@ export default function MapsBlockAppleEdit( props ) {
 		);
 
 		const handleAppleMapError = () => {
-			setIsLoading( false );
-			setAuthenticated( false );
+			setIsLoading(false);
+			setAuthenticated(false);
 		};
 
-		mapkit.addEventListener( 'error', handleAppleMapError );
+		mapkit.addEventListener('error', handleAppleMapError);
 
-		mapkit.addEventListener( 'reinitialize', () => {
+		mapkit.addEventListener('reinitialize', () => {
 			AppleMapEdit.authenticateMap();
-		} );
+		});
 
 		AppleMapEdit.authenticateMap();
 
@@ -99,88 +99,88 @@ export default function MapsBlockAppleEdit( props ) {
 				handleConfigurationChange
 			);
 
-			mapkit.removeEventListener( 'error', handleAppleMapError );
+			mapkit.removeEventListener('error', handleAppleMapError);
 		};
-	}, [] );
+	}, []);
 
 	const debouncedUpdateMarkers = useRef(
-		debounce( ( newMarkers ) => {
-			if ( ! map.current ) {
+		debounce((newMarkers) => {
+			if (!map.current) {
 				return;
 			}
 
-			map.current.addMarkers( newMarkers );
-		}, 300 )
+			map.current.addMarkers(newMarkers);
+		}, 300)
 	).current;
 
-	useEffect( () => {
-		if ( authenticated ) {
+	useEffect(() => {
+		if (authenticated) {
 			map.current = new AppleMapEdit(
 				mapElement.current,
 				clientId,
 				setAttributes
 			);
 		}
-	}, [ authenticated ] );
+	}, [authenticated]);
 
-	useEffect( () => {
-		if ( authenticated ) {
-			map.current.update( props.attributes );
+	useEffect(() => {
+		if (authenticated) {
+			map.current.update(props.attributes);
 		}
-	}, [ props.attributes, authenticated ] );
+	}, [props.attributes, authenticated]);
 
-	useEffect( () => debouncedUpdateMarkers( markers ), [ markers ] );
+	useEffect(() => debouncedUpdateMarkers(markers), [markers]);
 
-	if ( isLoading ) {
+	if (isLoading) {
 		return (
 			<Placeholder
-				style={ { height: `${ height }px` } }
-				label={ __( 'Block for Apple Maps', 'maps-block-apple' ) }
-				icon={ BlockIcon }
+				style={{ height: `${height}px` }}
+				label={__('Block for Apple Maps', 'maps-block-apple')}
+				icon={BlockIcon}
 			>
 				<Spinner />
 			</Placeholder>
 		);
 	}
 
-	if ( ! authenticated ) {
+	if (!authenticated) {
 		return (
 			<>
 				<InspectorSettings
-					{ ...props }
-					authenticated={ authenticated }
-					map={ map }
+					{...props}
+					authenticated={authenticated}
+					map={map}
 				/>
 				<Placeholder
-					style={ { minHeight: `${ height }px` } }
-					label={ __(
+					style={{ minHeight: `${height}px` }}
+					label={__(
 						'Confirm access to Apple Maps',
 						'maps-block-apple'
-					) }
-					icon={ BlockIcon }
+					)}
+					icon={BlockIcon}
 					instructions={
 						<IsAdmin
-							fallback={ __(
+							fallback={__(
 								'Sorry, you are not allowed to do that. Please talk to your Administrator.'
-							) }
+							)}
 						>
-							{ __(
+							{__(
 								'In order to include an Apple Map on your website you need to confirm your MapKit credentials below. Here is documentation on how to get those credentials: ',
 								'maps-block-apple'
-							) }
+							)}
 							<a
 								href="https://developer.apple.com/documentation/mapkitjs/setting_up_mapkit_js"
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								{ __(
+								{__(
 									'Instructions for creating your MapKit credentials.',
 									'maps-block-apple'
-								) }
-							</a>{ ' ' }
+								)}
+							</a>{' '}
 						</IsAdmin>
 					}
-					isColumnLayout={ true }
+					isColumnLayout={true}
 				>
 					<IsAdmin>
 						<EditAuthForm />
@@ -196,72 +196,70 @@ export default function MapsBlockAppleEdit( props ) {
 				<Toolbar>
 					<ToolbarButton
 						icon="location"
-						title={ __( 'Add Marker', 'apple-maps-wordpress' ) }
-						onClick={ () => {
-							setAttributes( {
+						title={__('Add Marker', 'apple-maps-wordpress')}
+						onClick={() => {
+							setAttributes({
 								markers: [
 									...markers,
 									{
 										latitude,
 										longitude,
 										title: 'Title',
-										id: Symbol(
-											'identifier for the marker'
-										),
+										id: Symbol('identifier for the marker'),
 									},
 								],
-							} );
-						} }
+							});
+						}}
 					/>
 				</Toolbar>
 			</BlockControls>
 			<InspectorSettings
-				{ ...props }
-				authenticated={ authenticated }
-				map={ map }
+				{...props}
+				authenticated={authenticated}
+				map={map}
 			/>
 			<ResizableMap
-				onResizeStart={ () => {
-					toggleSelection( false );
-				} }
-				onResize={ ( newHeight ) => {
-					setAttributes( { height: newHeight } );
-				} }
-				onResizeStop={ ( newHeight ) => {
-					toggleSelection( true );
-					setAttributes( { height: newHeight } );
-				} }
-				showHandle={ isSelected }
+				onResizeStart={() => {
+					toggleSelection(false);
+				}}
+				onResize={(newHeight) => {
+					setAttributes({ height: newHeight });
+				}}
+				onResizeStop={(newHeight) => {
+					toggleSelection(true);
+					setAttributes({ height: newHeight });
+				}}
+				showHandle={isSelected}
 			/>
 			<div
-				ref={ mapElement }
-				className={ className }
-				data-map-type={ mapType }
-				data-latitude={ latitude }
-				data-longitude={ longitude }
-				data-rotation={ rotation }
-				data-zoom={ zoom }
-				data-shows-map-type-control={ showsMapTypeControl }
-				data-is-rotation-enabled={ isRotationEnabled }
-				data-shows-compass={ showsCompass }
-				data-is-zoom-enabled={ isZoomEnabled }
-				data-shows-zoom-control={ showsZoomControl }
-				data-is-scroll-enabled={ isScrollEnabled }
-				data-shows-scale={ showsScale }
-				style={ { height: `${ height }px` } }
+				ref={mapElement}
+				className={className}
+				data-map-type={mapType}
+				data-latitude={latitude}
+				data-longitude={longitude}
+				data-rotation={rotation}
+				data-zoom={zoom}
+				data-shows-map-type-control={showsMapTypeControl}
+				data-is-rotation-enabled={isRotationEnabled}
+				data-shows-compass={showsCompass}
+				data-is-zoom-enabled={isZoomEnabled}
+				data-shows-zoom-control={showsZoomControl}
+				data-is-scroll-enabled={isScrollEnabled}
+				data-shows-scale={showsScale}
+				style={{ height: `${height}px` }}
 			>
-				{ markers.map( ( marker, index ) => (
+				{markers.map((marker, index) => (
 					<div
-						key={ index }
-						className={ 'marker-annotation' }
-						data-latitude={ marker.latitude }
-						data-longitude={ marker.longitude }
-						data-title={ marker.title }
-						data-subtitle={ marker.subtitle }
-						data-color={ marker.color }
-						data-glyph-color={ marker.glyphColor }
+						key={index}
+						className={'marker-annotation'}
+						data-latitude={marker.latitude}
+						data-longitude={marker.longitude}
+						data-title={marker.title}
+						data-subtitle={marker.subtitle}
+						data-color={marker.color}
+						data-glyph-color={marker.glyphColor}
 					/>
-				) ) }
+				))}
 			</div>
 		</>
 	);
