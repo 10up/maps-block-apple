@@ -12,6 +12,7 @@
 .eslintrc
 .gitignore
 .phpcs.xml
+.wp-env.json
 CHANGELOG.md
 CODE_OF_CONDUCT.md
 composer.json
@@ -19,7 +20,6 @@ composer.lock
 CONTRIBUTING.md
 CREDITS.md
 LICENSE.md
-package.json
 package-lock.json
+package.json
 README.md
-.wp-env.json
