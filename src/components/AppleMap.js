@@ -69,7 +69,7 @@ class AppleMap {
 
 		// the mapkit implementation checks the node against `instanceof window.Node` which fails
 		// since the node was not created from this window bur rather from a different window
-		// to get arround that we create a new node here in the main window and then append that
+		// to get around that we create a new node here in the main window and then append that
 		// to the node in the iframe to insert the map in the correct location
 		const isInIframe = !(this.element instanceof window.Node);
 
