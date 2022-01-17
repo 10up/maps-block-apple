@@ -3,6 +3,7 @@
   "title":"Apple Maps",
   "category":"embed",
   "description":"Add an Apple Map to your site.",
+  "apiVersion": 2,
   "keywords":[
     "apple",
     "map",
@@ -86,5 +87,6 @@
     "html":false
   },
   "editorScript":"maps-block-apple-block",
-  "viewScript":"maps-block-apple-frontend"
+  "viewScript":"maps-block-apple-frontend",
+  "script": "apple-mapkit-js"
 }

@@ -1,6 +1,7 @@
+import { useBlockProps } from '@wordpress/block-editor';
+
 export default function MapsBlockAppleSave(props) {
 	const {
-		className,
 		attributes: {
 			mapType,
 			height,
@@ -19,9 +20,11 @@ export default function MapsBlockAppleSave(props) {
 		},
 	} = props;
 
+	const blockProps = useBlockProps.save();
+
 	return (
 		<div
-			className={className}
+			{...blockProps}
 			data-map-type={mapType}
 			data-latitude={latitude}
 			data-longitude={longitude}

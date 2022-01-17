@@ -1,8 +1,6 @@
 import apiFetch from '@wordpress/api-fetch';
 import { dispatch } from '@wordpress/data';
 
-const { Coordinate, Map, FeatureVisibility, MarkerAnnotation } = mapkit;
-
 class AppleMap {
 	constructor(element) {
 		this.element = element;
@@ -21,6 +19,10 @@ class AppleMap {
 				glyphColor: glyphColor || null,
 			};
 		});
+
+		this.mapkit = (element.ownerDocument.defaultView ?
+		element.ownerDocument.defaultView :
+		element.ownerDocument.parentWindow).mapkit;
 
 		this.init();
 	}
@@ -49,7 +51,7 @@ class AppleMap {
 			showsScale,
 		} = this.element.dataset;
 
-		const center = new Coordinate(
+		const center = new this.mapkit.Coordinate(
 			Number(latitude) || 51.48762585296625,
 			Number(longitude) || -0.1326724377053381
 		);
@@ -57,33 +59,19 @@ class AppleMap {
 		this.mapOptions = {
 			center,
 			rotation: Number(rotation) || 0,
-			mapType: mapType || Map.MapTypes.Satellite,
+			mapType: mapType || this.mapkit.Map.MapTypes.Satellite,
 			showsMapTypeControl: showsMapTypeControl === 'true',
 			isRotationEnabled: isRotationEnabled === 'true',
-			showsCompass: showsCompass || FeatureVisibility.Adaptive,
+			showsCompass: showsCompass || this.mapkit.FeatureVisibility.Adaptive,
 			isZoomEnabled: isZoomEnabled === 'true',
 			showsZoomControl: showsZoomControl === 'true',
 			isScrollEnabled: isScrollEnabled === 'true',
-			showsScale: showsScale || FeatureVisibility.Adaptive,
+			showsScale: showsScale || this.mapkit.FeatureVisibility.Adaptive,
 		};
 
-		// the mapkit implementation checks the node against `instanceof window.Node` which fails
-		// since the node was not created from this window bur rather from a different window
-		// to get around that we create a new node here in the main window and then append that
-		// to the node in the iframe to insert the map in the correct location
-		const isInIframe = !(this.element instanceof window.Node);
-
-		const fakeTarget = document.createElement('div');
-		fakeTarget.classList.add('mapkit-wrapper');
-
-		const mapTargetElement = isInIframe ? fakeTarget : this.element;
-
-		this.map = new Map(mapTargetElement, this.mapOptions);
+		this.map = new this.mapkit.Map(this.element, this.mapOptions);
 		this.map._impl.zoomLevel = Number(zoom) || 15;
 
-		if (isInIframe) {
-			this.element.appendChild(mapTargetElement);
-		}
 	}
 
 	/**
@@ -108,17 +96,17 @@ class AppleMap {
 				glyphColor,
 				glyphText,
 			} = item;
-			const position = new Coordinate(
+			const position = new this.mapkit.Coordinate(
 				Number(latitude),
 				Number(longitude)
 			);
 
-			const marker = new MarkerAnnotation(position, {
+			const marker = new this.mapkit.MarkerAnnotation(position, {
 				title,
 				subtitle: subtitle || null,
-				titleVisibility: titleVisibility || FeatureVisibility.Visible,
+				titleVisibility: titleVisibility || this.mapkit.FeatureVisibility.Visible,
 				subtitleVisibility:
-					subtitleVisibility || FeatureVisibility.Visible,
+					subtitleVisibility || this.mapkit.FeatureVisibility.Visible,
 				color: color || 'green',
 				glyphColor: glyphColor || 'white',
 				glyphText: glyphText || '',
@@ -160,7 +148,7 @@ class AppleMap {
 		this.map.removeAnnotations(this.map.annotations);
 	}
 
-	static authenticateMap() {
+	static authenticateMap(mapkit) {
 		apiFetch({ path: 'MapsBlockApple/v1/GetJWT/' })
 			.then(() => {
 				mapkit.init({
@@ -283,7 +271,7 @@ class AppleMapEdit extends AppleMap {
 			(latitude !== this.map.center.latitude ||
 				longitude !== this.map.center.longitude)
 		) {
-			this.map.center = new Coordinate(latitude, longitude);
+			this.map.center = new this.mapkit.Coordinate(latitude, longitude);
 		}
 
 		if (
@@ -301,7 +289,7 @@ class AppleMapEdit extends AppleMap {
 		}
 
 		if (showsCompass !== this.map.showsCompass) {
-			this.map.showsCompass = showsCompass || FeatureVisibility.Adaptive;
+			this.map.showsCompass = showsCompass || this.mapkit.FeatureVisibility.Adaptive;
 		}
 
 		if (
@@ -326,25 +314,25 @@ class AppleMapEdit extends AppleMap {
 		}
 
 		if (showsScale !== this.map.showsScale) {
-			this.map.showsScale = showsScale || FeatureVisibility.Adaptive;
+			this.map.showsScale = showsScale || this.mapkit.FeatureVisibility.Adaptive;
 		}
 	}
 }
 
-// MapTypes formated to be used as options in SelectControl dropdowns
-const MAP_TYPE_OPTIONS = Object.keys(Map.MapTypes).map((mapType) => {
+// MapTypes formatted to be used as options in SelectControl dropdown
+const MAP_TYPE_OPTIONS = Object.keys(mapkit.Map.MapTypes).map((mapType) => {
 	return {
 		label: mapType,
-		value: Map.MapTypes[mapType],
+		value: mapkit.Map.MapTypes[mapType],
 	};
 });
 
-// FeatureVisibility options formated to be used as options in SelectControl dropdowns
-const FEATURE_VISIBILITY_OPTIONS = Object.keys(FeatureVisibility).map(
+// FeatureVisibility options formatted to be used as options in SelectControl dropdown
+const FEATURE_VISIBILITY_OPTIONS = Object.keys(mapkit.FeatureVisibility).map(
 	(featureVisibility) => {
 		return {
 			label: featureVisibility,
-			value: FeatureVisibility[featureVisibility],
+			value: mapkit.FeatureVisibility[featureVisibility],
 		};
 	}
 );

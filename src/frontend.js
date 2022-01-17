@@ -11,7 +11,7 @@ domReady(async () => {
 		return;
 	}
 
-	AppleMap.authenticateMap();
+	AppleMap.authenticateMap(window.mapkit);
 
 	appleMapsBlocks.forEach((block) => {
 		new AppleMap(block);

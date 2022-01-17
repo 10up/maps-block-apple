@@ -6,7 +6,8 @@ import {
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { useEffect, useRef, useState } from '@wordpress/element';
-import { BlockControls } from '@wordpress/block-editor';
+import { useRefEffect, useMergeRefs } from '@wordpress/compose';
+import { BlockControls, useBlockProps } from '@wordpress/block-editor';
 import { dispatch } from '@wordpress/data';
 import { debounce } from 'lodash';
 
@@ -44,16 +45,34 @@ export default function MapsBlockAppleEdit(props) {
 	const [authenticated, setAuthenticated] = useState(false);
 	const [isLoading, setIsLoading] = useState(true);
 
-	const mapElement = useRef();
 	const map = useRef();
+	const mapElement = useRef();
 
 	const { toggleSelection } = dispatch('core/block-editor');
 
-	useEffect(() => {
+	const authRef = useRefEffect((element) => {
+		mapElement.current = element;
+
+		const mapkit = (element.ownerDocument.defaultView ?
+			element.ownerDocument.defaultView :
+			element.ownerDocument.parentWindow).mapkit;
+
+		if ( !mapkit ) {
+			return;
+		}
+
 		if (mapkit.authenticated) {
 			setIsLoading(false);
 			setAuthenticated(true);
 			return;
+		}
+
+		if ( authenticated && ! map.current ) {
+			map.current = new AppleMapEdit(
+				mapElement.current,
+				clientId,
+				setAttributes
+			);
 		}
 
 		const handleConfigurationChange = ({ status }) => {
@@ -88,10 +107,10 @@ export default function MapsBlockAppleEdit(props) {
 		mapkit.addEventListener('error', handleAppleMapError);
 
 		mapkit.addEventListener('reinitialize', () => {
-			AppleMapEdit.authenticateMap();
+			AppleMapEdit.authenticateMap(mapkit);
 		});
 
-		AppleMapEdit.authenticateMap();
+		AppleMapEdit.authenticateMap(mapkit);
 
 		return () => {
 			mapkit.removeEventListener(
@@ -101,7 +120,7 @@ export default function MapsBlockAppleEdit(props) {
 
 			mapkit.removeEventListener('error', handleAppleMapError);
 		};
-	}, []);
+	});
 
 	const debouncedUpdateMarkers = useRef(
 		debounce((newMarkers) => {
@@ -114,32 +133,26 @@ export default function MapsBlockAppleEdit(props) {
 	).current;
 
 	useEffect(() => {
-		if (authenticated) {
-			map.current = new AppleMapEdit(
-				mapElement.current,
-				clientId,
-				setAttributes
-			);
-		}
-	}, [authenticated]);
-
-	useEffect(() => {
-		if (authenticated) {
+		if (authenticated && map?.current?.update) {
 			map.current.update(props.attributes);
 		}
 	}, [props.attributes, authenticated]);
 
 	useEffect(() => debouncedUpdateMarkers(markers), [markers]);
 
+	const blockProps = useBlockProps( { ref: authRef } );
+
 	if (isLoading) {
 		return (
-			<Placeholder
-				style={{ height: `${height}px` }}
-				label={__('Block for Apple Maps', 'maps-block-apple')}
-				icon={BlockIcon}
-			>
-				<Spinner />
-			</Placeholder>
+			<div {...blockProps}>
+				<Placeholder
+					style={{ height: `${height}px` }}
+					label={__('Block for Apple Maps', 'maps-block-apple')}
+					icon={BlockIcon}
+				>
+					<Spinner />
+				</Placeholder>
+			</div>
 		);
 	}
 
@@ -151,41 +164,43 @@ export default function MapsBlockAppleEdit(props) {
 					authenticated={authenticated}
 					map={map}
 				/>
-				<Placeholder
-					style={{ minHeight: `${height}px` }}
-					label={__(
-						'Confirm access to Apple Maps',
-						'maps-block-apple'
-					)}
-					icon={BlockIcon}
-					instructions={
-						<IsAdmin
-							fallback={__(
-								'Sorry, you are not allowed to do that. Please talk to your Administrator.'
-							)}
-						>
-							{__(
-								'In order to include an Apple Map on your website you need to confirm your MapKit credentials below. Here is documentation on how to get those credentials: ',
-								'maps-block-apple'
-							)}
-							<a
-								href="https://developer.apple.com/documentation/mapkitjs/setting_up_mapkit_js"
-								target="_blank"
-								rel="noopener noreferrer"
+				<div {...blockProps}>
+					<Placeholder
+						style={{ minHeight: `${height}px` }}
+						label={__(
+							'Confirm access to Apple Maps',
+							'maps-block-apple'
+						)}
+						icon={BlockIcon}
+						instructions={
+							<IsAdmin
+								fallback={__(
+									'Sorry, you are not allowed to do that. Please talk to your Administrator.'
+								)}
 							>
 								{__(
-									'Instructions for creating your MapKit credentials.',
+									'In order to include an Apple Map on your website you need to confirm your MapKit credentials below. Here is documentation on how to get those credentials: ',
 									'maps-block-apple'
 								)}
-							</a>{' '}
+								<a
+									href="https://developer.apple.com/documentation/mapkitjs/setting_up_mapkit_js"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									{__(
+										'Instructions for creating your MapKit credentials.',
+										'maps-block-apple'
+									)}
+								</a>{' '}
+							</IsAdmin>
+						}
+						isColumnLayout={true}
+					>
+						<IsAdmin>
+							<EditAuthForm />
 						</IsAdmin>
-					}
-					isColumnLayout={true}
-				>
-					<IsAdmin>
-						<EditAuthForm />
-					</IsAdmin>
-				</Placeholder>
+					</Placeholder>
+				</div>
 			</>
 		);
 	}
@@ -218,48 +233,50 @@ export default function MapsBlockAppleEdit(props) {
 				authenticated={authenticated}
 				map={map}
 			/>
-			<ResizableMap
-				onResizeStart={() => {
-					toggleSelection(false);
-				}}
-				onResize={(newHeight) => {
-					setAttributes({ height: newHeight });
-				}}
-				onResizeStop={(newHeight) => {
-					toggleSelection(true);
-					setAttributes({ height: newHeight });
-				}}
-				showHandle={isSelected}
-			/>
-			<div
-				ref={mapElement}
-				className={className}
-				data-map-type={mapType}
-				data-latitude={latitude}
-				data-longitude={longitude}
-				data-rotation={rotation}
-				data-zoom={zoom}
-				data-shows-map-type-control={showsMapTypeControl}
-				data-is-rotation-enabled={isRotationEnabled}
-				data-shows-compass={showsCompass}
-				data-is-zoom-enabled={isZoomEnabled}
-				data-shows-zoom-control={showsZoomControl}
-				data-is-scroll-enabled={isScrollEnabled}
-				data-shows-scale={showsScale}
-				style={{ height: `${height}px` }}
-			>
-				{markers.map((marker, index) => (
-					<div
-						key={index}
-						className={'marker-annotation'}
-						data-latitude={marker.latitude}
-						data-longitude={marker.longitude}
-						data-title={marker.title}
-						data-subtitle={marker.subtitle}
-						data-color={marker.color}
-						data-glyph-color={marker.glyphColor}
-					/>
-				))}
+			<div {...blockProps}>
+				<ResizableMap
+					onResizeStart={() => {
+						toggleSelection(false);
+					}}
+					onResize={(newHeight) => {
+						setAttributes({ height: newHeight });
+					}}
+					onResizeStop={(newHeight) => {
+						toggleSelection(true);
+						setAttributes({ height: newHeight });
+					}}
+					showHandle={isSelected}
+				/>
+				<div
+					ref={authRef}
+					className={className}
+					data-map-type={mapType}
+					data-latitude={latitude}
+					data-longitude={longitude}
+					data-rotation={rotation}
+					data-zoom={zoom}
+					data-shows-map-type-control={showsMapTypeControl}
+					data-is-rotation-enabled={isRotationEnabled}
+					data-shows-compass={showsCompass}
+					data-is-zoom-enabled={isZoomEnabled}
+					data-shows-zoom-control={showsZoomControl}
+					data-is-scroll-enabled={isScrollEnabled}
+					data-shows-scale={showsScale}
+					style={{ height: `${height}px` }}
+				>
+					{markers.map((marker, index) => (
+						<div
+							key={index}
+							className={'marker-annotation'}
+							data-latitude={marker.latitude}
+							data-longitude={marker.longitude}
+							data-title={marker.title}
+							data-subtitle={marker.subtitle}
+							data-color={marker.color}
+							data-glyph-color={marker.glyphColor}
+						/>
+					))}
+				</div>
 			</div>
 		</>
 	);
