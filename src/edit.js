@@ -1,7 +1,7 @@
 import {
 	Spinner,
 	Placeholder,
-	Toolbar,
+	ToolbarGroup,
 	ToolbarButton,
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
@@ -193,7 +193,7 @@ export default function MapsBlockAppleEdit(props) {
 	return (
 		<>
 			<BlockControls>
-				<Toolbar>
+				<ToolbarGroup>
 					<ToolbarButton
 						icon="location"
 						title={__('Add Marker', 'apple-maps-wordpress')}
@@ -211,7 +211,7 @@ export default function MapsBlockAppleEdit(props) {
 							});
 						}}
 					/>
-				</Toolbar>
+				</ToolbarGroup>
 			</BlockControls>
 			<InspectorSettings
 				{...props}
