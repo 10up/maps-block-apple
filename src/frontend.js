@@ -11,11 +11,6 @@ domReady(async () => {
 		return;
 	}
 
-	// don't initialize the frontend map in the editor
-	if (document.body.classList.contains('editor-styles-wrapper')) {
-		return;
-	}
-
 	AppleMap.authenticateMap();
 
 	appleMapsBlocks.forEach((block) => {

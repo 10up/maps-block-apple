@@ -86,5 +86,5 @@
     "html":false
   },
   "editorScript":"maps-block-apple-block",
-  "script":"maps-block-apple-frontend"
+  "viewScript":"maps-block-apple-frontend"
 }
