@@ -20,7 +20,6 @@ import { ResizableMap } from './components/ResizableMap';
 
 export default function MapsBlockAppleEdit(props) {
 	const {
-		className,
 		attributes: {
 			mapType,
 			height,
@@ -46,13 +45,10 @@ export default function MapsBlockAppleEdit(props) {
 	const [isLoading, setIsLoading] = useState(true);
 
 	const map = useRef();
-	const mapElement = useRef();
 
 	const { toggleSelection } = dispatch('core/block-editor');
 
 	const authRef = useRefEffect((element) => {
-		mapElement.current = element;
-
 		const mapkit = (element.ownerDocument.defaultView ?
 			element.ownerDocument.defaultView :
 			element.ownerDocument.parentWindow).mapkit;
@@ -65,14 +61,6 @@ export default function MapsBlockAppleEdit(props) {
 			setIsLoading(false);
 			setAuthenticated(true);
 			return;
-		}
-
-		if ( authenticated && ! map.current ) {
-			map.current = new AppleMapEdit(
-				mapElement.current,
-				clientId,
-				setAttributes
-			);
 		}
 
 		const handleConfigurationChange = ({ status }) => {
@@ -121,6 +109,18 @@ export default function MapsBlockAppleEdit(props) {
 			mapkit.removeEventListener('error', handleAppleMapError);
 		};
 	});
+
+	const mapRef = useRefEffect((element) => {
+		if ( authenticated && ! map.current ) {
+			map.current = new AppleMapEdit(
+				element,
+				clientId,
+				setAttributes
+			);
+		}
+	})
+
+	const mergedRefs = useMergeRefs( [ authRef, mapRef ] )
 
 	const debouncedUpdateMarkers = useRef(
 		debounce((newMarkers) => {
@@ -248,8 +248,7 @@ export default function MapsBlockAppleEdit(props) {
 					showHandle={isSelected}
 				/>
 				<div
-					ref={authRef}
-					className={className}
+					ref={mergedRefs}
 					data-map-type={mapType}
 					data-latitude={latitude}
 					data-longitude={longitude}
