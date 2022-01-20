@@ -5,11 +5,10 @@ import {
 	ToolbarButton,
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import { useEffect, useRef, useState } from '@wordpress/element';
-import { useRefEffect } from '@wordpress/compose';
+import { useEffect, useRef, useState, memo } from '@wordpress/element';
+import { useRefEffect, useDebounce } from '@wordpress/compose';
 import { BlockControls, useBlockProps } from '@wordpress/block-editor';
 import { dispatch, useSelect, useDispatch } from '@wordpress/data';
-import { debounce } from 'lodash';
 
 import { AppleMapEdit } from './components/AppleMap';
 import EditAuthForm from './components/EditAuthForm';
@@ -19,22 +18,51 @@ import BlockIcon from './block-icon';
 import { ResizableMap } from './components/ResizableMap';
 import { store as mapsBlockAppleStore } from './store';
 
+const Map = memo((props) => {
+	const {
+		height,
+		map,
+		isAuthenticated,
+		clientId,
+		setAttributes,
+		setMap,
+	} = props;
+
+	/**
+	 * render a new map on the provided element if the mapkit object has
+	 * already been successfully authenticated
+	 */
+	 const mapRef = useRefEffect((element) => {
+		if ( isAuthenticated && ! map ) {
+			setMap(new AppleMapEdit(
+				element,
+				clientId,
+				setAttributes
+			));
+		}
+
+		return () => {
+			if ( !!map ) {
+				map.destroy();
+				setMap(null);
+			}
+		}
+	})
+
+	return (
+		<div
+			ref={mapRef}
+			style={{ height: `${height}px` }}
+		/>
+	)
+})
+
 export default function MapsBlockAppleEdit(props) {
 	const {
 		attributes: {
-			mapType,
 			height,
 			latitude,
 			longitude,
-			rotation,
-			zoom,
-			showsMapTypeControl,
-			isRotationEnabled,
-			showsCompass,
-			isZoomEnabled,
-			showsZoomControl,
-			isScrollEnabled,
-			showsScale,
 			markers,
 		},
 		setAttributes,
@@ -42,14 +70,14 @@ export default function MapsBlockAppleEdit(props) {
 		isSelected,
 	} = props;
 
+	const [map, setMap] = useState(null);
+
 	const isAuthenticated = useSelect((select) => {
 		return select(mapsBlockAppleStore).isAuthenticated();
 	});
 	const [isLoading, setIsLoading] = useState(true);
 
 	const { updateAuthenticationStatus } = useDispatch( mapsBlockAppleStore );
-
-	const map = useRef();
 
 	const { toggleSelection } = dispatch('core/block-editor');
 
@@ -124,7 +152,9 @@ export default function MapsBlockAppleEdit(props) {
 		}
 		mapkit.addEventListener('reinitialize', InitializeMapkit);
 
-		InitializeMapkit();
+		if ( ! isAuthenticated ) {
+			InitializeMapkit();
+		}
 
 		return () => {
 			mapkit.removeEventListener('configuration-change', handleConfigurationChange);
@@ -144,35 +174,19 @@ export default function MapsBlockAppleEdit(props) {
 		if ( isAuthenticated ) setIsLoading(false);
 	},[isAuthenticated])
 
-	/**
-	 * render a new map on the provided element if the mapkit object has
-	 * already been successfully authenticated
-	 */
-	const mapRef = useRefEffect((element) => {
-		if ( isAuthenticated && ! map.current ) {
-			map.current = new AppleMapEdit(
-				element,
-				clientId,
-				setAttributes
-			);
+	const debouncedUpdateMarkers = useDebounce((newMarkers) => {
+		if (!map) {
+			return;
 		}
-	})
 
-	const debouncedUpdateMarkers = useRef(
-		debounce((newMarkers) => {
-			if (!map.current) {
-				return;
-			}
-
-			map.current.addMarkers(newMarkers);
-		}, 300)
-	).current;
+		map.addMarkers(newMarkers);
+	}, 300)
 
 	useEffect(() => {
-		if (isAuthenticated && map?.current?.update) {
-			map.current.update(props.attributes);
+		if (isAuthenticated && !!map) {
+			map.update(props.attributes);
 		}
-	}, [props.attributes, isAuthenticated]);
+	}, [props.attributes, isAuthenticated, map]);
 
 	useEffect(() => debouncedUpdateMarkers(markers), [markers]);
 
@@ -283,35 +297,14 @@ export default function MapsBlockAppleEdit(props) {
 					}}
 					showHandle={isSelected}
 				/>
-				<div
-					ref={mapRef}
-					data-map-type={mapType}
-					data-latitude={latitude}
-					data-longitude={longitude}
-					data-rotation={rotation}
-					data-zoom={zoom}
-					data-shows-map-type-control={showsMapTypeControl}
-					data-is-rotation-enabled={isRotationEnabled}
-					data-shows-compass={showsCompass}
-					data-is-zoom-enabled={isZoomEnabled}
-					data-shows-zoom-control={showsZoomControl}
-					data-is-scroll-enabled={isScrollEnabled}
-					data-shows-scale={showsScale}
-					style={{ height: `${height}px` }}
-				>
-					{markers.map((marker, index) => (
-						<div
-							key={index}
-							className={'marker-annotation'}
-							data-latitude={marker.latitude}
-							data-longitude={marker.longitude}
-							data-title={marker.title}
-							data-subtitle={marker.subtitle}
-							data-color={marker.color}
-							data-glyph-color={marker.glyphColor}
-						/>
-					))}
-				</div>
+				<Map
+					height={height}
+					map={map}
+					setMap={setMap}
+					isAuthenticated={isAuthenticated}
+					clientId={clientId}
+					setAttributes={setAttributes}
+				/>
 			</div>
 		</>
 	);

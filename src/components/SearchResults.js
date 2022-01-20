@@ -17,7 +17,7 @@ export default function SearchResults(props) {
 								setAttributes({
 									address: searchResult.formattedAddress,
 								});
-								map.current.update({
+								map.update({
 									region: searchResult.region,
 								});
 								setSearchResults([]);

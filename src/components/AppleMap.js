@@ -23,6 +23,8 @@ class AppleMap {
 		// get the mapkit object on the current window object to account for iframe editors
 		this.mapkit = element.ownerDocument.defaultView.mapkit;
 
+		if ( ! this.mapkit ) return;
+
 		this.init();
 	}
 
@@ -187,6 +189,8 @@ class AppleMapEdit extends AppleMap {
 		this.clientId = clientId;
 		this.setAttributes = setAttributes;
 
+		if ( ! this.mapkit ) return;
+
 		this.initEdit();
 	}
 
@@ -196,6 +200,10 @@ class AppleMapEdit extends AppleMap {
 	initEdit() {
 		this.addListeners();
 		this.addMarkers(this.markers);
+	}
+
+	destroy() {
+		this.map.destroy();
 	}
 
 	/**
