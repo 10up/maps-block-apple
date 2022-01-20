@@ -96,7 +96,6 @@ export default function MapsBlockAppleEdit(props) {
 					break;
 			}
 		};
-
 		mapkit.addEventListener('configuration-change', handleConfigurationChange);
 
 		/**
@@ -115,24 +114,22 @@ export default function MapsBlockAppleEdit(props) {
 			setIsLoading(false);
 			updateAuthenticationStatus(false);
 		};
-
 		mapkit.addEventListener('error', handleAppleMapError);
 
 		/**
 		 * handleMapkitReInitialization
 		 */
-		const handleMapkitReInitialization = () => {
+		const InitializeMapkit = () => {
 			AppleMapEdit.authenticateMap(mapkit);
 		}
+		mapkit.addEventListener('reinitialize', InitializeMapkit);
 
-		mapkit.addEventListener('reinitialize', handleMapkitReInitialization);
-
-		AppleMapEdit.authenticateMap(mapkit);
+		InitializeMapkit();
 
 		return () => {
 			mapkit.removeEventListener('configuration-change', handleConfigurationChange);
 			mapkit.removeEventListener('error', handleAppleMapError);
-			mapkit.removeEventListener('reinitialize', handleMapkitReInitialization);
+			mapkit.removeEventListener('reinitialize', InitializeMapkit);
 		};
 	});
 
