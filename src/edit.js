@@ -31,8 +31,8 @@ const Map = memo((props) => {
 	 * render a new map on the provided element if the mapkit object has
 	 * already been successfully authenticated
 	 */
-	 const mapRef = useRefEffect((element) => {
-		if ( isAuthenticated && ! map ) {
+	const mapRef = useRefEffect((element) => {
+		if (isAuthenticated && !map) {
 			setMap(new AppleMapEdit(
 				element,
 				clientId,
@@ -41,7 +41,7 @@ const Map = memo((props) => {
 		}
 
 		return () => {
-			if ( !!map ) {
+			if (!!map) {
 				map.destroy();
 				setMap(null);
 			}
@@ -74,7 +74,7 @@ export default function MapsBlockAppleEdit(props) {
 	});
 	const [isLoading, setIsLoading] = useState(true);
 
-	const { updateAuthenticationStatus } = useDispatch( mapsBlockAppleStore );
+	const { updateAuthenticationStatus } = useDispatch(mapsBlockAppleStore);
 	const { toggleSelection } = useDispatch(blockEditorStore);
 
 	/**
@@ -89,7 +89,7 @@ export default function MapsBlockAppleEdit(props) {
 
 		// return early if the mapkit script has not jet been loaded. The editor iframe
 		// will re render the element after the scripts have been loaded
-		if ( !mapkit ) {
+		if (!mapkit) {
 			return;
 		}
 
@@ -150,7 +150,7 @@ export default function MapsBlockAppleEdit(props) {
 		}
 		mapkit.addEventListener('reinitialize', InitializeMapkit);
 
-		if ( ! isAuthenticated ) {
+		if (!isAuthenticated) {
 			InitializeMapkit();
 		}
 
@@ -169,8 +169,8 @@ export default function MapsBlockAppleEdit(props) {
 	 * event configured and therefore wasn't aware of the updated authentication state
 	 */
 	useEffect(() => {
-		if ( isAuthenticated ) setIsLoading(false);
-	},[isAuthenticated])
+		if (isAuthenticated) setIsLoading(false);
+	}, [isAuthenticated])
 
 	const debouncedUpdateMarkers = useDebounce((newMarkers) => {
 		if (!map) {
@@ -188,7 +188,7 @@ export default function MapsBlockAppleEdit(props) {
 
 	useEffect(() => debouncedUpdateMarkers(markers), [markers]);
 
-	const blockProps = useBlockProps({ref: setupRef});
+	const blockProps = useBlockProps({ ref: setupRef });
 
 	if (isLoading) {
 		return (
@@ -286,14 +286,14 @@ export default function MapsBlockAppleEdit(props) {
 			<div {...blockProps}>
 				<ResizableMap
 					onResizeStart={() => {
-						toggleSelection( false );
+						toggleSelection(false);
 					}}
 					onResize={(newHeight) => {
-						map.update({height: newHeight});
+						map.update({ height: newHeight });
 					}}
 					onResizeStop={(newHeight) => {
 						setAttributes({ height: newHeight });
-						toggleSelection( true );
+						toggleSelection(true);
 					}}
 					showHandle={isSelected}
 					size={

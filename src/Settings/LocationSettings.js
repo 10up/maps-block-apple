@@ -25,7 +25,7 @@ export default function LocationSettings(props) {
 		setSearchString('');
 	}, [address]);
 
-	if ( ! mapkit ) {
+	if (!mapkit) {
 		return null;
 	}
 

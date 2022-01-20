@@ -23,7 +23,7 @@ class AppleMap {
 		// get the mapkit object on the current window object to account for iframe editors
 		this.mapkit = element.ownerDocument.defaultView.mapkit;
 
-		if ( ! this.mapkit ) return;
+		if (!this.mapkit) return;
 
 		this.init();
 	}
@@ -189,7 +189,7 @@ class AppleMapEdit extends AppleMap {
 		this.clientId = clientId;
 		this.setAttributes = setAttributes;
 
-		if ( ! this.mapkit ) return;
+		if (!this.mapkit) return;
 
 		this.initEdit();
 	}
@@ -255,7 +255,7 @@ class AppleMapEdit extends AppleMap {
 			height,
 		} = options;
 
-		if ( height ) {
+		if (height) {
 			this.element.style.height = `${height}px`;
 		}
 
@@ -272,7 +272,7 @@ class AppleMapEdit extends AppleMap {
 		}
 
 		if (rotation && rotation !== this?.map.rotation) {
-			this.map.setRotationAnimated( Number(rotation) );
+			this.map.setRotationAnimated(Number(rotation));
 		}
 
 		if (
@@ -281,7 +281,7 @@ class AppleMapEdit extends AppleMap {
 			(latitude !== this?.map?.center?.latitude ||
 				longitude !== this?.map?.center?.longitude)
 		) {
-			this.map.setCenterAnimated( new this.mapkit.Coordinate(latitude, longitude) );
+			this.map.setCenterAnimated(new this.mapkit.Coordinate(latitude, longitude));
 		}
 
 		if (
