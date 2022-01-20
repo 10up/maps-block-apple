@@ -7,9 +7,9 @@ import LocationSettings from './Settings/LocationSettings';
 import MarkerSettings from './Settings/MarkerSettings';
 
 export default function InspectorSettings(props) {
-	const { authenticated, map } = props;
+	const { isAuthenticated, map } = props;
 
-	if (!authenticated) {
+	if (!isAuthenticated) {
 		return (
 			<InspectorControls>
 				<PanelBody>

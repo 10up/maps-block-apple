@@ -8,7 +8,7 @@ import { __ } from '@wordpress/i18n';
 import { useEffect, useRef, useState } from '@wordpress/element';
 import { useRefEffect } from '@wordpress/compose';
 import { BlockControls, useBlockProps } from '@wordpress/block-editor';
-import { dispatch } from '@wordpress/data';
+import { dispatch, useSelect, useDispatch } from '@wordpress/data';
 import { debounce } from 'lodash';
 
 import { AppleMapEdit } from './components/AppleMap';
@@ -17,6 +17,7 @@ import InspectorSettings from './inspector-settings';
 import IsAdmin from './helper';
 import BlockIcon from './block-icon';
 import { ResizableMap } from './components/ResizableMap';
+import { store as mapsBlockAppleStore } from './store';
 
 export default function MapsBlockAppleEdit(props) {
 	const {
@@ -41,8 +42,12 @@ export default function MapsBlockAppleEdit(props) {
 		isSelected,
 	} = props;
 
-	const [authenticated, setAuthenticated] = useState(false);
+	const isAuthenticated = useSelect((select) => {
+		return select(mapsBlockAppleStore).isAuthenticated();
+	});
 	const [isLoading, setIsLoading] = useState(true);
+
+	const { updateAuthenticationStatus } = useDispatch( mapsBlockAppleStore );
 
 	const map = useRef();
 
@@ -64,17 +69,6 @@ export default function MapsBlockAppleEdit(props) {
 			return;
 		}
 
-		// when there are multiple maps on a page the first map will handle the authentication
-		// any map that loads after that may not be quick enough to setup their event listener
-		// for the `configuration-change` event and therefore not receive the update that the
-		// map has ben initialized. We therefore store our own property `authenticated` on the
-		// window.mapkit object to allow later instances to check for that key and set their
-		// status based on that key.
-		if ( mapkit?.authenticated ) {
-			setAuthenticated(true);
-			setIsLoading(false);
-		}
-
 		/**
 		 * MapKit configuration changed due to either a successful initialization or a refresh.
 		 *
@@ -87,8 +81,7 @@ export default function MapsBlockAppleEdit(props) {
 
 			function handleSuccessfulAuthentication() {
 				setIsLoading(false);
-				setAuthenticated(true);
-				mapkit.authenticated = true;
+				updateAuthenticationStatus(true);
 			}
 
 			switch (status) {
@@ -120,8 +113,7 @@ export default function MapsBlockAppleEdit(props) {
 		 */
 		const handleAppleMapError = () => {
 			setIsLoading(false);
-			setAuthenticated(false);
-			mapkit.authenticated = false;
+			updateAuthenticationStatus(false);
 		};
 
 		mapkit.addEventListener('error', handleAppleMapError);
@@ -145,11 +137,22 @@ export default function MapsBlockAppleEdit(props) {
 	});
 
 	/**
+	 * listen to changes in the authentication store
+	 *
+	 * This is needed to cover the case where another map already authenticated mapkit
+	 * but this map did not jet have the event listener for the `configuration-change`
+	 * event configured and therefore wasn't aware of the updated authentication state
+	 */
+	useEffect(() => {
+		if ( isAuthenticated ) setIsLoading(false);
+	},[isAuthenticated])
+
+	/**
 	 * render a new map on the provided element if the mapkit object has
 	 * already been successfully authenticated
 	 */
 	const mapRef = useRefEffect((element) => {
-		if ( authenticated && ! map.current ) {
+		if ( isAuthenticated && ! map.current ) {
 			map.current = new AppleMapEdit(
 				element,
 				clientId,
@@ -169,10 +172,10 @@ export default function MapsBlockAppleEdit(props) {
 	).current;
 
 	useEffect(() => {
-		if (authenticated && map?.current?.update) {
+		if (isAuthenticated && map?.current?.update) {
 			map.current.update(props.attributes);
 		}
-	}, [props.attributes, authenticated]);
+	}, [props.attributes, isAuthenticated]);
 
 	useEffect(() => debouncedUpdateMarkers(markers), [markers]);
 
@@ -192,12 +195,12 @@ export default function MapsBlockAppleEdit(props) {
 		);
 	}
 
-	if (!authenticated) {
+	if (!isAuthenticated) {
 		return (
 			<>
 				<InspectorSettings
 					{...props}
-					authenticated={authenticated}
+					isAuthenticated={isAuthenticated}
 					map={map}
 				/>
 				<div {...blockProps}>
@@ -266,7 +269,7 @@ export default function MapsBlockAppleEdit(props) {
 			</BlockControls>
 			<InspectorSettings
 				{...props}
-				authenticated={authenticated}
+				isAuthenticated={isAuthenticated}
 				map={map}
 			/>
 			<div {...blockProps}>

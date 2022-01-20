@@ -7,6 +7,7 @@ const { Map, FeatureVisibility } = mapkit;
  * WordPress dependencies
  */
 import { registerBlockType } from '@wordpress/blocks';
+import './store';
 
 /**
  * Internal dependencies
