@@ -71,6 +71,7 @@ export default function MapsBlockAppleEdit(props) {
 	} = props;
 
 	const [map, setMap] = useState(null);
+	const [mapkit, setMapkit] = useState(null);
 
 	const isAuthenticated = useSelect((select) => {
 		return select(mapsBlockAppleStore).isAuthenticated();
@@ -96,6 +97,8 @@ export default function MapsBlockAppleEdit(props) {
 		if ( !mapkit ) {
 			return;
 		}
+
+		setMapkit(mapkit);
 
 		/**
 		 * MapKit configuration changed due to either a successful initialization or a refresh.
@@ -213,6 +216,7 @@ export default function MapsBlockAppleEdit(props) {
 					{...props}
 					isAuthenticated={isAuthenticated}
 					map={map}
+					mapkit={mapkit}
 				/>
 				<div {...blockProps}>
 					<Placeholder
@@ -282,17 +286,16 @@ export default function MapsBlockAppleEdit(props) {
 				{...props}
 				isAuthenticated={isAuthenticated}
 				map={map}
+				mapkit={mapkit}
 			/>
 			<div {...blockProps}>
 				<ResizableMap
 					onResizeStart={() => {
-						toggleSelection(false);
 					}}
 					onResize={(newHeight) => {
-						setAttributes({ height: newHeight });
+						map.element.style.height = `${newHeight}px`;
 					}}
 					onResizeStop={(newHeight) => {
-						toggleSelection(true);
 						setAttributes({ height: newHeight });
 					}}
 					showHandle={isSelected}

@@ -13,19 +13,23 @@ import LocationInfo from '../components/LocationInfo';
 export default function LocationSettings(props) {
 	const {
 		map,
+		mapkit,
 		attributes: { latitude, longitude, address },
 		setAttributes,
 	} = props;
-
 	const [searchString, setSearchString] = useState([]);
 	const [searchResults, setSearchResults] = useState([]);
-
-	const geocoder = new mapkit.Geocoder();
 
 	useEffect(() => {
 		// clear search string when the address changes
 		setSearchString('');
 	}, [address]);
+
+	if ( ! mapkit ) {
+		return null;
+	}
+
+	const geocoder = new mapkit.Geocoder();
 
 	/**
 	 *
