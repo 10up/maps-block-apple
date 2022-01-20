@@ -252,7 +252,12 @@ class AppleMapEdit extends AppleMap {
 			isScrollEnabled,
 			showsScale,
 			region,
+			height,
 		} = options;
+
+		if ( height ) {
+			this.element.style.height = `${height}px`;
+		}
 
 		if (region && region !== '') {
 			this.map.setRegionAnimated(region, true);

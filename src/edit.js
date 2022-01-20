@@ -7,8 +7,8 @@ import {
 import { __ } from '@wordpress/i18n';
 import { useEffect, useState, memo } from '@wordpress/element';
 import { useRefEffect, useDebounce } from '@wordpress/compose';
-import { BlockControls, useBlockProps } from '@wordpress/block-editor';
-import { dispatch, useSelect, useDispatch } from '@wordpress/data';
+import { BlockControls, useBlockProps, store as blockEditorStore } from '@wordpress/block-editor';
+import { useSelect, useDispatch } from '@wordpress/data';
 
 import { AppleMapEdit } from './components/AppleMap';
 import EditAuthForm from './components/EditAuthForm';
@@ -20,7 +20,6 @@ import { store as mapsBlockAppleStore } from './store';
 
 const Map = memo((props) => {
 	const {
-		height,
 		map,
 		isAuthenticated,
 		clientId,
@@ -50,10 +49,7 @@ const Map = memo((props) => {
 	})
 
 	return (
-		<div
-			ref={mapRef}
-			style={{ height: `${height}px` }}
-		/>
+		<div ref={mapRef} />
 	)
 })
 
@@ -79,8 +75,7 @@ export default function MapsBlockAppleEdit(props) {
 	const [isLoading, setIsLoading] = useState(true);
 
 	const { updateAuthenticationStatus } = useDispatch( mapsBlockAppleStore );
-
-	const { toggleSelection } = dispatch('core/block-editor');
+	const { toggleSelection } = useDispatch(blockEditorStore);
 
 	/**
 	 * setup the initial authentication of mapkit and setup all the event listeners
@@ -291,17 +286,21 @@ export default function MapsBlockAppleEdit(props) {
 			<div {...blockProps}>
 				<ResizableMap
 					onResizeStart={() => {
+						toggleSelection( false );
 					}}
 					onResize={(newHeight) => {
-						map.element.style.height = `${newHeight}px`;
+						map.update({height: newHeight});
 					}}
 					onResizeStop={(newHeight) => {
 						setAttributes({ height: newHeight });
+						toggleSelection( true );
 					}}
 					showHandle={isSelected}
+					size={
+						{ height }
+					}
 				/>
 				<Map
-					height={height}
 					map={map}
 					setMap={setMap}
 					isAuthenticated={isAuthenticated}
