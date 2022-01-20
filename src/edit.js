@@ -5,7 +5,7 @@ import {
 	ToolbarButton,
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import { useEffect, useRef, useState, memo } from '@wordpress/element';
+import { useEffect, useState, memo } from '@wordpress/element';
 import { useRefEffect, useDebounce } from '@wordpress/compose';
 import { BlockControls, useBlockProps } from '@wordpress/block-editor';
 import { dispatch, useSelect, useDispatch } from '@wordpress/data';
