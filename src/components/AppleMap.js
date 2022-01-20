@@ -258,67 +258,67 @@ class AppleMapEdit extends AppleMap {
 			this.map.setRegionAnimated(region, true);
 		}
 
-		if (mapType && mapType !== this.map.mapType) {
+		if (mapType && mapType !== this?.map.mapType) {
 			this.map.mapType = options.mapType;
 		}
 
-		if (zoom && zoom !== this.map._impl.zoomLevel) {
+		if (zoom && zoom !== this.map?._impl?.zoomLevel) {
 			this.map._impl.zoomLevel = zoom;
 		}
 
-		if (rotation && rotation !== this.map.rotation) {
-			this.map.rotation = Number(rotation);
+		if (rotation && rotation !== this?.map.rotation) {
+			this.map.setRotationAnimated( Number(rotation) );
 		}
 
 		if (
 			latitude &&
 			longitude &&
-			(latitude !== this.map.center.latitude ||
-				longitude !== this.map.center.longitude)
+			(latitude !== this?.map?.center?.latitude ||
+				longitude !== this?.map?.center?.longitude)
 		) {
-			this.map.center = new this.mapkit.Coordinate(latitude, longitude);
+			this.map.setCenterAnimated( new this.mapkit.Coordinate(latitude, longitude) );
 		}
 
 		if (
 			typeof showsMapTypeControl !== 'undefined' &&
-			showsMapTypeControl !== this.map.showsMapTypeControl
+			showsMapTypeControl !== this?.map?.showsMapTypeControl
 		) {
 			this.map.showsMapTypeControl = !!showsMapTypeControl;
 		}
 
 		if (
 			typeof isRotationEnabled !== 'undefined' &&
-			isRotationEnabled !== this.map.isRotationEnabled
+			isRotationEnabled !== this?.map?.isRotationEnabled
 		) {
 			this.map.isRotationEnabled = !!isRotationEnabled;
 		}
 
-		if (showsCompass !== this.map.showsCompass) {
+		if (showsCompass !== this?.map?.showsCompass) {
 			this.map.showsCompass = showsCompass || this.mapkit.FeatureVisibility.Adaptive;
 		}
 
 		if (
 			typeof isZoomEnabled !== 'undefined' &&
-			isZoomEnabled !== this.map.isZoomEnabled
+			isZoomEnabled !== this?.map?.isZoomEnabled
 		) {
 			this.map.isZoomEnabled = !!isZoomEnabled;
 		}
 
 		if (
 			typeof showsZoomControl !== 'undefined' &&
-			showsZoomControl !== this.map.showsZoomControl
+			showsZoomControl !== this?.map?.showsZoomControl
 		) {
 			this.map.showsZoomControl = !!showsZoomControl;
 		}
 
 		if (
 			typeof isScrollEnabled !== 'undefined' &&
-			isScrollEnabled !== this.map.isScrollEnabled
+			isScrollEnabled !== this?.map?.isScrollEnabled
 		) {
 			this.map.isScrollEnabled = !!isScrollEnabled;
 		}
 
-		if (showsScale !== this.map.showsScale) {
+		if (showsScale !== this?.map?.showsScale) {
 			this.map.showsScale = showsScale || this.mapkit.FeatureVisibility.Adaptive;
 		}
 	}
