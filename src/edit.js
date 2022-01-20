@@ -6,7 +6,7 @@ import {
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { useEffect, useRef, useState } from '@wordpress/element';
-import { useRefEffect, useMergeRefs } from '@wordpress/compose';
+import { useRefEffect } from '@wordpress/compose';
 import { BlockControls, useBlockProps } from '@wordpress/block-editor';
 import { dispatch } from '@wordpress/data';
 import { debounce } from 'lodash';
@@ -48,68 +48,106 @@ export default function MapsBlockAppleEdit(props) {
 
 	const { toggleSelection } = dispatch('core/block-editor');
 
-	const authRef = useRefEffect((element) => {
-		const mapkit = (element.ownerDocument.defaultView ?
-			element.ownerDocument.defaultView :
-			element.ownerDocument.parentWindow).mapkit;
+	/**
+	 * setup the initial authentication of mapkit and setup all the event listeners
+	 *
+	 * ensures that the mapkit object gets initialized on the correct window which is
+	 * needed for the iframe editors.
+	 */
+	const setupRef = useRefEffect((element) => {
+		// use the mapkit object on the window of the current document
+		const mapkit = element.ownerDocument.defaultView.mapkit;
 
+		// return early if the mapkit script has not jet been loaded. The editor iframe
+		// will re render the element after the scripts have been loaded
 		if ( !mapkit ) {
 			return;
 		}
 
-		if (mapkit.authenticated) {
-			setIsLoading(false);
+		// when there are multiple maps on a page the first map will handle the authentication
+		// any map that loads after that may not be quick enough to setup their event listener
+		// for the `configuration-change` event and therefore not receive the update that the
+		// map has ben initialized. We therefore store our own property `authenticated` on the
+		// window.mapkit object to allow later instances to check for that key and set their
+		// status based on that key.
+		if ( mapkit?.authenticated ) {
 			setAuthenticated(true);
-			return;
+			setIsLoading(false);
 		}
 
+		/**
+		 * MapKit configuration changed due to either a successful initialization or a refresh.
+		 *
+		 * @typedef mapkitConfigurationChangeEvent
+		 * @property {('Initialized'|'Refreshed')} status indicates the configuration change status
+		 *
+		 * @param {mapkitConfigurationChangeEvent} event
+		 */
 		const handleConfigurationChange = ({ status }) => {
+
+			function handleSuccessfulAuthentication() {
+				setIsLoading(false);
+				setAuthenticated(true);
+				mapkit.authenticated = true;
+			}
+
 			switch (status) {
+				// MapKit successfully initialized and configured.
 				case 'Initialized':
-					setIsLoading(false);
-					setAuthenticated(true);
-					mapkit.authenticated = true;
+					handleSuccessfulAuthentication();
 					break;
+
+				// MapKit configuration updated.
 				case 'Refreshed':
-					setIsLoading(false);
-					setAuthenticated(true);
-					mapkit.authenticated = true;
-					break;
-				default:
-					setIsLoading(false);
-					setAuthenticated(false);
+					handleSuccessfulAuthentication();
 					break;
 			}
 		};
 
-		mapkit.addEventListener(
-			'configuration-change',
-			handleConfigurationChange
-		);
+		mapkit.addEventListener('configuration-change', handleConfigurationChange);
 
+		/**
+		 * MapKit failed to initialize
+		 *
+		 * This either happens when the authorization token provided is invalid or
+		 * when the authorization token provided is based on a Maps ID, which has
+		 * exceeded its allowed daily usage.
+		 *
+		 * @typedef mapkitErrorEvent
+		 * @property {('Unauthorized'|'Too Many Requests')} status indicates the status response
+		 *
+		 * @param {mapkitErrorEvent} event
+		 */
 		const handleAppleMapError = () => {
 			setIsLoading(false);
 			setAuthenticated(false);
+			mapkit.authenticated = false;
 		};
 
 		mapkit.addEventListener('error', handleAppleMapError);
 
-		mapkit.addEventListener('reinitialize', () => {
+		/**
+		 * handleMapkitReInitialization
+		 */
+		const handleMapkitReInitialization = () => {
 			AppleMapEdit.authenticateMap(mapkit);
-		});
+		}
+
+		mapkit.addEventListener('reinitialize', handleMapkitReInitialization);
 
 		AppleMapEdit.authenticateMap(mapkit);
 
 		return () => {
-			mapkit.removeEventListener(
-				'configuration-change',
-				handleConfigurationChange
-			);
-
+			mapkit.removeEventListener('configuration-change', handleConfigurationChange);
 			mapkit.removeEventListener('error', handleAppleMapError);
+			mapkit.removeEventListener('reinitialize', handleMapkitReInitialization);
 		};
 	});
 
+	/**
+	 * render a new map on the provided element if the mapkit object has
+	 * already been successfully authenticated
+	 */
 	const mapRef = useRefEffect((element) => {
 		if ( authenticated && ! map.current ) {
 			map.current = new AppleMapEdit(
@@ -119,8 +157,6 @@ export default function MapsBlockAppleEdit(props) {
 			);
 		}
 	})
-
-	const mergedRefs = useMergeRefs( [ authRef, mapRef ] )
 
 	const debouncedUpdateMarkers = useRef(
 		debounce((newMarkers) => {
@@ -140,7 +176,7 @@ export default function MapsBlockAppleEdit(props) {
 
 	useEffect(() => debouncedUpdateMarkers(markers), [markers]);
 
-	const blockProps = useBlockProps( { ref: authRef } );
+	const blockProps = useBlockProps({ref: setupRef});
 
 	if (isLoading) {
 		return (
@@ -248,7 +284,7 @@ export default function MapsBlockAppleEdit(props) {
 					showHandle={isSelected}
 				/>
 				<div
-					ref={mergedRefs}
+					ref={mapRef}
 					data-map-type={mapType}
 					data-latitude={latitude}
 					data-longitude={longitude}

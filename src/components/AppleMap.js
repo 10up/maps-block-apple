@@ -20,18 +20,15 @@ class AppleMap {
 			};
 		});
 
-		this.mapkit = (element.ownerDocument.defaultView ?
-		element.ownerDocument.defaultView :
-		element.ownerDocument.parentWindow).mapkit;
+		// get the mapkit object on the current window object to account for iframe editors
+		this.mapkit = element.ownerDocument.defaultView.mapkit;
 
 		this.init();
 	}
 
 	init() {
 		this.createMap();
-
 		this.clearMarkers();
-
 		this.addMarkers(this.markers);
 	}
 
