@@ -25,28 +25,36 @@ const Map = memo((props) => {
 		clientId,
 		setAttributes,
 		setMap,
+		mapkit,
 	} = props;
+
+	const hasMap = !!map;
 
 	/**
 	 * render a new map on the provided element if the mapkit object has
 	 * already been successfully authenticated
 	 */
 	const mapRef = useRefEffect((element) => {
-		if (isAuthenticated && !map) {
+
+		// return early if the mapkit script has not jet been loaded. The editor iframe
+		// will re render the element after the scripts have been loaded
+		if (!mapkit) return;
+
+		if (isAuthenticated && !hasMap) {
 			setMap(new AppleMapEdit(
 				element,
 				clientId,
-				setAttributes
+				setAttributes,
 			));
 		}
 
 		return () => {
-			if (!!map) {
+			if (hasMap) {
 				map.destroy();
 				setMap(null);
 			}
 		}
-	})
+	}, [mapkit, isAuthenticated, map, clientId, setAttributes]);
 
 	return (
 		<div ref={mapRef} />
@@ -55,19 +63,23 @@ const Map = memo((props) => {
 
 export default function MapsBlockAppleEdit(props) {
 	const {
-		attributes: {
-			height,
-			latitude,
-			longitude,
-			markers,
-		},
+		attributes,
 		setAttributes,
 		clientId,
 		isSelected,
 	} = props;
 
+	const {
+		height,
+		latitude,
+		longitude,
+		markers,
+	} = attributes;
+
 	const [map, setMap] = useState(null);
 	const [mapkit, setMapkit] = useState(null);
+
+	const hasMap = !!map;
 
 	const isAuthenticated = useSelect((select) => {
 		return select(mapsBlockAppleStore).isAuthenticated();
@@ -90,6 +102,7 @@ export default function MapsBlockAppleEdit(props) {
 		// return early if the mapkit script has not jet been loaded. The editor iframe
 		// will re render the element after the scripts have been loaded
 		if (!mapkit) {
+			setMapkit(null);
 			return;
 		}
 
@@ -158,6 +171,7 @@ export default function MapsBlockAppleEdit(props) {
 			mapkit.removeEventListener('configuration-change', handleConfigurationChange);
 			mapkit.removeEventListener('error', handleAppleMapError);
 			mapkit.removeEventListener('reinitialize', InitializeMapkit);
+			setMapkit(null);
 		};
 	});
 
@@ -170,21 +184,19 @@ export default function MapsBlockAppleEdit(props) {
 	 */
 	useEffect(() => {
 		if (isAuthenticated) setIsLoading(false);
-	}, [isAuthenticated])
-
-	const debouncedUpdateMarkers = useDebounce((newMarkers) => {
-		if (!map) {
-			return;
-		}
-
-		map.addMarkers(newMarkers);
-	}, 300)
+	}, [isAuthenticated]);
 
 	useEffect(() => {
-		if (isAuthenticated && !!map) {
-			map.update(props.attributes);
+		if (isAuthenticated && hasMap) {
+			map.update(attributes);
 		}
-	}, [props.attributes, isAuthenticated, map]);
+	}, [attributes, isAuthenticated, map]);
+
+	const debouncedUpdateMarkers = useDebounce((newMarkers) => {
+		if (hasMap) {
+			map.addMarkers(newMarkers);
+		};
+	}, 300);
 
 	useEffect(() => debouncedUpdateMarkers(markers), [markers]);
 
@@ -289,16 +301,14 @@ export default function MapsBlockAppleEdit(props) {
 						toggleSelection(false);
 					}}
 					onResize={(newHeight) => {
-						map.update({ height: newHeight });
+						map.update({height: newHeight});
 					}}
 					onResizeStop={(newHeight) => {
-						setAttributes({ height: newHeight });
+						setAttributes({height: newHeight});
 						toggleSelection(true);
 					}}
 					showHandle={isSelected}
-					size={
-						{ height }
-					}
+					size={{height}}
 				/>
 				<Map
 					map={map}
@@ -306,6 +316,7 @@ export default function MapsBlockAppleEdit(props) {
 					isAuthenticated={isAuthenticated}
 					clientId={clientId}
 					setAttributes={setAttributes}
+					mapkit={mapkit}
 				/>
 			</div>
 		</>

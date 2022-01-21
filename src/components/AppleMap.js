@@ -30,7 +30,6 @@ class AppleMap {
 
 	init() {
 		this.createMap();
-		this.clearMarkers();
 		this.addMarkers(this.markers);
 	}
 
@@ -61,12 +60,15 @@ class AppleMap {
 			mapType: mapType || this.mapkit.Map.MapTypes.Satellite,
 			showsMapTypeControl: showsMapTypeControl === 'true',
 			isRotationEnabled: isRotationEnabled === 'true',
-			showsCompass: showsCompass || this.mapkit.FeatureVisibility.Adaptive,
 			isZoomEnabled: isZoomEnabled === 'true',
 			showsZoomControl: showsZoomControl === 'true',
 			isScrollEnabled: isScrollEnabled === 'true',
 			showsScale: showsScale || this.mapkit.FeatureVisibility.Adaptive,
 		};
+
+		if (this.mapOptions.isRotationEnabled) {
+			this.mapOptions.showsCompass = showsCompass || this.mapkit.FeatureVisibility.Adaptive;
+		}
 
 		this.map = new this.mapkit.Map(this.element, this.mapOptions);
 		this.map._impl.zoomLevel = Number(zoom) || 15;
@@ -189,8 +191,6 @@ class AppleMapEdit extends AppleMap {
 		this.clientId = clientId;
 		this.setAttributes = setAttributes;
 
-		if (!this.mapkit) return;
-
 		this.initEdit();
 	}
 
@@ -203,6 +203,7 @@ class AppleMapEdit extends AppleMap {
 	}
 
 	destroy() {
+		if (!this.map) return;
 		this.map.destroy();
 	}
 
@@ -255,15 +256,18 @@ class AppleMapEdit extends AppleMap {
 			height,
 		} = options;
 
+
 		if (height) {
 			this.element.style.height = `${height}px`;
 		}
+
+		if (!this.map) return;
 
 		if (region && region !== '') {
 			this.map.setRegionAnimated(region, true);
 		}
 
-		if (mapType && mapType !== this?.map.mapType) {
+		if (mapType && mapType !== this?.map?.mapType) {
 			this.map.mapType = options.mapType;
 		}
 
@@ -271,7 +275,7 @@ class AppleMapEdit extends AppleMap {
 			this.map._impl.zoomLevel = zoom;
 		}
 
-		if (rotation && rotation !== this?.map.rotation) {
+		if (rotation && rotation !== this?.map?.rotation) {
 			this.map.setRotationAnimated(Number(rotation));
 		}
 
@@ -299,7 +303,9 @@ class AppleMapEdit extends AppleMap {
 		}
 
 		if (showsCompass !== this?.map?.showsCompass) {
-			this.map.showsCompass = showsCompass || this.mapkit.FeatureVisibility.Adaptive;
+			if (this.map.isRotationEnabled) {
+				this.map.showsCompass = showsCompass || this.mapkit.FeatureVisibility.Adaptive;
+			}
 		}
 
 		if (
