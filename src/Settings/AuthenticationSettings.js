@@ -8,8 +8,8 @@ export default function AuthenticationSettings() {
 	return (
 		<IsAdmin>
 			<PanelBody
-				title={ __( 'Authentication', 'maps-block-apple' ) }
-				initialOpen={ false }
+				title={__('Authentication', 'maps-block-apple')}
+				initialOpen={false}
 			>
 				<EditAuthForm />
 			</PanelBody>

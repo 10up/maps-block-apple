@@ -10,61 +10,65 @@ import LocationInfo from '../components/LocationInfo';
  *
  * @param {Object} props
  */
-export default function LocationSettings( props ) {
+export default function LocationSettings(props) {
 	const {
 		map,
+		mapkit,
 		attributes: { latitude, longitude, address },
 		setAttributes,
 	} = props;
+	const [searchString, setSearchString] = useState([]);
+	const [searchResults, setSearchResults] = useState([]);
 
-	const [ searchString, setSearchString ] = useState( [] );
-	const [ searchResults, setSearchResults ] = useState( [] );
+	useEffect(() => {
+		// clear search string when the address changes
+		setSearchString('');
+	}, [address]);
+
+	if (!mapkit) {
+		return null;
+	}
 
 	const geocoder = new mapkit.Geocoder();
-
-	useEffect( () => {
-		// clear search string when the address changes
-		setSearchString( '' );
-	}, [ address ] );
 
 	/**
 	 *
 	 * @param {string} searchTerm current search term
 	 */
-	const handleSearchStringChange = ( searchTerm ) => {
-		if ( searchTerm ) {
-			geocoder.lookup( searchTerm, handleSearchResults );
+	const handleSearchStringChange = (searchTerm) => {
+		if (searchTerm) {
+			geocoder.lookup(searchTerm, handleSearchResults);
 		}
 
-		setSearchString( searchTerm );
+		setSearchString(searchTerm);
 	};
 
 	/**
 	 * Handle apple geocoder lookup response
 	 *
-	 * @param {*} error error from apple geocoder
-	 * @param {Array} data data from apple geocoder
+	 * @param {*}     error error from apple geocoder
+	 * @param {Array} data  data from apple geocoder
 	 */
-	const handleSearchResults = ( error, data ) => {
-		if ( data.results ) {
-			setSearchResults( data.results );
+	const handleSearchResults = (error, data) => {
+		if (data.results) {
+			setSearchResults(data.results);
 		}
 	};
 
 	return (
-		<PanelBody title={ __( 'Location Settings', 'maps-block-apple' ) }>
-			<LocationInfo latitude={ latitude } longitude={ longitude } />
+		<PanelBody title={__('Location Settings', 'maps-block-apple')}>
+			<LocationInfo latitude={latitude} longitude={longitude} />
 			<div>
 				<TextControl
-					label={ __( 'Search for a Location', 'maps-block-apple' ) }
-					value={ searchString }
-					onChange={ handleSearchStringChange }
+					label={__('Search for a Location', 'maps-block-apple')}
+					value={searchString}
+					onChange={handleSearchStringChange}
 				/>
 				<SearchResults
-					map={ map }
-					setAttributes={ setAttributes }
-					searchResults={ searchResults }
-					setSearchResults={ setSearchResults }
+					map={map}
+					setAttributes={setAttributes}
+					searchResults={searchResults}
+					setSearchResults={setSearchResults}
 				/>
 			</div>
 		</PanelBody>
