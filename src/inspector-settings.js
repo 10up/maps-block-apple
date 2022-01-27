@@ -6,18 +6,18 @@ import DisplaySettings from './Settings/DisplaySettings';
 import LocationSettings from './Settings/LocationSettings';
 import MarkerSettings from './Settings/MarkerSettings';
 
-export default function InspectorSettings( props ) {
-	const { authenticated, map } = props;
+export default function InspectorSettings(props) {
+	const { isAuthenticated } = props;
 
-	if ( ! authenticated ) {
+	if (!isAuthenticated) {
 		return (
 			<InspectorControls>
 				<PanelBody>
 					<p>
-						{ __(
+						{__(
 							'You need to confirm your access to Apple Maps before you can continue.',
 							'maps-block-apple'
-						) }
+						)}
 					</p>
 				</PanelBody>
 			</InspectorControls>
@@ -26,9 +26,9 @@ export default function InspectorSettings( props ) {
 
 	return (
 		<InspectorControls>
-			<LocationSettings { ...props } map={ map } />
-			<DisplaySettings { ...props } />
-			<MarkerSettings { ...props } />
+			<LocationSettings {...props} />
+			<DisplaySettings {...props} />
+			<MarkerSettings {...props} />
 		</InspectorControls>
 	);
 }

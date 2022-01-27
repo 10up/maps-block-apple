@@ -7,6 +7,7 @@ const { Map, FeatureVisibility } = mapkit;
  * WordPress dependencies
  */
 import { registerBlockType } from '@wordpress/blocks';
+import './store';
 
 /**
  * Internal dependencies
@@ -16,7 +17,7 @@ import MapsBlockAppleSave from './save';
 import BlockIcon from './block-icon';
 import metadata from './../block.json';
 
-registerBlockType( metadata, {
+registerBlockType(metadata, {
 	icon: BlockIcon,
 	attributes: {
 		...metadata.attributes,
@@ -35,4 +36,4 @@ registerBlockType( metadata, {
 	},
 	edit: MapsBlockAppleEdit,
 	save: MapsBlockAppleSave,
-} );
+});
