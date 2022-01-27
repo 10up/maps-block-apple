@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file, per [the Ke
 
 ## [Unreleased] - TBD
 
-## [1.0.2] - 2022-01-28
+## [1.0.2] - 2022-01-27
 ### Added
 - `wp env` for local development (props [@fabiankaegy](https://github.com/fabiankaegy), [@dinhtungdu](https://github.com/dinhtungdu), [@jeffpaul](https://github.com/jeffpaul) via [#77](https://github.com/10up/maps-block-apple/pull/77)).
 - Issue management automation via GitHub Actions (props [@jeffpaul](https://github.com/jeffpaul) via [#96](https://github.com/10up/maps-block-apple/pull/96)).
