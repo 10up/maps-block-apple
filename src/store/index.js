@@ -15,7 +15,7 @@ const STORE_NAME = 'tenup/maps-block-apple';
 /**
  * Store definition for the icons namespace.
  *
- * @type {object}
+ * @type {Object}
  */
 export const store = createReduxStore(STORE_NAME, {
 	reducer,

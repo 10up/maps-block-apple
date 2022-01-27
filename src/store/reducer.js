@@ -6,17 +6,17 @@ import { combineReducers } from '@wordpress/data';
 /**
  * Reducer managing the mapkit authentication
  *
- * @param {object} state  Current state.
- * @param {object} action Dispatched action.
+ * @param {Object} state  Current state.
+ * @param {Object} action Dispatched action.
  *
- * @returns {object} Updated state.
+ * @return {Object} Updated state.
  */
 export function authenticationReducer(state, action) {
 	switch (action.type) {
 		case 'UPDATE_AUTHENTICATION':
 			return {
 				...state,
-				authenticated: action.isAuthenticated
+				authenticated: action.isAuthenticated,
 			};
 		default:
 			return state;

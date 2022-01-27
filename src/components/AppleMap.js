@@ -67,12 +67,12 @@ class AppleMap {
 		};
 
 		if (this.mapOptions.isRotationEnabled) {
-			this.mapOptions.showsCompass = showsCompass || this.mapkit.FeatureVisibility.Adaptive;
+			this.mapOptions.showsCompass =
+				showsCompass || this.mapkit.FeatureVisibility.Adaptive;
 		}
 
 		this.map = new this.mapkit.Map(this.element, this.mapOptions);
 		this.map._impl.zoomLevel = Number(zoom) || 15;
-
 	}
 
 	/**
@@ -105,7 +105,8 @@ class AppleMap {
 			const marker = new this.mapkit.MarkerAnnotation(position, {
 				title,
 				subtitle: subtitle || null,
-				titleVisibility: titleVisibility || this.mapkit.FeatureVisibility.Visible,
+				titleVisibility:
+					titleVisibility || this.mapkit.FeatureVisibility.Visible,
 				subtitleVisibility:
 					subtitleVisibility || this.mapkit.FeatureVisibility.Visible,
 				color: color || 'green',
@@ -256,7 +257,6 @@ class AppleMapEdit extends AppleMap {
 			height,
 		} = options;
 
-
 		if (height) {
 			this.element.style.height = `${height}px`;
 		}
@@ -285,7 +285,9 @@ class AppleMapEdit extends AppleMap {
 			(latitude !== this?.map?.center?.latitude ||
 				longitude !== this?.map?.center?.longitude)
 		) {
-			this.map.setCenterAnimated(new this.mapkit.Coordinate(latitude, longitude));
+			this.map.setCenterAnimated(
+				new this.mapkit.Coordinate(latitude, longitude)
+			);
 		}
 
 		if (
@@ -304,7 +306,8 @@ class AppleMapEdit extends AppleMap {
 
 		if (showsCompass !== this?.map?.showsCompass) {
 			if (this.map.isRotationEnabled) {
-				this.map.showsCompass = showsCompass || this.mapkit.FeatureVisibility.Adaptive;
+				this.map.showsCompass =
+					showsCompass || this.mapkit.FeatureVisibility.Adaptive;
 			}
 		}
 
@@ -330,7 +333,8 @@ class AppleMapEdit extends AppleMap {
 		}
 
 		if (showsScale !== this?.map?.showsScale) {
-			this.map.showsScale = showsScale || this.mapkit.FeatureVisibility.Adaptive;
+			this.map.showsScale =
+				showsScale || this.mapkit.FeatureVisibility.Adaptive;
 		}
 	}
 }

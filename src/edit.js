@@ -7,7 +7,11 @@ import {
 import { __ } from '@wordpress/i18n';
 import { useEffect, useState, memo } from '@wordpress/element';
 import { useRefEffect, useDebounce } from '@wordpress/compose';
-import { BlockControls, useBlockProps, store as blockEditorStore } from '@wordpress/block-editor';
+import {
+	BlockControls,
+	useBlockProps,
+	store as blockEditorStore,
+} from '@wordpress/block-editor';
 import { useSelect, useDispatch } from '@wordpress/data';
 
 import { AppleMapEdit } from './components/AppleMap';
@@ -19,14 +23,8 @@ import { ResizableMap } from './components/ResizableMap';
 import { store as mapsBlockAppleStore } from './store';
 
 const Map = memo((props) => {
-	const {
-		map,
-		isAuthenticated,
-		clientId,
-		setAttributes,
-		setMap,
-		mapkit,
-	} = props;
+	const { map, isAuthenticated, clientId, setAttributes, setMap, mapkit } =
+		props;
 
 	const hasMap = !!map;
 
@@ -34,47 +32,33 @@ const Map = memo((props) => {
 	 * render a new map on the provided element if the mapkit object has
 	 * already been successfully authenticated
 	 */
-	const mapRef = useRefEffect((element) => {
+	const mapRef = useRefEffect(
+		(element) => {
+			// return early if the mapkit script has not jet been loaded. The editor iframe
+			// will re render the element after the scripts have been loaded
+			if (!mapkit) return;
 
-		// return early if the mapkit script has not jet been loaded. The editor iframe
-		// will re render the element after the scripts have been loaded
-		if (!mapkit) return;
-
-		if (isAuthenticated && !hasMap) {
-			setMap(new AppleMapEdit(
-				element,
-				clientId,
-				setAttributes,
-			));
-		}
-
-		return () => {
-			if (hasMap) {
-				map.destroy();
-				setMap(null);
+			if (isAuthenticated && !hasMap) {
+				setMap(new AppleMapEdit(element, clientId, setAttributes));
 			}
-		}
-	}, [mapkit, isAuthenticated, map, clientId, setAttributes]);
 
-	return (
-		<div ref={mapRef} />
-	)
-})
+			return () => {
+				if (hasMap) {
+					map.destroy();
+					setMap(null);
+				}
+			};
+		},
+		[mapkit, isAuthenticated, map, clientId, setAttributes]
+	);
+
+	return <div ref={mapRef} />;
+});
 
 export default function MapsBlockAppleEdit(props) {
-	const {
-		attributes,
-		setAttributes,
-		clientId,
-		isSelected,
-	} = props;
+	const { attributes, setAttributes, clientId, isSelected } = props;
 
-	const {
-		height,
-		latitude,
-		longitude,
-		markers,
-	} = attributes;
+	const { height, latitude, longitude, markers } = attributes;
 
 	const [map, setMap] = useState(null);
 	const [mapkit, setMapkit] = useState(null);
@@ -97,27 +81,26 @@ export default function MapsBlockAppleEdit(props) {
 	 */
 	const setupRef = useRefEffect((element) => {
 		// use the mapkit object on the window of the current document
-		const mapkit = element.ownerDocument.defaultView.mapkit;
+		const localMapkit = element.ownerDocument.defaultView.mapkit;
 
 		// return early if the mapkit script has not jet been loaded. The editor iframe
 		// will re render the element after the scripts have been loaded
-		if (!mapkit) {
+		if (!localMapkit) {
 			setMapkit(null);
 			return;
 		}
 
-		setMapkit(mapkit);
+		setMapkit(localMapkit);
 
 		/**
 		 * MapKit configuration changed due to either a successful initialization or a refresh.
 		 *
 		 * @typedef mapkitConfigurationChangeEvent
-		 * @property {('Initialized'|'Refreshed')} status indicates the configuration change status
+		 * @property {('Initialized'|'Refreshed')}    status indicates the configuration change status
 		 *
-		 * @param {mapkitConfigurationChangeEvent} event
+		 * @param    {mapkitConfigurationChangeEvent} event
 		 */
 		const handleConfigurationChange = ({ status }) => {
-
 			function handleSuccessfulAuthentication() {
 				setIsLoading(false);
 				updateAuthenticationStatus(true);
@@ -135,7 +118,10 @@ export default function MapsBlockAppleEdit(props) {
 					break;
 			}
 		};
-		mapkit.addEventListener('configuration-change', handleConfigurationChange);
+		localMapkit.addEventListener(
+			'configuration-change',
+			handleConfigurationChange
+		);
 
 		/**
 		 * MapKit failed to initialize
@@ -146,31 +132,32 @@ export default function MapsBlockAppleEdit(props) {
 		 *
 		 * @typedef mapkitErrorEvent
 		 * @property {('Unauthorized'|'Too Many Requests')} status indicates the status response
-		 *
-		 * @param {mapkitErrorEvent} event
 		 */
 		const handleAppleMapError = () => {
 			setIsLoading(false);
 			updateAuthenticationStatus(false);
 		};
-		mapkit.addEventListener('error', handleAppleMapError);
+		localMapkit.addEventListener('error', handleAppleMapError);
 
 		/**
 		 * handleMapkitReInitialization
 		 */
 		const InitializeMapkit = () => {
-			AppleMapEdit.authenticateMap(mapkit);
-		}
-		mapkit.addEventListener('reinitialize', InitializeMapkit);
+			AppleMapEdit.authenticateMap(localMapkit);
+		};
+		localMapkit.addEventListener('reinitialize', InitializeMapkit);
 
 		if (!isAuthenticated) {
 			InitializeMapkit();
 		}
 
 		return () => {
-			mapkit.removeEventListener('configuration-change', handleConfigurationChange);
-			mapkit.removeEventListener('error', handleAppleMapError);
-			mapkit.removeEventListener('reinitialize', InitializeMapkit);
+			localMapkit.removeEventListener(
+				'configuration-change',
+				handleConfigurationChange
+			);
+			localMapkit.removeEventListener('error', handleAppleMapError);
+			localMapkit.removeEventListener('reinitialize', InitializeMapkit);
 			setMapkit(null);
 		};
 	});
@@ -195,7 +182,7 @@ export default function MapsBlockAppleEdit(props) {
 	const debouncedUpdateMarkers = useDebounce((newMarkers) => {
 		if (hasMap) {
 			map.addMarkers(newMarkers);
-		};
+		}
 	}, 300);
 
 	useEffect(() => debouncedUpdateMarkers(markers), [markers]);
@@ -301,14 +288,14 @@ export default function MapsBlockAppleEdit(props) {
 						toggleSelection(false);
 					}}
 					onResize={(newHeight) => {
-						map.update({height: newHeight});
+						map.update({ height: newHeight });
 					}}
 					onResizeStop={(newHeight) => {
-						setAttributes({height: newHeight});
+						setAttributes({ height: newHeight });
 						toggleSelection(true);
 					}}
 					showHandle={isSelected}
-					size={{height}}
+					size={{ height }}
 				/>
 				<Map
 					map={map}

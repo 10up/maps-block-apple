@@ -1,9 +1,9 @@
 /**
  * Returns an action object used in signalling that the authentication state has changed
  *
- * @param {object} isAuthenticated status
+ * @param {boolean} isAuthenticated status
  *
- * @returns {object} Action object.
+ * @return {Object} Action object.
  */
 export function updateAuthenticationStatus(isAuthenticated) {
 	return {
