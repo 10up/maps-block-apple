@@ -31,8 +31,9 @@ export function ResizableMap({
 				right: 0,
 				bottom: 0,
 			}}
-			className={`apple-maps-block__resize-container ${isResizing ? 'is-resizing' : ''
-				}`}
+			className={`apple-maps-block__resize-container ${
+				isResizing ? 'is-resizing' : ''
+			}`}
 			enable={RESIZABLE_BOX_ENABLE_OPTION}
 			onResizeStart={(_event, _direction, elt) => {
 				onResizeStart(elt.clientHeight);

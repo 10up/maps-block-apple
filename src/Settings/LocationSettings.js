@@ -63,6 +63,7 @@ export default function LocationSettings(props) {
 					label={__('Search for a Location', 'maps-block-apple')}
 					value={searchString}
 					onChange={handleSearchStringChange}
+					autoComplete='off'
 				/>
 				<SearchResults
 					map={map}

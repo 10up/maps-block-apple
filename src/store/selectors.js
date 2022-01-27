@@ -1,9 +1,9 @@
 /**
  * Returns authentication state
  *
- * @param {object} state Data state.
+ * @param {Object} state Data state.
  *
- * @returns {Array?} Icon Sets.
+ * @return {Array?} Icon Sets.
  */
 export function isAuthenticated(state) {
 	return Boolean(state?.authenticationReducer?.authenticated);

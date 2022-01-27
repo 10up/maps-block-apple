@@ -9,7 +9,7 @@ export default function SearchResults(props) {
 
 	return (
 		<Popover focusOnMount={false}>
-			<ul>
+			<ul style={{ width: '250px' }}>
 				{searchResults.map((searchResult, index) => (
 					<li key={index}>
 						<Button
