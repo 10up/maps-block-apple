@@ -10,7 +10,7 @@ All notable changes to this project will be documented in this file, per [the Ke
 - Issue management automation via GitHub Actions (props [@jeffpaul](https://github.com/jeffpaul) via [#96](https://github.com/10up/maps-block-apple/pull/96)).
 
 ### Changed
-- Bump WordPress version "tested up to" 5.9 (props [@jeffpaul](https://github.com/jeffpaul), [@fabiankaegy](https://github.com/fabiankaegy), [@dinhtungdu](https://github.com/dinhtungdu) via [#80](https://github.com/10up/maps-block-apple/pull/80), [#99](https://github.com/10up/maps-block-apple/pull/99)).
+- Bump WordPress version "tested up to" 5.9 (props [@jeffpaul](https://github.com/jeffpaul), [@fabiankaegy](https://github.com/fabiankaegy), [@dinhtungdu](https://github.com/dinhtungdu), [@barneyjeffries](https://github.com/barneyjeffries) via [#80](https://github.com/10up/maps-block-apple/pull/80), [#99](https://github.com/10up/maps-block-apple/pull/99)).
 - Turn off `autoComplete` for the search input field (props [@dinhtungdu](https://github.com/dinhtungdu) via [#111](https://github.com/10up/maps-block-apple/pull/111)).
 
 ### Fixed
