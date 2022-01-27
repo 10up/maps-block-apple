@@ -2,9 +2,9 @@
 Contributors:      10up, helen, welcher, fabiankaegy, dinhtungdu
 Tags:              apple maps, map block, block
 Requires at least: 5.2
-Tested up to:      5.7
+Tested up to:      5.9
 Requires PHP:      5.6
-Stable tag:        1.0.1
+Stable tag:        1.0.2
 License:           GPLv2 or later
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -71,6 +71,25 @@ Yes, you can track your MapKit JS useage on the [MapKit JS Developer Dashboard](
 4. Block settings page showing MapKit JS credential fields
 
 == Changelog ==
+
+= 1.0.2 =
+* **Added:** `wp env` for local development (props [@fabiankaegy](https://github.com/fabiankaegy), [@dinhtungdu](https://github.com/dinhtungdu), [@jeffpaul](https://github.com/jeffpaul)).
+* **Added:** Issue management automation via GitHub Actions (props [@jeffpaul](https://github.com/jeffpaul)).
+* **Changed:** Bump WordPress version "tested up to" 5.9 (props [@jeffpaul](https://github.com/jeffpaul), [@fabiankaegy](https://github.com/fabiankaegy), [@dinhtungdu](https://github.com/dinhtungdu), [@barneyjeffries](https://github.com/barneyjeffries)).
+* **Changed:**Turn off `autoComplete` for the search input field (props [@dinhtungdu](https://github.com/dinhtungdu)).
+* **Fixed:** `block.json` syntax error (props [@dinhtungdu](https://github.com/dinhtungdu), [@jeffpaul](https://github.com/jeffpaul), [@ryanwelcher](https://github.com/ryanwelcher)).
+* **Fixed:** Enqueue map assets only when being used and clean up unused assets (props [@joshuaabenazer](https://github.com/joshuaabenazer), [@fabiankaegy](https://github.com/fabiankaegy)).
+* **Fixed:** Remove orign restriction in local environments to allow for proxied domains (props [@fabiankaegy](https://github.com/fabiankaegy), [@dinhtungdu](https://github.com/dinhtungdu)).
+* **Fixed:** Block not working in Site Editor due to iframed editor (props [@fabiankaegy](https://github.com/fabiankaegy), [@dinhtungdu](https://github.com/dinhtungdu)).
+* **Fixed:** Search popover sizing (props [@fabiankaegy](https://github.com/fabiankaegy), [@dinhtungdu](https://github.com/dinhtungdu), [@ankitguptaindia](https://github.com/ankitguptaindia)).
+* **Security:** Bump `ini` from 1.3.5 to 1.3.8 (props [@dependabot](https://github.com/apps/dependabot)).
+* **Security:** Bump `elliptic` from 6.5.3 to 6.5.4 (props [@dependabot](https://github.com/apps/dependabot)).
+* **Security:** Bump `y18n` from 4.0.0 to 4.0.1 (props [@dependabot](https://github.com/apps/dependabot)).
+* **Security:** Bump `ssri` from 6.0.1 to 6.0.2 (props [@dependabot](https://github.com/apps/dependabot)).
+* **Security:** Bump `lodash` from 4.17.19 to 4.17.21 (props [@dependabot](https://github.com/apps/dependabot)).
+* **Security:** Bump `hosted-git-info` from 2.8.8 to 2.8.9 (props [@dependabot](https://github.com/apps/dependabot)).
+* **Security:** Bump `normalize-url` from 4.5.0 to 4.5.1 (props [@dependabot](https://github.com/apps/dependabot)).
+* **Security:** Bump `path-parse` from 1.0.6 to 1.0.7 (props [@dependabot](https://github.com/apps/dependabot)).
 
 = 1.0.1 =
 * **Added:** Internationalization support via loading translations for the block (props [@dinhtungdu](https://profiles.wordpress.org/dinhtungdu/), [@helen](https://profiles.wordpress.org/helen/) via [#69](https://github.com/10up/maps-block-apple/pull/69))

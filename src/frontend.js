@@ -2,18 +2,18 @@ import domReady from '@wordpress/dom-ready';
 
 import { AppleMap } from './components/AppleMap';
 
-domReady( async () => {
+domReady(async () => {
 	const appleMapsBlocks = document.querySelectorAll(
 		'.wp-block-tenup-maps-block-apple'
 	);
 
-	if ( ! appleMapsBlocks.length ) {
+	if (!appleMapsBlocks.length) {
 		return;
 	}
 
-	AppleMap.authenticateMap();
+	AppleMap.authenticateMap(window.mapkit);
 
-	appleMapsBlocks.forEach( ( block ) => {
-		new AppleMap( block );
-	} );
-} );
+	appleMapsBlocks.forEach((block) => {
+		new AppleMap(block);
+	});
+});

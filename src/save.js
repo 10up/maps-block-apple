@@ -1,6 +1,7 @@
-export default function MapsBlockAppleSave( props ) {
+import { useBlockProps } from '@wordpress/block-editor';
+
+export default function MapsBlockAppleSave(props) {
 	const {
-		className,
 		attributes: {
 			mapType,
 			height,
@@ -19,35 +20,37 @@ export default function MapsBlockAppleSave( props ) {
 		},
 	} = props;
 
+	const blockProps = useBlockProps.save();
+
 	return (
 		<div
-			className={ className }
-			data-map-type={ mapType }
-			data-latitude={ latitude }
-			data-longitude={ longitude }
-			data-rotation={ rotation }
-			data-zoom={ zoom }
-			data-shows-map-type-control={ showsMapTypeControl }
-			data-is-rotation-enabled={ isRotationEnabled }
-			data-shows-compass={ showsCompass }
-			data-is-zoom-enabled={ isZoomEnabled }
-			data-shows-zoom-control={ showsZoomControl }
-			data-is-scroll-enabled={ isScrollEnabled }
-			data-shows-scale={ showsScale }
-			style={ { height: `${ height }px` } }
+			{...blockProps}
+			data-map-type={mapType}
+			data-latitude={latitude}
+			data-longitude={longitude}
+			data-rotation={rotation}
+			data-zoom={zoom}
+			data-shows-map-type-control={showsMapTypeControl}
+			data-is-rotation-enabled={isRotationEnabled}
+			data-shows-compass={showsCompass}
+			data-is-zoom-enabled={isZoomEnabled}
+			data-shows-zoom-control={showsZoomControl}
+			data-is-scroll-enabled={isScrollEnabled}
+			data-shows-scale={showsScale}
+			style={{ height: `${height}px` }}
 		>
-			{ markers.map( ( marker, index ) => (
+			{markers.map((marker, index) => (
 				<div
-					key={ index }
-					className={ 'marker-annotation' }
-					data-latitude={ marker.latitude }
-					data-longitude={ marker.longitude }
-					data-title={ marker.title }
-					data-subtitle={ marker.subtitle }
-					data-color={ marker.color }
-					data-glyph-color={ marker.glyphColor }
+					key={index}
+					className={'marker-annotation'}
+					data-latitude={marker.latitude}
+					data-longitude={marker.longitude}
+					data-title={marker.title}
+					data-subtitle={marker.subtitle}
+					data-color={marker.color}
+					data-glyph-color={marker.glyphColor}
 				/>
-			) ) }
+			))}
 		</div>
 	);
 }

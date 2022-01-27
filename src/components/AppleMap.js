@@ -1,43 +1,36 @@
 import apiFetch from '@wordpress/api-fetch';
 import { dispatch } from '@wordpress/data';
 
-const { Coordinate, Map, FeatureVisibility, MarkerAnnotation } = mapkit;
-
 class AppleMap {
-	constructor( element ) {
+	constructor(element) {
 		this.element = element;
 		this.mapOptions = {};
-		this.markerElements = this.element.querySelectorAll(
-			'.marker-annotation'
-		);
-		this.markers = [ ...this.markerElements ].map( ( markerElement ) => {
-			const {
-				latitude,
-				longitude,
-				title,
-				subtitle,
-				color,
-				glyphColor,
-			} = markerElement.dataset;
+		this.markerElements =
+			this.element.querySelectorAll('.marker-annotation');
+		this.markers = [...this.markerElements].map((markerElement) => {
+			const { latitude, longitude, title, subtitle, color, glyphColor } =
+				markerElement.dataset;
 			return {
-				latitude: Number( latitude ),
-				longitude: Number( longitude ),
+				latitude: Number(latitude),
+				longitude: Number(longitude),
 				title: title || '',
 				subtitle: subtitle || '',
 				color: color || null,
 				glyphColor: glyphColor || null,
 			};
-		} );
+		});
+
+		// get the mapkit object on the current window object to account for iframe editors
+		this.mapkit = element.ownerDocument.defaultView.mapkit;
+
+		if (!this.mapkit) return;
 
 		this.init();
 	}
 
 	init() {
 		this.createMap();
-
-		this.clearMarkers();
-
-		this.addMarkers( this.markers );
+		this.addMarkers(this.markers);
 	}
 
 	createMap() {
@@ -56,26 +49,30 @@ class AppleMap {
 			showsScale,
 		} = this.element.dataset;
 
-		const center = new Coordinate(
-			Number( latitude ) || 51.48762585296625,
-			Number( longitude ) || -0.1326724377053381
+		const center = new this.mapkit.Coordinate(
+			Number(latitude) || 51.48762585296625,
+			Number(longitude) || -0.1326724377053381
 		);
 
 		this.mapOptions = {
 			center,
-			rotation: Number( rotation ) || 0,
-			mapType: mapType || Map.MapTypes.Satellite,
+			rotation: Number(rotation) || 0,
+			mapType: mapType || this.mapkit.Map.MapTypes.Satellite,
 			showsMapTypeControl: showsMapTypeControl === 'true',
 			isRotationEnabled: isRotationEnabled === 'true',
-			showsCompass: showsCompass || FeatureVisibility.Adaptive,
 			isZoomEnabled: isZoomEnabled === 'true',
 			showsZoomControl: showsZoomControl === 'true',
 			isScrollEnabled: isScrollEnabled === 'true',
-			showsScale: showsScale || FeatureVisibility.Adaptive,
+			showsScale: showsScale || this.mapkit.FeatureVisibility.Adaptive,
 		};
 
-		this.map = new Map( this.element, this.mapOptions );
-		this.map._impl.zoomLevel = Number( zoom ) || 15;
+		if (this.mapOptions.isRotationEnabled) {
+			this.mapOptions.showsCompass =
+				showsCompass || this.mapkit.FeatureVisibility.Adaptive;
+		}
+
+		this.map = new this.mapkit.Map(this.element, this.mapOptions);
+		this.map._impl.zoomLevel = Number(zoom) || 15;
 	}
 
 	/**
@@ -83,12 +80,12 @@ class AppleMap {
 	 *
 	 * @param {Array} markers markers
 	 */
-	addMarkers( markers ) {
+	addMarkers(markers) {
 		this.clearMarkers();
 
 		const markerAnnotations = [];
 
-		markers.forEach( ( item, index ) => {
+		markers.forEach((item, index) => {
 			const {
 				latitude,
 				longitude,
@@ -100,34 +97,35 @@ class AppleMap {
 				glyphColor,
 				glyphText,
 			} = item;
-			const position = new Coordinate(
-				Number( latitude ),
-				Number( longitude )
+			const position = new this.mapkit.Coordinate(
+				Number(latitude),
+				Number(longitude)
 			);
 
-			const marker = new MarkerAnnotation( position, {
+			const marker = new this.mapkit.MarkerAnnotation(position, {
 				title,
 				subtitle: subtitle || null,
-				titleVisibility: titleVisibility || FeatureVisibility.Visible,
+				titleVisibility:
+					titleVisibility || this.mapkit.FeatureVisibility.Visible,
 				subtitleVisibility:
-					subtitleVisibility || FeatureVisibility.Visible,
+					subtitleVisibility || this.mapkit.FeatureVisibility.Visible,
 				color: color || 'green',
 				glyphColor: glyphColor || 'white',
 				glyphText: glyphText || '',
-				draggable: !! this.isEditor,
-			} );
+				draggable: !!this.isEditor,
+			});
 
-			if ( this.setAttributes ) {
-				marker.addEventListener( 'drag-end', ( event ) => {
+			if (this.setAttributes) {
+				marker.addEventListener('drag-end', (event) => {
 					const {
 						target: { coordinate },
 					} = event;
-					const newMarkers = [ ...markers ];
-					newMarkers[ index ].latitude = coordinate.latitude;
-					newMarkers[ index ].longitude = coordinate.longitude;
+					const newMarkers = [...markers];
+					newMarkers[index].latitude = coordinate.latitude;
+					newMarkers[index].longitude = coordinate.longitude;
 
-					this.setAttributes( { markers: newMarkers } );
-				} );
+					this.setAttributes({ markers: newMarkers });
+				});
 
 				/*
 				 * Focus the Marker setting when the marker is selected
@@ -139,24 +137,24 @@ class AppleMap {
 				 */
 			}
 
-			markerAnnotations.push( marker );
-		} );
+			markerAnnotations.push(marker);
+		});
 
-		this.map.addAnnotations( markerAnnotations );
+		this.map.addAnnotations(markerAnnotations);
 	}
 
 	/**
 	 * clear markers from the map
 	 */
 	clearMarkers() {
-		this.map.removeAnnotations( this.map.annotations );
+		this.map.removeAnnotations(this.map.annotations);
 	}
 
-	static authenticateMap() {
-		apiFetch( { path: 'MapsBlockApple/v1/GetJWT/' } )
-			.then( () => {
-				mapkit.init( {
-					authorizationCallback( done ) {
+	static authenticateMap(mapkit) {
+		apiFetch({ path: 'MapsBlockApple/v1/GetJWT/' })
+			.then(() => {
+				mapkit.init({
+					authorizationCallback(done) {
 						/**
 						 * JWT only lives for 30 mins. Calling it again here to
 						 * allow mapkit to get new token when needed.
@@ -164,19 +162,19 @@ class AppleMap {
 						 * @see https://github.com/10up/maps-block-apple/issues/48
 						 * @see https://github.com/10up/maps-block-apple/pull/52
 						 */
-						apiFetch( { path: 'MapsBlockApple/v1/GetJWT/' } ).then(
+						apiFetch({ path: 'MapsBlockApple/v1/GetJWT/' }).then(
 							done
 						);
 					},
-				} );
-			} )
-			.catch( ( error ) => {
-				dispatch( 'core/notices' ).createErrorNotice( error.message, {
+				});
+			})
+			.catch((error) => {
+				dispatch('core/notices').createErrorNotice(error.message, {
 					isDismissible: true,
 					type: 'snackbar',
-				} );
-				mapkit.dispatchEvent( new Event( 'error' ) );
-			} );
+				});
+				mapkit.dispatchEvent(new Event('error'));
+			});
 	}
 }
 
@@ -184,12 +182,12 @@ class AppleMapEdit extends AppleMap {
 	/**
 	 * Constructor of the AppleMapEdit Class
 	 *
-	 * @param {HTMLElement} element Element to initialize the map on
-	 * @param {string} clientId ClientId of the Block
-	 * @param {Function} setAttributes to update attributes of the block
+	 * @param {HTMLElement} element       Element to initialize the map on
+	 * @param {string}      clientId      ClientId of the Block
+	 * @param {Function}    setAttributes to update attributes of the block
 	 */
-	constructor( element, clientId, setAttributes ) {
-		super( element );
+	constructor(element, clientId, setAttributes) {
+		super(element);
 		this.isEditor = true;
 		this.clientId = clientId;
 		this.setAttributes = setAttributes;
@@ -202,7 +200,12 @@ class AppleMapEdit extends AppleMap {
 	 */
 	initEdit() {
 		this.addListeners();
-		this.addMarkers( this.markers );
+		this.addMarkers(this.markers);
+	}
+
+	destroy() {
+		if (!this.map) return;
+		this.map.destroy();
 	}
 
 	/**
@@ -211,24 +214,24 @@ class AppleMapEdit extends AppleMap {
 	 */
 	addListeners() {
 		// select the block when the user interacts with the map
-		this.map.element.addEventListener( 'click', () => {
-			dispatch( 'core/block-editor' ).selectBlock( this.clientId );
-		} );
+		this.map.element.addEventListener('click', () => {
+			dispatch('core/block-editor').selectBlock(this.clientId);
+		});
 
 		// change the mapType attribute when it gets changed inside the map
-		this.map.addEventListener( 'map-type-change', () => {
-			this.setAttributes( { mapType: this.map.mapType } );
-		} );
+		this.map.addEventListener('map-type-change', () => {
+			this.setAttributes({ mapType: this.map.mapType });
+		});
 
 		// update the region settings when the map gets moved around
-		this.map.addEventListener( 'region-change-end', () => {
-			this.setAttributes( {
+		this.map.addEventListener('region-change-end', () => {
+			this.setAttributes({
 				rotation: this.map.rotation,
 				latitude: this.map.center.latitude,
 				longitude: this.map.center.longitude,
 				zoom: this.map._impl.zoomLevel,
-			} );
-		} );
+			});
+		});
 	}
 
 	/**
@@ -236,7 +239,7 @@ class AppleMapEdit extends AppleMap {
 	 *
 	 * @param {Object} options Settings to update
 	 */
-	update( options ) {
+	update(options) {
 		const {
 			mapType,
 			latitude,
@@ -251,92 +254,105 @@ class AppleMapEdit extends AppleMap {
 			isScrollEnabled,
 			showsScale,
 			region,
+			height,
 		} = options;
 
-		if ( region && region !== '' ) {
-			this.map.setRegionAnimated( region, true );
+		if (height) {
+			this.element.style.height = `${height}px`;
 		}
 
-		if ( mapType && mapType !== this.map.mapType ) {
+		if (!this.map) return;
+
+		if (region && region !== '') {
+			this.map.setRegionAnimated(region, true);
+		}
+
+		if (mapType && mapType !== this?.map?.mapType) {
 			this.map.mapType = options.mapType;
 		}
 
-		if ( zoom && zoom !== this.map._impl.zoomLevel ) {
+		if (zoom && zoom !== this.map?._impl?.zoomLevel) {
 			this.map._impl.zoomLevel = zoom;
 		}
 
-		if ( rotation && rotation !== this.map.rotation ) {
-			this.map.rotation = Number( rotation );
+		if (rotation && rotation !== this?.map?.rotation) {
+			this.map.setRotationAnimated(Number(rotation));
 		}
 
 		if (
 			latitude &&
 			longitude &&
-			( latitude !== this.map.center.latitude ||
-				longitude !== this.map.center.longitude )
+			(latitude !== this?.map?.center?.latitude ||
+				longitude !== this?.map?.center?.longitude)
 		) {
-			this.map.center = new Coordinate( latitude, longitude );
+			this.map.setCenterAnimated(
+				new this.mapkit.Coordinate(latitude, longitude)
+			);
 		}
 
 		if (
 			typeof showsMapTypeControl !== 'undefined' &&
-			showsMapTypeControl !== this.map.showsMapTypeControl
+			showsMapTypeControl !== this?.map?.showsMapTypeControl
 		) {
-			this.map.showsMapTypeControl = !! showsMapTypeControl;
+			this.map.showsMapTypeControl = !!showsMapTypeControl;
 		}
 
 		if (
 			typeof isRotationEnabled !== 'undefined' &&
-			isRotationEnabled !== this.map.isRotationEnabled
+			isRotationEnabled !== this?.map?.isRotationEnabled
 		) {
-			this.map.isRotationEnabled = !! isRotationEnabled;
+			this.map.isRotationEnabled = !!isRotationEnabled;
 		}
 
-		if ( showsCompass !== this.map.showsCompass ) {
-			this.map.showsCompass = showsCompass || FeatureVisibility.Adaptive;
+		if (showsCompass !== this?.map?.showsCompass) {
+			if (this.map.isRotationEnabled) {
+				this.map.showsCompass =
+					showsCompass || this.mapkit.FeatureVisibility.Adaptive;
+			}
 		}
 
 		if (
 			typeof isZoomEnabled !== 'undefined' &&
-			isZoomEnabled !== this.map.isZoomEnabled
+			isZoomEnabled !== this?.map?.isZoomEnabled
 		) {
-			this.map.isZoomEnabled = !! isZoomEnabled;
+			this.map.isZoomEnabled = !!isZoomEnabled;
 		}
 
 		if (
 			typeof showsZoomControl !== 'undefined' &&
-			showsZoomControl !== this.map.showsZoomControl
+			showsZoomControl !== this?.map?.showsZoomControl
 		) {
-			this.map.showsZoomControl = !! showsZoomControl;
+			this.map.showsZoomControl = !!showsZoomControl;
 		}
 
 		if (
 			typeof isScrollEnabled !== 'undefined' &&
-			isScrollEnabled !== this.map.isScrollEnabled
+			isScrollEnabled !== this?.map?.isScrollEnabled
 		) {
-			this.map.isScrollEnabled = !! isScrollEnabled;
+			this.map.isScrollEnabled = !!isScrollEnabled;
 		}
 
-		if ( showsScale !== this.map.showsScale ) {
-			this.map.showsScale = showsScale || FeatureVisibility.Adaptive;
+		if (showsScale !== this?.map?.showsScale) {
+			this.map.showsScale =
+				showsScale || this.mapkit.FeatureVisibility.Adaptive;
 		}
 	}
 }
 
-// MapTypes formated to be used as options in SelectControl dropdowns
-const MAP_TYPE_OPTIONS = Object.keys( Map.MapTypes ).map( ( mapType ) => {
+// MapTypes formatted to be used as options in SelectControl dropdown
+const MAP_TYPE_OPTIONS = Object.keys(mapkit.Map.MapTypes).map((mapType) => {
 	return {
 		label: mapType,
-		value: Map.MapTypes[ mapType ],
+		value: mapkit.Map.MapTypes[mapType],
 	};
-} );
+});
 
-// FeatureVisibility options formated to be used as options in SelectControl dropdowns
-const FEATURE_VISIBILITY_OPTIONS = Object.keys( FeatureVisibility ).map(
-	( featureVisibility ) => {
+// FeatureVisibility options formatted to be used as options in SelectControl dropdown
+const FEATURE_VISIBILITY_OPTIONS = Object.keys(mapkit.FeatureVisibility).map(
+	(featureVisibility) => {
 		return {
 			label: featureVisibility,
-			value: FeatureVisibility[ featureVisibility ],
+			value: mapkit.FeatureVisibility[featureVisibility],
 		};
 	}
 );
