@@ -4,18 +4,21 @@ All notable changes to this project will be documented in this file, per [the Ke
 
 ## [Unreleased] - TBD
 
-## [1.0.2] - 2012-12-13
+## [1.0.2] - 2022-01-28
 ### Added
 - `wp env` for local development (props [@fabiankaegy](https://github.com/fabiankaegy), [@dinhtungdu](https://github.com/dinhtungdu), [@jeffpaul](https://github.com/jeffpaul) via [#77](https://github.com/10up/maps-block-apple/pull/77)).
 - Issue management automation via GitHub Actions (props [@jeffpaul](https://github.com/jeffpaul) via [#96](https://github.com/10up/maps-block-apple/pull/96)).
 
 ### Changed
-- Bump WordPress version "tested up to" 5.7 (props [@jeffpaul](https://github.com/jeffpaul) via [#80](https://github.com/10up/maps-block-apple/pull/80)).
+- Bump WordPress version "tested up to" 5.9 (props [@jeffpaul](https://github.com/jeffpaul), [@fabiankaegy](https://github.com/fabiankaegy), [@dinhtungdu](https://github.com/dinhtungdu) via [#80](https://github.com/10up/maps-block-apple/pull/80), [#99](https://github.com/10up/maps-block-apple/pull/99)).
+- Turn off `autoComplete` for the search input field (props [@dinhtungdu](https://github.com/dinhtungdu) via [#111](https://github.com/10up/maps-block-apple/pull/111)).
 
 ### Fixed
 - `block.json` syntax error (props [@dinhtungdu](https://github.com/dinhtungdu), [@jeffpaul](https://github.com/jeffpaul), [@ryanwelcher](https://github.com/ryanwelcher) via [#76](https://github.com/10up/maps-block-apple/pull/76)).
 - Enqueue map assets only when being used and clean up unused assets (props [@joshuaabenazer](https://github.com/joshuaabenazer), [@fabiankaegy](https://github.com/fabiankaegy) via [#97](https://github.com/10up/maps-block-apple/pull/97)).
 - Remove orign restriction in local environments to allow for proxied domains (props [@fabiankaegy](https://github.com/fabiankaegy), [@dinhtungdu](https://github.com/dinhtungdu) via [#98](https://github.com/10up/maps-block-apple/pull/98)).
+- Block not working in Site Editor due to iframed editor (props [@fabiankaegy](https://github.com/fabiankaegy), [@dinhtungdu](https://github.com/dinhtungdu) via [#99](https://github.com/10up/maps-block-apple/pull/99)).
+- Search popover sizing (props [@fabiankaegy](https://github.com/fabiankaegy), [@dinhtungdu](https://github.com/dinhtungdu), [@ankitguptaindia](https://github.com/ankitguptaindia) via [#110](https://github.com/10up/maps-block-apple/pull/110)).
 
 ### Security
 - Bump `ini` from 1.3.5 to 1.3.8 (props [@dependabot](https://github.com/apps/dependabot) via [#79](https://github.com/10up/maps-block-apple/pull/79)).

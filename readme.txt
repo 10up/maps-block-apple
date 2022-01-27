@@ -75,10 +75,13 @@ Yes, you can track your MapKit JS useage on the [MapKit JS Developer Dashboard](
 = 1.0.2 =
 * **Added:** `wp env` for local development (props [@fabiankaegy](https://github.com/fabiankaegy), [@dinhtungdu](https://github.com/dinhtungdu), [@jeffpaul](https://github.com/jeffpaul)).
 * **Added:** Issue management automation via GitHub Actions (props [@jeffpaul](https://github.com/jeffpaul)).
-* **Changed:** Bump WordPress version "tested up to" 5.7 (props [@jeffpaul](https://github.com/jeffpaul)).
+* **Changed:** Bump WordPress version "tested up to" 5.9 (props [@jeffpaul](https://github.com/jeffpaul), [@fabiankaegy](https://github.com/fabiankaegy), [@dinhtungdu](https://github.com/dinhtungdu)).
+* **Changed:**Turn off `autoComplete` for the search input field (props [@dinhtungdu](https://github.com/dinhtungdu)).
 * **Fixed:** `block.json` syntax error (props [@dinhtungdu](https://github.com/dinhtungdu), [@jeffpaul](https://github.com/jeffpaul), [@ryanwelcher](https://github.com/ryanwelcher)).
 * **Fixed:** Enqueue map assets only when being used and clean up unused assets (props [@joshuaabenazer](https://github.com/joshuaabenazer), [@fabiankaegy](https://github.com/fabiankaegy)).
 * **Fixed:** Remove orign restriction in local environments to allow for proxied domains (props [@fabiankaegy](https://github.com/fabiankaegy), [@dinhtungdu](https://github.com/dinhtungdu)).
+* **Fixed:** Block not working in Site Editor due to iframed editor (props [@fabiankaegy](https://github.com/fabiankaegy), [@dinhtungdu](https://github.com/dinhtungdu)).
+* **Fixed:** Search popover sizing (props [@fabiankaegy](https://github.com/fabiankaegy), [@dinhtungdu](https://github.com/dinhtungdu), [@ankitguptaindia](https://github.com/ankitguptaindia)).
 * **Security:** Bump `ini` from 1.3.5 to 1.3.8 (props [@dependabot](https://github.com/apps/dependabot)).
 * **Security:** Bump `elliptic` from 6.5.3 to 6.5.4 (props [@dependabot](https://github.com/apps/dependabot)).
 * **Security:** Bump `y18n` from 4.0.0 to 4.0.1 (props [@dependabot](https://github.com/apps/dependabot)).
