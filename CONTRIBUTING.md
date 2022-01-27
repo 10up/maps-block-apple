@@ -29,19 +29,18 @@ The `develop` branch is the development branch which means it contains the next 
 ## Release instructions
 
 1. Branch: Starting from `develop`, cut a release branch named `release/X.Y.Z` for your changes.
-2. Version bump: Bump the version number in `maps-block-apple.php`, `readme.txt`, and `package.json` if it does not already reflect the version being released.  Update both the plugin "Version:" property and the plugin `MAPS_BLOCK_APPLE_VERSION` constant in `maps-block-apple.php`.
-3. Changelog: Add/update the changelog in `CHANGELOG.md` and `readme.txt`.
-4. Props: update `CREDITS.md` with any new contributors, confirm maintainers are accurate.
-5. New files: Check to be sure any new files/paths that are unnecessary in the production version are included in `.distignore`.
-6. Readme updates: Make any other readme changes as necessary. `README.md` is geared toward GitHub and `readme.txt` contains WordPress.org-specific content.  The two are slightly different.
-7. Merge: Make a non-fast-forward merge from your release branch to `develop` (or merge the pull request), then do the same for `develop` into `trunk` (`git checkout trunk && git merge --no-ff develop`). `trunk` contains the stable development version.
-8. Push: Push your `trunk` branch to GitHub (e.g. `git push origin trunk`).
-9. [Wait for build](https://xkcd.com/303/): Head to the [Actions](/actions) tab in the repo and wait for it to finish if it hasn't already. If it doesn't succeed, figure out why and start over.
-10. Release: Create a [new release](/releases/new), naming the tag and the release with the new version number, and targeting the `trunk` branch. Paste the changelog from `CHANGELOG.md` into the body of the release and include a link to the [closed issues on the milestone](/milestone/3?closed=1).
-11. SVN: Wait for the [GitHub Action](/actions) to finish deploying to the WordPress.org repository. If all goes well, users with SVN commit access for that plugin will receive an emailed diff of changes.
-12. Check WordPress.org: Ensure that the changes are live on https://wordpress.org/plugins/maps-block-apple/. This may take a few minutes.
-13. Close the milestone: Edit the [X.Y.Z milestone](/milestone/#) with release date (in the `Due date (optional)` field) and link to GitHub release (in the `Description` field), then close the milestone.
-14. Punt incomplete items: If any open issues or PRs which were milestoned for `X.Y.Z` do not make it into the release, update their milestone to `X+1.0.0`, `X.Y+1.0`, `X.Y.Z+1`, or `Future Release`
+1. Version bump: Bump the version number in `maps-block-apple.php`, `readme.txt`, and `package.json` if it does not already reflect the version being released.  Update both the plugin "Version:" property and the plugin `MAPS_BLOCK_APPLE_VERSION` constant in `maps-block-apple.php`.
+1. Changelog: Add/update the changelog in `CHANGELOG.md` and `readme.txt`.
+1. Props: update `CREDITS.md` with any new contributors, confirm maintainers are accurate.
+1. New files: Check to be sure any new files/paths that are unnecessary in the production version are included in `.distignore`.
+1. Readme updates: Make any other readme changes as necessary. `README.md` is geared toward GitHub and `readme.txt` contains WordPress.org-specific content.  The two are slightly different.
+1. Merge: Make a non-fast-forward merge from your release branch to `develop` (or merge the pull request), then do the same for `develop` into `trunk` (`git checkout trunk && git merge --no-ff develop`). `trunk` contains the stable development version.
+1. Push: Push your `trunk` branch to GitHub (e.g. `git push origin trunk`).
+1. Release: Create a [new release](/releases/new), naming the tag and the release with the new version number, and targeting the `trunk` branch. Paste the changelog from `CHANGELOG.md` into the body of the release and include a link to the [closed issues on the milestone](/milestone/3?closed=1).
+1. SVN: Wait for the [GitHub Action](/actions) to finish deploying to the WordPress.org repository. If all goes well, users with SVN commit access for that plugin will receive an emailed diff of changes.
+1. Check WordPress.org: Ensure that the changes are live on https://wordpress.org/plugins/maps-block-apple/. This may take a few minutes.
+1. Close the milestone: Edit the [X.Y.Z milestone](/milestone/#) with release date (in the `Due date (optional)` field) and link to GitHub release (in the `Description` field), then close the milestone.
+1. Punt incomplete items: If any open issues or PRs which were milestoned for `X.Y.Z` do not make it into the release, update their milestone to `X+1.0.0`, `X.Y+1.0`, `X.Y.Z+1`, or `Future Release`
 
 ## Local Development
 This plugin can be installed with any local development instalation. To make it easier however it also comes with a bundled wp-env installation. So you can run `npm ci` to install the dependencies and then `npm run wp-env start` to start the local development server. For further documentation regarding the `@wordpress/env` package prese reffer to their docs here: [https://www.npmjs.com/package/@wordpress/env](https://www.npmjs.com/package/@wordpress/env)
