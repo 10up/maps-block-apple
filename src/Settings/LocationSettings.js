@@ -38,6 +38,8 @@ export default function LocationSettings(props) {
 	const handleSearchStringChange = (searchTerm) => {
 		if (searchTerm) {
 			geocoder.lookup(searchTerm, handleSearchResults);
+		} else {
+			setSearchResults([]);
 		}
 
 		setSearchString(searchTerm);
