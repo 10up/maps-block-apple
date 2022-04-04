@@ -1,5 +1,6 @@
 import apiFetch from '@wordpress/api-fetch';
 import { dispatch } from '@wordpress/data';
+import { __ } from '@wordpress/i18n';
 
 class AppleMap {
 	constructor(element) {
@@ -341,8 +342,10 @@ class AppleMapEdit extends AppleMap {
 
 // MapTypes formatted to be used as options in SelectControl dropdown
 const MAP_TYPE_OPTIONS = Object.keys(mapkit.Map.MapTypes).map((mapType) => {
+	const label =
+		mapType === 'MutedStandard' ? __('Muted', 'maps-block-apple') : mapType;
 	return {
-		label: mapType,
+		label,
 		value: mapkit.Map.MapTypes[mapType],
 	};
 });

@@ -1,9 +1,11 @@
+/* eslint-disable @wordpress/no-unsafe-wp-apis */
 import {
 	PanelBody,
 	TextControl,
-	SelectControl,
 	RangeControl,
 	ToggleControl,
+	__experimentalToggleGroupControl as ToggleGroupControl,
+	__experimentalToggleGroupControlOption as ToggleGroupControlOption,
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
@@ -31,12 +33,17 @@ export default function DisplaySettings(props) {
 
 	return (
 		<PanelBody title={__('Display Settings', 'maps-block-apple')}>
-			<SelectControl
+			<ToggleGroupControl
 				label={__('Map Type', 'maps-block-apple')}
-				options={MAP_TYPE_OPTIONS}
+				isBlock={true}
+				isAdaptiveWidth
 				value={mapType}
 				onChange={(value) => setAttributes({ mapType: value })}
-			/>
+			>
+				{MAP_TYPE_OPTIONS.map((option) => (
+					<ToggleGroupControlOption {...option} key={option.value} />
+				))}
+			</ToggleGroupControl>
 			<ToggleControl
 				label={__('Show Map Type Control', 'maps-block-apple')}
 				checked={showsMapTypeControl}
@@ -74,24 +81,35 @@ export default function DisplaySettings(props) {
 				}
 			/>
 			{isRotationEnabled && (
-				<SelectControl
-					label={__('Show Compass', 'maps-block-apple')}
-					options={FEATURE_VISIBILITY_OPTIONS}
+				<ToggleGroupControl
+					label={__('Compass Visibility', 'maps-block-apple')}
+					isBlock={true}
 					value={showsCompass}
 					onChange={(value) => setAttributes({ showsCompass: value })}
-				/>
+				>
+					{FEATURE_VISIBILITY_OPTIONS.map((option) => (
+						<ToggleGroupControlOption
+							{...option}
+							key={option.value}
+						/>
+					))}
+				</ToggleGroupControl>
 			)}
 			<ToggleControl
 				label={__('Scroll Enabled', 'maps-block-apple')}
 				checked={isScrollEnabled}
 				onChange={(value) => setAttributes({ isScrollEnabled: value })}
 			/>
-			<SelectControl
-				label={__('Show Scale', 'maps-block-apple')}
-				options={FEATURE_VISIBILITY_OPTIONS}
+			<ToggleGroupControl
+				label={__('Scale Visibility', 'maps-block-apple')}
 				value={showsScale}
+				isBlock={true}
 				onChange={(value) => setAttributes({ showsScale: value })}
-			/>
+			>
+				{FEATURE_VISIBILITY_OPTIONS.map((option) => (
+					<ToggleGroupControlOption {...option} key={option.value} />
+				))}
+			</ToggleGroupControl>
 			<TextControl
 				label={__('Height ( pixels )', 'maps-block-apple')}
 				value={height}
