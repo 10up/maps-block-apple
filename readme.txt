@@ -2,7 +2,7 @@
 Contributors:      10up, helen, welcher, fabiankaegy, dinhtungdu
 Tags:              apple maps, map block, block
 Requires at least: 5.2
-Tested up to:      5.9
+Tested up to:      6.0
 Requires PHP:      5.6
 Stable tag:        1.0.2
 License:           GPLv2 or later
