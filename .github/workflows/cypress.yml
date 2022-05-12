@@ -31,3 +31,7 @@ jobs:
       run: npm run env:start
     - name: Test
       run: npm run cypress:run
+      env:
+        CYPRESS_MAPS_PRIVATE_KEY: ${{ secrets.MAPS_PRIVATE_KEY }}
+        CYPRESS_MAPS_KEY_ID: ${{ secrets.MAPS_KEY_ID }}
+        CYPRESS_MAPS_TEAM_ID: ${{ secrets.MAPS_TEAM_ID }}
