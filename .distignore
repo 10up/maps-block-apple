@@ -5,6 +5,7 @@
 /node_modules
 /src
 /vendor
+/tests
 
 # Files
 .distignore
@@ -13,6 +14,7 @@
 .gitignore
 .phpcs.xml
 .wp-env.json
+.wp-env.override.json
 CHANGELOG.md
 CODE_OF_CONDUCT.md
 composer.json
