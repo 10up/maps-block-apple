@@ -31,6 +31,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: WPCS check
-        uses: 10up/wpcs-action@stable
+        uses: 10up/wpcs-action@try/gh-actions-summary
         with:
           use_local_config: true
