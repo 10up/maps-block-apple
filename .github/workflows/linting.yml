@@ -34,3 +34,7 @@ jobs:
         uses: 10up/wpcs-action@try/gh-actions-summary
         with:
           use_local_config: true
+      - name: Update summary
+        run: |
+          npx github:10up/phpcs-json-to-md --path ./phpcs.json --output ./phpcs.md
+          cat phpcs.md >> $GITHUB_STEP_SUMMARY
