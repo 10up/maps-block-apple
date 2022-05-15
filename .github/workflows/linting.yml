@@ -34,6 +34,7 @@ jobs:
         uses: 10up/wpcs-action@try/gh-actions-summary
         with:
           use_local_config: true
+          extra_args: '--report-json=./phpcs.json'
       - name: Update summary
         run: |
           npx github:10up/phpcs-json-to-md --path ./phpcs.json --output ./phpcs.md
