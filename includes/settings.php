@@ -19,7 +19,7 @@ function setup() {
 	add_action( 'admin_menu', $n( 'admin_menu' ), 20 );
 	add_action( 'admin_init', $n( 'setup_fields_sections' ) );
 	add_action( 'admin_init', $n( 'register_settings' ) );
-	add_action( 'rest_api_init', $n( 'register_settings' ) );
+	add_action( 'rest_api_init', $n('register_settings' ) );
 	add_filter( 'plugin_action_links_' . MAPS_BLOCK_APPLE_BASENAME, $n( 'plugin_filter_action_links' ) );
 	add_action( 'admin_enqueue_scripts', $n( 'enqueue_settings_assets' ) );
 }
