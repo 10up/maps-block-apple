@@ -15,10 +15,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: install node v12
-      uses: actions/setup-node@v1
-      with:
-        node-version: 12
     - name: npm install
       run: npm install
     - name: Generate linting report
@@ -46,6 +42,6 @@ jobs:
           extra_args: '--report-json=./phpcs-report.json'
       - name: Update summary
         run: |
-          npm_config_yes=true npx github:10up/phpcs-json-to-md --path ./phpcs-report.json --output ./phpcs-report.md
+          npx github:10up/phpcs-json-to-md --path ./phpcs-report.json --output ./phpcs-report.md
           cat phpcs-report.md >> $GITHUB_STEP_SUMMARY
         if: always()
