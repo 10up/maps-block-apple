@@ -32,7 +32,7 @@ jobs:
         report-json: 'eslint-report.json'
     - name: Update summary
       run: |
-        npx github:10up/eslint-json-to-md --path ./eslint-report.json --output ./eslint-report.md
+        npm_config_yes=true npx github:10up/eslint-json-to-md --path ./eslint-report.json --output ./eslint-report.md
         cat eslint-report.md >> $GITHUB_STEP_SUMMARY
   phpcs:
     name: WPCS
@@ -41,11 +41,11 @@ jobs:
       - uses: actions/checkout@v2
       - name: WPCS check
         uses: 10up/wpcs-action@try/gh-actions-summary
-        continue-on-error: true
         with:
           use_local_config: true
           extra_args: '--report-json=./phpcs-report.json'
       - name: Update summary
         run: |
-          npx github:10up/phpcs-json-to-md --path ./phpcs-report.json --output ./phpcs-report.md
+          npm_config_yes=true npx github:10up/phpcs-json-to-md --path ./phpcs-report.json --output ./phpcs-report.md
           cat phpcs-report.md >> $GITHUB_STEP_SUMMARY
+        if: always()
