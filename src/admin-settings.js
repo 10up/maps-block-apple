@@ -1,3 +1,4 @@
+/* eslint jsdoc/check-tag-names: "warn" */
 import apiFetch from '@wordpress/api-fetch';
 import { __ } from '@wordpress/i18n';
 
@@ -10,7 +11,7 @@ if (!privateKeyInput.value && !keyIdInput.value && !teamIdInput.value) {
 	statusEl.closest('tr').style.display = 'none';
 } else {
 	setTimeout(() => {
-		apiFetch({ path: 'MapsBlockApple/v1/GetJWT/' })
+		apiFetch({ path: 'MapsBlockApple/v1/GetJWT/'})
 			.then((token) => {
 				mapkit.init({
 					authorizationCallback(done) {
@@ -25,7 +26,7 @@ if (!privateKeyInput.value && !keyIdInput.value && !teamIdInput.value) {
 }
 
 mapkit.addEventListener('error', () => {
-	addNotice(__('Invalid credentials!'), 'error');
+	addNotice(__('Invalid credentials!'), 'error')
 });
 
 mapkit.addEventListener('configuration-change', () => {
@@ -36,6 +37,7 @@ mapkit.addEventListener('configuration-change', () => {
  *
  * @param {string} message Notice message.
  * @param {string} type    Notice type. error|valid.
+ * @yields
  */
 const addNotice = (message, type) => {
 	statusEl.className = '';
