@@ -29,7 +29,7 @@ jobs:
         run: |
           npm_config_yes=true npx github:10up/eslint-json-to-md --path ./eslint-report.json --output ./eslint-report.md
           cat eslint-report.md >> $GITHUB_STEP_SUMMARY
-        if: always()
+        if: ${{ failure() }}
   phpcs:
     name: WPCS
     runs-on: ubuntu-latest
@@ -44,4 +44,4 @@ jobs:
         run: |
           npx github:10up/phpcs-json-to-md --path ./phpcs-report.json --output ./phpcs-report.md
           cat phpcs-report.md >> $GITHUB_STEP_SUMMARY
-        if: always()
+        if: ${{ failure() }}
