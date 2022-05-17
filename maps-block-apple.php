@@ -18,7 +18,7 @@
 namespace tenup\Maps_Block_Apple;
 
 // Useful global constants.
-define( 'MAPS_BLOCK_APPLE_VERSION' , '1.0.2' );
+define( 'MAPS_BLOCK_APPLE_VERSION', '1.0.2' );
 define( 'MAPS_BLOCK_APPLE_URL', plugin_dir_url( __FILE__ ) );
 define( 'MAPS_BLOCK_APPLE_PATH', dirname( __FILE__ ) . '/' );
 define( 'MAPS_BLOCK_APPLE_INC', MAPS_BLOCK_APPLE_PATH . 'includes/' );
@@ -50,7 +50,7 @@ function add_options() {
 }
 add_action( 'init', __NAMESPACE__ . '\add_options' );
 
-require_once MAPS_BLOCK_APPLE_INC .'block-assets.php';
+require_once MAPS_BLOCK_APPLE_INC . 'block-assets.php';
 require_once MAPS_BLOCK_APPLE_INC . 'rest-routes.php';
 require_once MAPS_BLOCK_APPLE_INC . 'settings.php';
 
