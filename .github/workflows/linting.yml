@@ -36,7 +36,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: WPCS check
-        uses: 10up/wpcs-action@try/gh-actions-summary
+        uses: 10up/wpcs-action@stable
         with:
           use_local_config: true
           extra_args: '--report-json=./phpcs-report.json'
