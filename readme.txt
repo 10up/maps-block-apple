@@ -72,6 +72,16 @@ Yes, you can track your MapKit JS useage on the [MapKit JS Developer Dashboard](
 
 == Changelog ==
 
+= 1.0.3 =
+* **Added:** Dependency security scanning (props [@jeffpaul](https://github.com/jeffpaul), [@faisal-alvi](https://github.com/faisal-alvi) via [#121](https://github.com/10up/maps-block-apple/pull/121)).
+* **Changed:** Rename linting workflow (props [@dinhtungdu](https://github.com/dinhtungdu) via [#124](https://github.com/10up/maps-block-apple/pull/124)).
+* **Changed:** Bump WordPress version "tested up to" 6.0 (props [@cadic](https://github.com/cadic) via [#125](https://github.com/10up/maps-block-apple/pull/125)).
+* **Security:** Bump `follow-redirects` from 1.14.4 to 1.14.8 (props [@dependabot](https://github.com/apps/dependabot) via [#114](https://github.com/10up/maps-block-apple/pull/114)).
+* **Security:** Bump `nanoid` from 3.1.30 to 3.3.1 (props [@dependabot](https://github.com/apps/dependabot) via [#116](https://github.com/10up/maps-block-apple/pull/116)).
+* **Security:** Bump `minimist` from 1.2.5 to 1.2.6 (props [@dependabot](https://github.com/apps/dependabot) via [#118](https://github.com/10up/maps-block-apple/pull/118)).
+* **Security:** Bump `node-forge` from 1.2.1 to 1.3.1 (props [@dependabot](https://github.com/apps/dependabot) via [#119](https://github.com/10up/maps-block-apple/pull/119)).
+* **Security:** Bump `async` from 2.6.3 to 2.6.4 (props [@dependabot](https://github.com/apps/dependabot) via [#123](https://github.com/10up/maps-block-apple/pull/123)).
+
 = 1.0.2 =
 * **Added:** `wp env` for local development (props [@fabiankaegy](https://github.com/fabiankaegy), [@dinhtungdu](https://github.com/dinhtungdu), [@jeffpaul](https://github.com/jeffpaul)).
 * **Added:** Issue management automation via GitHub Actions (props [@jeffpaul](https://github.com/jeffpaul)).
