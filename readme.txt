@@ -74,6 +74,7 @@ Yes, you can track your MapKit JS useage on the [MapKit JS Developer Dashboard](
 
 = 1.0.3 =
 * **Added:** Dependency security scanning (props [@jeffpaul](https://github.com/jeffpaul), [@faisal-alvi](https://github.com/faisal-alvi) via [#121](https://github.com/10up/maps-block-apple/pull/121)).
+* **Changed:** Update UI of settings sidebar to make it feel more native (props [@fabiankaegy](https://github.com/fabiankaegy) , [@Sidsector9](https://github.com/Sidsector9) via [#115](https://github.com/10up/maps-block-apple/pull/115)).
 * **Changed:** Rename linting workflow (props [@dinhtungdu](https://github.com/dinhtungdu) via [#124](https://github.com/10up/maps-block-apple/pull/124)).
 * **Changed:** Bump WordPress version "tested up to" 6.0 (props [@cadic](https://github.com/cadic) via [#125](https://github.com/10up/maps-block-apple/pull/125)).
 * **Security:** Bump `follow-redirects` from 1.14.4 to 1.14.8 (props [@dependabot](https://github.com/apps/dependabot) via [#114](https://github.com/10up/maps-block-apple/pull/114)).

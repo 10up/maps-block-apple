@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file, per [the Ke
 
 ### Changed
 
+- Update UI of settings sidebar to make it feel more native (props [@fabiankaegy](https://github.com/fabiankaegy) , [@Sidsector9](https://github.com/Sidsector9) via [#115](https://github.com/10up/maps-block-apple/pull/115)).
 - Rename linting workflow (props [@dinhtungdu](https://github.com/dinhtungdu) via [#124](https://github.com/10up/maps-block-apple/pull/124)).
 - Bump WordPress version "tested up to" 6.0 (props [@cadic](https://github.com/cadic) via [#125](https://github.com/10up/maps-block-apple/pull/125)).
 
