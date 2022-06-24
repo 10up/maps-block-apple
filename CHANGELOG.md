@@ -90,7 +90,7 @@ All notable changes to this project will be documented in this file, per [the Ke
 - Initial private release of Block for Apple Maps plugin.
 
 [Unreleased]: https://github.com/10up/maps-block-apple/compare/trunk...develop
-[1.0.2]: https://github.com/10up/maps-block-apple/compare/1.0.2...1.0.3
+[1.0.3]: https://github.com/10up/maps-block-apple/compare/1.0.2...1.0.3
 [1.0.2]: https://github.com/10up/maps-block-apple/compare/1.0.1...1.0.2
 [1.0.1]: https://github.com/10up/maps-block-apple/compare/1.0.0...1.0.1
 [1.0.0]: https://github.com/10up/maps-block-apple/releases/tag/1.0.0
