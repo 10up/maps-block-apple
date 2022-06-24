@@ -5,19 +5,15 @@ All notable changes to this project will be documented in this file, per [the Ke
 ## [Unreleased] - TBD
 
 ## [1.0.3] - 2022-06-27
-
 ### Added
-
 - Dependency security scanning (props [@jeffpaul](https://github.com/jeffpaul), [@faisal-alvi](https://github.com/faisal-alvi) via [#121](https://github.com/10up/maps-block-apple/pull/121)).
 
 ### Changed
-
 - Update UI of settings sidebar to make it feel more native (props [@fabiankaegy](https://github.com/fabiankaegy) , [@Sidsector9](https://github.com/Sidsector9) via [#115](https://github.com/10up/maps-block-apple/pull/115)).
-- Rename linting workflow (props [@dinhtungdu](https://github.com/dinhtungdu) via [#124](https://github.com/10up/maps-block-apple/pull/124)).
 - Bump WordPress version "tested up to" 6.0 (props [@cadic](https://github.com/cadic) via [#125](https://github.com/10up/maps-block-apple/pull/125)).
+- Rename linting workflow (props [@dinhtungdu](https://github.com/dinhtungdu) via [#124](https://github.com/10up/maps-block-apple/pull/124)).
 
 ### Security
-
 - Bump `follow-redirects` from 1.14.4 to 1.14.8 (props [@dependabot](https://github.com/apps/dependabot) via [#114](https://github.com/10up/maps-block-apple/pull/114)).
 - Bump `nanoid` from 3.1.30 to 3.3.1 (props [@dependabot](https://github.com/apps/dependabot) via [#116](https://github.com/10up/maps-block-apple/pull/116)).
 - Bump `minimist` from 1.2.5 to 1.2.6 (props [@dependabot](https://github.com/apps/dependabot) via [#118](https://github.com/10up/maps-block-apple/pull/118)).
