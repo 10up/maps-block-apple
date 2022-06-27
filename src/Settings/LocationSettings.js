@@ -1,4 +1,4 @@
-import { PanelBody, TextControl } from '@wordpress/components';
+import { PanelBody, SearchControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { useState, useEffect } from '@wordpress/element';
 
@@ -38,6 +38,8 @@ export default function LocationSettings(props) {
 	const handleSearchStringChange = (searchTerm) => {
 		if (searchTerm) {
 			geocoder.lookup(searchTerm, handleSearchResults);
+		} else {
+			setSearchResults([]);
 		}
 
 		setSearchString(searchTerm);
@@ -57,13 +59,11 @@ export default function LocationSettings(props) {
 
 	return (
 		<PanelBody title={__('Location Settings', 'maps-block-apple')}>
-			<LocationInfo latitude={latitude} longitude={longitude} />
 			<div>
-				<TextControl
+				<SearchControl
 					label={__('Search for a Location', 'maps-block-apple')}
 					value={searchString}
 					onChange={handleSearchStringChange}
-					autoComplete='off'
 				/>
 				<SearchResults
 					map={map}
@@ -72,6 +72,7 @@ export default function LocationSettings(props) {
 					setSearchResults={setSearchResults}
 				/>
 			</div>
+			<LocationInfo latitude={latitude} longitude={longitude} />
 		</PanelBody>
 	);
 }
