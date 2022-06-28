@@ -11,6 +11,7 @@
 .editorconfig
 .eslintrc
 .gitignore
+.nvmrc
 .phpcs.xml
 .wp-env.json
 CHANGELOG.md
