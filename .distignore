@@ -12,6 +12,7 @@
 .editorconfig
 .eslintrc
 .gitignore
+.nvmrc
 .phpcs.xml
 .wp-env.json
 .wp-env.override.json

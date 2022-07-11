@@ -14,17 +14,22 @@ jobs:
     name: eslint
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: install node v12
-      uses: actions/setup-node@v1
-      with:
-        node-version: 12
-    - name: npm install
-      run: npm install
-    - name: eslint
-      uses: icrawl/action-eslint@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v2
+      - name: npm install
+        run: npm install
+      - name: Generate linting report
+        run: npm run lint:js -- --output-file eslint-report.json --format json
+        continue-on-error: true
+      - name: Annotate code linting results
+        uses: ataylorme/eslint-annotate-action@1.2.0
+        with:
+          repo-token: '${{ secrets.GITHUB_TOKEN }}'
+          report-json: 'eslint-report.json'
+      - name: Update summary
+        run: |
+          npm_config_yes=true npx github:10up/eslint-json-to-md --path ./eslint-report.json --output ./eslint-report.md
+          cat eslint-report.md >> $GITHUB_STEP_SUMMARY
+        if: ${{ failure() }}
   phpcs:
     name: WPCS
     runs-on: ubuntu-latest
@@ -34,3 +39,9 @@ jobs:
         uses: 10up/wpcs-action@stable
         with:
           use_local_config: true
+          extra_args: '--report-json=./phpcs-report.json'
+      - name: Update summary
+        run: |
+          npx github:10up/phpcs-json-to-md --path ./phpcs-report.json --output ./phpcs-report.md
+          cat phpcs-report.md >> $GITHUB_STEP_SUMMARY
+        if: ${{ failure() }}
