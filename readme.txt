@@ -1,9 +1,9 @@
 === Block for Apple Maps ===
 Contributors:      10up, helen, welcher, fabiankaegy, dinhtungdu
 Tags:              apple maps, map block, block
-Requires at least: 5.2
+Requires at least: 5.7
 Tested up to:      6.0
-Requires PHP:      5.6
+Requires PHP:      7.4
 Stable tag:        1.0.3
 License:           GPLv2 or later
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
