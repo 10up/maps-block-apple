@@ -9,6 +9,7 @@ import {
 } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
 import LocationInfo from './LocationInfo';
+import MarkerIconUpload from './MarkerIconUpload';
 
 export default function EditMarker(props) {
 	const { marker, remove, update } = props;
@@ -62,6 +63,7 @@ export default function EditMarker(props) {
 				colors={availableColors}
 				onChange={(value) => update({ ...marker, glyphColor: value })}
 			/>
+			<MarkerIconUpload marker={marker} update={update} />
 			<PanelRow>
 				<LocationInfo
 					latitude={marker.latitude}

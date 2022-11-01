@@ -49,6 +49,7 @@ export default function MapsBlockAppleSave(props) {
 					data-subtitle={marker.subtitle}
 					data-color={marker.color}
 					data-glyph-color={marker.glyphColor}
+					data-glyph-image={marker.glyphImage}
 				/>
 			))}
 		</div>
