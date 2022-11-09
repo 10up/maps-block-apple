@@ -24,8 +24,8 @@
     "test:e2e": "wp-scripts test-e2e",
     "test:unit": "wp-scripts test-unit-js",
     "wp-env": "wp-env",
-    "cypress:open": "cypress open --config-file tests/cypress/config.json",
-    "cypress:run": "cypress run --config-file tests/cypress/config.json",
+    "cypress:open": "cypress open --config-file tests/cypress/config.js --e2e --browser chrome",
+    "cypress:run": "cypress run --config-file tests/cypress/config.js",
     "env": "wp-env",
     "env:start": "wp-env start",
     "env:stop": "wp-env stop",
@@ -40,9 +40,9 @@
   },
   "devDependencies": {
     "@10up/cypress-wp-utils": "github:10up/cypress-wp-utils#build",
-    "@wordpress/env": "^4.6.0",
+    "@wordpress/env": "^5.6.0",
     "@wordpress/eslint-plugin": "^10.0.1",
     "@wordpress/scripts": "^20.0.2",
-    "cypress": "^9.6.1"
+    "cypress": "^10.11.0"
   }
 }
