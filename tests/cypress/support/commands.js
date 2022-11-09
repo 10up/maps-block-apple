@@ -34,7 +34,7 @@ Cypress.Commands.add(
 		cy.visit(`/wp-admin/options-general.php?page=block-for-apple-maps`);
 		cy.get("#token-gen-authkey").click().clear();
 		if (key) {
-			cy.get("#token-gen-authkey").type(key);
+			cy.get("#token-gen-authkey").type(key, { delay: 0 });
 		}
 
 		cy.get("#token-gen-kid").click().clear();
