@@ -36,7 +36,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: WPCS check
-        uses: 10up/wpcs-action@stable
+        uses: 10up/wpcs-action@72a56d82dcf853abe99ea617e96a42ce9c2c175a # Merge of PHP deprecation fix.
         with:
           use_local_config: true
           extra_args: '--report-json=./phpcs-report.json'
