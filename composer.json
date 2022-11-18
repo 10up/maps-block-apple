@@ -15,11 +15,16 @@
 	],
 	"require-dev": {
 		"wp-coding-standards/wpcs": "^2.2",
-		"dealerdirect/phpcodesniffer-composer-installer": "^0.5.0"
+		"dealerdirect/phpcodesniffer-composer-installer": "dev-master"
 	},
 	"scripts": {
 		"lint": "./vendor/bin/phpcs",
 		"lint-fix": "./vendor/bin/phpcbf --extensions=php ."
 	},
-	"minimum-stability": "dev"
+	"minimum-stability": "dev",
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		}
+	}
 }
