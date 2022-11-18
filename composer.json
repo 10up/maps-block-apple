@@ -14,12 +14,17 @@
 		}
 	],
 	"require-dev": {
-		"wp-coding-standards/wpcs": "^2.2",
-		"dealerdirect/phpcodesniffer-composer-installer": "^0.5.0"
+		"10up/phpcs-composer": "dev-master"
 	},
 	"scripts": {
 		"lint": "./vendor/bin/phpcs",
-		"lint-fix": "./vendor/bin/phpcbf --extensions=php ."
+		"lint-fix": "./vendor/bin/phpcbf --extensions=php .",
+		"phpcs:compat": "vendor/bin/phpcs maps-block-apple.php includes/ -p --standard=PHPCompatibilityWP --extensions=php --runtime-set testVersion 7.4-"
 	},
-	"minimum-stability": "dev"
+	"minimum-stability": "dev",
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		}
+	}
 }
