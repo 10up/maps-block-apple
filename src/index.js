@@ -16,6 +16,7 @@ import MapsBlockAppleEdit from './edit';
 import MapsBlockAppleSave from './save';
 import BlockIcon from './block-icon';
 import metadata from './../block.json';
+import deprecated from './deprecated';
 
 registerBlockType(metadata, {
 	icon: BlockIcon,
@@ -36,4 +37,5 @@ registerBlockType(metadata, {
 	},
 	edit: MapsBlockAppleEdit,
 	save: MapsBlockAppleSave,
+	deprecated,
 });
