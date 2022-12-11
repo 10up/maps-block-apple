@@ -22,6 +22,8 @@ import BlockIcon from './block-icon';
 import { ResizableMap } from './components/ResizableMap';
 import { store as mapsBlockAppleStore } from './store';
 
+import './editor.scss';
+
 const Map = memo((props) => {
 	const { map, isAuthenticated, clientId, setAttributes, setMap, mapkit } =
 		props;
