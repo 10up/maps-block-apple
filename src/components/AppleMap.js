@@ -9,8 +9,16 @@ class AppleMap {
 		this.markerElements =
 			this.element.querySelectorAll('.marker-annotation');
 		this.markers = [...this.markerElements].map((markerElement) => {
-			const { latitude, longitude, title, subtitle, color, glyphColor } =
-				markerElement.dataset;
+			const {
+				latitude,
+				longitude,
+				title,
+				subtitle,
+				color,
+				glyphColor,
+				glyphImage,
+			} = markerElement.dataset;
+
 			return {
 				latitude: Number(latitude),
 				longitude: Number(longitude),
@@ -18,6 +26,7 @@ class AppleMap {
 				subtitle: subtitle || '',
 				color: color || null,
 				glyphColor: glyphColor || null,
+				glyphImage: glyphImage || null,
 			};
 		});
 
@@ -97,13 +106,13 @@ class AppleMap {
 				color,
 				glyphColor,
 				glyphText,
+				glyphImage,
 			} = item;
 			const position = new this.mapkit.Coordinate(
 				Number(latitude),
 				Number(longitude)
 			);
-
-			const marker = new this.mapkit.MarkerAnnotation(position, {
+			const markerAnnotationOptions = {
 				title,
 				subtitle: subtitle || null,
 				titleVisibility:
@@ -114,7 +123,15 @@ class AppleMap {
 				glyphColor: glyphColor || 'white',
 				glyphText: glyphText || '',
 				draggable: !!this.isEditor,
-			});
+			};
+			// Use custom glyph image if provided.
+			if (glyphImage) {
+				markerAnnotationOptions.glyphImage = { 1: glyphImage };
+			}
+			const marker = new this.mapkit.MarkerAnnotation(
+				position,
+				markerAnnotationOptions
+			);
 
 			if (this.setAttributes) {
 				marker.addEventListener('drag-end', (event) => {
