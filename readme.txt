@@ -72,10 +72,11 @@ Yes, you can track your MapKit JS useage on the [MapKit JS Developer Dashboard](
 
 == Changelog ==
 
-= 1.1.0 - 2023-01-16 =
+= 1.1.0 - 2023-01-23 =
 * **Note that this release bumps the WordPress minimum version from 5.2 to 5.8.**
 
 * **Added:** Support for custom marker icons (props [@iamdharmesh](https://github.com/iamdharmesh), [@dinhtungdu](https://github.com/dinhtungdu), [@fabiankaegy](https://github.com/fabiankaegy) via [#136](https://github.com/10up/maps-block-apple/pull/136)).
+* **Added:** Ability to control margin of map (props [@fabiankaegy](https://github.com/fabiankaegy), [@dkotter](https://github.com/dkotter) via [#157](https://github.com/10up/maps-block-apple/pull/157)).
 * **Added:** End-to-end testing setup with Cypress (props [@cadic](https://github.com/cadic), [@peterwilsoncc](https://github.com/peterwilsoncc) via [#126](https://github.com/10up/maps-block-apple/pull/126)).
 * **Changed:** Bump minimum WordPress version from 5.2 to 5.8 (props [@cadic](https://github.com/cadic), [@peterwilsoncc](https://github.com/peterwilsoncc) via [#126](https://github.com/10up/maps-block-apple/pull/126)).
 * **Changed:** Update linting workflows to take advantage of GitHub Actions summaries (props [@dinhtungdu](https://github.com/dinhtungdu), [@fabiankaegy](https://github.com/fabiankaegy) via [#128](https://github.com/10up/maps-block-apple/pull/128)).
