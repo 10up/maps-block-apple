@@ -38,5 +38,3 @@ jobs:
 
       - name: Generate ZIP file
         uses: 10up/action-wordpress-plugin-build-zip@stable
-        env:
-          SLUG: eight-day-week-print-workflow
