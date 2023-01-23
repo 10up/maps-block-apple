@@ -84,6 +84,9 @@
       "wide",
       "full"
     ],
+    "spacing": {
+      "margin": true
+    },
     "html":false
   },
   "editorScript":"maps-block-apple-block",
