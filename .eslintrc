@@ -5,5 +5,5 @@
         "CustomEvent": "readonly",
         "Event": "readonly"
     },
-    "ignorePatterns": ["**/vendor/**"]
+    "ignorePatterns": ["**/vendor/**", "tests/**"]
 }

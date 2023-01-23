@@ -20,7 +20,11 @@ export default function MapsBlockAppleSave(props) {
 		},
 	} = props;
 
-	const blockProps = useBlockProps.save();
+	const blockProps = useBlockProps.save({
+		style: {
+			height: `${height}px`,
+		},
+	});
 
 	return (
 		<div
@@ -37,7 +41,6 @@ export default function MapsBlockAppleSave(props) {
 			data-shows-zoom-control={showsZoomControl}
 			data-is-scroll-enabled={isScrollEnabled}
 			data-shows-scale={showsScale}
-			style={{ height: `${height}px` }}
 		>
 			{markers.map((marker, index) => (
 				<div
@@ -49,6 +52,7 @@ export default function MapsBlockAppleSave(props) {
 					data-subtitle={marker.subtitle}
 					data-color={marker.color}
 					data-glyph-color={marker.glyphColor}
+					data-glyph-image={marker.glyphImage}
 				/>
 			))}
 		</div>

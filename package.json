@@ -1,6 +1,6 @@
 {
   "name": "maps-block-apple",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "An Apple Maps block for the WordPress block editor (Gutenberg).",
   "author": {
     "name": "10up",
@@ -23,15 +23,26 @@
     "start": "wp-scripts start src/index.js src/frontend.js src/admin-settings.js --hot",
     "test:e2e": "wp-scripts test-e2e",
     "test:unit": "wp-scripts test-unit-js",
-    "wp-env": "wp-env"
+    "wp-env": "wp-env",
+    "cypress:open": "cypress open --config-file tests/cypress/config.js --e2e --browser chrome",
+    "cypress:run": "cypress run --config-file tests/cypress/config.js",
+    "env": "wp-env",
+    "env:start": "wp-env start",
+    "env:stop": "wp-env stop",
+    "postenv:start": "./tests/bin/initialize.sh"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/10up/maps-block-apple"
   },
+  "engines": {
+    "node": ">=12.0"
+  },
   "devDependencies": {
-    "@wordpress/env": "^4.2.1",
+    "@10up/cypress-wp-utils": "github:10up/cypress-wp-utils#build",
+    "@wordpress/env": "^5.6.0",
     "@wordpress/eslint-plugin": "^10.0.1",
-    "@wordpress/scripts": "^20.0.2"
+    "@wordpress/scripts": "^24.6.0",
+    "cypress": "^11.0.0"
   }
 }

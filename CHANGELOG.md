@@ -4,6 +4,28 @@ All notable changes to this project will be documented in this file, per [the Ke
 
 ## [Unreleased] - TBD
 
+## [1.1.0] - 2023-01-23
+**Note that this release bumps the WordPress minimum version from 5.2 to 5.8.**
+
+### Added
+- Support for custom marker icons (props [@iamdharmesh](https://github.com/iamdharmesh), [@dinhtungdu](https://github.com/dinhtungdu), [@fabiankaegy](https://github.com/fabiankaegy) via [#136](https://github.com/10up/maps-block-apple/pull/136)).
+- Ability to control margin of map (props [@fabiankaegy](https://github.com/fabiankaegy), [@dkotter](https://github.com/dkotter) via [#157](https://github.com/10up/maps-block-apple/pull/157)).
+- End-to-end testing setup with Cypress (props [@cadic](https://github.com/cadic), [@peterwilsoncc](https://github.com/peterwilsoncc) via [#126](https://github.com/10up/maps-block-apple/pull/126)).
+
+### Changed
+- Bump minimum WordPress version from 5.2 to 5.8 (props [@cadic](https://github.com/cadic), [@peterwilsoncc](https://github.com/peterwilsoncc) via [#126](https://github.com/10up/maps-block-apple/pull/126)).
+- Update linting workflows to take advantage of GitHub Actions summaries (props [@dinhtungdu](https://github.com/dinhtungdu), [@fabiankaegy](https://github.com/fabiankaegy) via [#128](https://github.com/10up/maps-block-apple/pull/128)).
+- Update Support Level from `Active` to `Stable` (props [@jeffpaul](https://github.com/jeffpaul), [@dkotter](https://github.com/dkotter) via [#135](https://github.com/10up/maps-block-apple/pull/135)).
+- Update composer dependencies to avoid conflict (props [@peterwilsoncc](https://github.com/peterwilsoncc), [@iamdharmesh](https://github.com/iamdharmesh) via [#145](https://github.com/10up/maps-block-apple/pull/145)).
+- Bump WordPress "tested up to" version to 6.1 (props [@iamdharmesh](https://github.com/iamdharmesh), [@cadic](https://github.com/cadic) via [#148](https://github.com/10up/maps-block-apple/pull/148)).
+
+### Security
+- Bump `terser` from 5.14.1 to 5.14.2 (props [@dependabot](https://github.com/apps/dependabot) via [#132](https://github.com/10up/maps-block-apple/pull/132)).
+- Bump `markdown-it` from 12.0.4 to 12.3.2 and `@wordpress/scripts` from 20.0.2 to 24.5.0 (props [@dependabot](https://github.com/apps/dependabot) via [#138](https://github.com/10up/maps-block-apple/pull/138)).
+- Bump `loader-utils` from 2.0.2 to 2.0.4 (props [@dependabot](https://github.com/apps/dependabot) via [#146](https://github.com/10up/maps-block-apple/pull/146)).
+- Bump `simple-git` from 3.10.0 to 3.15.1 (props [@dependabot](https://github.com/apps/dependabot) via [#149](https://github.com/10up/maps-block-apple/pull/149)).
+- Bump `json5` from 1.0.1 to 1.0.2 (props [@dependabot](https://github.com/apps/dependabot) via [#153](https://github.com/10up/maps-block-apple/pull/153)).
+
 ## [1.0.3] - 2022-06-27
 ### Added
 - Dependency security scanning (props [@jeffpaul](https://github.com/jeffpaul), [@faisal-alvi](https://github.com/faisal-alvi) via [#121](https://github.com/10up/maps-block-apple/pull/121)).
@@ -86,6 +108,7 @@ All notable changes to this project will be documented in this file, per [the Ke
 - Initial private release of Block for Apple Maps plugin.
 
 [Unreleased]: https://github.com/10up/maps-block-apple/compare/trunk...develop
+[1.1.0]: https://github.com/10up/maps-block-apple/compare/1.0.3...1.1.0
 [1.0.3]: https://github.com/10up/maps-block-apple/compare/1.0.2...1.0.3
 [1.0.2]: https://github.com/10up/maps-block-apple/compare/1.0.1...1.0.2
 [1.0.1]: https://github.com/10up/maps-block-apple/compare/1.0.0...1.0.1

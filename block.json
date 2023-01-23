@@ -84,9 +84,13 @@
       "wide",
       "full"
     ],
+    "spacing": {
+      "margin": true
+    },
     "html":false
   },
   "editorScript":"maps-block-apple-block",
   "viewScript":"maps-block-apple-frontend",
-  "script": "apple-mapkit-js"
+  "script": "apple-mapkit-js",
+  "editorStyle": "file:build/index.css"
 }
