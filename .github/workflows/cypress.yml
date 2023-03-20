@@ -8,6 +8,7 @@ jobs:
   build: 
     uses: 10up/maps-block-apple/.github/workflows/build-release-zip.yml@update/151 # TODO: Update this to develop branch.
   cypress:
+    needs: build
     name: ${{ matrix.core.name }}
     runs-on: ubuntu-latest
     strategy:
