@@ -32,5 +32,7 @@ Desktop.ini
 .env
 
 .wp-env.override.json
-tests/cypress/screenshots/
-tests/cypress/videos/
+tests/cypress/downloads
+tests/cypress/screenshots
+tests/cypress/videos
+tests/cypress/reports
