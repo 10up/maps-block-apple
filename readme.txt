@@ -72,7 +72,7 @@ Yes, you can track your MapKit JS useage on the [MapKit JS Developer Dashboard](
 
 == Changelog ==
 
-= 1.1.1 - 2023-06-20 =
+= 1.1.1 - 2023-06-21 =
 * **Note that this release bumps the PHP minimum supported version from 5.6 to 7.4.**
 
 * **Added:** Mochawesome reporter added for Cypress test report (props [@jayedul](https://github.com/jayedul), [@iamdharmesh](https://github.com/iamdharmesh) via [#168](https://github.com/10up/maps-block-apple/pull/168)).

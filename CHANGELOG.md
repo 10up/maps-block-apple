@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file, per [the Ke
 
 ## [Unreleased] - TBD
 
-## [1.1.1] - 2023-06-20
+## [1.1.1] - 2023-06-21
 **Note that this release bumps the PHP minimum supported version from 5.6 to 7.4.**
 
 ### Added
