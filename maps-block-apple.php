@@ -68,22 +68,6 @@ if ( ! site_meets_php_requirements() ) {
 }
 
 /**
- * Require WP version >=5.8
- * PHP 7.4 errors should be caught in the sandbox during activation.
- */
-register_activation_hook(
-	__FILE__,
-	function() {
-		if ( ! version_compare( $GLOBALS['wp_version'], '5.8', '>=' ) ) {
-			wp_die(
-				esc_html__( 'Block for Apple Maps requires WordPress version 5.8 or greater.', 'maps-block-apple' ),
-				esc_html__( 'Error Activating', 'maps-block-apple' )
-			);
-		}
-	}
-);
-
-/**
  * Add options
  */
 function add_options() {
