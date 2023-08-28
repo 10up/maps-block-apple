@@ -216,32 +216,13 @@ export default function MapsBlockAppleEdit(props) {
 				/>
 				<div {...blockProps}>
 					<Placeholder
-						style={{ minHeight: `${height}px` }}
-						label={__(
-							'Confirm access to Apple Maps',
-							'maps-block-apple'
-						)}
-						icon={BlockIcon}
+						style={{ minHeight: isAuthenticated ? `${height}px` : 'auto' }}
 						instructions={
 							<IsAdmin
 								fallback={__(
 									'Sorry, you are not allowed to do that. Please talk to your Administrator.'
 								)}
 							>
-								{__(
-									'In order to include an Apple Map on your website you need to confirm your MapKit credentials below. Here is documentation on how to get those credentials: ',
-									'maps-block-apple'
-								)}
-								<a
-									href="https://developer.apple.com/documentation/mapkitjs/setting_up_mapkit_js"
-									target="_blank"
-									rel="noopener noreferrer"
-								>
-									{__(
-										'Instructions for creating your MapKit credentials.',
-										'maps-block-apple'
-									)}
-								</a>{' '}
 							</IsAdmin>
 						}
 						isColumnLayout={true}
