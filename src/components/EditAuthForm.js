@@ -197,7 +197,7 @@ export default function EditAuthForm() {
 	);
 
 	return (
-		<div>
+		<div className='maps-block-apple__setup-wrapper'>
 			<ul className="components-guide__page-control" aria-label={ __( 'Guide controls' ) } style={{ padding: 0 }}>
 				{ pageControl }
 			</ul>

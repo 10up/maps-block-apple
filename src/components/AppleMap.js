@@ -1,5 +1,5 @@
 import apiFetch from '@wordpress/api-fetch';
-import { dispatch } from '@wordpress/data';
+import { select, dispatch } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 
 class AppleMap {
@@ -188,6 +188,7 @@ class AppleMap {
 			})
 			.catch((error) => {
 				dispatch('core/notices').createErrorNotice(error.message, {
+					id: error.code,
 					isDismissible: true,
 					type: 'snackbar',
 				});
