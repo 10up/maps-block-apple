@@ -46,6 +46,33 @@ export default function EditAuthForm() {
 		}
 	}, [siteSettings]);
 
+	function getNavData() {
+		switch ( step ) {
+			case STEPS.GET_STARTED:
+				return {
+					text: __( 'Get started!', 'maps-block-apple' ),
+					step: STEPS.CREATE_APPLE_DEV_ACCOUNT,
+					isEnabled: true,
+				}
+
+			case STEPS.CREATE_APPLE_DEV_ACCOUNT:
+				return {
+					text: __( 'Next', 'maps-block-apple' ),
+					step: STEPS.CONFIRM_CREDS,
+					isEnabled: keyId && teamId,
+				}
+
+			case STEPS.CONFIRM_CREDS:
+				return {
+					text: __( 'Next', 'maps-block-apple' ),
+					step: STEPS.CONFIRM_CREDS,
+					isEnabled: privateKey,
+				}
+		}
+	}
+
+	const navData = getNavData();
+
 	const handleSave = () => {
 		setIsBusy(true);
 
@@ -76,6 +103,7 @@ export default function EditAuthForm() {
 	const pageControl = [];
 
 	for ( let i = 0; i < Object.keys( STEPS ).length; i++ ) {
+		const disableButton = ! navData.isEnabled && i > step;
 		pageControl.push(
 			<li
 				key={ i }
@@ -92,6 +120,7 @@ export default function EditAuthForm() {
 						Object.keys( STEPS ).length
 					) }
 					onClick={ () => setStep( i ) }
+					disabled={ disableButton }
 				/>
 			</li>
 		);
@@ -156,7 +185,7 @@ export default function EditAuthForm() {
 			<Flex justify='flex-end'>
 				<Button
 					isPrimary
-					disabled={isBusy}
+					disabled={isBusy || !navData.isEnabled}
 					isBusy={isBusy}
 					onClick={handleSave}
 					style={ { marginTop: '3rem' } }
@@ -166,48 +195,6 @@ export default function EditAuthForm() {
 			</Flex>
 		</>
 	);
-
-	const connectionForm = (
-		<>
-			<h4>{ __( 'Confirm your credentials.', 'maps-block-apple' ) }</h4>
-			<TextareaControl
-				label={__('Please enter your Private Key', 'maps-block-apple')}
-				readOnly={isBusy}
-				name="private_key"
-				value={privateKey}
-				onChange={(newPrivateKey) => setPrivateKey(newPrivateKey)}
-			/>
-			<Flex justify='flex-end'>
-				<Button
-					isPrimary
-					disabled={isBusy}
-					isBusy={isBusy}
-					onClick={handleSave}
-					style={ { marginTop: '3rem' } }
-				>
-					{__('Confirm MapKit Credentials', 'maps-block-apple')}
-				</Button>
-			</Flex>
-		</>
-	);
-
-	function getNavData() {
-		switch ( step ) {
-			case STEPS.GET_STARTED:
-				return {
-					text: __( 'Get started!', 'maps-block-apple' ),
-					step: STEPS.CREATE_APPLE_DEV_ACCOUNT,
-				}
-
-			case STEPS.CREATE_APPLE_DEV_ACCOUNT:
-				return {
-					text: __( 'Next', 'maps-block-apple' ),
-					step: STEPS.CONFIRM_CREDS,
-				}
-		}
-	}
-
-	const navData = getNavData();
 
 	return (
 		<div>
@@ -225,6 +212,7 @@ export default function EditAuthForm() {
 							variant='primary'
 							text={ navData.text }
 							onClick={ () => setStep( navData.step ) }
+							disabled={ ! navData.isEnabled }
 						/>
 					</FlexItem>
 				</Flex>
