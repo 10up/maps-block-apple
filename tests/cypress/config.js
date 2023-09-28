@@ -33,7 +33,7 @@ module.exports = defineConfig({
  * @returns config Updated Cypress Config object.
  */
 const setBaseUrl = async (on, config) => {
-	const cacheDirectory = await getCacheDirectory();
+  const cacheDirectory = await getCacheDirectory();
   const wpEnvConfig = await loadConfig( cacheDirectory );
 
   if (wpEnvConfig) {
