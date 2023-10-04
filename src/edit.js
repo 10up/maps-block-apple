@@ -226,7 +226,8 @@ export default function MapsBlockAppleEdit(props) {
 					>
 						<IsAdmin
 							fallback={__(
-								'Sorry, you are not allowed to do that. Please talk to your Administrator.'
+								'Sorry, you are not allowed to do that. Please talk to your Administrator.',
+								'maps-block-apple'
 							)}
 						>
 							<div style={{ marginBottom: '1em' }}>
