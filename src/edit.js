@@ -222,12 +222,14 @@ export default function MapsBlockAppleEdit(props) {
 							'maps-block-apple'
 						)}
 						icon={BlockIcon}
-						instructions={
-							<IsAdmin
-								fallback={__(
-									'Sorry, you are not allowed to do that. Please talk to your Administrator.'
-								)}
-							>
+						isColumnLayout={true}
+					>
+						<IsAdmin
+							fallback={__(
+								'Sorry, you are not allowed to do that. Please talk to your Administrator.'
+							)}
+						>
+							<div style={{ marginBottom: '1em' }}>
 								{__(
 									'In order to include an Apple Map on your website you need to confirm your MapKit credentials below. Here is documentation on how to get those credentials: ',
 									'maps-block-apple'
@@ -241,12 +243,8 @@ export default function MapsBlockAppleEdit(props) {
 										'Instructions for creating your MapKit credentials.',
 										'maps-block-apple'
 									)}
-								</a>{' '}
-							</IsAdmin>
-						}
-						isColumnLayout={true}
-					>
-						<IsAdmin>
+								</a>
+							</div>
 							<EditAuthForm />
 						</IsAdmin>
 					</Placeholder>
