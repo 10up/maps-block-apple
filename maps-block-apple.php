@@ -27,7 +27,7 @@ define( 'MAPS_BLOCK_APPLE_BASENAME', plugin_basename( __FILE__ ) );
 
 // Validate Environment.
 $is_environment_satisfy = require MAPS_BLOCK_APPLE_INC . 'environment-validation.php';
-if( ! $is_environment_satisfy ) {
+if ( ! $is_environment_satisfy ) {
 	return;
 }
 
