@@ -24,48 +24,13 @@ define( 'MAPS_BLOCK_APPLE_PATH', dirname( __FILE__ ) . '/' );
 define( 'MAPS_BLOCK_APPLE_INC', MAPS_BLOCK_APPLE_PATH . 'includes/' );
 define( 'MAPS_BLOCK_APPLE_BASENAME', plugin_basename( __FILE__ ) );
 
-/**
- * Get the minimum version of PHP required by this plugin.
- *
- * @return string Minimum version required.
- */
-function minimum_php_requirement() {
-	return '7.4';
-}
 
-/**
- * Whether PHP installation meets the minimum requirements
- *
- * @return bool True if meets minimum requirements, false otherwise.
- */
-function site_meets_php_requirements() {
-	return version_compare( phpversion(), minimum_php_requirement(), '>=' );
-}
-
-// Ensuring our PHP version requirement is met first before loading plugin.
-if ( ! site_meets_php_requirements() ) {
-	add_action(
-		'admin_notices',
-		function() {
-			?>
-			<div class="notice notice-error">
-				<p>
-					<?php
-					echo wp_kses_post(
-						sprintf(
-							/* translators: %s: Minimum required PHP version */
-							__( 'Block for Apple Maps requires PHP version %s or later. Please upgrade PHP or disable the plugin.', 'maps-block-apple' ),
-							esc_html( minimum_php_requirement() )
-						)
-					);
-					?>
-				</p>
-			</div>
-			<?php
-		}
-	);
+// Validate Environment.
+$is_environment_satisfy = require MAPS_BLOCK_APPLE_INC . 'environment-validation.php';
+if( ! $is_environment_satisfy ) {
 	return;
 }
+
 
 /**
  * Add options
