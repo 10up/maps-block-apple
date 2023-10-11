@@ -2,8 +2,10 @@
 /**
  * This file is used to validate the environment.
  *
+ * @package tenup\Maps_Block_Apple
  * @since x.x.x
  */
+
 namespace tenup\Maps_Block_Apple;
 
 use TenUP_Maps_Block_Apple_Environment_Validation_Tools\Validator;
