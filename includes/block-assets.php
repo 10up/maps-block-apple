@@ -49,7 +49,7 @@ function register_block_assets() {
 	wp_register_script(
 		'maps-block-apple-block',
 		MAPS_BLOCK_APPLE_URL . "build/$block_file_name.js",
-		$block_dependencies['dependencies'],
+		array_merge( $block_dependencies['dependencies'], [ 'apple-mapkit-js' ] ),
 		$block_dependencies['version'],
 		false
 	);

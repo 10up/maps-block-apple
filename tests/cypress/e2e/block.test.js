@@ -1,9 +1,6 @@
 describe("Test block functions", () => {
-	before(() => {
-		cy.login();
-	});
-
 	beforeEach(() => {
+		cy.login();
 		cy.mapsBlockSaveSettings();
 	});
 

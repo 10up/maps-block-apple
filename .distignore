@@ -8,14 +8,7 @@
 /tests
 
 # Files
-.distignore
-.editorconfig
-.eslintrc
-.gitignore
-.nvmrc
-.phpcs.xml
-.wp-env.json
-.wp-env.override.json
+.*
 CHANGELOG.md
 CODE_OF_CONDUCT.md
 composer.json
