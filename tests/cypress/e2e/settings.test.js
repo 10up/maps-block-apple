@@ -1,5 +1,5 @@
 describe("Settings", () => {
-	before(() => {
+	beforeEach(() => {
 		cy.login();
 	});
 
