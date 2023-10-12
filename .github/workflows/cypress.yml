@@ -6,7 +6,7 @@ on:
       - develop
 jobs:
   build:
-    uses: 10up/maps-block-apple/.github/workflows/build-release-zip.yml@fix/172-php-ver-check
+    uses: 10up/maps-block-apple/.github/workflows/build-release-zip.yml@develop
   cypress:
     needs: build
     name: ${{ matrix.core.name }}
