@@ -24,21 +24,13 @@ define( 'MAPS_BLOCK_APPLE_PATH', dirname( __FILE__ ) . '/' );
 define( 'MAPS_BLOCK_APPLE_INC', MAPS_BLOCK_APPLE_PATH . 'includes/' );
 define( 'MAPS_BLOCK_APPLE_BASENAME', plugin_basename( __FILE__ ) );
 
-/**
- * Require WP version >=5.8
- * PHP 7.4 errors should be caught in the sandbox during activation.
- */
-register_activation_hook(
-	__FILE__,
-	function() {
-		if ( ! version_compare( $GLOBALS['wp_version'], '5.8', '>=' ) ) {
-			wp_die(
-				esc_html__( 'Block for Apple Maps requires WordPress version 5.8 or greater.', 'maps-block-apple' ),
-				esc_html__( 'Error Activating', 'maps-block-apple' )
-			);
-		}
-	}
-);
+
+// Validate Environment.
+$is_environment_satisfy = require MAPS_BLOCK_APPLE_INC . 'environment-validation.php';
+if ( ! $is_environment_satisfy ) {
+	return;
+}
+
 
 /**
  * Add options

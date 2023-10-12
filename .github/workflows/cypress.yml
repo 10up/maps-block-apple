@@ -5,7 +5,7 @@ on:
     branches:
       - develop
 jobs:
-  build: 
+  build:
     uses: 10up/maps-block-apple/.github/workflows/build-release-zip.yml@develop
   cypress:
     needs: build
@@ -42,7 +42,7 @@ jobs:
         key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
     - name: Install dependencies
       run: npm install
-    - name: Set the core version and plugins config 
+    - name: Set the core version and plugins config
       run: ./tests/bin/set-wp-config.js --core=${{ matrix.core.version }} --plugins=./${{ github.event.repository.name }}
     - name: Set up WP environment
       run: npm run env:start
