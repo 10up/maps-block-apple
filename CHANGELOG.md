@@ -4,6 +4,25 @@ All notable changes to this project will be documented in this file, per [the Ke
 
 ## [Unreleased] - TBD
 
+## [1.1.2] - 2023-10-16
+### Changed
+- Bump WordPress "tested up to" version to 6.3 (props [@QAharshalkadu](https://github.com/QAharshalkadu), [@jeffpaul](https://github.com/jeffpaul) via [#179](https://github.com/10up/maps-block-apple/pull/179)).
+
+### Fixed
+- Ensure our Mapkit JS only loads when a Map block is in place (props [@jayedul](https://github.com/jayedul), [@fabiankaegy](https://github.com/fabiankaegy), [@faisal-alvi](https://github.com/faisal-alvi) via [#161](https://github.com/10up/maps-block-apple/pull/161)).
+- Better error handling for environments that don't match our minimum PHP version (props [@rahulsprajapati](https://github.com/rahulsprajapati), [@dkotter](https://github.com/dkotter), [@ravinderk](https://github.com/ravinderk) via [#174](https://github.com/10up/maps-block-apple/pull/174)).
+- Ensure that the Apple Maps block works fine in WordPress 6.4 (props [@iamdharmesh](https://github.com/iamdharmesh), [@fabiankaegy](https://github.com/fabiankaegy), [@faisal-alvi](https://github.com/faisal-alvi) via [#183](https://github.com/10up/maps-block-apple/pull/183)).
+- Ensure that our Cypress E2E tests pass (props [@iamdharmesh](https://github.com/iamdharmesh), [@Sidsector9](https://github.com/Sidsector9) via [#181](https://github.com/10up/maps-block-apple/pull/181)).
+
+### Security
+- Bump `word-wrap` from 1.2.3 to 1.2.4 (props [@dependabot](https://github.com/apps/dependabot), [@ravinderk](https://github.com/apps/ravinderk) via [#173](https://github.com/10up/maps-block-apple/pull/173)).
+- Bump `tough-cookie` from 4.1.2 to 4.1.3 (props [@dependabot](https://github.com/apps/dependabot), [@faisal-alvi](https://github.com/apps/faisal-alvi) via [#176](https://github.com/10up/maps-block-apple/pull/176)).
+- Bump `cypress` from 11.2.0 to 13.2.0 and `@cypress/request` from 2.88.11 to 3.0.0 (props [@dependabot](https://github.com/apps/dependabot), [@ravinderk](https://github.com/apps/ravinderk), [@faisal-alvi](https://github.com/apps/faisal-alvi), [@iamdharmesh](https://github.com/iamdharmesh), [@Sidsector9](https://github.com/Sidsector9) via [#176](https://github.com/10up/maps-block-apple/pull/176), [#180](https://github.com/10up/maps-block-apple/pull/180), [#181](https://github.com/10up/maps-block-apple/pull/181)).
+- Bump `postcss` from 8.4.23 to 8.4.31 (props [@dependabot](https://github.com/apps/dependabot), [@ravinderk](https://github.com/apps/ravinderk) via [#184](https://github.com/10up/maps-block-apple/pull/184)).
+- Bump `@10up/cypress-wp-utils` from 0.1.0 to 0.2.0 (props [@iamdharmesh](https://github.com/iamdharmesh), [@Sidsector9](https://github.com/Sidsector9) via [#181](https://github.com/10up/maps-block-apple/pull/181)).
+- Bump `@wordpress/env` from 5.6.0 to 8.7.0 (props [@iamdharmesh](https://github.com/iamdharmesh), [@Sidsector9](https://github.com/Sidsector9) via [#181](https://github.com/10up/maps-block-apple/pull/181)).
+- Bump `cypress-mochawesome-reporter` from 3.4.0 to 3.6.0 (props [@iamdharmesh](https://github.com/iamdharmesh), [@Sidsector9](https://github.com/Sidsector9) via [#181](https://github.com/10up/maps-block-apple/pull/181)).
+
 ## [1.1.1] - 2023-06-21
 **Note that this release bumps the PHP minimum supported version from 5.6 to 7.4.**
 
@@ -126,6 +145,7 @@ All notable changes to this project will be documented in this file, per [the Ke
 - Initial private release of Block for Apple Maps plugin.
 
 [Unreleased]: https://github.com/10up/maps-block-apple/compare/trunk...develop
+[1.1.2]: https://github.com/10up/maps-block-apple/compare/1.1.1...1.1.2
 [1.1.1]: https://github.com/10up/maps-block-apple/compare/1.1.0...1.1.1
 [1.1.0]: https://github.com/10up/maps-block-apple/compare/1.0.3...1.1.0
 [1.0.3]: https://github.com/10up/maps-block-apple/compare/1.0.2...1.0.3
