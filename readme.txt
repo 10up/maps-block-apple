@@ -114,52 +114,8 @@ Yes, you can track your MapKit JS useage on the [MapKit JS Developer Dashboard](
 * **Security:** Bump `simple-git` from 3.10.0 to 3.15.1 (props [@dependabot](https://github.com/apps/dependabot) via [#149](https://github.com/10up/maps-block-apple/pull/149)).
 * **Security:** Bump `json5` from 1.0.1 to 1.0.2 (props [@dependabot](https://github.com/apps/dependabot) via [#153](https://github.com/10up/maps-block-apple/pull/153)).
 
-= 1.0.3 - 2022-06-27 =
-* **Added:** Dependency security scanning (props [@jeffpaul](https://github.com/jeffpaul), [@faisal-alvi](https://github.com/faisal-alvi) via [#121](https://github.com/10up/maps-block-apple/pull/121)).
-* **Changed:** Update UI of settings sidebar to make it feel more native (props [@fabiankaegy](https://github.com/fabiankaegy) , [@Sidsector9](https://github.com/Sidsector9) via [#115](https://github.com/10up/maps-block-apple/pull/115)).
-* **Changed:** Bump WordPress version "tested up to" 6.0 (props [@cadic](https://github.com/cadic) via [#125](https://github.com/10up/maps-block-apple/pull/125)).
-* **Changed:** Rename linting workflow (props [@dinhtungdu](https://github.com/dinhtungdu) via [#124](https://github.com/10up/maps-block-apple/pull/124)).
-* **Security:** Bump `follow-redirects` from 1.14.4 to 1.14.8 (props [@dependabot](https://github.com/apps/dependabot) via [#114](https://github.com/10up/maps-block-apple/pull/114)).
-* **Security:** Bump `nanoid` from 3.1.30 to 3.3.1 (props [@dependabot](https://github.com/apps/dependabot) via [#116](https://github.com/10up/maps-block-apple/pull/116)).
-* **Security:** Bump `minimist` from 1.2.5 to 1.2.6 (props [@dependabot](https://github.com/apps/dependabot) via [#118](https://github.com/10up/maps-block-apple/pull/118)).
-* **Security:** Bump `node-forge` from 1.2.1 to 1.3.1 (props [@dependabot](https://github.com/apps/dependabot) via [#119](https://github.com/10up/maps-block-apple/pull/119)).
-* **Security:** Bump `async` from 2.6.3 to 2.6.4 (props [@dependabot](https://github.com/apps/dependabot) via [#123](https://github.com/10up/maps-block-apple/pull/123)).
-
-= 1.0.2 - 2022-01-27 =
-* **Added:** `wp env` for local development (props [@fabiankaegy](https://github.com/fabiankaegy), [@dinhtungdu](https://github.com/dinhtungdu), [@jeffpaul](https://github.com/jeffpaul)).
-* **Added:** Issue management automation via GitHub Actions (props [@jeffpaul](https://github.com/jeffpaul)).
-* **Changed:** Bump WordPress version "tested up to" 5.9 (props [@jeffpaul](https://github.com/jeffpaul), [@fabiankaegy](https://github.com/fabiankaegy), [@dinhtungdu](https://github.com/dinhtungdu), [@barneyjeffries](https://github.com/barneyjeffries)).
-* **Changed:**Turn off `autoComplete` for the search input field (props [@dinhtungdu](https://github.com/dinhtungdu)).
-* **Fixed:** `block.json` syntax error (props [@dinhtungdu](https://github.com/dinhtungdu), [@jeffpaul](https://github.com/jeffpaul), [@ryanwelcher](https://github.com/ryanwelcher)).
-* **Fixed:** Enqueue map assets only when being used and clean up unused assets (props [@joshuaabenazer](https://github.com/joshuaabenazer), [@fabiankaegy](https://github.com/fabiankaegy)).
-* **Fixed:** Remove orign restriction in local environments to allow for proxied domains (props [@fabiankaegy](https://github.com/fabiankaegy), [@dinhtungdu](https://github.com/dinhtungdu)).
-* **Fixed:** Block not working in Site Editor due to iframed editor (props [@fabiankaegy](https://github.com/fabiankaegy), [@dinhtungdu](https://github.com/dinhtungdu)).
-* **Fixed:** Search popover sizing (props [@fabiankaegy](https://github.com/fabiankaegy), [@dinhtungdu](https://github.com/dinhtungdu), [@ankitguptaindia](https://github.com/ankitguptaindia)).
-* **Security:** Bump `ini` from 1.3.5 to 1.3.8 (props [@dependabot](https://github.com/apps/dependabot)).
-* **Security:** Bump `elliptic` from 6.5.3 to 6.5.4 (props [@dependabot](https://github.com/apps/dependabot)).
-* **Security:** Bump `y18n` from 4.0.0 to 4.0.1 (props [@dependabot](https://github.com/apps/dependabot)).
-* **Security:** Bump `ssri` from 6.0.1 to 6.0.2 (props [@dependabot](https://github.com/apps/dependabot)).
-* **Security:** Bump `lodash` from 4.17.19 to 4.17.21 (props [@dependabot](https://github.com/apps/dependabot)).
-* **Security:** Bump `hosted-git-info` from 2.8.8 to 2.8.9 (props [@dependabot](https://github.com/apps/dependabot)).
-* **Security:** Bump `normalize-url` from 4.5.0 to 4.5.1 (props [@dependabot](https://github.com/apps/dependabot)).
-* **Security:** Bump `path-parse` from 1.0.6 to 1.0.7 (props [@dependabot](https://github.com/apps/dependabot)).
-
-= 1.0.1 - 2020-08-11 =
-* **Added:** Internationalization support via loading translations for the block (props [@dinhtungdu](https://profiles.wordpress.org/dinhtungdu/), [@helen](https://profiles.wordpress.org/helen/) via [#69](https://github.com/10up/maps-block-apple/pull/69))
-* **Added:** WordPress.org Block Directory integration (props [@jeffpaul](https://profiles.wordpress.org/jeffpaul/) via [#63](https://github.com/10up/maps-block-apple/pull/63))
-* **Added:** Documentation and GitHub Action updates (props [@helen](https://profiles.wordpress.org/helen/), [@jeffpaul](https://profiles.wordpress.org/jeffpaul/) via [#59](https://github.com/10up/maps-block-apple/pull/59), [#60](https://github.com/10up/maps-block-apple/pull/60), [#68](https://github.com/10up/maps-block-apple/pull/68))
-* **Fixed:** Debounce `addMarker` call when marker settings are changed (props [@fabiankaegy](https://profiles.wordpress.org/fabiankaegy/), [@dinhtungdu](https://profiles.wordpress.org/dinhtungdu/) via [#70](https://github.com/10up/maps-block-apple/pull/70))
-* **Fixed:** Key and Team ID settings placeholders (props [@dinhtungdu](https://profiles.wordpress.org/dinhtungdu/), [@helen](https://profiles.wordpress.org/helen/), [@jeffpaul](https://profiles.wordpress.org/jeffpaul/) via [#57](https://github.com/10up/maps-block-apple/pull/57))
-* **Security:** Bump `lodash` from 4.17.15 to 4.17.19 (props [@dependabot](https://github.com/apps/dependabot) via [#67](https://github.com/10up/maps-block-apple/pull/67))
-* **Security:** Bump `elliptic` from 6.5.2 to 6.5.3 (props [@dependabot](https://github.com/apps/dependabot) via [#71](https://github.com/10up/maps-block-apple/pull/71))
-
-= 1.0.0 - 2020-06-25 =
-🎉 Initial public release!
-
-Block for Apple Maps gives you an easy way to add MapKit-powered maps with custom markers to your site. For all of the technical details, please see the [full changelog](https://github.com/10up/maps-block-apple/blob/develop/CHANGELOG.md).
-
-= 0.1.0 - 2020-05-13 =
-* Initial private release of Block for Apple Maps plugin.
+= Earlier versions =
+For the changelog of earlier versions, please refer to the [changelog on github.com](https://github.com/10up/maps-block-apple/blob/develop/CHANGELOG.md).
 
 == Upgrade Notice ==
 
