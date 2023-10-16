@@ -3,7 +3,7 @@
  * Plugin Name:       Block for Apple Maps
  * Plugin URI:        https://github.com/10up/maps-block-apple
  * Description:       An Apple Maps block for the WordPress block editor (Gutenberg).
- * Version:           1.1.1
+ * Version:           1.1.2
  * Requires at least: 5.8
  * Requires PHP:      7.4
  * Author:            10up
@@ -18,27 +18,19 @@
 namespace tenup\Maps_Block_Apple;
 
 // Useful global constants.
-define( 'MAPS_BLOCK_APPLE_VERSION', '1.1.1' );
+define( 'MAPS_BLOCK_APPLE_VERSION', '1.1.2' );
 define( 'MAPS_BLOCK_APPLE_URL', plugin_dir_url( __FILE__ ) );
 define( 'MAPS_BLOCK_APPLE_PATH', dirname( __FILE__ ) . '/' );
 define( 'MAPS_BLOCK_APPLE_INC', MAPS_BLOCK_APPLE_PATH . 'includes/' );
 define( 'MAPS_BLOCK_APPLE_BASENAME', plugin_basename( __FILE__ ) );
 
-/**
- * Require WP version >=5.8
- * PHP 7.4 errors should be caught in the sandbox during activation.
- */
-register_activation_hook(
-	__FILE__,
-	function() {
-		if ( ! version_compare( $GLOBALS['wp_version'], '5.8', '>=' ) ) {
-			wp_die(
-				esc_html__( 'Block for Apple Maps requires WordPress version 5.8 or greater.', 'maps-block-apple' ),
-				esc_html__( 'Error Activating', 'maps-block-apple' )
-			);
-		}
-	}
-);
+
+// Validate Environment.
+$is_environment_satisfy = require MAPS_BLOCK_APPLE_INC . 'environment-validation.php';
+if ( ! $is_environment_satisfy ) {
+	return;
+}
+
 
 /**
  * Add options

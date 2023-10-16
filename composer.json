@@ -1,30 +1,51 @@
 {
-	"name": "10up/maps-block-apple",
-	"description": "WordPress editor block for Apple Maps",
-	"version": "1.0.1",
-	"type": "wordpress-plugin",
-	"homepage": "https://10up.com",
-	"license": "GPLv2 or later",
-	"authors": [
-		{
-			"name": "10up",
-			"email": "opensource@10up.com",
-			"homepage": "https://10up.com",
-			"role": "Developer"
-		}
-	],
-	"require-dev": {
-		"10up/phpcs-composer": "dev-master"
-	},
-	"scripts": {
-		"lint": "./vendor/bin/phpcs",
-		"lint-fix": "./vendor/bin/phpcbf --extensions=php .",
-		"phpcs:compat": "vendor/bin/phpcs maps-block-apple.php includes/ -p --standard=PHPCompatibilityWP --extensions=php --runtime-set testVersion 7.4-"
-	},
-	"minimum-stability": "dev",
-	"config": {
-		"allow-plugins": {
-			"dealerdirect/phpcodesniffer-composer-installer": true
-		}
-	}
+  "name": "10up/maps-block-apple",
+  "description": "WordPress editor block for Apple Maps",
+  "version": "1.0.1",
+  "type": "wordpress-plugin",
+  "homepage": "https://10up.com",
+  "license": "GPLv2 or later",
+  "authors": [
+    {
+      "name": "10up",
+      "email": "opensource@10up.com",
+      "homepage": "https://10up.com",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "10up/wp-compat-validation-tool": "dev-trunk"
+  },
+  "require-dev": {
+    "10up/phpcs-composer": "dev-master"
+  },
+  "scripts": {
+    "lint": "./vendor/bin/phpcs",
+    "lint-fix": "./vendor/bin/phpcbf --extensions=php .",
+    "phpcs:compat": "vendor/bin/phpcs maps-block-apple.php includes/ -p --standard=PHPCompatibilityWP --extensions=php --runtime-set testVersion 7.4-",
+    "post-install-cmd": [
+      "./10up-lib/wp-compat-validation-tool/replace-namespace.sh TenUP_Maps_Block_Apple_Environment_Validation_Tools"
+    ],
+    "post-update-cmd": [
+      "./10up-lib/wp-compat-validation-tool/replace-namespace.sh TenUP_Maps_Block_Apple_Environment_Validation_Tools"
+    ]
+  },
+  "minimum-stability": "dev",
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true,
+      "composer/installers": true
+    }
+  },
+  "repositories": [
+    {
+      "type": "git",
+      "url": "https://github.com/10up/wp-compat-validation-tool.git"
+    }
+  ],
+  "extra": {
+    "installer-paths": {
+      "./{$name}/": ["10up/wp-compat-validation-tool"]
+    }
+  }
 }

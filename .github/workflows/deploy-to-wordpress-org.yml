@@ -9,6 +9,8 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@master
+    - name: Install Composer dependencies
+      run: composer install --no-dev
     - name: Build
       run: |
         npm install
