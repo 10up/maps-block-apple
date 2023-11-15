@@ -72,6 +72,9 @@ Yes, you can track your MapKit JS useage on the [MapKit JS Developer Dashboard](
 
 == Changelog ==
 
+= 1.1.3 - 2023-11-16 =
+* **Changed:** Bump WordPress "tested up to" version to 6.4 (props [@QAharshalkadu](https://github.com/QAharshalkadu), [@jeffpaul](https://github.com/jeffpaul) via [#190](https://github.com/10up/maps-block-apple/pull/190), [#191](https://github.com/10up/maps-block-apple/pull/191)).
+
 = 1.1.2 - 2023-10-16 =
 * **Changed:** Bump WordPress "tested up to" version to 6.3 (props [@QAharshalkadu](https://github.com/QAharshalkadu), [@jeffpaul](https://github.com/jeffpaul) via [#179](https://github.com/10up/maps-block-apple/pull/179)).
 * **Fixed:** Ensure our Mapkit JS only loads when a Map block is in place (props [@jayedul](https://github.com/jayedul), [@fabiankaegy](https://github.com/fabiankaegy), [@faisal-alvi](https://github.com/faisal-alvi) via [#161](https://github.com/10up/maps-block-apple/pull/161)).
