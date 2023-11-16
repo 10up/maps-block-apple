@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file, per [the Ke
 
 ## [Unreleased] - TBD
 
+## [1.1.3] - 2023-11-16
+### Changed
+- Bump WordPress "tested up to" version to 6.4 (props [@QAharshalkadu](https://github.com/QAharshalkadu), [@jeffpaul](https://github.com/jeffpaul) via [#190](https://github.com/10up/maps-block-apple/pull/190), [#191](https://github.com/10up/maps-block-apple/pull/191)).
+
 ## [1.1.2] - 2023-10-16
 ### Changed
 - Bump WordPress "tested up to" version to 6.3 (props [@QAharshalkadu](https://github.com/QAharshalkadu), [@jeffpaul](https://github.com/jeffpaul) via [#179](https://github.com/10up/maps-block-apple/pull/179)).
@@ -143,6 +147,7 @@ All notable changes to this project will be documented in this file, per [the Ke
 - Initial private release of Block for Apple Maps plugin.
 
 [Unreleased]: https://github.com/10up/maps-block-apple/compare/trunk...develop
+[1.1.3]: https://github.com/10up/maps-block-apple/compare/1.1.2...1.1.3
 [1.1.2]: https://github.com/10up/maps-block-apple/compare/1.1.1...1.1.2
 [1.1.1]: https://github.com/10up/maps-block-apple/compare/1.1.0...1.1.1
 [1.1.0]: https://github.com/10up/maps-block-apple/compare/1.0.3...1.1.0

@@ -4,7 +4,7 @@ Tags:              apple maps, map block, block
 Requires at least: 5.8
 Tested up to:      6.4
 Requires PHP:      7.4
-Stable tag:        1.1.2
+Stable tag:        1.1.3
 License:           GPLv2 or later
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -71,6 +71,9 @@ Yes, you can track your MapKit JS useage on the [MapKit JS Developer Dashboard](
 4. Block settings page showing MapKit JS credential fields
 
 == Changelog ==
+
+= 1.1.3 - 2023-11-16 =
+* **Changed:** Bump WordPress "tested up to" version to 6.4 (props [@QAharshalkadu](https://github.com/QAharshalkadu), [@jeffpaul](https://github.com/jeffpaul) via [#190](https://github.com/10up/maps-block-apple/pull/190), [#191](https://github.com/10up/maps-block-apple/pull/191)).
 
 = 1.1.2 - 2023-10-16 =
 * **Changed:** Bump WordPress "tested up to" version to 6.3 (props [@QAharshalkadu](https://github.com/QAharshalkadu), [@jeffpaul](https://github.com/jeffpaul) via [#179](https://github.com/10up/maps-block-apple/pull/179)).
