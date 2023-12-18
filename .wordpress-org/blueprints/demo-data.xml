@@ -16,7 +16,7 @@
 <!-- 7. WordPress will then import each of the posts, pages, comments, categories, etc. -->
 <!--    contained in this file into your site. -->
 
-	<!-- generator="WordPress/6.4.2" created="2023-12-18 22:50" -->
+	<!-- generator="WordPress/6.4.2" created="2023-12-18 22:55" -->
 <rss version="2.0"
 	xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
 	xmlns:content="http://purl.org/rss/1.0/modules/content/"
@@ -29,7 +29,7 @@
 	<title>My WordPress Website</title>
 	<link>https://playground.wordpress.net/</link>
 	<description></description>
-	<pubDate>Mon, 18 Dec 2023 22:50:04 +0000</pubDate>
+	<pubDate>Mon, 18 Dec 2023 22:55:30 +0000</pubDate>
 	<language>en-US</language>
 	<wp:wxr_version>1.2</wp:wxr_version>
 	<wp:base_site_url>https://playground.wordpress.net/</wp:base_site_url>
@@ -37,34 +37,14 @@
 
 		<wp:author><wp:author_id>1</wp:author_id><wp:author_login><![CDATA[admin]]></wp:author_login><wp:author_email><![CDATA[admin@localhost.com]]></wp:author_email><wp:author_display_name><![CDATA[admin]]></wp:author_display_name><wp:author_first_name><![CDATA[]]></wp:author_first_name><wp:author_last_name><![CDATA[]]></wp:author_last_name></wp:author>
 
-		<wp:category>
-		<wp:term_id>1</wp:term_id>
-		<wp:category_nicename><![CDATA[uncategorized]]></wp:category_nicename>
-		<wp:category_parent><![CDATA[]]></wp:category_parent>
-		<wp:cat_name><![CDATA[Uncategorized]]></wp:cat_name>
-	</wp:category>
-				<wp:term>
-		<wp:term_id>2</wp:term_id>
-		<wp:term_taxonomy><![CDATA[wp_theme]]></wp:term_taxonomy>
-		<wp:term_slug><![CDATA[twentytwentyfour]]></wp:term_slug>
-		<wp:term_parent><![CDATA[]]></wp:term_parent>
-		<wp:term_name><![CDATA[twentytwentyfour]]></wp:term_name>
-	</wp:term>
-		<wp:term>
-		<wp:term_id>1</wp:term_id>
-		<wp:term_taxonomy><![CDATA[category]]></wp:term_taxonomy>
-		<wp:term_slug><![CDATA[uncategorized]]></wp:term_slug>
-		<wp:term_parent><![CDATA[]]></wp:term_parent>
-		<wp:term_name><![CDATA[Uncategorized]]></wp:term_name>
-	</wp:term>
 
 	<generator>https://wordpress.org/?v=6.4.2</generator>
-
+	<item>
 		<title><![CDATA[Apple Maps Block Demo]]></title>
-		<link>https://playground.wordpress.net//?p=4</link>
-		<pubDate>Mon, 18 Dec 2023 22:49:54 +0000</pubDate>
+		<link>https://playground.wordpress.net/?p=6</link>
+		<pubDate>Mon, 18 Dec 2023 22:55:23 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">https://playground.wordpress.net//?p=4</guid>
+		<guid isPermaLink="false">https://playground.wordpress.net/?p=6</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:paragraph -->
 <p>This is a demo of the Apple Maps block. You'll need to enter valid credentials in the block below in order to test.</p>
@@ -74,11 +54,11 @@
 <div style="height:450px" class="wp-block-tenup-maps-block-apple" data-map-type="standard" data-latitude="51.48762585296625" data-longitude="-0.1326724377053381" data-rotation="0" data-zoom="15" data-shows-map-type-control="true" data-is-rotation-enabled="true" data-shows-compass="adaptive" data-is-zoom-enabled="true" data-shows-zoom-control="true" data-is-scroll-enabled="true" data-shows-scale="adaptive"></div>
 <!-- /wp:tenup/maps-block-apple -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>4</wp:post_id>
-		<wp:post_date><![CDATA[2023-12-18 22:49:54]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2023-12-18 22:49:54]]></wp:post_date_gmt>
-		<wp:post_modified><![CDATA[2023-12-18 22:49:54]]></wp:post_modified>
-		<wp:post_modified_gmt><![CDATA[2023-12-18 22:49:54]]></wp:post_modified_gmt>
+		<wp:post_id>6</wp:post_id>
+		<wp:post_date><![CDATA[2023-12-18 22:55:23]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2023-12-18 22:55:23]]></wp:post_date_gmt>
+		<wp:post_modified><![CDATA[2023-12-18 22:55:23]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2023-12-18 22:55:23]]></wp:post_modified_gmt>
 		<wp:comment_status><![CDATA[open]]></wp:comment_status>
 		<wp:ping_status><![CDATA[open]]></wp:ping_status>
 		<wp:post_name><![CDATA[apple-maps-block-demo]]></wp:post_name>
