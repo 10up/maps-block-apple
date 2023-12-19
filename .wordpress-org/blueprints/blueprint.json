@@ -1,6 +1,6 @@
 {
 	"$schema": "https://playground.wordpress.net/blueprint-schema.json",
-	"landingPage": "\/wp-admin\/admin.php?page=block-for-apple-maps",
+	"landingPage": "\/wp-admin\/post.php?post=6&action=edit",
 	"preferredVersions": {
 		"php": "7.4",
 		"wp": "latest"
@@ -20,6 +20,13 @@
 			},
 			"options": {
 				"activate": true
+			}
+		},
+    {
+			"step": "importFile",
+			"file": {
+				"resource": "url",
+        "url": "https:\/\/raw.githubusercontent.com\/10up\/maps-block-apple\/385fb9705624c2fe6822ac399ed08f09a5e80388\/.wordpress-org/blueprints\/demo-data.xml"
 			}
 		}
 	]
