@@ -78,6 +78,20 @@ function register_block_assets() {
 
 }
 
+add_action( 'enqueue_block_assets', __NAMESPACE__ . '\load_apple_map_script_in_iframe' );
+/**
+ * Load Apple MapKit script within the editor iframe.
+ * This is required in order to target the correct DOM node within the iframe
+ * and apply the Mapkit script to it.
+ */
+function load_apple_map_script_in_iframe() {
+	if ( !is_admin() ) {
+		return;
+	}
+
+	wp_enqueue_script( 'apple-mapkit-js' );
+}
+
 add_action( 'init', __NAMESPACE__ . '\set_script_translations' );
 /**
  * Load translations.
