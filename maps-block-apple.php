@@ -4,12 +4,12 @@
  * Plugin URI:        https://github.com/10up/maps-block-apple
  * Description:       An Apple Maps block for the WordPress block editor (Gutenberg).
  * Version:           1.1.3
- * Requires at least: 5.8
+ * Requires at least: 6.4
  * Requires PHP:      7.4
  * Author:            10up
  * Author URI:        https://10up.com
- * License:           GPLv2 or later
- * License URI:       http://www.gnu.org/licenses/gpl-2.0.html
+ * License:           GPL-2.0-or-later
+ * License URI:       https://spdx.org/licenses/GPL-2.0-or-later.html
  * Text Domain:       maps-block-apple
  *
  * @package           tenup\Maps_Block_Apple

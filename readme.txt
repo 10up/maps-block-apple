@@ -1,12 +1,10 @@
 === Block for Apple Maps ===
 Contributors:      10up, helen, welcher, fabiankaegy, dinhtungdu, jeffpaul
 Tags:              apple maps, map block, block
-Requires at least: 5.8
-Tested up to:      6.4
-Requires PHP:      7.4
+Tested up to:      6.6
 Stable tag:        1.1.3
-License:           GPLv2 or later
-License URI:       http://www.gnu.org/licenses/gpl-2.0.html
+License:           GPL-2.0-or-later
+License URI:       https://spdx.org/licenses/GPL-2.0-or-later.html
 
 An Apple Maps block for the WordPress block editor (Gutenberg).
 
