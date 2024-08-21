@@ -85,7 +85,7 @@ add_action( 'enqueue_block_assets', __NAMESPACE__ . '\load_apple_map_script_in_i
  * and apply the Mapkit script to it.
  */
 function load_apple_map_script_in_iframe() {
-	if ( !is_admin() ) {
+	if ( ! is_admin() ) {
 		return;
 	}
 
