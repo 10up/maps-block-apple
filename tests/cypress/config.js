@@ -3,6 +3,7 @@ const { loadConfig } = require( '@wordpress/env/lib/config' );
 const getCacheDirectory = require( '@wordpress/env/lib/config/get-cache-directory' );
 
 module.exports = defineConfig({
+  chromeWebSecurity: false,
   fixturesFolder: 'tests/cypress/fixtures',
   screenshotsFolder: 'tests/cypress/screenshots',
   videosFolder: 'tests/cypress/videos',
