@@ -9,7 +9,7 @@ describe("Test block functions", () => {
 			title: "Correct Map Post",
 			beforeSave: () => {
 				cy.insertBlock("tenup/maps-block-apple", "apple maps").then((id) => {
-					cy.get(`#${id}`).then((block) => {
+					cy.getBlockEditor().find(`#${id}`).then((block) => {
 						expect(block.find(".mk-map-view").length > 0);
 					});
 				});
@@ -25,7 +25,7 @@ describe("Test block functions", () => {
 			title: "Broken Map Post",
 			beforeSave: () => {
 				cy.insertBlock("tenup/maps-block-apple", "apple maps").then((block) => {
-					cy.get(`#${block}`).should(
+					cy.getBlockEditor().find(`#${block}`).should(
 						"contain.text",
 						"Confirm access to Apple Maps"
 					);
