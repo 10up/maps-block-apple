@@ -3,7 +3,7 @@
   "title":"Apple Maps",
   "category":"embed",
   "description":"Add an Apple Map to your site.",
-  "apiVersion": 2,
+  "apiVersion": 3,
   "keywords":[
     "apple",
     "map",

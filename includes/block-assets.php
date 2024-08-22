@@ -78,6 +78,21 @@ function register_block_assets() {
 
 }
 
+add_action( 'enqueue_block_assets', __NAMESPACE__ . '\load_apple_map_script_in_iframe' );
+/**
+ * Load Apple MapKit script within the editor iframe.
+ * This is required to ensure that the mapkit js script gets properly loaded inside the editor iframe.
+ * It needs to be inside the iframe so the element we want to render the Map in is in the same window
+ * as the mapkit script. Otherwise mapkit will throw an error saying it cannot find the element.
+ */
+function load_apple_map_script_in_iframe() {
+	if ( ! is_admin() ) {
+		return;
+	}
+
+	wp_enqueue_script( 'apple-mapkit-js' );
+}
+
 add_action( 'init', __NAMESPACE__ . '\set_script_translations' );
 /**
  * Load translations.
