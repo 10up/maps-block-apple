@@ -70,7 +70,7 @@ Yes, you can track your MapKit JS useage on the [MapKit JS Developer Dashboard](
 
 == Changelog ==
 
-= 1.1.4 - 2024-08-26 =
+= 1.1.4 - 2024-08-22 =
 * **Note that this release bumps the WordPress minimum version from 5.8 to 6.4.**
 
 * **Changed:** Update the `apiVersion` of the Apple Maps Block to Version 3 (props [@fabiankaegy](https://github.com/fabiankaegy), [@wadebekker](https://github.com/wadebekker), [@dkotter](https://github.com/dkotter) via [#211](https://github.com/10up/maps-block-apple/pull/211)).
