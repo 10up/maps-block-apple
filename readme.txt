@@ -70,6 +70,19 @@ Yes, you can track your MapKit JS useage on the [MapKit JS Developer Dashboard](
 
 == Changelog ==
 
+= 1.1.4 - 2024-08-26 =
+* **Note that this release bumps the WordPress minimum version from 5.8 to 6.4.**
+
+* **Changed:** Update the `apiVersion` of the Apple Maps Block to Version 3 (props [@fabiankaegy](https://github.com/fabiankaegy), [@wadebekker](https://github.com/wadebekker), [@dkotter](https://github.com/dkotter) via [#211](https://github.com/10up/maps-block-apple/pull/211)).
+* **Changed:** Bump WordPress "tested up to" version to 6.6 (props [@QAharshalkadu](https://github.com/QAharshalkadu), [@sudip-md](https://github.com/sudip-md), [@jeffpaul](https://github.com/jeffpaul), [@dkotter](https://github.com/dkotter) via [#212](https://github.com/10up/maps-block-apple/pull/212), [#218](https://github.com/10up/maps-block-apple/pull/218)).
+* **Changed:** Bump minimum WordPress version from 5.8 to 6.4 (props [@QAharshalkadu](https://github.com/QAharshalkadu), [@sudip-md](https://github.com/sudip-md), [@jeffpaul](https://github.com/jeffpaul), [@dkotter](https://github.com/dkotter) via [#212](https://github.com/10up/maps-block-apple/pull/212), [#218](https://github.com/10up/maps-block-apple/pull/218)).
+* **Fixed:** Load the Apple MapKit script in the editor iframe to ensure the Apple Maps block works correctly (props [@fabiankaegy](https://github.com/fabiankaegy), [@wadebekker](https://github.com/wadebekker), [@dkotter](https://github.com/dkotter) via [#211](https://github.com/10up/maps-block-apple/pull/211)).
+* **Security:** Bump `postcss` from 8.4.23 to 8.4.32 (props [@dependabot](https://github.com/apps/dependabot), [@faisal-alvi](https://github.com/faisal-alvi) via [#194](https://github.com/10up/maps-block-apple/pull/194)).
+* **Security:** Bump `@babel/traverse` from 7.21.5 to 7.23.7 (props [@dependabot](https://github.com/apps/dependabot), [@peterwilsoncc](https://github.com/peterwilsoncc) via [#200](https://github.com/10up/maps-block-apple/pull/200)).
+* **Security:** Bump `axios` from 0.25.0 to 1.7.4, `@wordpress/scripts` from 24.6.0 to 27.5.0, `express` from 4.18.2 to 4.19.2, `follow-redirects` from 1.15.3 to 1.15.6 and `webpack-dev-middleware` from 5.3.3 to 5.3.4 (props [@dependabot](https://github.com/apps/dependabot), [@Sidsector9](https://github.com/Sidsector9) via [#209](https://github.com/10up/maps-block-apple/pull/209), [#219](https://github.com/10up/maps-block-apple/pull/219)).
+* **Security:** Bump `braces` from 3.0.2 to 3.0.3 and `ws` from 7.5.9 to 7.5.10 (props [@dependabot](https://github.com/apps/dependabot), [@iamdharmesh](https://github.com/iamdharmesh) via [#215](https://github.com/10up/maps-block-apple/pull/215)).
+* **Developer:** Support for the WordPress.org plugin preview (props [@dkotter](https://github.com/dkotter), [@jeffpaul](https://github.com/jeffpaul) via [#196](https://github.com/10up/maps-block-apple/pull/196)).
+
 = 1.1.3 - 2023-11-16 =
 * **Changed:** Bump WordPress "tested up to" version to 6.4 (props [@QAharshalkadu](https://github.com/QAharshalkadu), [@jeffpaul](https://github.com/jeffpaul) via [#190](https://github.com/10up/maps-block-apple/pull/190), [#191](https://github.com/10up/maps-block-apple/pull/191)).
 
@@ -79,10 +92,10 @@ Yes, you can track your MapKit JS useage on the [MapKit JS Developer Dashboard](
 * **Fixed:** Better error handling for environments that don't match our minimum PHP version (props [@rahulsprajapati](https://github.com/rahulsprajapati), [@dkotter](https://github.com/dkotter), [@ravinderk](https://github.com/ravinderk) via [#174](https://github.com/10up/maps-block-apple/pull/174)).
 * **Fixed:** Ensure that the Apple Maps block works fine in WordPress 6.4 (props [@iamdharmesh](https://github.com/iamdharmesh), [@fabiankaegy](https://github.com/fabiankaegy), [@faisal-alvi](https://github.com/faisal-alvi) via [#183](https://github.com/10up/maps-block-apple/pull/183)).
 * **Fixed:** Ensure that our Cypress E2E tests pass (props [@iamdharmesh](https://github.com/iamdharmesh), [@Sidsector9](https://github.com/Sidsector9) via [#181](https://github.com/10up/maps-block-apple/pull/181)).
-* **Security:** Bump `word-wrap` from 1.2.3 to 1.2.4 (props [@dependabot](https://github.com/apps/dependabot), [@ravinderk](https://github.com/apps/ravinderk) via [#173](https://github.com/10up/maps-block-apple/pull/173)).
-* **Security:** Bump `tough-cookie` from 4.1.2 to 4.1.3 (props [@dependabot](https://github.com/apps/dependabot), [@faisal-alvi](https://github.com/apps/faisal-alvi) via [#176](https://github.com/10up/maps-block-apple/pull/176)).
-* **Security:** Bump `cypress` from 11.2.0 to 13.2.0 and `@cypress/request` from 2.88.11 to 3.0.0 (props [@dependabot](https://github.com/apps/dependabot), [@ravinderk](https://github.com/apps/ravinderk), [@faisal-alvi](https://github.com/apps/faisal-alvi), [@iamdharmesh](https://github.com/iamdharmesh), [@Sidsector9](https://github.com/Sidsector9) via [#176](https://github.com/10up/maps-block-apple/pull/176), [#180](https://github.com/10up/maps-block-apple/pull/180), [#181](https://github.com/10up/maps-block-apple/pull/181)).
-* **Security:** Bump `postcss` from 8.4.23 to 8.4.31 (props [@dependabot](https://github.com/apps/dependabot), [@ravinderk](https://github.com/apps/ravinderk) via [#184](https://github.com/10up/maps-block-apple/pull/184)).
+* **Security:** Bump `word-wrap` from 1.2.3 to 1.2.4 (props [@dependabot](https://github.com/apps/dependabot), [@ravinderk](https://github.com/ravinderk) via [#173](https://github.com/10up/maps-block-apple/pull/173)).
+* **Security:** Bump `tough-cookie` from 4.1.2 to 4.1.3 (props [@dependabot](https://github.com/apps/dependabot), [@faisal-alvi](https://github.com/faisal-alvi) via [#176](https://github.com/10up/maps-block-apple/pull/176)).
+* **Security:** Bump `cypress` from 11.2.0 to 13.2.0 and `@cypress/request` from 2.88.11 to 3.0.0 (props [@dependabot](https://github.com/apps/dependabot), [@ravinderk](https://github.com/ravinderk), [@faisal-alvi](https://github.com/faisal-alvi), [@iamdharmesh](https://github.com/iamdharmesh), [@Sidsector9](https://github.com/Sidsector9) via [#176](https://github.com/10up/maps-block-apple/pull/176), [#180](https://github.com/10up/maps-block-apple/pull/180), [#181](https://github.com/10up/maps-block-apple/pull/181)).
+* **Security:** Bump `postcss` from 8.4.23 to 8.4.31 (props [@dependabot](https://github.com/apps/dependabot), [@ravinderk](https://github.com/ravinderk) via [#184](https://github.com/10up/maps-block-apple/pull/184)).
 * **Security:** Bump `@10up/cypress-wp-utils` from 0.1.0 to 0.2.0, `@wordpress/env` from 5.6.0 to 8.7.0 and `cypress-mochawesome-reporter` from 3.4.0 to 3.6.0 (props [@iamdharmesh](https://github.com/iamdharmesh), [@Sidsector9](https://github.com/Sidsector9) via [#181](https://github.com/10up/maps-block-apple/pull/181)).
 
 = 1.1.1 - 2023-06-21 =
@@ -119,6 +132,10 @@ Yes, you can track your MapKit JS useage on the [MapKit JS Developer Dashboard](
 For the changelog of earlier versions, please refer to the [changelog on github.com](https://github.com/10up/maps-block-apple/blob/develop/CHANGELOG.md).
 
 == Upgrade Notice ==
+
+= 1.1.4 =
+
+* Note that this version bumps the minimum WordPress version from 5.8 to 6.4
 
 = 1.1.1 =
 
