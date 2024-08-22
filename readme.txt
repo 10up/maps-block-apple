@@ -2,7 +2,7 @@
 Contributors:      10up, helen, welcher, fabiankaegy, dinhtungdu, jeffpaul
 Tags:              apple maps, map block, block
 Tested up to:      6.6
-Stable tag:        1.1.3
+Stable tag:        1.1.4
 License:           GPL-2.0-or-later
 License URI:       https://spdx.org/licenses/GPL-2.0-or-later.html
 
