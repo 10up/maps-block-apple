@@ -42,7 +42,7 @@
     "@10up/cypress-wp-utils": "^0.4.0",
     "@wordpress/env": "^10.6.0",
     "@wordpress/eslint-plugin": "^10.0.1",
-    "@wordpress/scripts": "^27.5.0",
+    "@wordpress/scripts": "^29.0.0",
     "cypress": "^13.13.3",
     "cypress-mochawesome-reporter": "^3.8.2",
     "mochawesome-json-to-md": "^0.7.2"
