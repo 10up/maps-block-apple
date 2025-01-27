@@ -13,6 +13,7 @@ import {
 	store as blockEditorStore,
 } from '@wordpress/block-editor';
 import { useSelect, useDispatch } from '@wordpress/data';
+import apiFetch from '@wordpress/api-fetch';
 
 import { AppleMapEdit } from './components/AppleMap';
 import EditAuthForm from './components/EditAuthForm';
@@ -74,6 +75,33 @@ export default function MapsBlockAppleEdit(props) {
 
 	const { updateAuthenticationStatus } = useDispatch(mapsBlockAppleStore);
 	const { toggleSelection } = useDispatch(blockEditorStore);
+
+	/**
+	 * Check if the credentials exist.
+	 */
+	const checkCredentials = async () => {
+		try {
+			const settings = await apiFetch({ path: 'wp/v2/settings' });
+			const hasCredentials =
+				settings.maps_block_apple &&
+				settings.maps_block_apple.private_key &&
+				settings.maps_block_apple.key_id &&
+				settings.maps_block_apple.team_id;
+
+			if (!hasCredentials) {
+				setIsLoading(false);
+				updateAuthenticationStatus(false);
+				return;
+			}
+
+			// Credentials exist, proceed with normal initialization
+			return true;
+		} catch (error) {
+			setIsLoading(false);
+			updateAuthenticationStatus(false);
+			return false;
+		}
+	};
 
 	/**
 	 * setup the initial authentication of mapkit and setup all the event listeners
@@ -144,8 +172,11 @@ export default function MapsBlockAppleEdit(props) {
 		/**
 		 * handleMapkitReInitialization
 		 */
-		const InitializeMapkit = () => {
-			AppleMapEdit.authenticateMap(localMapkit);
+		const InitializeMapkit = async () => {
+			const hasValidCredentials = await checkCredentials();
+			if (hasValidCredentials) {
+				AppleMapEdit.authenticateMap(localMapkit);
+			}
 		};
 		localMapkit.addEventListener('reinitialize', InitializeMapkit);
 
