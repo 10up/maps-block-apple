@@ -81,18 +81,17 @@ export default function MapsBlockAppleEdit(props) {
 	 */
 	const checkCredentials = async () => {
 		try {
-			const response = await apiFetch({ path: 'MapsBlockApple/v1/GetJWT' });
-			// If the endpoint returns a JWT, treat as authenticated.
+			const response = await apiFetch({
+				path: 'MapsBlockApple/v1/GetJWT',
+			});
 			if (response && response.jwt) {
 				return true;
-			} else {
-				setIsLoading(false);
-				updateAuthenticationStatus(false);
-				return false;
 			}
+
+			setIsLoading(false);
+			updateAuthenticationStatus(false);
+			return false;
 		} catch (error) {
-			// If the endpoint returns an error, treat as unauthenticated.
-			console.error(error);
 			setIsLoading(false);
 			updateAuthenticationStatus(false);
 			return false;
