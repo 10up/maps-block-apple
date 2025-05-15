@@ -17,7 +17,7 @@ This plugin integrates Apple's [MapKit JS](https://developer.apple.com/maps/mapk
 ## Requirements
 
 * PHP 7.4+
-* [WordPress](http://wordpress.org/) 6.5+
+* [WordPress](http://wordpress.org/) 6.6+
 * Due to the requirements applied by Apple to use Apple Maps ([MapkitJS](https://developer.apple.com/maps/mapkitjs/)), Apple Maps for WordPress requires an [Apple Developer](https://developer.apple.com/) [account](https://developer.apple.com/account/) and enrollment within the [Apple Developer Program](https://developer.apple.com/programs/).
 
 ## Installation
