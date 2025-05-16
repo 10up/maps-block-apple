@@ -84,7 +84,7 @@ export default function MapsBlockAppleEdit(props) {
 			const response = await apiFetch({
 				path: 'MapsBlockApple/v1/GetJWT',
 			});
-			if (response && response.jwt) {
+			if (response) {
 				return true;
 			}
 
