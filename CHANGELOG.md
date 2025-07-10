@@ -4,6 +4,26 @@ All notable changes to this project will be documented in this file, per [the Ke
 
 ## [Unreleased] - TBD
 
+## [1.1.5] - 2025-07-14
+**Note that this release bumps the WordPress minimum version from 6.4 to 6.6.**
+
+### Changed
+- Bump WordPress "tested up to" version 6.8 (props [@sudip-md](https://github.com/sudip-md), [@mehidi258](https://github.com/mehidi258), [@jeffpaul](https://github.com/jeffpaul), [@dkotter](https://github.com/dkotter), [@peterwilsoncc](https://github.com/peterwilsoncc), [@Rishabh-fueled](https://github.com/@Rishabh-fueled) via [#229](https://github.com/10up/maps-block-apple/pull/229), [#230](https://github.com/10up/maps-block-apple/pull/230), [#237](https://github.com/10up/maps-block-apple/pull/237), [#238](https://github.com/10up/maps-block-apple/pull/238)).
+- Bump WordPress minimum supported version to 6.6 (props [@sudip-md](https://github.com/sudip-md), [@mehidi258](https://github.com/mehidi258), [@jeffpaul](https://github.com/jeffpaul), [@dkotter](https://github.com/dkotter), [@peterwilsoncc](https://github.com/peterwilsoncc), [@Rishabh-fueled](https://github.com/@Rishabh-fueled) via [#229](https://github.com/10up/maps-block-apple/pull/229), [#230](https://github.com/10up/maps-block-apple/pull/230), [#238](https://github.com/10up/maps-block-apple/pull/238)).
+
+### Fixed
+- Block crash when no Apple Maps credentials are configured (props [@elvismdev](https://github.com/elvismdev), [@peterwilsoncc](https://github.com/peterwilsoncc) via [#233](https://github.com/10up/maps-block-apple/pull/233)).
+
+### Security
+- Bump `braces` from 3.0.2 to 3.0.3, `express` from 4.18.2 to 4.19.2, `webpack` from 5.89.0 to 5.94.0 and `webpack-dev-middleware` from 5.3.3 to 5.3.4 (props [@dependabot](https://github.com/apps/dependabot), [@faisal-alvi](https://github.com/faisal-alvi) via [#224](https://github.com/10up/maps-block-apple/pull/224)).
+- Bump `@wordpress/scripts` from 27.9.0 to 30.6.0, `body-parser` from 1.20.2 to 1.20.3, `express` from 4.19.2 to 4.21.1, `ws` from 7.5.9 to 8.18.0, `send` from 0.18.0 to 0.19.0 and `serve-static` from 1.15.0 to 1.16.2 (props [@dependabot](https://github.com/apps/dependabot), [@peterwilsoncc](https://github.com/peterwilsoncc) via [#231](https://github.com/10up/maps-block-apple/pull/231)).
+- Bump `@wordpress/e2e-test-utils-playwright` from 1.13.0 to 1.18.0, `serialize-javascript` from 6.0.1 to 6.0.2, `mocha` from 10.2.0 to 11.1.0 and removes `cookie` (props [@dependabot](https://github.com/apps/dependabot), [@peterwilsoncc](https://github.com/peterwilsoncc) via [#234](https://github.com/10up/maps-block-apple/pull/234)).
+- Bump `axios` from 1.7.4 to 1.9.0 and `http-proxy-middleware` from 2.0.6 to 2.0.9 (props [@dependabot](https://github.com/apps/dependabot), [@peterwilsoncc](https://github.com/peterwilsoncc) via [#241](https://github.com/10up/maps-block-apple/pull/241)).
+
+### Developer
+- Update `README.md` with banner image and badges (props [@jeffpaul](https://github.com/jeffpaul), [@dkotter](https://github.com/dkotter) via [#225](https://github.com/10up/maps-block-apple/pull/225), [#227](https://github.com/10up/maps-block-apple/pull/227)).
+- Update all third-party actions our workflows rely on to use versions based on specific commit hashes (props [@jeffpaul](https://github.com/jeffpaul), [@dkotter](https://github.com/dkotter) via [#235](https://github.com/10up/maps-block-apple/pull/235)).
+
 ## [1.1.4] - 2024-08-22
 **Note that this release bumps the WordPress minimum version from 5.8 to 6.4.**
 
@@ -174,6 +194,7 @@ All notable changes to this project will be documented in this file, per [the Ke
 - Initial private release of Block for Apple Maps plugin.
 
 [Unreleased]: https://github.com/10up/maps-block-apple/compare/trunk...develop
+[1.1.5]: https://github.com/10up/maps-block-apple/compare/1.1.4...1.1.5
 [1.1.4]: https://github.com/10up/maps-block-apple/compare/1.1.3...1.1.4
 [1.1.3]: https://github.com/10up/maps-block-apple/compare/1.1.2...1.1.3
 [1.1.2]: https://github.com/10up/maps-block-apple/compare/1.1.1...1.1.2
