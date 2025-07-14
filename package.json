@@ -1,6 +1,6 @@
 {
   "name": "maps-block-apple",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "An Apple Maps block for the WordPress block editor (Gutenberg).",
   "author": {
     "name": "10up",
@@ -39,10 +39,10 @@
     "node": ">=12.0"
   },
   "devDependencies": {
-    "@10up/cypress-wp-utils": "^0.4.0",
+    "@10up/cypress-wp-utils": "^0.6.0",
     "@wordpress/env": "^10.6.0",
     "@wordpress/eslint-plugin": "^10.0.1",
-    "@wordpress/scripts": "^27.5.0",
+    "@wordpress/scripts": "^30.6.0",
     "cypress": "^13.13.3",
     "cypress-mochawesome-reporter": "^3.8.2",
     "mochawesome-json-to-md": "^0.7.2"

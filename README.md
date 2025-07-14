@@ -1,10 +1,10 @@
 # Block for Apple Maps
 
+![Apple Maps Block](https://github.com/10up/maps-block-apple/blob/develop/.wordpress-org/banner-1544x500.png)
+
+[![Support Level](https://img.shields.io/badge/support-stable-blue.svg)](#support-level) ![Required PHP Version](https://img.shields.io/wordpress/plugin/required-php/maps-block-apple?label=Requires%20PHP) ![Required WP Version](https://img.shields.io/wordpress/plugin/wp-version/maps-block-apple?label=Requires%20WordPress) ![WordPress tested up to version](https://img.shields.io/wordpress/plugin/tested/maps-block-apple?label=WordPress) [![GPL-2.0-or-later License](https://img.shields.io/github/license/10up/maps-block-apple.svg)](https://github.com/10up/maps-block-apple/blob/develop/LICENSE.md) [![Dependency Review](https://github.com/10up/maps-block-apple/actions/workflows/dependency-review.yml/badge.svg)](https://github.com/10up/maps-block-apple/actions/workflows/dependency-review.yml) [![E2E test](https://github.com/10up/maps-block-apple/actions/workflows/cypress.yml/badge.svg)](https://github.com/10up/maps-block-apple/actions/workflows/cypress.yml) [![Linting](https://github.com/10up/maps-block-apple/actions/workflows/linting.yml/badge.svg)](https://github.com/10up/maps-block-apple/actions/workflows/linting.yml) [![Code scanning - action](https://github.com/10up/maps-block-apple/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/10up/maps-block-apple/actions/workflows/codeql-analysis.yml) [![WordPress Plugin Version](https://img.shields.io/wordpress/plugin/v/maps-block-apple?logo=wordpress&logoColor=FFFFFF&label=Playground%20Demo&labelColor=3858E9&color=3858E9)](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/10up/maps-block-apple/develop/.wordpress-org/blueprints/blueprint.json)
+
 > An Apple Maps block for the WordPress block editor (Gutenberg).
-
-[![Support Level](https://img.shields.io/badge/support-stable-blue.svg)](#support-level) ![WordPress tested up to version](https://img.shields.io/wordpress/plugin/tested/maps-block-apple?label=WordPress) [![GPL-2.0-or-later License](https://img.shields.io/github/license/10up/maps-block-apple.svg)](https://github.com/10up/maps-block-apple/blob/develop/LICENSE.md) [![WordPress Plugin Version](https://img.shields.io/wordpress/plugin/v/maps-block-apple?logo=wordpress&logoColor=FFFFFF&label=Playground%20Demo&labelColor=3858E9&color=3858E9)](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/10up/maps-block-apple/develop/.wordpress-org/blueprints/blueprint.json)
-
-[![E2E test](https://github.com/10up/maps-block-apple/actions/workflows/cypress.yml/badge.svg)](https://github.com/10up/maps-block-apple/actions/workflows/cypress.yml) [![Linting](https://github.com/10up/maps-block-apple/actions/workflows/linting.yml/badge.svg)](https://github.com/10up/maps-block-apple/actions/workflows/linting.yml) [![Dependency Review](https://github.com/10up/maps-block-apple/actions/workflows/dependency-review.yml/badge.svg)](https://github.com/10up/maps-block-apple/actions/workflows/dependency-review.yml)
 
 ## Overview
 
@@ -17,7 +17,7 @@ This plugin integrates Apple's [MapKit JS](https://developer.apple.com/maps/mapk
 ## Requirements
 
 * PHP 7.4+
-* [WordPress](http://wordpress.org/) 6.4+
+* [WordPress](http://wordpress.org/) 6.6+
 * Due to the requirements applied by Apple to use Apple Maps ([MapkitJS](https://developer.apple.com/maps/mapkitjs/)), Apple Maps for WordPress requires an [Apple Developer](https://developer.apple.com/) [account](https://developer.apple.com/account/) and enrollment within the [Apple Developer Program](https://developer.apple.com/programs/).
 
 ## Installation
@@ -85,4 +85,4 @@ Please read [CODE_OF_CONDUCT.md](https://github.com/10up/maps-block-apple/blob/d
 
 ## Like what you see?
 
-<a href="http://10up.com/contact/"><img src="https://10up.com/uploads/2016/10/10up-Github-Banner.png" width="850" alt="Work with us at 10up"></a>
+<a href="http://10up.com/contact/"><img src="https://github.com/10up/.github/blob/trunk/profile/10up-github-banner.jpg" width="850" alt="Work with the 10up WordPress Practice at Fueled"></a>

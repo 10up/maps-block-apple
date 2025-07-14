@@ -1,9 +1,8 @@
 === Block for Apple Maps ===
 Contributors:      10up, helen, welcher, fabiankaegy, dinhtungdu, jeffpaul
 Tags:              apple maps, map block, block
-Requires at least: 6.6
 Tested up to:      6.8
-Stable tag:        1.1.4
+Stable tag:        1.1.5
 License:           GPL-2.0-or-later
 License URI:       https://spdx.org/licenses/GPL-2.0-or-later.html
 
@@ -71,6 +70,17 @@ Yes, you can track your MapKit JS useage on the [MapKit JS Developer Dashboard](
 
 == Changelog ==
 
+= 1.1.5 - 2025-07-14 =
+* **Note that this release bumps the WordPress minimum version from 6.4 to 6.6.**
+
+* **Changed:** Bump WordPress "tested up to" version 6.8 (props [@sudip-md](https://github.com/sudip-md), [@mehidi258](https://github.com/mehidi258), [@jeffpaul](https://github.com/jeffpaul), [@dkotter](https://github.com/dkotter), [@peterwilsoncc](https://github.com/peterwilsoncc), [@Rishabh-fueled](https://github.com/@Rishabh-fueled) via [#229](https://github.com/10up/maps-block-apple/pull/229), [#230](https://github.com/10up/maps-block-apple/pull/230), [#237](https://github.com/10up/maps-block-apple/pull/237), [#238](https://github.com/10up/maps-block-apple/pull/238)).
+* **Changed:** Bump WordPress minimum supported version to 6.6 (props [@sudip-md](https://github.com/sudip-md), [@mehidi258](https://github.com/mehidi258), [@jeffpaul](https://github.com/jeffpaul), [@dkotter](https://github.com/dkotter), [@peterwilsoncc](https://github.com/peterwilsoncc), [@Rishabh-fueled](https://github.com/@Rishabh-fueled) via [#229](https://github.com/10up/maps-block-apple/pull/229), [#230](https://github.com/10up/maps-block-apple/pull/230), [#238](https://github.com/10up/maps-block-apple/pull/238)).
+* **Fixed:** Block crash when no Apple Maps credentials are configured (props [@elvismdev](https://github.com/elvismdev), [@peterwilsoncc](https://github.com/peterwilsoncc) via [#233](https://github.com/10up/maps-block-apple/pull/233)).
+* **Security:** Bump `braces` from 3.0.2 to 3.0.3, `express` from 4.18.2 to 4.19.2, `webpack` from 5.89.0 to 5.94.0 and `webpack-dev-middleware` from 5.3.3 to 5.3.4 (props [@dependabot](https://github.com/apps/dependabot), [@faisal-alvi](https://github.com/faisal-alvi) via [#224](https://github.com/10up/maps-block-apple/pull/224)).
+* **Security:** Bump `@wordpress/scripts` from 27.9.0 to 30.6.0, `body-parser` from 1.20.2 to 1.20.3, `express` from 4.19.2 to 4.21.1, `ws` from 7.5.9 to 8.18.0, `send` from 0.18.0 to 0.19.0 and `serve-static` from 1.15.0 to 1.16.2 (props [@dependabot](https://github.com/apps/dependabot), [@peterwilsoncc](https://github.com/peterwilsoncc) via [#231](https://github.com/10up/maps-block-apple/pull/231)).
+* **Security:** Bump `@wordpress/e2e-test-utils-playwright` from 1.13.0 to 1.18.0, `serialize-javascript` from 6.0.1 to 6.0.2, `mocha` from 10.2.0 to 11.1.0 and removes `cookie` (props [@dependabot](https://github.com/apps/dependabot), [@peterwilsoncc](https://github.com/peterwilsoncc) via [#234](https://github.com/10up/maps-block-apple/pull/234)).
+* **Security:** Bump `axios` from 1.7.4 to 1.9.0 and `http-proxy-middleware` from 2.0.6 to 2.0.9 (props [@dependabot](https://github.com/apps/dependabot), [@peterwilsoncc](https://github.com/peterwilsoncc) via [#241](https://github.com/10up/maps-block-apple/pull/241)).
+
 = 1.1.4 - 2024-08-22 =
 * **Note that this release bumps the WordPress minimum version from 5.8 to 6.4.**
 
@@ -84,55 +94,14 @@ Yes, you can track your MapKit JS useage on the [MapKit JS Developer Dashboard](
 * **Security:** Bump `braces` from 3.0.2 to 3.0.3 and `ws` from 7.5.9 to 7.5.10 (props [@dependabot](https://github.com/apps/dependabot), [@iamdharmesh](https://github.com/iamdharmesh) via [#215](https://github.com/10up/maps-block-apple/pull/215)).
 * **Developer:** Support for the WordPress.org plugin preview (props [@dkotter](https://github.com/dkotter), [@jeffpaul](https://github.com/jeffpaul) via [#196](https://github.com/10up/maps-block-apple/pull/196)).
 
-= 1.1.3 - 2023-11-16 =
-* **Changed:** Bump WordPress "tested up to" version to 6.4 (props [@QAharshalkadu](https://github.com/QAharshalkadu), [@jeffpaul](https://github.com/jeffpaul) via [#190](https://github.com/10up/maps-block-apple/pull/190), [#191](https://github.com/10up/maps-block-apple/pull/191)).
-
-= 1.1.2 - 2023-10-16 =
-* **Changed:** Bump WordPress "tested up to" version to 6.3 (props [@QAharshalkadu](https://github.com/QAharshalkadu), [@jeffpaul](https://github.com/jeffpaul) via [#179](https://github.com/10up/maps-block-apple/pull/179)).
-* **Fixed:** Ensure our Mapkit JS only loads when a Map block is in place (props [@jayedul](https://github.com/jayedul), [@fabiankaegy](https://github.com/fabiankaegy), [@faisal-alvi](https://github.com/faisal-alvi) via [#161](https://github.com/10up/maps-block-apple/pull/161)).
-* **Fixed:** Better error handling for environments that don't match our minimum PHP version (props [@rahulsprajapati](https://github.com/rahulsprajapati), [@dkotter](https://github.com/dkotter), [@ravinderk](https://github.com/ravinderk) via [#174](https://github.com/10up/maps-block-apple/pull/174)).
-* **Fixed:** Ensure that the Apple Maps block works fine in WordPress 6.4 (props [@iamdharmesh](https://github.com/iamdharmesh), [@fabiankaegy](https://github.com/fabiankaegy), [@faisal-alvi](https://github.com/faisal-alvi) via [#183](https://github.com/10up/maps-block-apple/pull/183)).
-* **Fixed:** Ensure that our Cypress E2E tests pass (props [@iamdharmesh](https://github.com/iamdharmesh), [@Sidsector9](https://github.com/Sidsector9) via [#181](https://github.com/10up/maps-block-apple/pull/181)).
-* **Security:** Bump `word-wrap` from 1.2.3 to 1.2.4 (props [@dependabot](https://github.com/apps/dependabot), [@ravinderk](https://github.com/ravinderk) via [#173](https://github.com/10up/maps-block-apple/pull/173)).
-* **Security:** Bump `tough-cookie` from 4.1.2 to 4.1.3 (props [@dependabot](https://github.com/apps/dependabot), [@faisal-alvi](https://github.com/faisal-alvi) via [#176](https://github.com/10up/maps-block-apple/pull/176)).
-* **Security:** Bump `cypress` from 11.2.0 to 13.2.0 and `@cypress/request` from 2.88.11 to 3.0.0 (props [@dependabot](https://github.com/apps/dependabot), [@ravinderk](https://github.com/ravinderk), [@faisal-alvi](https://github.com/faisal-alvi), [@iamdharmesh](https://github.com/iamdharmesh), [@Sidsector9](https://github.com/Sidsector9) via [#176](https://github.com/10up/maps-block-apple/pull/176), [#180](https://github.com/10up/maps-block-apple/pull/180), [#181](https://github.com/10up/maps-block-apple/pull/181)).
-* **Security:** Bump `postcss` from 8.4.23 to 8.4.31 (props [@dependabot](https://github.com/apps/dependabot), [@ravinderk](https://github.com/ravinderk) via [#184](https://github.com/10up/maps-block-apple/pull/184)).
-* **Security:** Bump `@10up/cypress-wp-utils` from 0.1.0 to 0.2.0, `@wordpress/env` from 5.6.0 to 8.7.0 and `cypress-mochawesome-reporter` from 3.4.0 to 3.6.0 (props [@iamdharmesh](https://github.com/iamdharmesh), [@Sidsector9](https://github.com/Sidsector9) via [#181](https://github.com/10up/maps-block-apple/pull/181)).
-
-= 1.1.1 - 2023-06-21 =
-* **Note that this release bumps the PHP minimum supported version from 5.6 to 7.4.**
-
-* **Added:** Mochawesome reporter added for Cypress test report (props [@jayedul](https://github.com/jayedul), [@iamdharmesh](https://github.com/iamdharmesh) via [#168](https://github.com/10up/maps-block-apple/pull/168)).
-* **Changed:** Bump PHP minimum supported version from 5.6 to 7.4 (props [@jayedul](https://github.com/jayedul), [@csloisel](https://github.com/csloisel), [@faisal-alvi](https://github.com/faisal-alvi), [@dkotter](https://github.com/dkotter) via [#133](https://github.com/10up/maps-block-apple/pull/133)).
-* **Changed:** Run E2E tests on the zip generated by "Build release zip" action (props [@jayedul](https://github.com/jayedul), [@peterwilsoncc](https://github.com/peterwilsoncc) via [#163](https://github.com/10up/maps-block-apple/pull/163)).
-* **Changed:** Bump WordPress "tested up to" version to 6.2 (props [@jayedul](https://github.com/jayedul), [@peterwilsoncc](https://github.com/peterwilsoncc), [@Sidsector9](https://github.com/Sidsector9) via [#165](https://github.com/10up/maps-block-apple/pull/165), [#167](https://github.com/10up/maps-block-apple/pull/167)).
-* **Changed:** Update Cypress E2E and Dependency Review GitHub Actions (props [@jayedul](https://github.com/jayedul), [@jeffpaul](https://github.com/jeffpaul), [@Sidsector9](https://github.com/Sidsector9) via [#166](https://github.com/10up/maps-block-apple/pull/166), [#169](https://github.com/10up/maps-block-apple/pull/169)).
-* **Security:** Bump `simple-git` from 3.15.1 to 3.16.0 (props [@dependabot](https://github.com/apps/dependabot) via [#158](https://github.com/10up/maps-block-apple/pull/158)).
-* **Security:** Bump `http-cache-semantics` from 4.1.0 to 4.1.1 (props [@dependabot](https://github.com/apps/dependabot) via [#159](https://github.com/10up/maps-block-apple/pull/159)).
-* **Security:** Bump `@sideway/formula` from 3.0.0 to 3.0.1 (props [@dependabot](https://github.com/apps/dependabot) via [#160](https://github.com/10up/maps-block-apple/pull/160)).
-* **Security:** Bump `webpack` from 5.73.0 to 5.76.1 (props [@dependabot](https://github.com/apps/dependabot) via [#162](https://github.com/10up/maps-block-apple/pull/162)).
-
-= 1.1.0 - 2023-01-23 =
-* **Note that this release bumps the WordPress minimum version from 5.2 to 5.8.**
-
-* **Added:** Support for custom marker icons (props [@iamdharmesh](https://github.com/iamdharmesh), [@dinhtungdu](https://github.com/dinhtungdu), [@fabiankaegy](https://github.com/fabiankaegy) via [#136](https://github.com/10up/maps-block-apple/pull/136)).
-* **Added:** Ability to control margin of map (props [@fabiankaegy](https://github.com/fabiankaegy), [@dkotter](https://github.com/dkotter) via [#157](https://github.com/10up/maps-block-apple/pull/157)).
-* **Added:** End-to-end testing setup with Cypress (props [@cadic](https://github.com/cadic), [@peterwilsoncc](https://github.com/peterwilsoncc) via [#126](https://github.com/10up/maps-block-apple/pull/126)).
-* **Changed:** Bump minimum WordPress version from 5.2 to 5.8 (props [@cadic](https://github.com/cadic), [@peterwilsoncc](https://github.com/peterwilsoncc) via [#126](https://github.com/10up/maps-block-apple/pull/126)).
-* **Changed:** Update linting workflows to take advantage of GitHub Actions summaries (props [@dinhtungdu](https://github.com/dinhtungdu), [@fabiankaegy](https://github.com/fabiankaegy) via [#128](https://github.com/10up/maps-block-apple/pull/128)).
-* **Changed:** Update Support Level from `Active` to `Stable` (props [@jeffpaul](https://github.com/jeffpaul), [@dkotter](https://github.com/dkotter) via [#135](https://github.com/10up/maps-block-apple/pull/135)).
-* **Changed:** Update composer dependencies to avoid conflict (props [@peterwilsoncc](https://github.com/peterwilsoncc), [@iamdharmesh](https://github.com/iamdharmesh) via [#145](https://github.com/10up/maps-block-apple/pull/145)).
-* **Changed:** Bump WordPress "tested up to" version to 6.1 (props [@iamdharmesh](https://github.com/iamdharmesh), [@cadic](https://github.com/cadic) via [#148](https://github.com/10up/maps-block-apple/pull/148)).
-* **Security:** Bump `terser` from 5.14.1 to 5.14.2 (props [@dependabot](https://github.com/apps/dependabot) via [#132](https://github.com/10up/maps-block-apple/pull/132)).
-* **Security:** Bump `markdown-it` from 12.0.4 to 12.3.2 and `@wordpress/scripts` from 20.0.2 to 24.5.0 (props [@dependabot](https://github.com/apps/dependabot) via [#138](https://github.com/10up/maps-block-apple/pull/138)).
-* **Security:** Bump `loader-utils` from 2.0.2 to 2.0.4 (props [@dependabot](https://github.com/apps/dependabot) via [#146](https://github.com/10up/maps-block-apple/pull/146)).
-* **Security:** Bump `simple-git` from 3.10.0 to 3.15.1 (props [@dependabot](https://github.com/apps/dependabot) via [#149](https://github.com/10up/maps-block-apple/pull/149)).
-* **Security:** Bump `json5` from 1.0.1 to 1.0.2 (props [@dependabot](https://github.com/apps/dependabot) via [#153](https://github.com/10up/maps-block-apple/pull/153)).
-
 = Earlier versions =
 For the changelog of earlier versions, please refer to the [changelog on github.com](https://github.com/10up/maps-block-apple/blob/develop/CHANGELOG.md).
 
 == Upgrade Notice ==
+
+= 1.1.5 =
+
+* Note that this version bumps the minimum WordPress version from 6.4 to 6.6.
 
 = 1.1.4 =
 
