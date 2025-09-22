@@ -213,8 +213,8 @@ function setup_fields_sections() {
 function render_instructions() {
 	?>
 	<section class="credentials-instructions">
-			<p><?php echo esc_html_e( 'In order to start using the Apple Maps block, you will need to sign up for the Apple Developer Program and create your Maps identifiers, keys, and tokens.', 'maps-block-apple' ); ?></p>
-			<p><?php echo esc_html_e( 'Follow the steps below to generate the Private Key, Key ID, and Team ID that you will need to configure the plugin and gain access to the MapKit JS API for the Apple Maps block.', 'maps-block-apple' ); ?></p>
+			<p><?php esc_html_e( 'In order to start using the Apple Maps block, you will need to sign up for the Apple Developer Program and create your Maps identifiers, keys, and tokens.', 'maps-block-apple' ); ?></p>
+			<p><?php esc_html_e( 'Follow the steps below to generate the Private Key, Key ID, and Team ID that you will need to configure the plugin and gain access to the MapKit JS API for the Apple Maps block.', 'maps-block-apple' ); ?></p>
 			<h4><?php esc_html_e( '1. Create an Apple Developer account', 'maps-block-apple' ); ?></a></h4>
 			<ul>
 				<li><a href="https://developer.apple.com/programs/enroll/" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Enroll in the Apple Developer Program as either an individual or organization.', 'maps-block-apple' ); ?></a></li>
