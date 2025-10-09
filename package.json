@@ -40,7 +40,7 @@
   },
   "devDependencies": {
     "@10up/cypress-wp-utils": "^0.6.0",
-    "@wordpress/env": "^10.6.0",
+    "@wordpress/env": "^10.32.0",
     "@wordpress/eslint-plugin": "^10.0.1",
     "@wordpress/scripts": "^30.6.0",
     "cypress": "^13.13.3",
