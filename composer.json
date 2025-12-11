@@ -17,7 +17,7 @@
     "10up/wp-compat-validation-tool": "dev-trunk"
   },
   "require-dev": {
-    "10up/phpcs-composer": "dev-master"
+    "10up/phpcs-composer": "dev-trunk"
   },
   "scripts": {
     "lint": "./vendor/bin/phpcs",

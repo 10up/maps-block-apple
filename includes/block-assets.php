@@ -19,14 +19,14 @@ function register_block_assets() {
 	wp_register_style(
 		'maps-block-apple-settings',
 		trailingslashit( MAPS_BLOCK_APPLE_URL ) . 'assets/css/admin-maps-block-apple-settings.css',
-		[],
+		array(),
 		MAPS_BLOCK_APPLE_VERSION
 	);
 
 	/**
 	 * Mapkit Library
 	 */
-	wp_register_script( 'apple-mapkit-js', 'https://cdn.apple-mapkit.com/mk/5.x.x/mapkit.js', [], 5, false );
+	wp_register_script( 'apple-mapkit-js', 'https://cdn.apple-mapkit.com/mk/5.x.x/mapkit.js', array(), 5, false );
 
 	/**
 	 * Admin Settings Script
@@ -36,7 +36,7 @@ function register_block_assets() {
 	wp_register_script(
 		'maps-block-apple-settings',
 		MAPS_BLOCK_APPLE_URL . "build/$settings_file_name.js",
-		array_merge( $settings_dependencies['dependencies'], [ 'apple-mapkit-js' ] ),
+		array_merge( $settings_dependencies['dependencies'], array( 'apple-mapkit-js' ) ),
 		$settings_dependencies['version'],
 		true
 	);
@@ -49,16 +49,16 @@ function register_block_assets() {
 	wp_register_script(
 		'maps-block-apple-block',
 		MAPS_BLOCK_APPLE_URL . "build/$block_file_name.js",
-		array_merge( $block_dependencies['dependencies'], [ 'apple-mapkit-js' ] ),
+		array_merge( $block_dependencies['dependencies'], array( 'apple-mapkit-js' ) ),
 		$block_dependencies['version'],
 		false
 	);
 	wp_localize_script(
 		'maps-block-apple-block',
 		'_mbaData',
-		[
+		array(
 			'settingsURL' => admin_url( 'options-general.php?page=block-for-apple-maps' ),
-		]
+		)
 	);
 
 	/**
@@ -69,13 +69,12 @@ function register_block_assets() {
 	wp_register_script(
 		'maps-block-apple-frontend',
 		MAPS_BLOCK_APPLE_URL . "build/$fe_file_name.js",
-		array_merge( $frontend_dependencies['dependencies'], [ 'apple-mapkit-js' ] ),
+		array_merge( $frontend_dependencies['dependencies'], array( 'apple-mapkit-js' ) ),
 		$frontend_dependencies['version'],
 		false
 	);
 
 	register_block_type( MAPS_BLOCK_APPLE_PATH );
-
 }
 
 add_action( 'enqueue_block_assets', __NAMESPACE__ . '\load_apple_map_script_in_iframe' );
