@@ -217,7 +217,10 @@ export default function MapsBlockAppleEdit(props) {
 		}
 	}, 300);
 
-	useEffect(() => debouncedUpdateMarkers(markers), [markers, hasMap]);
+	useEffect(
+		() => debouncedUpdateMarkers(markers),
+		[markers, hasMap, debouncedUpdateMarkers]
+	);
 
 	const blockProps = useBlockProps({ ref: setupRef });
 
