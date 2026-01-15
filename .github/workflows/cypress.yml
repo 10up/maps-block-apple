@@ -62,7 +62,7 @@ jobs:
       run: npm run env:start
 
     - name: Test
-      run: npm run cypress:run
+      run: npm run cypress:run --  --browser chrome
       env:
         CYPRESS_MAPS_PRIVATE_KEY: ${{ secrets.MAPS_PRIVATE_KEY }}
         CYPRESS_MAPS_KEY_ID: ${{ secrets.MAPS_KEY_ID }}
