@@ -209,7 +209,7 @@ export default function MapsBlockAppleEdit(props) {
 		if (isAuthenticated && hasMap) {
 			map.update(attributes);
 		}
-	}, [attributes, isAuthenticated, map]);
+	}, [attributes, isAuthenticated, map, hasMap]);
 
 	const debouncedUpdateMarkers = useDebounce((newMarkers) => {
 		if (hasMap) {
@@ -217,7 +217,7 @@ export default function MapsBlockAppleEdit(props) {
 		}
 	}, 300);
 
-	useEffect(() => debouncedUpdateMarkers(markers), [markers]);
+	useEffect(() => debouncedUpdateMarkers(markers), [markers, hasMap]);
 
 	const blockProps = useBlockProps({ ref: setupRef });
 
