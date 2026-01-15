@@ -24,11 +24,10 @@ describe("Test block functions", () => {
 		cy.createPost({
 			title: "Broken Map Post",
 			beforeSave: () => {
-				cy.insertBlock("tenup/maps-block-apple", "apple maps").then((block) => {
-					cy.getBlockEditor().find(`#${block}`).should(
-						"contain.text",
-						"Confirm access to Apple Maps"
-					);
+				cy.insertBlock("tenup/maps-block-apple", "apple maps").then((id) => {
+					cy.getBlockEditor().find(`#${id}`).then((block) => {
+						expect(block).to.contain.text("Confirm access to Apple Maps");
+					});
 				});
 			},
 		});
