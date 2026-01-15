@@ -43,7 +43,7 @@
     "@wordpress/env": "^10.37.0",
     "@wordpress/eslint-plugin": "^23.0.0",
     "@wordpress/scripts": "^31.2.0",
-    "cypress-mochawesome-reporter": "^3.8.2",
-    "mochawesome-json-to-md": "^0.7.2"
+    "cypress-mochawesome-reporter": "^3.8.4",
+    "mochawesome-json-to-md": "^2.1.1"
   }
 }
