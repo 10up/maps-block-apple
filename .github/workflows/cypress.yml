@@ -6,7 +6,7 @@ on:
       - develop
 jobs:
   build:
-    uses: 10up/maps-block-apple/.github/workflows/build-release-zip.yml@develop
+    uses: ./.github/workflows/build-release-zip.yml
 
   cypress:
     needs: build
@@ -46,6 +46,12 @@ jobs:
           ~/.npm
         key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
 
+    - name: Setup node version and npm cache
+      uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e # v4.3.0
+      with:
+        node-version-file: .nvmrc
+        cache: 'npm'
+
     - name: Install dependencies
       run: npm install
 
@@ -56,7 +62,7 @@ jobs:
       run: npm run env:start
 
     - name: Test
-      run: npm run cypress:run
+      run: npm run cypress:run --  --browser chrome
       env:
         CYPRESS_MAPS_PRIVATE_KEY: ${{ secrets.MAPS_PRIVATE_KEY }}
         CYPRESS_MAPS_KEY_ID: ${{ secrets.MAPS_KEY_ID }}
@@ -67,6 +73,6 @@ jobs:
       run: |
           npx mochawesome-merge ./tests/cypress/reports/*.json -o tests/cypress/reports/mochawesome.json
           rm -rf ./tests/cypress/reports/mochawesome-*.json
-          npx mochawesome-json-to-md -p ./tests/cypress/reports/mochawesome.json -o ./tests/cypress/reports/mochawesome.md
+          npx mochawesome-json-to-md -p ./tests/cypress/reports/mochawesome.json -o ./tests/cypress/reports/mochawesome.md -t ./.github/e2e-report-template.md
           npx mochawesome-report-generator tests/cypress/reports/mochawesome.json -o tests/cypress/reports/
           cat ./tests/cypress/reports/mochawesome.md >> $GITHUB_STEP_SUMMARY

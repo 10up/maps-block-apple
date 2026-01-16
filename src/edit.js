@@ -39,7 +39,9 @@ const Map = memo((props) => {
 		(element) => {
 			// return early if the mapkit script has not jet been loaded. The editor iframe
 			// will re render the element after the scripts have been loaded
-			if (!mapkit) return;
+			if (!mapkit) {
+				return;
+			}
 
 			if (isAuthenticated && !hasMap) {
 				setMap(new AppleMapEdit(element, clientId, setAttributes));
@@ -198,14 +200,16 @@ export default function MapsBlockAppleEdit(props) {
 	 * event configured and therefore wasn't aware of the updated authentication state
 	 */
 	useEffect(() => {
-		if (isAuthenticated) setIsLoading(false);
+		if (isAuthenticated) {
+			setIsLoading(false);
+		}
 	}, [isAuthenticated]);
 
 	useEffect(() => {
 		if (isAuthenticated && hasMap) {
 			map.update(attributes);
 		}
-	}, [attributes, isAuthenticated, map]);
+	}, [attributes, isAuthenticated, map, hasMap]);
 
 	const debouncedUpdateMarkers = useDebounce((newMarkers) => {
 		if (hasMap) {
@@ -213,7 +217,10 @@ export default function MapsBlockAppleEdit(props) {
 		}
 	}, 300);
 
-	useEffect(() => debouncedUpdateMarkers(markers), [markers]);
+	useEffect(
+		() => debouncedUpdateMarkers(markers),
+		[markers, hasMap, debouncedUpdateMarkers]
+	);
 
 	const blockProps = useBlockProps({ ref: setupRef });
 
@@ -258,9 +265,10 @@ export default function MapsBlockAppleEdit(props) {
 						>
 							<div style={{ marginBottom: '1em' }}>
 								{__(
-									'In order to include an Apple Map on your website you need to confirm your MapKit credentials below. Here is documentation on how to get those credentials: ',
+									'In order to include an Apple Map on your website you need to confirm your MapKit credentials below. Here is documentation on how to get those credentials:',
 									'maps-block-apple'
 								)}
+								{' ' /* Whitespace between text */}
 								<a
 									href="https://developer.apple.com/documentation/mapkitjs/setting_up_mapkit_js"
 									target="_blank"
