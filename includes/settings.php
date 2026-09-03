@@ -31,7 +31,7 @@ function setup() {
  * @return mixed
  */
 function get_setting( $setting ) {
-	$settings = get_option( 'maps_block_apple', [] );
+	$settings = get_option( 'maps_block_apple', array() );
 	return isset( $settings[ $setting ] ) ? $settings[ $setting ] : '';
 }
 
@@ -61,7 +61,7 @@ function register_settings() {
 					),
 				),
 			),
-			'default'           => [],
+			'default'           => array(),
 			'sanitize_callback' => __NAMESPACE__ . '\sanitize_settings',
 		)
 	);
@@ -294,7 +294,7 @@ function render_credential_status() {
  * @since  1.0
  */
 function sanitize_settings( $settings ) {
-	$new_settings = [];
+	$new_settings = array();
 	if ( isset( $settings['private_key'] ) ) {
 		$new_settings['private_key'] = trim( $settings['private_key'] );
 	}

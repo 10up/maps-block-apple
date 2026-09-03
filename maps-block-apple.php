@@ -20,7 +20,7 @@ namespace tenup\Maps_Block_Apple;
 // Useful global constants.
 define( 'MAPS_BLOCK_APPLE_VERSION', '1.1.5' );
 define( 'MAPS_BLOCK_APPLE_URL', plugin_dir_url( __FILE__ ) );
-define( 'MAPS_BLOCK_APPLE_PATH', dirname( __FILE__ ) . '/' );
+define( 'MAPS_BLOCK_APPLE_PATH', __DIR__ . '/' );
 define( 'MAPS_BLOCK_APPLE_INC', MAPS_BLOCK_APPLE_PATH . 'includes/' );
 define( 'MAPS_BLOCK_APPLE_BASENAME', plugin_basename( __FILE__ ) );
 
