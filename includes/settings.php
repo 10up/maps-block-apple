@@ -13,8 +13,8 @@ namespace tenup\Maps_Block_Apple\Settings;
  * @since 1.0.0
  */
 function setup() {
-	$n = function ( $function ) {
-		return __NAMESPACE__ . "\\$function";
+	$n = function ( $function_name ) {
+		return __NAMESPACE__ . "\\$function_name";
 	};
 	add_action( 'admin_menu', $n( 'admin_menu' ), 20 );
 	add_action( 'admin_init', $n( 'setup_fields_sections' ) );

@@ -36,11 +36,12 @@ function add_endpoints() {
 /**
  * Encode String.
  *
- * @param [string] $string String to be encoded.
+ * @param [string] $unencoded_string String to be encoded.
  * @return [string]
  */
-function encode( $string ) {
-	$response = strtr( base64_encode( $string ), '+/', '-_' );
+function encode( $unencoded_string ) {
+	// phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_encode -- required for JWT.
+	$response = strtr( base64_encode( $unencoded_string ), '+/', '-_' );
 	return rtrim( $response, '=' );
 }
 
