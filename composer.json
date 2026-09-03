@@ -16,9 +16,6 @@
   "require": {
     "10up/wp-compat-validation-tool": "dev-trunk"
   },
-  "require-dev": {
-    "10up/phpcs-composer": "dev-master"
-  },
   "scripts": {
     "lint": "./vendor/bin/phpcs",
     "lint-fix": "./vendor/bin/phpcbf --extensions=php .",
@@ -47,5 +44,8 @@
     "installer-paths": {
       "./{$name}/": ["10up/wp-compat-validation-tool"]
     }
+  },
+  "require-dev": {
+    "10up/phpcs-composer": "dev-trunk"
   }
 }
