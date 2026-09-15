@@ -4,7 +4,7 @@
  * Plugin URI:        https://github.com/10up/maps-block-apple
  * Description:       An Apple Maps block for the WordPress block editor (Gutenberg).
  * Version:           1.1.5
- * Requires at least: 6.6
+ * Requires at least: 6.9
  * Requires PHP:      7.4
  * Author:            10up
  * Author URI:        https://10up.com
