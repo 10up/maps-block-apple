@@ -61,6 +61,10 @@ There is a free daily limit of 250,000 map views and 25,000 service calls per th
 
 Yes, you can track your MapKit JS useage on the [MapKit JS Developer Dashboard](https://maps.developer.apple.com/).  You can also monitor map initializations and service requests in realtime, or see up to a year of activity by day, week, month, or year via the MapKit JS Dashboard.
 
+= Where do I report security bugs found in this plugin? =
+
+Please report security bugs found in the source code of the Block for Apple Maps plugin through the [Patchstack Vulnerability Disclosure  Program](https://patchstack.com/database/vdp/6c456c3d-5e43-4e4c-a79b-9114c249140e).  The Patchstack team will assist you with verification, CVE assignment, and notify the developers of this plugin.
+
 == Screenshots ==
 
 1. Block settings
