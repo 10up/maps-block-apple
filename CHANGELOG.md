@@ -4,6 +4,35 @@ All notable changes to this project will be documented in this file, per [the Ke
 
 ## [Unreleased] - TBD
 
+## [1.1.6] - 2026-09-DD
+**Note that this release bumps the WordPress minimum version from 6.6 to 6.9.**
+
+### Changed
+- Bump WordPress tested-up-to version 7.0 (props [@peterwilsoncc](https://github.com/peterwilsoncc), [@dkotter](https://github.com/dkotter), [@fabiankaegy](https://github.com/fabiankaegy) via [#254](https://github.com/10up/maps-block-apple/pull/254), [#262](https://github.com/10up/maps-block-apple/pull/262)).
+- Update node version for building plugin to version 20 (props [@peterwilsoncc](https://github.com/peterwilsoncc), [@dkotter](https://github.com/dkotter) via [#256](https://github.com/10up/maps-block-apple/pull/256)).
+- Update NPM dependencies via `npm audit fix` (props [@peterwilsoncc](https://github.com/peterwilsoncc), [@dkotter](https://github.com/dkotter) via [#256](https://github.com/10up/maps-block-apple/pull/256)).
+
+### Fixed
+- Remove unneeded echo statements (props [@DAnn2012](https://github.com/DAnn2012), [@dkotter](https://github.com/dkotter) via [#248](https://github.com/10up/maps-block-apple/pull/248)).
+- Add missing dependencies to React hooks (props [@peterwilsoncc](https://github.com/peterwilsoncc), [@dkotter](https://github.com/dkotter) via [#256](https://github.com/10up/maps-block-apple/pull/256)).
+
+### Developer
+- Ensure release deploy action permissions allow for attaching release assets (props [@jeffpaul](https://github.com/jeffpaul), [@dkotter](https://github.com/dkotter) via [#247](https://github.com/10up/maps-block-apple/pull/247)).
+Developer - Add Patchstack security-reporting FAQ (props [@jeffpaul](https://github.com/jeffpaul) via [#255](https://github.com/10up/maps-block-apple/pull/255)).
+- E2E tests: update `10up/cypress-wp-utils` to 0.7.2 (props [@peterwilsoncc](https://github.com/peterwilsoncc), [@dkotter](https://github.com/dkotter) via [#267](https://github.com/10up/maps-block-apple/pull/267)).
+- Bump `tar-fs` from 3.0.8 to 3.1.1 (props [@dependabot](https://github.com/apps/dependabot), [@dkotter](https://github.com/dkotter), [@iamdharmesh](https://github.com/iamdharmesh) via [#243](https://github.com/10up/maps-block-apple/pull/243)).
+- Update WP-Env to 10.37.0 (props [@peterwilsoncc](https://github.com/peterwilsoncc), [@dkotter](https://github.com/dkotter) via [#256](https://github.com/10up/maps-block-apple/pull/256)).
+- Update WP-Scripts to 31.2.0 (props [@peterwilsoncc](https://github.com/peterwilsoncc), [@dkotter](https://github.com/dkotter) via [#256](https://github.com/10up/maps-block-apple/pull/256)).
+- Update WP-ESlint-plugin to 23.0.0 (props [@peterwilsoncc](https://github.com/peterwilsoncc), [@dkotter](https://github.com/dkotter) via [#256](https://github.com/10up/maps-block-apple/pull/256)).
+- Update Cypress-WP-Utils to 0.6.0 (props [@peterwilsoncc](https://github.com/peterwilsoncc), [@dkotter](https://github.com/dkotter) via [#256](https://github.com/10up/maps-block-apple/pull/256)).
+- Update Cypress to 15.9.0 (props [@peterwilsoncc](https://github.com/peterwilsoncc), [@dkotter](https://github.com/dkotter) via [#256](https://github.com/10up/maps-block-apple/pull/256)).
+- Update `cypress-mochawesome-reporter` to 3.8.4 (props [@peterwilsoncc](https://github.com/peterwilsoncc), [@dkotter](https://github.com/dkotter) via [#256](https://github.com/10up/maps-block-apple/pull/256)).
+- Update `mochawesome-json-to-md` to 2.1.1 (props [@peterwilsoncc](https://github.com/peterwilsoncc), [@dkotter](https://github.com/dkotter) via [#256](https://github.com/10up/maps-block-apple/pull/256)).
+- Bump `lodash` from 4.17.21 to 4.17.23 (props [@dependabot](https://github.com/apps/dependabot), [@peterwilsoncc](https://github.com/peterwilsoncc) via [#257](https://github.com/10up/maps-block-apple/pull/257)).
+- Bump `lodash-es` from 4.17.22 to 4.17.23 (props [@dependabot](https://github.com/apps/dependabot), [@peterwilsoncc](https://github.com/peterwilsoncc) via [#258](https://github.com/10up/maps-block-apple/pull/258)).
+- Bump `qs` from 6.14.1 to 6.15.3 (props [@dependabot](https://github.com/apps/dependabot), [@peterwilsoncc](https://github.com/peterwilsoncc) via [#260](https://github.com/10up/maps-block-apple/pull/260)).
+- Update `10up/phpcs-composer` to resolve security vulnerability advisories (props [@peterwilsoncc](https://github.com/peterwilsoncc), [@dkotter](https://github.com/dkotter) via [#269](https://github.com/10up/maps-block-apple/pull/269)).
+
 ## [1.1.5] - 2025-07-14
 **Note that this release bumps the WordPress minimum version from 6.4 to 6.6.**
 
@@ -194,6 +223,7 @@ All notable changes to this project will be documented in this file, per [the Ke
 - Initial private release of Block for Apple Maps plugin.
 
 [Unreleased]: https://github.com/10up/maps-block-apple/compare/trunk...develop
+[1.1.6]: https://github.com/10up/maps-block-apple/compare/1.1.5...1.1.6
 [1.1.5]: https://github.com/10up/maps-block-apple/compare/1.1.4...1.1.5
 [1.1.4]: https://github.com/10up/maps-block-apple/compare/1.1.3...1.1.4
 [1.1.3]: https://github.com/10up/maps-block-apple/compare/1.1.2...1.1.3
