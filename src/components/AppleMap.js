@@ -33,7 +33,9 @@ class AppleMap {
 		// get the mapkit object on the current window object to account for iframe editors
 		this.mapkit = element.ownerDocument.defaultView.mapkit;
 
-		if (!this.mapkit) return;
+		if (!this.mapkit) {
+			return;
+		}
 
 		this.init();
 	}
@@ -222,7 +224,9 @@ class AppleMapEdit extends AppleMap {
 	}
 
 	destroy() {
-		if (!this.map) return;
+		if (!this.map) {
+			return;
+		}
 		this.map.destroy();
 	}
 
@@ -279,7 +283,9 @@ class AppleMapEdit extends AppleMap {
 			this.element.style.height = `${height}px`;
 		}
 
-		if (!this.map) return;
+		if (!this.map) {
+			return;
+		}
 
 		if (region && region !== '') {
 			this.map.setRegionAnimated(region, true);

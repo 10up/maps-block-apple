@@ -54,6 +54,7 @@
 }
 
 @media (min-width: 1024px) {
+
 	.maps-block-apple-settings {
 		display: flex;
 	}
@@ -69,6 +70,7 @@
 }
 
 @media (min-width: 1200px) {
+
 	.maps-block-apple-settings form {
 		width: 60%;
 		margin-right: 10%;

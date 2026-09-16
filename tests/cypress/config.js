@@ -1,6 +1,13 @@
 const { defineConfig } = require('cypress');
-const { loadConfig } = require( '@wordpress/env/lib/config' );
-const getCacheDirectory = require( '@wordpress/env/lib/config/get-cache-directory' );
+const path = require( 'path' );
+
+// Resolve the package directory
+const wpEnvPackagePath = require.resolve( '@wordpress/env/package.json' );
+const wpEnvLibPath = path.join( path.dirname( wpEnvPackagePath ), 'lib' );
+
+// Directly require the files using their resolved paths
+const { loadConfig } = require( path.join( wpEnvLibPath, 'config', 'index.js' ) );
+const getCacheDirectory = require( path.join( wpEnvLibPath, 'config', 'get-cache-directory.js' ) );
 
 module.exports = defineConfig({
   chromeWebSecurity: false,
@@ -12,7 +19,7 @@ module.exports = defineConfig({
   reporter: 'mochawesome',
   reporterOptions: {
     mochaFile: "mochawesome-[name]",
-    reportDir: __dirname+"/reports",
+    reportDir: path.join(__dirname, "reports"),
     overwrite: false,
     html: false,
     json: true

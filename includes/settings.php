@@ -13,8 +13,8 @@ namespace tenup\Maps_Block_Apple\Settings;
  * @since 1.0.0
  */
 function setup() {
-	$n = function ( $function ) {
-		return __NAMESPACE__ . "\\$function";
+	$n = function ( $function_name ) {
+		return __NAMESPACE__ . "\\$function_name";
 	};
 	add_action( 'admin_menu', $n( 'admin_menu' ), 20 );
 	add_action( 'admin_init', $n( 'setup_fields_sections' ) );
@@ -31,7 +31,7 @@ function setup() {
  * @return mixed
  */
 function get_setting( $setting ) {
-	$settings = get_option( 'maps_block_apple', [] );
+	$settings = get_option( 'maps_block_apple', array() );
 	return isset( $settings[ $setting ] ) ? $settings[ $setting ] : '';
 }
 
@@ -61,7 +61,7 @@ function register_settings() {
 					),
 				),
 			),
-			'default'           => [],
+			'default'           => array(),
 			'sanitize_callback' => __NAMESPACE__ . '\sanitize_settings',
 		)
 	);
@@ -213,8 +213,8 @@ function setup_fields_sections() {
 function render_instructions() {
 	?>
 	<section class="credentials-instructions">
-			<p><?php echo esc_html_e( 'In order to start using the Apple Maps block, you will need to sign up for the Apple Developer Program and create your Maps identifiers, keys, and tokens.', 'maps-block-apple' ); ?></p>
-			<p><?php echo esc_html_e( 'Follow the steps below to generate the Private Key, Key ID, and Team ID that you will need to configure the plugin and gain access to the MapKit JS API for the Apple Maps block.', 'maps-block-apple' ); ?></p>
+			<p><?php esc_html_e( 'In order to start using the Apple Maps block, you will need to sign up for the Apple Developer Program and create your Maps identifiers, keys, and tokens.', 'maps-block-apple' ); ?></p>
+			<p><?php esc_html_e( 'Follow the steps below to generate the Private Key, Key ID, and Team ID that you will need to configure the plugin and gain access to the MapKit JS API for the Apple Maps block.', 'maps-block-apple' ); ?></p>
 			<h4><?php esc_html_e( '1. Create an Apple Developer account', 'maps-block-apple' ); ?></a></h4>
 			<ul>
 				<li><a href="https://developer.apple.com/programs/enroll/" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Enroll in the Apple Developer Program as either an individual or organization.', 'maps-block-apple' ); ?></a></li>
@@ -294,7 +294,7 @@ function render_credential_status() {
  * @since  1.0
  */
 function sanitize_settings( $settings ) {
-	$new_settings = [];
+	$new_settings = array();
 	if ( isset( $settings['private_key'] ) ) {
 		$new_settings['private_key'] = trim( $settings['private_key'] );
 	}

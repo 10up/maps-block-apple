@@ -17,7 +17,7 @@ This plugin integrates Apple's [MapKit JS](https://developer.apple.com/maps/mapk
 ## Requirements
 
 * PHP 7.4+
-* [WordPress](http://wordpress.org/) 6.6+
+* [WordPress](http://wordpress.org/) 6.9+
 * Due to the requirements applied by Apple to use Apple Maps ([MapkitJS](https://developer.apple.com/maps/mapkitjs/)), Apple Maps for WordPress requires an [Apple Developer](https://developer.apple.com/) [account](https://developer.apple.com/account/) and enrollment within the [Apple Developer Program](https://developer.apple.com/programs/).
 
 ## Installation
@@ -53,6 +53,10 @@ In order to start using the Apple Maps block, you will need to sign up for the A
 
 If you have WordPress installed in a subdirectory, then there is a [known issue](https://github.com/10up/maps-block-apple/issues/34) specifically related to this setup where the WordPress Admin URL is different from the site URL.  We're working on a [minor release](https://github.com/10up/maps-block-apple/milestone/3) to resolve this issue.
 
+### Can I use my MapKit JS token on a different domain?
+
+No. Tokens generated for development, staging, and production environments are limited to your site's origin. Tokens generated for local environments do not have an origin restriction, which supports local development tools that use a different URL than your site. The environment is determined by the `WP_ENVIRONMENT_TYPE` constant; see [WordPress environment types](https://make.wordpress.org/core/2020/08/27/wordpress-environment-types/) for configuration guidance.
+
 ### I want to update my MapKit JS credentials, what's the best way to do this?
 
 Our recommendation on updating the Apple Maps block settings focuses on ensuring the best experience for your site users.  Specifically we recommend the following approach to ensure that existing Apple Maps on your site continue to be displayed during your MapKit JS credential transition.
@@ -70,6 +74,10 @@ There is a free daily limit of 250,000 map views and 25,000 service calls per th
 Yes, you can track your MapKit JS useage on the [MapKit JS Developer Dashboard](https://maps.developer.apple.com/).  You can also monitor map initializations and service requests in realtime, or see up to a year of activity by day, week, month, or year via the MapKit JS Dashboard.
 
 ![Block marker settings](.wordpress-org/screenshot-2.png "Example of Apple Maps block showing Marker settings in the new WordPress editor")
+
+### Where do I report security bugs found in this plugin?
+
+Please report security bugs found in the source code of the Block for Apple Maps plugin through the [Patchstack Vulnerability Disclosure  Program](https://patchstack.com/database/vdp/6c456c3d-5e43-4e4c-a79b-9114c249140e).  The Patchstack team will assist you with verification, CVE assignment, and notify the developers of this plugin.
 
 ## Support Level
 
