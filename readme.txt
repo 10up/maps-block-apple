@@ -1,7 +1,7 @@
 === Block for Apple Maps ===
 Contributors:      10up, helen, welcher, fabiankaegy, dinhtungdu, jeffpaul
 Tags:              apple maps, map block, block
-Tested up to:      7.0
+Tested up to:      7.1
 Stable tag:        1.1.6
 License:           GPL-2.0-or-later
 License URI:       https://spdx.org/licenses/GPL-2.0-or-later.html
@@ -44,6 +44,10 @@ In order to start using the Apple Maps block, you will need to sign up for the A
 = I'm seeing validation errors when trying to authenticate my MapKit JS credentials, what am I doing wrong? =
 
 If you have WordPress installed in a subdirectory, then there is a [known issue](https://github.com/10up/maps-block-apple/issues/34) specifically related to this setup where the WordPress Admin URL is different from the site URL.  We're working on a [minor release](https://github.com/10up/maps-block-apple/milestone/3) to resolve this issue.
+
+= Can I use my MapKit JS token on a different domain? =
+
+No. Tokens generated for development, staging, and production environments are limited to your site's origin. Tokens generated for local environments do not have an origin restriction, which supports local development tools that use a different URL than your site. The environment is determined by the `WP_ENVIRONMENT_TYPE` constant; see [WordPress environment types](https://make.wordpress.org/core/2020/08/27/wordpress-environment-types/) for configuration guidance.
 
 = I want to update my MapKit JS credentials, what's the best way to do this? =
 
