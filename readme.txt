@@ -79,11 +79,12 @@ Please report security bugs found in the source code of the Block for Apple Maps
 
 == Changelog ==
 
-= 1.1.6 - 2026-09-DD =
+= 1.1.6 - 2026-09-16 =
 
 **Changed**
 
-- Bump WordPress tested-up-to version 7.0 (props [@peterwilsoncc](https://github.com/peterwilsoncc), [@dkotter](https://github.com/dkotter), [@fabiankaegy](https://github.com/fabiankaegy) via [#254](https://github.com/10up/maps-block-apple/pull/254), [#262](https://github.com/10up/maps-block-apple/pull/262)).
+- Bump WordPress tested-up-to version 7.1 (props [@peterwilsoncc](https://github.com/peterwilsoncc), [@dkotter](https://github.com/dkotter), [@fabiankaegy](https://github.com/fabiankaegy), [@jeffpaul](https://github.com/jeffpaul) via [#254](https://github.com/10up/maps-block-apple/pull/254), [#262](https://github.com/10up/maps-block-apple/pull/262), [#272](https://github.com/10up/maps-block-apple/pull/272)).
+- Bump WordPress minimum supported version to 6.9 (props [@jeffpaul](https://github.com/jeffpaul), [@dkotter](https://github.com/dkotter) via [#272](https://github.com/10up/maps-block-apple/pull/272)).
 - Update node version for building plugin to version 20 (props [@peterwilsoncc](https://github.com/peterwilsoncc), [@dkotter](https://github.com/dkotter) via [#256](https://github.com/10up/maps-block-apple/pull/256)).
 - Update NPM dependencies via `npm audit fix` (props [@peterwilsoncc](https://github.com/peterwilsoncc), [@dkotter](https://github.com/dkotter) via [#256](https://github.com/10up/maps-block-apple/pull/256)).
 
