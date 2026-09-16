@@ -3,7 +3,7 @@
  * This file is used to validate the environment.
  *
  * @package tenup\Maps_Block_Apple
- * @since   1.2.0
+ * @since   1.1.6
  */
 
 namespace tenup\Maps_Block_Apple;
