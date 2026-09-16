@@ -1,6 +1,7 @@
 === Block for Apple Maps ===
 Contributors:      10up, helen, welcher, fabiankaegy, dinhtungdu, jeffpaul
 Tags:              apple maps, map block, block
+Requires at least: 6.9
 Tested up to:      7.1
 Stable tag:        1.1.6
 License:           GPL-2.0-or-later
