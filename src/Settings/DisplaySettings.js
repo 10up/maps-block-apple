@@ -14,7 +14,7 @@ import {
 	FEATURE_VISIBILITY_OPTIONS,
 } from '../components/AppleMap';
 
-export default function DisplaySettings(props) {
+export default function DisplaySettings( props ) {
 	const {
 		attributes: {
 			mapType,
@@ -32,88 +32,100 @@ export default function DisplaySettings(props) {
 	} = props;
 
 	return (
-		<PanelBody title={__('Display Settings', 'maps-block-apple')}>
+		<PanelBody title={ __( 'Display Settings', 'maps-block-apple' ) }>
 			<ToggleGroupControl
-				label={__('Map Type', 'maps-block-apple')}
-				isBlock={true}
+				label={ __( 'Map Type', 'maps-block-apple' ) }
+				isBlock={ true }
 				isAdaptiveWidth
-				value={mapType}
-				onChange={(value) => setAttributes({ mapType: value })}
+				value={ mapType }
+				onChange={ ( value ) => setAttributes( { mapType: value } ) }
 			>
-				{MAP_TYPE_OPTIONS.map((option) => (
-					<ToggleGroupControlOption {...option} key={option.value} />
-				))}
+				{ MAP_TYPE_OPTIONS.map( ( option ) => (
+					<ToggleGroupControlOption
+						{ ...option }
+						key={ option.value }
+					/>
+				) ) }
 			</ToggleGroupControl>
 			<ToggleControl
-				label={__('Show Map Type Control', 'maps-block-apple')}
-				checked={showsMapTypeControl}
-				onChange={(value) =>
-					setAttributes({ showsMapTypeControl: value })
+				label={ __( 'Show Map Type Control', 'maps-block-apple' ) }
+				checked={ showsMapTypeControl }
+				onChange={ ( value ) =>
+					setAttributes( { showsMapTypeControl: value } )
 				}
 			/>
 			<RangeControl
-				label={__('Zoom', 'maps-block-apple')}
-				value={zoom}
-				onChange={(value) => setAttributes({ zoom: value })}
-				min={0}
-				max={20}
-				step={0.5}
+				label={ __( 'Zoom', 'maps-block-apple' ) }
+				value={ zoom }
+				onChange={ ( value ) => setAttributes( { zoom: value } ) }
+				min={ 0 }
+				max={ 20 }
+				step={ 0.5 }
 			/>
 			<ToggleControl
-				label={__('Zoom Enabled', 'maps-block-apple')}
-				checked={isZoomEnabled}
-				onChange={(value) => setAttributes({ isZoomEnabled: value })}
-			/>
-			{isZoomEnabled && (
-				<ToggleControl
-					label={__('Show Zoom Control', 'maps-block-apple')}
-					checked={showsZoomControl}
-					onChange={(value) =>
-						setAttributes({ showsZoomControl: value })
-					}
-				/>
-			)}
-			<ToggleControl
-				label={__('Rotation Enabled', 'maps-block-apple')}
-				checked={isRotationEnabled}
-				onChange={(value) =>
-					setAttributes({ isRotationEnabled: value })
+				label={ __( 'Zoom Enabled', 'maps-block-apple' ) }
+				checked={ isZoomEnabled }
+				onChange={ ( value ) =>
+					setAttributes( { isZoomEnabled: value } )
 				}
 			/>
-			{isRotationEnabled && (
-				<ToggleGroupControl
-					label={__('Compass Visibility', 'maps-block-apple')}
-					isBlock={true}
-					value={showsCompass}
-					onChange={(value) => setAttributes({ showsCompass: value })}
-				>
-					{FEATURE_VISIBILITY_OPTIONS.map((option) => (
-						<ToggleGroupControlOption
-							{...option}
-							key={option.value}
-						/>
-					))}
-				</ToggleGroupControl>
-			)}
+			{ isZoomEnabled && (
+				<ToggleControl
+					label={ __( 'Show Zoom Control', 'maps-block-apple' ) }
+					checked={ showsZoomControl }
+					onChange={ ( value ) =>
+						setAttributes( { showsZoomControl: value } )
+					}
+				/>
+			) }
 			<ToggleControl
-				label={__('Scroll Enabled', 'maps-block-apple')}
-				checked={isScrollEnabled}
-				onChange={(value) => setAttributes({ isScrollEnabled: value })}
+				label={ __( 'Rotation Enabled', 'maps-block-apple' ) }
+				checked={ isRotationEnabled }
+				onChange={ ( value ) =>
+					setAttributes( { isRotationEnabled: value } )
+				}
+			/>
+			{ isRotationEnabled && (
+				<ToggleGroupControl
+					label={ __( 'Compass Visibility', 'maps-block-apple' ) }
+					isBlock={ true }
+					value={ showsCompass }
+					onChange={ ( value ) =>
+						setAttributes( { showsCompass: value } )
+					}
+				>
+					{ FEATURE_VISIBILITY_OPTIONS.map( ( option ) => (
+						<ToggleGroupControlOption
+							{ ...option }
+							key={ option.value }
+						/>
+					) ) }
+				</ToggleGroupControl>
+			) }
+			<ToggleControl
+				label={ __( 'Scroll Enabled', 'maps-block-apple' ) }
+				checked={ isScrollEnabled }
+				onChange={ ( value ) =>
+					setAttributes( { isScrollEnabled: value } )
+				}
 			/>
 			<ToggleGroupControl
-				label={__('Scale Visibility', 'maps-block-apple')}
-				value={showsScale}
-				isBlock={true}
-				onChange={(value) => setAttributes({ showsScale: value })}
+				label={ __( 'Scale Visibility', 'maps-block-apple' ) }
+				value={ showsScale }
+				isBlock={ true }
+				onChange={ ( value ) => setAttributes( { showsScale: value } ) }
 			>
-				{FEATURE_VISIBILITY_OPTIONS.map((option) => (
-					<ToggleGroupControlOption {...option} key={option.value} />
-				))}
+				{ FEATURE_VISIBILITY_OPTIONS.map( ( option ) => (
+					<ToggleGroupControlOption
+						{ ...option }
+						key={ option.value }
+					/>
+				) ) }
 			</ToggleGroupControl>
 			<TextControl
-				label={__('Height ( pixels )', 'maps-block-apple')}
-				value={height}
-				onChange={(value) => setAttributes({ height: value })}
+				label={ __( 'Height ( pixels )', 'maps-block-apple' ) }
+				value={ height }
+				onChange={ ( value ) => setAttributes( { height: value } ) }
 			/>
 		</PanelBody>
 	);

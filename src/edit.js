@@ -25,77 +25,77 @@ import { store as mapsBlockAppleStore } from './store';
 
 import './editor.scss';
 
-const Map = memo((props) => {
+const Map = memo( ( props ) => {
 	const { map, isAuthenticated, clientId, setAttributes, setMap, mapkit } =
 		props;
 
-	const hasMap = !!map;
+	const hasMap = !! map;
 
 	/**
 	 * render a new map on the provided element if the mapkit object has
 	 * already been successfully authenticated
 	 */
 	const mapRef = useRefEffect(
-		(element) => {
+		( element ) => {
 			// return early if the mapkit script has not jet been loaded. The editor iframe
 			// will re render the element after the scripts have been loaded
-			if (!mapkit) {
+			if ( ! mapkit ) {
 				return;
 			}
 
-			if (isAuthenticated && !hasMap) {
-				setMap(new AppleMapEdit(element, clientId, setAttributes));
+			if ( isAuthenticated && ! hasMap ) {
+				setMap( new AppleMapEdit( element, clientId, setAttributes ) );
 			}
 
 			return () => {
-				if (hasMap) {
+				if ( hasMap ) {
 					map.destroy();
-					setMap(null);
+					setMap( null );
 				}
 			};
 		},
-		[mapkit, isAuthenticated, map, clientId, setAttributes]
+		[ mapkit, isAuthenticated, map, clientId, setAttributes ]
 	);
 
-	return <div ref={mapRef} />;
-});
+	return <div ref={ mapRef } />;
+} );
 
-export default function MapsBlockAppleEdit(props) {
+export default function MapsBlockAppleEdit( props ) {
 	const { attributes, setAttributes, clientId, isSelected } = props;
 
 	const { height, latitude, longitude, markers } = attributes;
 
-	const [map, setMap] = useState(null);
-	const [mapkit, setMapkit] = useState(null);
+	const [ map, setMap ] = useState( null );
+	const [ mapkit, setMapkit ] = useState( null );
 
-	const hasMap = !!map;
+	const hasMap = !! map;
 
-	const isAuthenticated = useSelect((select) => {
-		return select(mapsBlockAppleStore).isAuthenticated();
-	});
-	const [isLoading, setIsLoading] = useState(true);
+	const isAuthenticated = useSelect( ( select ) => {
+		return select( mapsBlockAppleStore ).isAuthenticated();
+	} );
+	const [ isLoading, setIsLoading ] = useState( true );
 
-	const { updateAuthenticationStatus } = useDispatch(mapsBlockAppleStore);
-	const { toggleSelection } = useDispatch(blockEditorStore);
+	const { updateAuthenticationStatus } = useDispatch( mapsBlockAppleStore );
+	const { toggleSelection } = useDispatch( blockEditorStore );
 
 	/**
 	 * Check if the credentials exist.
 	 */
 	const checkCredentials = async () => {
 		try {
-			const response = await apiFetch({
+			const response = await apiFetch( {
 				path: 'MapsBlockApple/v1/GetJWT',
-			});
-			if (response) {
+			} );
+			if ( response ) {
 				return true;
 			}
 
-			setIsLoading(false);
-			updateAuthenticationStatus(false);
+			setIsLoading( false );
+			updateAuthenticationStatus( false );
 			return false;
-		} catch (error) {
-			setIsLoading(false);
-			updateAuthenticationStatus(false);
+		} catch {
+			setIsLoading( false );
+			updateAuthenticationStatus( false );
 			return false;
 		}
 	};
@@ -106,18 +106,18 @@ export default function MapsBlockAppleEdit(props) {
 	 * ensures that the mapkit object gets initialized on the correct window which is
 	 * needed for the iframe editors.
 	 */
-	const setupRef = useRefEffect((element) => {
+	const setupRef = useRefEffect( ( element ) => {
 		// use the mapkit object on the window of the current document
 		const localMapkit = element.ownerDocument.defaultView.mapkit;
 
 		// return early if the mapkit script has not jet been loaded. The editor iframe
 		// will re render the element after the scripts have been loaded
-		if (!localMapkit) {
-			setMapkit(null);
+		if ( ! localMapkit ) {
+			setMapkit( null );
 			return;
 		}
 
-		setMapkit(localMapkit);
+		setMapkit( localMapkit );
 
 		/**
 		 * MapKit configuration changed due to either a successful initialization or a refresh.
@@ -127,13 +127,13 @@ export default function MapsBlockAppleEdit(props) {
 		 *
 		 * @param    {mapkitConfigurationChangeEvent} event
 		 */
-		const handleConfigurationChange = ({ status }) => {
+		const handleConfigurationChange = ( { status } ) => {
 			function handleSuccessfulAuthentication() {
-				setIsLoading(false);
-				updateAuthenticationStatus(true);
+				setIsLoading( false );
+				updateAuthenticationStatus( true );
 			}
 
-			switch (status) {
+			switch ( status ) {
 				// MapKit successfully initialized and configured.
 				case 'Initialized':
 					handleSuccessfulAuthentication();
@@ -161,23 +161,23 @@ export default function MapsBlockAppleEdit(props) {
 		 * @property {('Unauthorized'|'Too Many Requests')} status indicates the status response
 		 */
 		const handleAppleMapError = () => {
-			setIsLoading(false);
-			updateAuthenticationStatus(false);
+			setIsLoading( false );
+			updateAuthenticationStatus( false );
 		};
-		localMapkit.addEventListener('error', handleAppleMapError);
+		localMapkit.addEventListener( 'error', handleAppleMapError );
 
 		/**
 		 * handleMapkitReInitialization
 		 */
 		const InitializeMapkit = async () => {
 			const hasValidCredentials = await checkCredentials();
-			if (hasValidCredentials) {
-				AppleMapEdit.authenticateMap(localMapkit);
+			if ( hasValidCredentials ) {
+				AppleMapEdit.authenticateMap( localMapkit );
 			}
 		};
-		localMapkit.addEventListener('reinitialize', InitializeMapkit);
+		localMapkit.addEventListener( 'reinitialize', InitializeMapkit );
 
-		if (!isAuthenticated) {
+		if ( ! isAuthenticated ) {
 			InitializeMapkit();
 		}
 
@@ -186,11 +186,11 @@ export default function MapsBlockAppleEdit(props) {
 				'configuration-change',
 				handleConfigurationChange
 			);
-			localMapkit.removeEventListener('error', handleAppleMapError);
-			localMapkit.removeEventListener('reinitialize', InitializeMapkit);
-			setMapkit(null);
+			localMapkit.removeEventListener( 'error', handleAppleMapError );
+			localMapkit.removeEventListener( 'reinitialize', InitializeMapkit );
+			setMapkit( null );
 		};
-	});
+	} );
 
 	/**
 	 * listen to changes in the authentication store
@@ -199,38 +199,38 @@ export default function MapsBlockAppleEdit(props) {
 	 * but this map did not jet have the event listener for the `configuration-change`
 	 * event configured and therefore wasn't aware of the updated authentication state
 	 */
-	useEffect(() => {
-		if (isAuthenticated) {
-			setIsLoading(false);
+	useEffect( () => {
+		if ( isAuthenticated ) {
+			setIsLoading( false );
 		}
-	}, [isAuthenticated]);
+	}, [ isAuthenticated ] );
 
-	useEffect(() => {
-		if (isAuthenticated && hasMap) {
-			map.update(attributes);
+	useEffect( () => {
+		if ( isAuthenticated && hasMap ) {
+			map.update( attributes );
 		}
-	}, [attributes, isAuthenticated, map, hasMap]);
+	}, [ attributes, isAuthenticated, map, hasMap ] );
 
-	const debouncedUpdateMarkers = useDebounce((newMarkers) => {
-		if (hasMap) {
-			map.addMarkers(newMarkers);
+	const debouncedUpdateMarkers = useDebounce( ( newMarkers ) => {
+		if ( hasMap ) {
+			map.addMarkers( newMarkers );
 		}
-	}, 300);
+	}, 300 );
 
 	useEffect(
-		() => debouncedUpdateMarkers(markers),
-		[markers, hasMap, debouncedUpdateMarkers]
+		() => debouncedUpdateMarkers( markers ),
+		[ markers, hasMap, debouncedUpdateMarkers ]
 	);
 
-	const blockProps = useBlockProps({ ref: setupRef });
+	const blockProps = useBlockProps( { ref: setupRef } );
 
-	if (isLoading) {
+	if ( isLoading ) {
 		return (
-			<div {...blockProps}>
+			<div { ...blockProps }>
 				<Placeholder
-					style={{ height: `${height}px` }}
-					label={__('Block for Apple Maps', 'maps-block-apple')}
-					icon={BlockIcon}
+					style={ { height: `${ height }px` } }
+					label={ __( 'Block for Apple Maps', 'maps-block-apple' ) }
+					icon={ BlockIcon }
 				>
 					<Spinner />
 				</Placeholder>
@@ -238,46 +238,46 @@ export default function MapsBlockAppleEdit(props) {
 		);
 	}
 
-	if (!isAuthenticated) {
+	if ( ! isAuthenticated ) {
 		return (
 			<>
 				<InspectorSettings
-					{...props}
-					isAuthenticated={isAuthenticated}
-					map={map}
-					mapkit={mapkit}
+					{ ...props }
+					isAuthenticated={ isAuthenticated }
+					map={ map }
+					mapkit={ mapkit }
 				/>
-				<div {...blockProps}>
+				<div { ...blockProps }>
 					<Placeholder
-						style={{ minHeight: `${height}px` }}
-						label={__(
+						style={ { minHeight: `${ height }px` } }
+						label={ __(
 							'Confirm access to Apple Maps',
 							'maps-block-apple'
-						)}
-						icon={BlockIcon}
-						isColumnLayout={true}
+						) }
+						icon={ BlockIcon }
+						isColumnLayout={ true }
 					>
 						<IsAdmin
-							fallback={__(
+							fallback={ __(
 								'Sorry, you are not allowed to do that. Please talk to your Administrator.',
 								'maps-block-apple'
-							)}
+							) }
 						>
-							<div style={{ marginBottom: '1em' }}>
-								{__(
+							<div style={ { marginBottom: '1em' } }>
+								{ __(
 									'In order to include an Apple Map on your website you need to confirm your MapKit credentials below. Here is documentation on how to get those credentials:',
 									'maps-block-apple'
-								)}
-								{' ' /* Whitespace between text */}
+								) }
+								{ ' ' /* Whitespace between text */ }
 								<a
 									href="https://developer.apple.com/documentation/mapkitjs/setting_up_mapkit_js"
 									target="_blank"
 									rel="noopener noreferrer"
 								>
-									{__(
+									{ __(
 										'Instructions for creating your MapKit credentials.',
 										'maps-block-apple'
-									)}
+									) }
 								</a>
 							</div>
 							<EditAuthForm />
@@ -294,51 +294,53 @@ export default function MapsBlockAppleEdit(props) {
 				<ToolbarGroup>
 					<ToolbarButton
 						icon="location"
-						title={__('Add Marker', 'apple-maps-wordpress')}
-						onClick={() => {
-							setAttributes({
+						title={ __( 'Add Marker', 'apple-maps-wordpress' ) }
+						onClick={ () => {
+							setAttributes( {
 								markers: [
 									...markers,
 									{
 										latitude,
 										longitude,
 										title: 'Title',
-										id: Symbol('identifier for the marker'),
+										id: Symbol(
+											'identifier for the marker'
+										),
 									},
 								],
-							});
-						}}
+							} );
+						} }
 					/>
 				</ToolbarGroup>
 			</BlockControls>
 			<InspectorSettings
-				{...props}
-				isAuthenticated={isAuthenticated}
-				map={map}
-				mapkit={mapkit}
+				{ ...props }
+				isAuthenticated={ isAuthenticated }
+				map={ map }
+				mapkit={ mapkit }
 			/>
-			<div {...blockProps}>
+			<div { ...blockProps }>
 				<ResizableMap
-					onResizeStart={() => {
-						toggleSelection(false);
-					}}
-					onResize={(newHeight) => {
-						map.update({ height: newHeight });
-					}}
-					onResizeStop={(newHeight) => {
-						setAttributes({ height: newHeight });
-						toggleSelection(true);
-					}}
-					showHandle={isSelected}
-					size={{ height }}
+					onResizeStart={ () => {
+						toggleSelection( false );
+					} }
+					onResize={ ( newHeight ) => {
+						map.update( { height: newHeight } );
+					} }
+					onResizeStop={ ( newHeight ) => {
+						setAttributes( { height: newHeight } );
+						toggleSelection( true );
+					} }
+					showHandle={ isSelected }
+					size={ { height } }
 				/>
 				<Map
-					map={map}
-					setMap={setMap}
-					isAuthenticated={isAuthenticated}
-					clientId={clientId}
-					setAttributes={setAttributes}
-					mapkit={mapkit}
+					map={ map }
+					setMap={ setMap }
+					isAuthenticated={ isAuthenticated }
+					clientId={ clientId }
+					setAttributes={ setAttributes }
+					mapkit={ mapkit }
 				/>
 			</div>
 		</>

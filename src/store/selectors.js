@@ -5,6 +5,6 @@
  *
  * @return {Array?} Icon Sets.
  */
-export function isAuthenticated(state) {
-	return Boolean(state?.authenticationReducer?.authenticated);
+export function isAuthenticated( state ) {
+	return Boolean( state?.authenticationReducer?.authenticated );
 }

@@ -11,8 +11,8 @@ import { combineReducers } from '@wordpress/data';
  *
  * @return {Object} Updated state.
  */
-export function authenticationReducer(state, action) {
-	switch (action.type) {
+export function authenticationReducer( state, action ) {
+	switch ( action.type ) {
 		case 'UPDATE_AUTHENTICATION':
 			return {
 				...state,
@@ -23,6 +23,6 @@ export function authenticationReducer(state, action) {
 	}
 }
 
-export default combineReducers({
+export default combineReducers( {
 	authenticationReducer,
-});
+} );
