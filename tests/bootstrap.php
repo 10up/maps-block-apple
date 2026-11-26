@@ -36,3 +36,6 @@ tests_add_filter(
 
 // Start up the WP testing environment.
 require $_test_root . '/includes/bootstrap.php';
+
+// Helpers shared by the integration tests.
+require_once __DIR__ . '/Integration/Traits/Credentials.php';

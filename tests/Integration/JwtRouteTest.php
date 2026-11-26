@@ -7,86 +7,31 @@
 
 namespace tenup\Maps_Block_Apple\Tests\Integration;
 
+use tenup\Maps_Block_Apple\Tests\Integration\Traits\Credentials;
 use WP_REST_Request;
+use WP_REST_Response;
 use WP_UnitTestCase;
 
 /**
  * Tests `GET /MapsBlockApple/v1/GetJWT`.
  *
  * Every visitor's browser asks this route for a token, so it is public. It
- * must return only a short-lived signed token, never the stored credentials.
+ * must return only a short-lived signed token, never the stored credentials,
+ * and only when the stored credentials are complete and well formed.
  */
 class JwtRouteTest extends WP_UnitTestCase {
 
-	/**
-	 * Key ID saved with the credentials. MapKit key IDs are 10 characters.
-	 *
-	 * @var string
-	 */
-	const KEY_ID = 'KEYID12345';
+	use Credentials;
 
 	/**
-	 * Team ID saved with the credentials. Apple team IDs are 10 characters.
+	 * Requests a token as a logged-out visitor.
 	 *
-	 * @var string
+	 * @return WP_REST_Response Route response.
 	 */
-	const TEAM_ID = 'TEAMID1234';
+	private function request_token(): WP_REST_Response {
+		wp_set_current_user( 0 );
 
-	/**
-	 * Decodes one base64url-encoded JWT segment.
-	 *
-	 * @param string $segment Encoded segment.
-	 * @return array Decoded JSON object.
-	 */
-	private static function decode_segment( string $segment ): array {
-		// phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_decode -- Decoding a JWT segment.
-		return json_decode( base64_decode( strtr( $segment, '-_', '+/' ) ), true );
-	}
-
-	/**
-	 * Encodes a DER length.
-	 *
-	 * @param int $length Content length in bytes (below 256).
-	 * @return string DER length octets.
-	 */
-	private static function der_length( int $length ): string {
-		return $length < 128 ? chr( $length ) : "\x81" . chr( $length );
-	}
-
-	/**
-	 * Generates a P-256 private key as a PKCS #8 PEM, the format of the .p8
-	 * keys Apple issues for MapKit JS.
-	 *
-	 * PHP 8 exports EC keys as PKCS #8. PHP 7.4 exports them as SEC1
-	 * ("BEGIN EC PRIVATE KEY"), so that form is wrapped in a PKCS #8
-	 * PrivateKeyInfo structure here.
-	 *
-	 * @return string PEM-encoded private key.
-	 */
-	private static function generate_private_key(): string {
-		$key = openssl_pkey_new(
-			array(
-				'private_key_type' => OPENSSL_KEYTYPE_EC,
-				'curve_name'       => 'prime256v1',
-			)
-		);
-		openssl_pkey_export( $key, $pem );
-
-		if ( 0 === strpos( $pem, '-----BEGIN PRIVATE KEY-----' ) ) {
-			return $pem;
-		}
-
-		// phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_decode -- Reading a PEM body.
-		$sec1 = base64_decode( preg_replace( '/-----[^-]+-----|\s/', '', $pem ) );
-
-		// AlgorithmIdentifier: id-ecPublicKey with the prime256v1 curve.
-		$algorithm = "\x30\x13\x06\x07\x2a\x86\x48\xce\x3d\x02\x01\x06\x08\x2a\x86\x48\xce\x3d\x03\x01\x07";
-		$octets    = "\x04" . self::der_length( strlen( $sec1 ) ) . $sec1;
-		$body      = "\x02\x01\x00" . $algorithm . $octets;
-		$pkcs8     = "\x30" . self::der_length( strlen( $body ) ) . $body;
-
-		// phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_encode -- Writing a PEM body.
-		return "-----BEGIN PRIVATE KEY-----\n" . chunk_split( base64_encode( $pkcs8 ), 64, "\n" ) . "-----END PRIVATE KEY-----\n";
+		return rest_do_request( new WP_REST_Request( 'GET', '/MapsBlockApple/v1/GetJWT' ) );
 	}
 
 	/**
@@ -94,20 +39,12 @@ class JwtRouteTest extends WP_UnitTestCase {
 	 * expires 30 seconds after issue, and the response carries no key material.
 	 */
 	public function test_logged_out_request_gets_short_lived_token_without_key_material(): void {
-		$private_key = self::generate_private_key();
-		$this->assertNotFalse( openssl_pkey_get_private( $private_key ) );
+		$credentials = self::valid_credentials();
+		$this->assertNotFalse( openssl_pkey_get_private( $credentials['private_key'] ) );
 
-		update_option(
-			'maps_block_apple',
-			array(
-				'private_key' => $private_key,
-				'key_id'      => self::KEY_ID,
-				'team_id'     => self::TEAM_ID,
-			)
-		);
-		wp_set_current_user( 0 );
+		update_option( 'maps_block_apple', $credentials );
 
-		$response = rest_do_request( new WP_REST_Request( 'GET', '/MapsBlockApple/v1/GetJWT' ) );
+		$response = $this->request_token();
 
 		$this->assertSame( 200, $response->get_status() );
 
@@ -119,12 +56,82 @@ class JwtRouteTest extends WP_UnitTestCase {
 
 		$header = self::decode_segment( $segments[0] );
 		$this->assertSame( 'ES256', $header['alg'] );
-		$this->assertSame( self::KEY_ID, $header['kid'] );
+		$this->assertSame( self::$key_id, $header['kid'] );
 
 		$claims = self::decode_segment( $segments[1] );
-		$this->assertSame( self::TEAM_ID, $claims['iss'] );
+		$this->assertSame( self::$team_id, $claims['iss'] );
 		$this->assertSame( 30, $claims['exp'] - $claims['iat'] );
 
 		$this->assertStringNotContainsString( 'PRIVATE KEY', wp_json_encode( $response->get_data() ) );
+	}
+
+	/**
+	 * Incomplete or malformed credentials, and the refusal each one gets.
+	 *
+	 * Each case changes valid credentials; `null` means nothing is saved. When
+	 * several values are wrong, the first failing check in the route's order
+	 * (private key present, key ID present, team ID present, key ID length,
+	 * team ID length, private key format) decides the message.
+	 *
+	 * @return array[] Credential changes, error code and message per case.
+	 */
+	public function data_refused_credentials(): array {
+		$pem_without_key = "-----BEGIN PRIVATE KEY-----\nbm90IGEga2V5\n-----END PRIVATE KEY-----\n";
+
+		return array(
+			'nothing saved'                     => array( null, 'NoKey', 'Missing Private Key' ),
+			'empty private key'                 => array( array( 'private_key' => '' ), 'NoKey', 'Missing Private Key' ),
+			'empty key ID'                      => array( array( 'key_id' => '' ), 'NoKey', 'Missing Key ID' ),
+			'empty key ID and team ID'          => array(
+				array(
+					'key_id'  => '',
+					'team_id' => '',
+				),
+				'NoKey',
+				'Missing Key ID',
+			),
+			'empty team ID'                     => array( array( 'team_id' => '' ), 'NoKey', 'Missing Team ID' ),
+			'9-character key ID'                => array( array( 'key_id' => 'KEYID1234' ), 'InvalidKey', 'Invalid Key ID' ),
+			'11-character key ID'               => array( array( 'key_id' => 'KEYID123456' ), 'InvalidKey', 'Invalid Key ID' ),
+			'short key ID and short team ID'    => array(
+				array(
+					'key_id'  => 'KEY',
+					'team_id' => 'TEAM',
+				),
+				'InvalidKey',
+				'Invalid Key ID',
+			),
+			'9-character team ID'               => array( array( 'team_id' => 'TEAMID123' ), 'InvalidKey', 'Invalid Team ID' ),
+			'11-character team ID'              => array( array( 'team_id' => 'TEAMID12345' ), 'InvalidKey', 'Invalid Team ID' ),
+			'private key without PEM markers'   => array( array( 'private_key' => 'INVALID' ), 'InvalidKey', 'Invalid Private Key' ),
+			'PEM markers around a non-key body' => array( array( 'private_key' => $pem_without_key ), 'InvalidKey', 'Invalid Private Key' ),
+		);
+	}
+
+	/**
+	 * Incomplete or malformed credentials get a 401 with the matching error
+	 * and no token.
+	 *
+	 * @dataProvider data_refused_credentials
+	 *
+	 * @param array|null $changes Changes to valid credentials; null saves nothing.
+	 * @param string     $code    Expected error code.
+	 * @param string     $message Expected error message.
+	 */
+	public function test_incomplete_or_malformed_credentials_get_no_token( ?array $changes, string $code, string $message ): void {
+		if ( null !== $changes ) {
+			update_option( 'maps_block_apple', array_merge( self::valid_credentials(), $changes ) );
+		}
+
+		$response = $this->request_token();
+
+		$this->assertSame( 401, $response->get_status() );
+		$this->assertTrue( $response->is_error() );
+
+		$error = $response->as_error();
+		$this->assertSame( $code, $error->get_error_code() );
+		$this->assertSame( $message, $error->get_error_message() );
+		// The body is the error alone: no token alongside it.
+		$this->assertSame( array( 'code', 'message', 'data' ), array_keys( $response->get_data() ) );
 	}
 }
