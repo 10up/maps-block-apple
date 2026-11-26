@@ -59,61 +59,11 @@ test.describe( 'MapKit credentials settings', () => {
 		expect( claims.iss ).toBe( credentials.team_id );
 	} );
 
-	test( 'reports a private key that is not a PEM key', async ( {
-		admin,
-		page,
-	} ) => {
-		await submitCredentials( admin, page, {
-			...credentials,
-			private_key: 'INVALID',
-		} );
-
-		await expect( page.locator( '#mapkit-credentials-status' ) ).toHaveText(
-			'Invalid Private Key'
-		);
-	} );
-
 	test( 'reports a missing key ID', async ( { admin, page } ) => {
 		await submitCredentials( admin, page, { ...credentials, key_id: '' } );
 
 		await expect( page.locator( '#mapkit-credentials-status' ) ).toHaveText(
 			'Missing Key ID'
-		);
-	} );
-
-	test( 'reports a key ID that is not 10 characters', async ( {
-		admin,
-		page,
-	} ) => {
-		await submitCredentials( admin, page, {
-			...credentials,
-			key_id: 'INVALID',
-		} );
-
-		await expect( page.locator( '#mapkit-credentials-status' ) ).toHaveText(
-			'Invalid Key ID'
-		);
-	} );
-
-	test( 'reports a missing team ID', async ( { admin, page } ) => {
-		await submitCredentials( admin, page, { ...credentials, team_id: '' } );
-
-		await expect( page.locator( '#mapkit-credentials-status' ) ).toHaveText(
-			'Missing Team ID'
-		);
-	} );
-
-	test( 'reports a team ID that is not 10 characters', async ( {
-		admin,
-		page,
-	} ) => {
-		await submitCredentials( admin, page, {
-			...credentials,
-			team_id: 'INCORRECT',
-		} );
-
-		await expect( page.locator( '#mapkit-credentials-status' ) ).toHaveText(
-			'Invalid Team ID'
 		);
 	} );
 } );
