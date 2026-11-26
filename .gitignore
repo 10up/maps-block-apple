@@ -32,9 +32,8 @@ Desktop.ini
 .env
 
 .wp-env.override.json
-tests/cypress/downloads
-tests/cypress/screenshots
-tests/cypress/videos
-tests/cypress/reports
+.wp-env.test.override.json
+/artifacts
+tests/.phpunit.result.cache
 
 10up-lib/

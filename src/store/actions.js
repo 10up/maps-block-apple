@@ -5,7 +5,7 @@
  *
  * @return {Object} Action object.
  */
-export function updateAuthenticationStatus(isAuthenticated) {
+export function updateAuthenticationStatus( isAuthenticated ) {
 	return {
 		type: 'UPDATE_AUTHENTICATION',
 		isAuthenticated,

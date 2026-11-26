@@ -45,6 +45,9 @@
     }
   },
   "require-dev": {
-    "10up/phpcs-composer": "dev-trunk"
+    "10up/phpcs-composer": "dev-trunk",
+    "phpunit/phpunit": "^9.6@stable",
+    "yoast/phpunit-polyfills": "^4.0@stable",
+    "wp-phpunit/wp-phpunit": "^7.1@stable"
   }
 }

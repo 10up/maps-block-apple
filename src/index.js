@@ -18,7 +18,7 @@ import BlockIcon from './block-icon';
 import metadata from './../block.json';
 import deprecated from './deprecated';
 
-registerBlockType(metadata, {
+registerBlockType( metadata, {
 	icon: BlockIcon,
 	attributes: {
 		...metadata.attributes,
@@ -38,4 +38,4 @@ registerBlockType(metadata, {
 	edit: MapsBlockAppleEdit,
 	save: MapsBlockAppleSave,
 	deprecated,
-});
+} );

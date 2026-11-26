@@ -2,7 +2,9 @@
 /.git
 /.github
 /.wordpress-org
+/artifacts
 /node_modules
+/release
 /src
 /vendor
 /tests
@@ -15,7 +17,9 @@ composer.json
 composer.lock
 CONTRIBUTING.md
 CREDITS.md
+eslint.config.mjs
 LICENSE.md
 package-lock.json
 package.json
+phpunit.xml.dist
 README.md
